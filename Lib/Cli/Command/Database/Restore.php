@@ -35,7 +35,7 @@ class Restore extends Command
             $this->printer->display("succ", "La base de datos existe.");
 
             $this->printer->display("info", "Iniciando Restauración.");
-            exec("$dump --opt -h $host -u $user -p $pass -P $port $name < $backupLast");
+            exec("$dump -h $host -u $user -p $pass -P $port $name < $backupLast");
             $this->printer->display("info", "Copia de seguridad restaurada (?");
         } else {
             $this->printer->display("warn", "No existe la base de datos");
