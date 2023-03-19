@@ -1,0 +1,60 @@
+header {
+    background-color: rgba($color: black, $alpha: 0.4);
+    position: fixed;
+    top: 0;
+    width: 100%;
+    transition: 0.5s;
+    z-index: 2;
+}
+
+header,
+header a {
+    color: white;
+}
+
+.header-content > div:first-child {
+    padding: 0.5rem;
+}
+
+.header-content > div:first-child,
+.logo > a {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo p {
+    margin-top: -0.5rem;
+    margin-left: 0.5rem;
+}
+
+.logo span {
+    display: block;
+}
+
+.logo .webname {
+    font-family: "Open Sans";
+}
+
+.fs-xl {
+    font-size: x-large;
+}
+
+.logo .websub {
+    font-family: "Segoe Script" !important;
+    font-size: 8pt;
+    margin: -0.5rem -1rem;
+    text-align: right;
+}
+
+nav {
+    padding-bottom: 0.5rem;
+}
+
+nav p {
+    text-align: center;
+}
+
+.def-menu {
+    display: none;
+}

@@ -1,0 +1,181 @@
+.title {
+
+    padding-top: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 300px;
+    background-size: cover;
+    background-position: center;
+
+    h1 {
+
+        font-family: var(--segoe-script);
+        text-align: center;
+        width: 100%;
+        height: fit-content;
+        padding: 1rem;
+        background: rgba($color: black, $alpha: .5);
+        color: white;
+        font-weight: lighter;
+        letter-spacing: 2px;
+    }
+}
+
+
+.carousel,
+.carousel-complete {
+
+    margin: 5rem auto;
+
+    .images {
+        margin: auto;
+        margin-bottom: .5rem;
+        position: relative;
+
+        .slider-btn {
+            span {
+                width: 20px;
+                height: 20px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                background-color: grey;
+                border-radius: 50%;
+                font-size: 10pt;
+                position: absolute;
+                top: 50%;
+                transform: translateY(-50%);
+                margin: 0 -10px;
+                cursor: pointer;
+
+                path {
+                    fill: white;
+                }
+            }
+
+            span:last-child {
+                right: 0;
+            }
+        }
+
+        .image {
+            position: relative;
+            display: none;
+            box-shadow: 0 0 5px 0 lightgray;
+            border-radius: 5px;
+            background-position: center;
+            background-size: cover;
+            height: 800px;
+
+            div {
+                position: absolute;
+                bottom: 0;
+                background-color: rgba($color: #000000, $alpha: .5);
+                width: 100%;
+                padding: .5rem 1rem;
+                color: white;
+            }
+        }
+
+        .active {
+            display: block !important;
+            animation: fade-in .5s linear;
+        }
+    }
+
+    .dots {
+
+        display: flex;
+        justify-content: center;
+
+        span {
+            display: block;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background-color: var(--color-principal) !important;
+            margin: .5rem;
+            transition: .5s;
+            cursor: pointer;
+        }
+
+        span.active {
+            transform: scale(2);
+            box-shadow: 0 0 2px 0 lightgrey;
+        }
+    }
+}
+
+.carousel-complete .images {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+}
+
+label {
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    padding: .5rem 1rem;
+    transition: .5s;
+}
+
+.form-control {
+    width: 100%;
+    position: relative;
+
+    textarea {
+        resize: vertical;
+        min-height: 100px;
+        height: 100px;
+
+        &::placeholder {
+            color: transparent;
+        }
+
+        &~label {
+            top: 0;
+            padding: 1rem;
+            transform: none;
+        }
+    }
+
+    input,
+    textarea,
+    select {
+        width: 100%;
+        margin: .5rem 0;
+        padding: .5rem 1rem;
+        border: none;
+        box-shadow: 0 0 5px 0 lightgrey;
+        border-radius: 5px;
+    }
+
+    input::placeholder {
+        color: transparent;
+    }
+
+    input:not(:placeholder-shown)~label,
+    textarea:not(:placeholder-shown)~label {
+        font-size: 8pt;
+        background: white;
+        padding: 1px 10px !important;
+    }
+
+    input:not(:placeholder-shown)~label {
+        margin: -15px 5px !important;
+    }
+
+    textarea:not(:placeholder-shown)~label {
+        margin: 0px 5px !important;
+    }
+
+    select~label {
+        font-size: 8pt;
+        background: white;
+        padding: 1px 10px !important;
+        margin: -15px 5px !important;
+    }
+}

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Site\Controller;
+namespace App\Site\Controllers;
 
 use App\Site\Models\User;
 use Lib\Foxy\Core\Base\Controller;

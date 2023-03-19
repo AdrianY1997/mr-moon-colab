@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Site\Controller;
+namespace App\Site\Controllers;
 
-use App\Model\Webdata;
+use App\Site\Models\Webdata;
 use Lib\Foxy\Core\Base\Controller;
 use Lib\Foxy\Core\Request;
 use Lib\Foxy\Core\Session;
@@ -58,11 +58,11 @@ class DashboardController extends Controller
                     "webd_ytlink" => $data["ytlink"],
                 ])
             )
-                Session::setMessage("success::Se ha actualizado la información de la pagina correctamente.");
+                Session::setMessage("success", "Se ha actualizado la información de la pagina correctamente.");
             else
-                Session::setMessage("error::Ubo un error al actualizar la información de la pagina.");
+                Session::setMessage("error", "Ubo un error al actualizar la información de la pagina.");
         else
-            Session::setMessage("error::No se pudo actualizar, por que la contraseña no coincide con tu usuario");
+            Session::setMessage("error", "No se pudo actualizar, por que la contraseña no coincide con tu usuario");
 
         redirect()->route("dash.info");
     }

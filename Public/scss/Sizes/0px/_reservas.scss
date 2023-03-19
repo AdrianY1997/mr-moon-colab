@@ -1,0 +1,16 @@
+.reservas {
+    .form {
+        margin: 5rem auto;
+
+        background: white;
+        border-radius: 5px;
+        box-shadow: 0 0 5px 0 lightgrey;
+        padding: 1rem;
+
+        hr {
+            border: none;
+            margin: .5rem 0;
+            border-bottom: 1px dotted lightgrey;
+        }
+    }
+}

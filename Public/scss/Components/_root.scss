@@ -1,0 +1,28 @@
+@import "fonts";
+
+:root {
+    --color-principal: #DFB240;
+    --shadow: 0 0 5px 0 lightgrey;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    transition: .5s;
+}
+
+a {
+    text-decoration: none;
+    color: black;
+}
+
+body {
+    font-family: var(--open-sans) !important;
+    background-color: whitesmoke;
+    min-height: 100vh;
+}
+
+footer {
+    background-color: white;
+}

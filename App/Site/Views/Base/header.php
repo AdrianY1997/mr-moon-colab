@@ -1,4 +1,5 @@
-<?php $webdata = $GLOBALS["webdata"] ?>
+<?php $webdata = unserialize($_COOKIE["webdata"]) ?>
+
 <div>
     <div class="container header-content">
         <div>

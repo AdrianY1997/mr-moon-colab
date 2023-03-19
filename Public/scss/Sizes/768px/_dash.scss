@@ -1,0 +1,32 @@
+.dash {
+
+    > div:first-child {
+        display: block;
+
+        .container {
+            display: grid;
+            gap: 1rem;
+            grid-template-columns: 150px calc(100% - 150px - 1rem);
+        }
+    }
+
+    .dash-menu {
+
+        position: relative !important;
+
+        .icon {
+            display: none;
+        }
+
+        .items.hide {
+            display: block !important;
+        }
+    }
+
+    .dash-menu.hide, .dash-menu-show {
+        background: white !important;
+        width: 100% !important;
+        padding: 1rem !important;
+        box-shadow: var(--shadow);
+    }
+}
