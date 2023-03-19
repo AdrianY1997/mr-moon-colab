@@ -17,7 +17,6 @@ class Migrate extends Command
     {
         $migrationsFolder = "App\\Site\\Migrations";
 
-        $name = constant('DBNAME');
         $host = constant('DBHOST');
         $user = constant('DBUSER');
         $pass = constant('DBPASS');
@@ -31,12 +30,12 @@ class Migrate extends Command
         $database = new Create();
         $database->init();
 
-        $pdo->exec("USE $name;");
-
         foreach ($migrationFiles as $migrationFile) {
             $migration = require_once $migrationFile;
 
-            $pdo->exec($migration->up());
+            if (method_exists($migration, "up")) {
+                $pdo->exec($migration->up());
+            }
         }
     }
 }
