@@ -47,7 +47,7 @@ class Migration extends Command
         $migrationContent = str_replace(["__tableName", "__acronym"], [$migrationName, substr($migrationName, 0, 4)], $templateContent);
 
         $date = new DateTime('now', new DateTimeZone('America/Bogota'));
-        $migrationPath = $migrationsFolder . "/" . $date->format("Y-m-d_H:i:s:u") . "-" . $migrationName . ".php";
+        $migrationPath = $migrationsFolder . "/" . $date->format("Y-m-d_Hisu") . "-" . $migrationName . ".php";
 
         $this->printer->display("info", "Creando e la migración en \"$migrationsFolder\"");
 
@@ -79,51 +79,3 @@ class Migration extends Command
         $this->printer->display("succ", "Finalizando creación de la migración");
     }
 }
-
-
-$migrationTemplateFile = "$templatesFolder\\make-migration.template.php";
-
-$this->printer->display("info", "Obteniendo plantilla de migraciones en \"$migrationTemplateFile\"");
-
-$migrationContent = file_get_contents($migrationTemplateFile);
-
-if (!$migrationContent) {
-    $this->printer->error(
-        "No se ha podido cargar la plantilla",
-        "Contacte con el desarrollador",
-    );
-}
-
-$this->printer->display("succ", "La plantilla de la migración ha sido cargada");
-
-$migrationContent = str_replace(["__tableName", "__acronym"], [$migrationName, substr($migrationName, 0, 4)], $migrationContent);
-
-$migrationPath = $migrationsFolder . "\\" . $migrationName . "-" . date_timestamp_get(date_create()) . ".php";
-
-$this->printer->display("succ", "Creando migración en \"$migrationsFolder\"");
-
-$migrationFile = fopen($migrationPath, "w");
-
-if (!$migrationFile) {
-    $this->printer->error(
-        "Ubo un problema al cargar el archivo",
-        "Contacte con el desarrollador",
-    );
-}
-
-$this->printer->display("succ", "\"$migrationsFolder\\$componentEs\" ha sido creado");
-
-$this->printer->display("succ", "Sobrescribiendo el contenido");
-
-$migrationWrite = fwrite($migrationFile, $migrationContent);
-
-if (!$migrationWrite) {
-    $this->printer->error(
-        "No se ha podido cargar la plantilla",
-        "Contacte con el desarrollador",
-    );
-}
-
-fclose($migrationFile);
-
-$this->printer->display("succ", "El contenido ha sido actualizado");

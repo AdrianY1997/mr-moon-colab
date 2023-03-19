@@ -33,7 +33,9 @@ class Rollback extends Command
         foreach ($migrationFiles as $key => $migrationFile) {
             $migration = require_once $migrationFile;
 
-            $pdo->exec($migration->down());
+            if (method_exists($migration, "down")) {
+                $pdo->exec($migration->down());
+            }
         }
 
         $database = new Drop();
