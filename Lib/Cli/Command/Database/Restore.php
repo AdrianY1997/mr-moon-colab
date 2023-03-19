@@ -22,14 +22,11 @@ class Backup extends Command
         $pass = constant('DBPASS');
         $port = constant('DBPORT');
         $chst = constant('DBCHST');
-        $dump = getenv("DPFILE");
+        $dump = getenv("DBFILE");
 
         $backupsFolder = constant("DIR") . "/Database/Backup";
-
-        mkdir($backupsFolder);
-
-        $date = new DateTime('now', new DateTimeZone('America/Bogota'));
-        $output = $backupsFolder . "/" . $date->format("Y-m-d_Hisu") . ".php";
+        $backupArray = glob($backupsFolder . "/*.php");
+        $backupLast = $backupArray[array_key_last($backupArray)];
 
         $pdo = new PDO("mysql:host=$host;port=$port,charset=$chst", $user, $pass);
 
@@ -39,9 +36,9 @@ class Backup extends Command
         if ($stmt->fetchColumn()) {
             $this->printer->display("succ", "La base de datos existe.");
 
-            $this->printer->display("info", "Iniciando Copia de seguridad");
-            exec("$dump --opt -h $host -u $user -p $pass -P $port $name > $output");
-            $this->printer->display("info", "Copia de seguridad completa (?");
+            $this->printer->display("info", "Iniciando Restauración.");
+            exec("$dump --opt -h $host -u $user -p $pass -P $port $name < $backupLast");
+            $this->printer->display("info", "Copia de seguridad restaurada (?");
         } else {
             $this->printer->display("warn", "No existe la base de datos");
             $this->printer->display("warn", "Saliendo...\n");
