@@ -24,6 +24,7 @@ class Set
         ]);
 
         Register::command("database", [
+            "backup",
             "create",
             "drop"
         ]);
