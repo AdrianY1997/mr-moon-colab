@@ -5,6 +5,7 @@ namespace Lib\Foxy\Core;
 class Route
 {
     static $routes = [];
+
     protected $name;
     protected $url;
     protected $controller;
@@ -45,6 +46,14 @@ class Route
         return $this->method;
     }
 
+    static public function loadRoutes()
+    {
+        $routes = glob("Routes\\*.php");
+        foreach ($routes as $value) {
+            require_once $value;
+        }
+    }
+
     static public function set($url, $action)
     {
         return new self($url, $action);
@@ -57,6 +66,8 @@ class Route
 
     static public function getRouteFromUrl($url)
     {
+        self::loadRoutes();
+
         foreach (Route::$routes as $route) {
             $routeUrl = $route->getUrl();
 

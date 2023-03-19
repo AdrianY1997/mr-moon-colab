@@ -1,8 +1,8 @@
 <?php
 
-define("DBHOST", getenv("MODE") == "PRO" ? getenv("proDBHOST") : getenv("devDBHOST"));
-define("DBUSER", getenv("MODE") == "PRO" ? getenv("proDBUSER") : getenv("devDBUSER"));
-define("DBPASS", getenv("MODE") == "PRO" ? getenv("proDBPASS") : getenv("devDBPASS"));
-define("DBNAME", getenv("MODE") == "PRO" ? getenv("proDBNAME") : getenv("devDBNAME"));
-define("DBPORT", getenv("MODE") == "PRO" ? getenv("proDBPORT") : getenv("devDBPORT"));
-define("DBCHST", getenv("MODE") == "PRO" ? getenv("proDBCHST") : getenv("devDBCHST"));
+define("DBHOST", getenv("MODE") == "DEV" ? getenv("devDBHOST") : getenv("proDBHOST"));
+define("DBUSER", getenv("MODE") == "DEV" ? getenv("devDBUSER") : getenv("proDBUSER"));
+define("DBPASS", getenv("MODE") == "DEV" ? getenv("devDBPASS") : getenv("proDBPASS"));
+define("DBNAME", getenv("MODE") == "DEV" ? getenv("devDBNAME") : getenv("proDBNAME"));
+define("DBPORT", getenv("MODE") == "DEV" ? getenv("devDBPORT") : getenv("proDBPORT"));
+define("DBCHST", getenv("MODE") == "DEV" ? getenv("devDBCHST") : getenv("proDBCHST"));

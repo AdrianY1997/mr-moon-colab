@@ -3,11 +3,15 @@
     <p>Sistema MVC basado en laravel para hosting gratuitos</p>
     <br>
     <button class="button is-rounded is-primary">
-        <span class="mr-1"><i class="fa-solid fa-rocket"></i></span>
-        Iniciar
+        <a href="<?= route("error", ["msg" => "service-unavailable"]) ?>" class="has-text-white">
+            <span class="mr-1"><i class="fa-solid fa-rocket"></i></span>
+            Iniciar
+        </a>
     </button>
     <button class="button is-rounded is-light">
-        <span class="mr-1"><i class="fa-solid fa-search"></i></span>
-        Descubre
+        <a href="<?= route("error", ["msg" => "service-unavailable"]) ?>" class="has-text-dark">
+            <span class="mr-1"><i class="fa-solid fa-search"></i></span>
+            Descubre
+        </a>
     </button>
 </div>

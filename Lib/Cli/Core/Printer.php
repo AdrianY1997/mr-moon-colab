@@ -63,7 +63,7 @@ class Printer
         $version = constant("VER");
         $time = (new DateTime())->format("H:i:s");
 
-        $h = $type ? "[$version $time $type]" : "";
+        $h = $type ? "[$version $time|$type]" : "";
 
         switch ($c) {
             case 'e': //error

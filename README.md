@@ -10,4 +10,4 @@ this README is keep under construction
 
 ## License
 
-This project is licensed under the terms of the [MIT]() license.
+This project is licensed under the terms of the [MIT](http://opensource.org/licenses/mit-license.php) license.

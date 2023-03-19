@@ -264,7 +264,7 @@ class Model
 
     public function insertLog($args)
     {
-        $stmt = $this->db->connect()->prepare("INSERT INTO insert_log (table_name, params, time) VALUES (?, ?, ?);");
+        $stmt = $this->db->connect()->prepare("INSERT INTO logs (table_name, params, time) VALUES (?, ?, ?);");
         $stmt->execute($args);
         $stmt->closeCursor();
     }

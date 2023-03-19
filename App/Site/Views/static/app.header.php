@@ -2,7 +2,7 @@
     <nav class="navbar is-light">
         <div class="container">
             <div class="navbar-brand ff-edu-nsw-act-foundation">
-                <a href="" class="navbar-item">
+                <a href="<?= route(constant("HOME")) ?>" class="navbar-item">
                     <img src="<?= resource("img/logo.png") ?>" alt="">
                 </a>
                 <div class="navbar-burger">
