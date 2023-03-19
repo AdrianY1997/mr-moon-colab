@@ -2,12 +2,10 @@
 
 namespace Lib\Cli\Command\Database;
 
-use DateTime;
-use DateTimeZone;
 use Lib\Cli\Core\Base\Command;
 use PDO;
 
-class Backup extends Command
+class Restore extends Command
 {
     public function __construct($pro = [], $avs = [])
     {
