@@ -9,8 +9,8 @@
     <link rel="stylesheet" href="<?= resource("css/bulma.min.css") ?>">
     <link rel="stylesheet" href="<?= resource("css/custom.css") ?>">
 
-    <link rel="shortcut icon" href="<?= resource("img/favicon.png") ?>" type="image/x-icon">
-    <link rel="icon" href="<?= resource("img/favicon.png") ?>" type="image/x-icon">
+    <link rel="shortcut icon" href="<?= asset("img/favicon.png") ?>" type="image/x-icon">
+    <link rel="icon" href="<?= asset("img/favicon.png") ?>" type="image/x-icon">
 
     <script src="<?= resource("js/fontawesome.min.js") ?>"></script>
 </head>
@@ -24,7 +24,7 @@
 
     <?php include_once "App\\Site\\Views\\static\\app.footer.php" ?>
 
-    <script src="<?= resource("js/foxy.js") ?>"></script>
+    <script src="<?= asset("js/foxy.js") ?>"></script>
 </body>
 
 </html>
