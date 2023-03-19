@@ -6,3 +6,5 @@ define("DBPASS", getenv("MODE") == "DEV" ? getenv("devDBPASS") : getenv("proDBPA
 define("DBNAME", getenv("MODE") == "DEV" ? getenv("devDBNAME") : getenv("proDBNAME"));
 define("DBPORT", getenv("MODE") == "DEV" ? getenv("devDBPORT") : getenv("proDBPORT"));
 define("DBCHST", getenv("MODE") == "DEV" ? getenv("devDBCHST") : getenv("proDBCHST"));
+
+define("DPFILE", getenv("DPFILE"));
