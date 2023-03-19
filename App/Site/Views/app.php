@@ -1,3 +1,9 @@
+<?php
+
+use App\Site\Models\Webdata;
+?>
+<?= Webdata::initialView() ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
