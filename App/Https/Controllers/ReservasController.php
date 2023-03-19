@@ -1,18 +1,18 @@
 <?php
 
-namespace App\Site\Controllers;
+namespace App\Https\Controllers;
 
 use Lib\Foxy\Core\Base\Controller;
 
-class EventosController extends Controller
+class ReservasController extends Controller
 {
     public function __construct()
     {
         parent::__construct();
     }
 
-    public function index()
+    function index()
     {
-        render("eventos/eventos");
+        render("reservas/reservas");
     }
 }

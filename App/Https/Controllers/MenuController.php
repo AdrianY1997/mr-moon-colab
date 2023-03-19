@@ -1,11 +1,10 @@
 <?php
 
-namespace App\Site\Controllers;
+namespace App\Https\Controllers;
 
 use Lib\Foxy\Core\Base\Controller;
 
-
-class ReservasController extends Controller
+class MenuController extends Controller
 {
     public function __construct()
     {
@@ -14,6 +13,6 @@ class ReservasController extends Controller
 
     function index()
     {
-        render("reservas/reservas");
+        render("menu/menu");
     }
 }

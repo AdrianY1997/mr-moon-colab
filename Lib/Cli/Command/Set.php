@@ -10,6 +10,7 @@ class Set
     {
         Register::command("make",  [
             "controller",
+            "migration",
             "model"
         ]);
 

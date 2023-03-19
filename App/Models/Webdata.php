@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Site\Models;
+namespace App\Models;
 
 use Lib\Foxy\Core\Base\Model;
 

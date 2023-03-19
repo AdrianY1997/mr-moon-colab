@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Site\Controllers;
+namespace App\Https\Controllers;
 
-use App\Site\Models\User;
+use App\Models\User;
 use Lib\Foxy\Core\Base\Controller;
 use Lib\Foxy\Core\Request;
 use Lib\Foxy\Core\Session;

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Site\Controllers;
+namespace App\Https\Controllers;
 
 use App\Site\Models\Webdata;
 use Lib\Foxy\Core\Base\Controller;

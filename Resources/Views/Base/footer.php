@@ -3,10 +3,10 @@
         <span data-function="toggle-footer"><i class="fa-solid fa-caret-up"></i></span>
         <p>Síguenos en nuestras redes sociales: </p>
         <p>
-            <?= $webdata["webd_fblink"] ? "<span><a target=\"_blank\" href=\"https://" . $webdata["webd_fblink"] . "\"><i class=\"fa-brands fa-facebook\"></i></a></span>" : "" ?>
-            <?= $webdata["webd_twlink"] ? "<span><a target=\"_blank\" href=\"https://" . $webdata["webd_twlink"] . "\"><i class=\"fa-brands fa-twitter\"></i></a></span>" : "" ?>
-            <?= $webdata["webd_iglink"] ? "<span><a target=\"_blank\" href=\"https://" . $webdata["webd_iglink"] . "\"><i class=\"fa-brands fa-instagram\"></i></a></span>" : "" ?>
-            <?= $webdata["webd_ytlink"] ? "<span><a target=\"_blank\" href=\"https://" . $webdata["webd_ytlink"] . "\"><i class=\"fa-brands fa-youtube\"></i></a></span>" : "" ?>
+            <?= $webdata["webd_fblink"] ? "<span><a target=\"_blank\" href=\"" . $webdata["webd_fblink"] . "\"><i class=\"fa-brands fa-facebook\"></i></a></span>" : "" ?>
+            <?= $webdata["webd_twlink"] ? "<span><a target=\"_blank\" href=\"" . $webdata["webd_twlink"] . "\"><i class=\"fa-brands fa-twitter\"></i></a></span>" : "" ?>
+            <?= $webdata["webd_iglink"] ? "<span><a target=\"_blank\" href=\"" . $webdata["webd_iglink"] . "\"><i class=\"fa-brands fa-instagram\"></i></a></span>" : "" ?>
+            <?= $webdata["webd_ytlink"] ? "<span><a target=\"_blank\" href=\"" . $webdata["webd_ytlink"] . "\"><i class=\"fa-brands fa-youtube\"></i></a></span>" : "" ?>
         </p>
     </div>
     <div class="complete-footer hide">
