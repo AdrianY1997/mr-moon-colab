@@ -2,7 +2,6 @@
 
 namespace Lib\Foxy\Core\Base;
 
-use DateTime;
 use Exception;
 use Lib\Foxy\Core\Database;
 use PDOException;
@@ -27,7 +26,7 @@ class Model
      * @return bool Devuelve true si se insertaron los datos correctamente, o false en caso contrario.
      * @throws Exception Si ocurre algún error durante la ejecución de la consulta.
      */
-    public function insert(string $table = "", array $data): bool
+    public function insert(?string $table = "", array $data): bool
     {
 
         if (empty($table))
