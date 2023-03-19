@@ -38,13 +38,13 @@ class Model
         try {
             $stmt = $this->db->connect()->prepare("INSERT INTO $table ($columns) VALUES ($values)");
             $stmt->execute(array_values($data));
-            $stmt->closeCursor();
 
             // $this->insertLog([
             //     $table,
             //     json_encode($data),
             //     (new DateTime())->format('Y-m-d H:i:s')
             // ]);
+            $stmt->closeCursor();
             return true;
         } catch (PDOException $e) {
             throw new Exception("Error al insertar en la tabla $table: " . $e->getMessage());
@@ -107,7 +107,6 @@ class Model
 
         try {
             $query->execute();
-            $query->closeCursor();
             while ($row = $query->fetch()) {
                 $item = [];
 
@@ -118,6 +117,7 @@ class Model
                 }
                 array_push($items, $item);
             }
+            $query->closeCursor();
             return $items;
         } catch (PDOException $e) {
             return false;
@@ -156,7 +156,6 @@ class Model
         $query = $this->db->connect()->prepare($string);
         try {
             $query->execute();
-            $query->closeCursor();
             while ($row = $query->fetch()) {
                 $item = [];
 
@@ -168,6 +167,7 @@ class Model
                 array_push($items, $item);
             }
 
+            $query->closeCursor();
             return $one ? $items[0] : $items;
         } catch (PDOException $e) {
             return false;
@@ -220,6 +220,7 @@ class Model
 
         try {
             $query->execute();
+
             $query->closeCursor();
             return true;
         } catch (PDOException $e) {
@@ -254,6 +255,7 @@ class Model
 
         try {
             $query->execute();
+
             $query->closeCursor();
             return true;
         } catch (PDOException $e) {
