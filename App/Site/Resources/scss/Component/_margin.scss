@@ -1,0 +1,71 @@
+$p: 0;
+
+@for $i from 0 to 3 {
+    .foxy-mar-#{$i} {
+        margin: #{$p}rem;
+    }
+
+    .foxy-marx-#{$i} {
+        margin-left: #{$p}rem;
+        margin-right: #{$p}rem;
+    }
+
+    .foxy-mary-#{$i} {
+        margin-top: #{$p}rem;
+        margin-bottom: #{$p}rem;
+    }
+
+    .foxy-mars-#{$i} {
+        margin-left: #{$p}rem;
+    }
+
+    .foxy-mare-#{$i} {
+        margin-right: #{$p}rem;
+    }
+
+    .foxy-mart-#{$i} {
+        margin-top: #{$p}rem;
+    }
+
+    .foxy-marb-#{$i} {
+        margin-bottom: #{$p}rem;
+    }
+
+    $p: $p + 0.25;
+}
+
+$p: 1;
+
+@for $i from 3 to 10 {
+    .foxy-mar-#{$i} {
+        margin: #{$p}rem;
+    }
+
+    .foxy-marx-#{$i} {
+        margin-left: #{$p}rem;
+        margin-right: #{$p}rem;
+    }
+
+    .foxy-mary-#{$i} {
+        margin-top: #{$p}rem;
+        margin-bottom: #{$p}rem;
+    }
+
+    .foxy-mars-#{$i} {
+        margin-left: #{$p}rem;
+    }
+
+    .foxy-mare-#{$i} {
+        margin-right: #{$p}rem;
+    }
+
+    .foxy-mart-#{$i} {
+        margin-top: #{$p}rem;
+    }
+
+    .foxy-marb-#{$i} {
+        margin-bottom: #{$p}rem;
+    }
+
+    $p: $p + 1;
+}
