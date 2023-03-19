@@ -15,8 +15,6 @@ class Migrate extends Command
 
     public function init()
     {
-        $migrationsFolder = "App\\Site\\Migrations";
-
         $host = constant('DBHOST');
         $user = constant('DBUSER');
         $pass = constant('DBPASS');
@@ -25,7 +23,8 @@ class Migrate extends Command
 
         $pdo = new PDO("mysql:host=$host;port=$port,charset=$chst", $user, $pass);
 
-        $migrationFiles = glob(constant("DIR") . '\\App\\Site\\Migrations\\*.php');
+        $migrationsFolder = constant("DIR") . "/Database/Migrations/*.php";
+        $migrationFiles = glob($migrationsFolder);
 
         $database = new Create();
         $database->init();
