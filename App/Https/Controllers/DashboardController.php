@@ -2,7 +2,7 @@
 
 namespace App\Https\Controllers;
 
-use App\Site\Models\Webdata;
+use App\Models\Webdata;
 use Lib\Foxy\Core\Base\Controller;
 use Lib\Foxy\Core\Request;
 use Lib\Foxy\Core\Session;

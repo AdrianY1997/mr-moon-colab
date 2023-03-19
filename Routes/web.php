@@ -1,13 +1,13 @@
 <?php
 
-use App\Site\Controllers\AuthController;
-use App\Site\Controllers\DashboardController;
-use App\Site\Controllers\EventosController;
-use App\Site\Controllers\GaleriaController;
-use App\Site\Controllers\InicioController;
-use App\Site\Controllers\MenuController;
-use App\Site\Controllers\ProfileController;
-use App\Site\Controllers\ReservasController;
+use App\Https\Controllers\AuthController;
+use App\Https\Controllers\DashboardController;
+use App\Https\Controllers\EventosController;
+use App\Https\Controllers\GaleriaController;
+use App\Https\Controllers\InicioController;
+use App\Https\Controllers\MenuController;
+use App\Https\Controllers\ProfileController;
+use App\Https\Controllers\ReservasController;
 use Lib\Foxy\Core\Route;
 
 Route::set("", [InicioController::class, "toHome"])->name("toHome");
