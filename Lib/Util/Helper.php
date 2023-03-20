@@ -24,11 +24,7 @@ if (!function_exists("render")) {
             ${$e} = $data[$e];
         }
 
-<<<<<<< HEAD
         include "Resources/Views/app.php";
-=======
-        include "Resources/Views/foxy.base.php";
->>>>>>> 6b5c196099593059070fa6d43e3abed522b9e6e7
     }
 }
 
