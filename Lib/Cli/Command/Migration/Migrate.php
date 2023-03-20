@@ -15,14 +15,6 @@ class Migrate extends Command
 
     public function init()
     {
-        $host = constant('DBHOST');
-        $user = constant('DBUSER');
-        $pass = constant('DBPASS');
-        $port = constant('DBPORT');
-        $chst = constant('DBCHST');
-
-        $pdo = new PDO("mysql:host=$host;port=$port,charset=$chst", $user, $pass);
-
         $migrationsFolder = constant("DIR") . "/Database/Migrations/*.php";
         $migrationFiles = glob($migrationsFolder);
 
@@ -33,7 +25,7 @@ class Migrate extends Command
             $migration = require_once $migrationFile;
 
             if (method_exists($migration, "up")) {
-                $pdo->exec($migration->up());
+                $migration->up();
             }
         }
     }

@@ -3,6 +3,7 @@
 namespace Lib\Foxy\Core;
 
 use Lib\Foxy\Core\Session;
+use Lib\Foxy\Database\MySQL;
 
 class Application
 {
@@ -24,6 +25,6 @@ class Application
 
     public function terminate()
     {
-        Database::closeConnection();
+        MySQL::closeConnection();
     }
 }
