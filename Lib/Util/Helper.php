@@ -24,7 +24,7 @@ if (!function_exists("render")) {
             ${$e} = $data[$e];
         }
 
-        include "App/Site/Views/app.php";
+        include "Resources/Views/app.php";
     }
 }
 
