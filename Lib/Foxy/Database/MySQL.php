@@ -1,12 +1,12 @@
 <?php
 
-namespace Lib\Foxy\Core;
+namespace Lib\Foxy\Database;
 
 use PDO;
 use PDOException;
 
 
-class Database
+class MySQL
 {
     private $host;
     private $name;

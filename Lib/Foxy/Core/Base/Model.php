@@ -3,7 +3,7 @@
 namespace Lib\Foxy\Core\Base;
 
 use Exception;
-use Lib\Foxy\Core\Database;
+use Lib\Foxy\Database\MySQL;
 use PDOException;
 
 class Model
@@ -13,7 +13,7 @@ class Model
 
     function __construct($name)
     {
-        $this->db = new Database();
+        $this->db = new MySQL();
         $this->name = $name;
     }
 
@@ -62,19 +62,19 @@ class Model
      * 
      * Opciones: 
      * 
-     * `string`: Unicamente traera los datos de la columna seleccionada
+     * `string`: Unicamente traerá los datos de la columna seleccionada
      * 
      * `array`: Se debe indicar en las columnas requeridas separadas por comas
      * 
-     * @param array $data Recibe los datos de busqueda para la consulta WHERE con `[indice => valor]`
+     * @param array $data Recibe los datos de búsqueda para la consulta WHERE con `[indice => valor]`
      * 
-     * `indice` Nombre de la columa
+     * `indice` Nombre de la columna
      * 
-     * `valor` El valor que se añadira en la fila
+     * `valor` El valor que se añadirá en la fila
      * 
-     * `Ejemplo`: ["name" => "Jonh Doe", "email" => "jonhdoe@mail.com"]
+     * `Ejemplo`: ["name" => "John Doe", "email" => "johndoe@mail.com"]
      * 
-     * @return array|bool Retorna un arreglo con los datos de la consulta o `false` si ocurrio un error
+     * @return array|bool Retorna un arreglo con los datos de la consulta o `false` si ocurrió un error
      */
     public function get(array|string $keys, array $data): array|bool
     {
@@ -127,17 +127,17 @@ class Model
     /**
      * Realiza una consulta a la base de datos si se requieren todos los datos
      * 
-     * @param array $data Recibe los datos de busqueda para la declaració WHERE con `[indice => valor]`
+     * @param array $data Recibe los datos de búsqueda para la declaración WHERE con `[indice => valor]`
      * 
-     * `indice` Nombre de la columa
+     * `indice` Nombre de la columna
      * 
-     * `valor` El valor que se añadira en la fila
+     * `valor` El valor que se añadirá en la fila
      * 
-     * `Ejemplo`: ["name" => "Jonh Doe", "email" => "jonhdoe@mail.com"]
+     * `Ejemplo`: ["name" => "John Doe", "email" => "johndoe@mail.com"]
      * 
      * @param bool $one recibe un `true` si se requiere solo una fila de datos
      * 
-     * @return array|bool Retorna un arreglo con los datos de la consulta o `false` si ocurrio un error
+     * @return array|bool Retorna un arreglo con los datos de la consulta o `false` si ocurrió un error
      */
     public function getAll(array $data, bool $one = false): array|bool
     {
@@ -177,21 +177,21 @@ class Model
     /**
      * Actualiza la base de datos
      * 
-     * @param array $keys Recibe los datos de busqueda para la declaració WHERE con `[indice => valor]`
+     * @param array $keys Recibe los datos de búsqueda para la declaración WHERE con `[indice => valor]`
      * 
-     * `indice` Nombre de la columa
+     * `indice` Nombre de la columna
      * 
-     * `valor` El valor que se añadira en la fila
+     * `valor` El valor que se añadirá en la fila
      * 
-     * `Ejemplo`: ["name" => "Jonh Doe", "email" => "jonhdoe@mail.com"]
+     * `Ejemplo`: ["name" => "John Doe", "email" => "johndoe@mail.com"]
      * 
-     * @param array $data Recibe las columnas que se van a actulizar es necesario indicar [`indice => valor`]
+     * @param array $data Recibe las columnas que se van a actualizar es necesario indicar [`indice => valor`]
      * 
-     * `indice` Nombre de la columa
+     * `indice` Nombre de la columna
      * 
-     * `valor` El valor que se añadira en la fila
+     * `valor` El valor que se añadirá en la fila
      * 
-     * `Ejemplo`: ["name" => "Jonh Doe", "email" => "jonhdoe@mail.com"]
+     * `Ejemplo`: ["name" => "John Doe", "email" => "johndoe@mail.com"]
      * 
      * @return bool Retorna `verdadero` si la actualización se realiza correctamente, en caso contrario retorna `false`
      */
@@ -231,13 +231,13 @@ class Model
     /**
      * Elimina datos de la base de datos
      * 
-     * @param array $data Recibe los datos de busqueda para la declaració WHERE con `[indice => valor]`
+     * @param array $data Recibe los datos de búsqueda para la declaración WHERE con `[indice => valor]`
      * 
-     * `indice` Nombre de la columa
+     * `indice` Nombre de la columna
      * 
-     * `valor` El valor que se añadira en la fila
+     * `valor` El valor que se añadirá en la fila
      * 
-     * `Ejemplo`: ["name" => "Jonh Doe", "email" => "jonhdoe@mail.com"]
+     * `Ejemplo`: ["name" => "John Doe", "email" => "johndoe@mail.com"]
      */
     public function delete($data)
     {
