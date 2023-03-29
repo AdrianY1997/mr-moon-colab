@@ -40,9 +40,10 @@ class Blueprint
         return $this;
     }
 
-    public function foreign(string $columnName, string $tableName)
+    public function references(string $tableName)
     {
-        $this->addColumn($columnName, "INT FOREIGN KEY REFERENCES $tableName($columnName)");
+        $column = explode(" ", $this->columns[array_key_last($this->columns)])[0];
+        $this->addColumn("FOREIGN KEY ($column) $tableName($column)");
     }
 
     public function timestamp(string $columnName, bool $acronym = true)
@@ -71,7 +72,7 @@ class Blueprint
         return $this;
     }
 
-    protected function addColumn(string $columnName, string $type, $options = [])
+    protected function addColumn(string $columnName, string $type = "", $options = [])
     {
         $this->columns[] = "$columnName $type" . $this->formatOptions($options);
     }
