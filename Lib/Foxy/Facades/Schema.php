@@ -41,6 +41,11 @@ class Schema
         self::$pdo->exec($sql);
     }
 
+    static function query($query)
+    {
+        self::$pdo->exec($query);
+    }
+
     static function dropIfExists($tableName)
     {
         self::connect();
