@@ -7,15 +7,13 @@ return new class
 {
     public function up()
     {
-        Schema::create("employers", function (Blueprint $table) {
+        Schema::create("menus", function (Blueprint $table) {
             $table->id();
-            $table->string("position");
-            $table->integer("user_id")->references("users");
         });
     }
 
     public function down()
     {
-        Schema::dropIfExists("employers");
+        Schema::dropIfExists("menus");
     }
 };

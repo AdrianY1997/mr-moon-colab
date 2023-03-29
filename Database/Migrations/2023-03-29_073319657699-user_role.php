@@ -7,15 +7,14 @@ return new class
 {
     public function up()
     {
-        Schema::create("employers", function (Blueprint $table) {
-            $table->id();
-            $table->string("position");
+        Schema::create("user_role", function (Blueprint $table) {
             $table->integer("user_id")->references("users");
+            $table->integer("role_id")->references("roles");
         });
     }
 
     public function down()
     {
-        Schema::dropIfExists("employers");
+        Schema::dropIfExists("user_role");
     }
 };

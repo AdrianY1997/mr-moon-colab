@@ -7,15 +7,17 @@ return new class
 {
     public function up()
     {
-        Schema::create("employers", function (Blueprint $table) {
+        Schema::create("reservations", function (Blueprint $table) {
             $table->id();
-            $table->string("position");
+            $table->string("code")->unique();
+            $table->string("table");
+            $table->string("date");
             $table->integer("user_id")->references("users");
         });
     }
 
     public function down()
     {
-        Schema::dropIfExists("employers");
+        Schema::dropIfExists("reservations");
     }
 };
