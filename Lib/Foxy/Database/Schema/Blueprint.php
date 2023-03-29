@@ -42,7 +42,7 @@ class Blueprint
 
     public function references(string $tableName)
     {
-        $column = explode(" ", $this->columns[array_key_last($this->columns)])[0];
+        $column = trim(explode(" ", $this->columns[array_key_last($this->columns)])[0], $this->acronym);
         $this->addColumn("FOREIGN KEY ($column) REFERENCES $tableName($column)");
     }
 
