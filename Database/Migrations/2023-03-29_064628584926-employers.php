@@ -10,7 +10,7 @@ return new class
         Schema::create("employers", function (Blueprint $table) {
             $table->id();
             $table->string("position");
-            $table->foreign("user_id", "users");
+            $table->integer("user_id");
         });
     }
 
