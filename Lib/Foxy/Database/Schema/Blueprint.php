@@ -40,6 +40,11 @@ class Blueprint
         return $this;
     }
 
+    public function foreign(string $columnName, string $tableName)
+    {
+        $this->addColumn($columnName, "FOREIGN KEY REFERENCES $tableName($columnName)");
+    }
+
     public function timestamp(string $columnName, bool $acronym = true)
     {
         $this->addColumn(($acronym ? $this->acronym : "") . $columnName, 'TIMESTAMP');
