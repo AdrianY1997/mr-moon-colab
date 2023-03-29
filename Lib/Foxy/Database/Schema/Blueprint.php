@@ -43,7 +43,7 @@ class Blueprint
     public function references(string $tableName)
     {
         $column = explode(" ", $this->columns[array_key_last($this->columns)])[0];
-        $this->addColumn("FOREIGN KEY ($column) $tableName($column)");
+        $this->addColumn("FOREIGN KEY ($column) REFERENCES $tableName($column)");
     }
 
     public function timestamp(string $columnName, bool $acronym = true)
