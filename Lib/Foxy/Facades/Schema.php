@@ -41,7 +41,6 @@ class Schema
         $sql = "CREATE TABLE IF NOT EXISTS $tableName (" . implode(", ", $blueprintObj->getColumns()) . ")";
         $stmt = self::$pdo->connect()->prepare($sql);
         $stmt->execute();
-        $stmt->closeCursor();
     }
 
     static function insert(string $table, array $data)
@@ -49,17 +48,15 @@ class Schema
         self::connect();
 
         $keys = array_keys($data);
-        $values = array_values($data);
 
         array_walk($keys, function (&$value) use ($table) {
             $value = substr($table, 0, 4) . "_" . $value;
         });
 
-        $sql = "INSERT INTO $table (" . join(", ", $keys) . ") VALUES (" . rtrim(str_repeat("? ", count($data)), ", ") . ")";
+        $sql = "INSERT IGNORE INTO $table (" . join(", ", $keys) . ") VALUES (" . rtrim(str_repeat("?, ", count($data)), ", ") . ")";
 
         $stmt = self::$pdo->connect()->prepare($sql);
-        $stmt->execute($values);
-        $stmt->closeCursor();
+        $stmt->execute(array_values($data));
     }
 
     static function dropIfExists($tableName)

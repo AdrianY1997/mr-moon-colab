@@ -12,7 +12,9 @@ return new class
             $table->string("name");
         });
 
-        Schema::query("INSERT INTO roles (role_name) VALUES ('USER')");
+        Schema::insert("roles", [
+            "name" => "USER"
+        ]);
     }
 
     public function down()
