@@ -64,7 +64,10 @@ class Schema
 
     static function dropIfExists($tableName)
     {
-        self::connect();
-        self::$pdo->exec("DROP TABLE IF EXISTS $tableName");
+        $sql = "DROP TABLE IF EXISTS ?";
+
+        $stmt = self::$pdo->connect()->prepare($sql);
+        $stmt->execute([$tableName]);
+        $stmt->closeCursor();
     }
 }
