@@ -50,8 +50,6 @@ class MySQL
             ];
 
             $pdo = new PDO($connection, $this->user, $this->pass, $options);
-            $pdo->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
-            $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
             self::$connection[] = $pdo;
 
