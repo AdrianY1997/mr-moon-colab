@@ -2,6 +2,7 @@
 
 namespace Lib\Foxy\Facades;
 
+use Lib\Foxy\Database\MySQL;
 use Lib\Foxy\Database\Schema\Blueprint;
 use PDO;
 
@@ -24,7 +25,7 @@ class Schema
             PDO::ATTR_EMULATE_PREPARES => false,
         ];
 
-        self::$pdo = new PDO("mysql:host=$host;port=$port;dbname=$name;charset=$chst", $user, $pass, $options);
+        self::$pdo = new MySQL();
     }
 
     static function create(string $tableName, callable $blueprint)
@@ -38,12 +39,27 @@ class Schema
         $blueprintObj->timestamp("updated_at", false)->default("CURRENT_TIMESTAMP")->update("CURRENT_TIMESTAMP");
 
         $sql = "CREATE TABLE IF NOT EXISTS $tableName (" . implode(", ", $blueprintObj->getColumns()) . ")";
-        self::$pdo->exec($sql);
+        $stmt = self::$pdo->connect()->prepare($sql);
+        $stmt->execute();
+        $stmt->closeCursor();
     }
 
-    static function query($query)
+    static function insert(string $table, array $data)
     {
-        self::$pdo->exec($query);
+        self::connect();
+
+        $keys = array_keys($data);
+        $values = array_values($data);
+
+        array_walk($keys, function (&$value) use ($table) {
+            $value = substr($table, 0, 4) . "_" . $value;
+        });
+
+        $sql = "INSERT INTO $table (" . join(", ", $keys) . ") VALUES (" . rtrim(str_repeat("? ", count($data)), ", ") . ")";
+
+        $stmt = self::$pdo->connect()->prepare($sql);
+        $stmt->execute($values);
+        $stmt->closeCursor();
     }
 
     static function dropIfExists($tableName)
