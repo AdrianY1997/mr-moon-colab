@@ -26,29 +26,29 @@
         <hr>
         <div>
             <h1>Menu</h1>
-            <a href="#">
+            <a href="<?= route("menu") ?>">
                 <p>Principal</p>
             </a>
-            <a href="#">
+            <a href="<?= route("menu") ?>">
                 <p>Bebidas</p>
             </a>
-            <a href="#">
+            <a href="<?= route("menu") ?>">
                 <p>Comidas</p>
             </a>
         </div>
         <hr>
         <div>
             <h1>Link</h1>
-            <a href="#">
+            <a href="<?= route("inicio") ?>">
                 <p>Inicio</p>
             </a>
-            <a href="#">
+            <a href="<?= route("eventos") ?>">
                 <p>Eventos</p>
             </a>
-            <a href="#">
+            <a href="<?= route("galeria") ?>">
                 <p>Galería</p>
             </a>
-            <a href="#">
+            <a href="<?= route("auth/sign_up") ?>">
                 <p>Ingreso</p>
             </a>
         </div>
