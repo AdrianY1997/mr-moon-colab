@@ -6,7 +6,7 @@
                     Ingreso
                     <hr>
                 </h1>
-                <form action="<?= route("auth.startSession") ?>" method="POST">
+                <form action="<?= route("auth.start") ?>" method="POST">
                     <div class="form-control">
                         <input type="text" name="email" id="email" placeholder="email">
                         <label for="email">Email</label>

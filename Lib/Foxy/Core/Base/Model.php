@@ -153,6 +153,8 @@ class Model
 
         $string = "SELECT * FROM " . $this->name . rtrim($string, 'AND ');
 
+        var_dump($string);
+
         $query = $this->db->connect()->prepare($string);
         try {
             $query->execute();

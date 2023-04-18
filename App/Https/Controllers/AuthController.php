@@ -39,30 +39,26 @@ class AuthController extends Controller
         $user = new User();
 
         $user = $user->getAll(["user_email" => $data["email"]]);
-
-        Session::setMessage("email", $data["email"]);
-
+        var_dump($user);
         if (!isset($user[0])) {
             Session::setMessage("error", "El correo ingresado no se encuentra registrado en la base de datos");
+            redirect()->route("auth.login")->send();
         } else {
             $user = $user[0];
             if (!password_verify($data["password"], $user["password"]))
                 Session::setMessage("error", "La contraseña ingresada no coincide con el correo");
+            else if (Session::save($user["user_name"]))
+                Session::setMessage("success", "Haz iniciado sesión correctamente");
         }
         if (Session::checkError())
             redirect()->route("auth.login");
 
-
-        if (Session::save($user["name"]))
-            Session::setMessage("success", "Haz iniciado sesión correctamente");
-
-        redirect()->route("dash.home");
+        redirect()->route("dash.home")->send();
     }
 
     public function close_session()
     {
-
         Session::destroy();
-        redirect()->route(constant("HOME"));
+        redirect()->route(constant("HOME"))->send();
     }
 }

@@ -17,7 +17,8 @@ Route::set("testsly", [InicioController::class, "trySlyEngine"])->name("sly.test
 Route::set("ingreso", [AuthController::class, "log_in"])->name("auth.login");
 Route::set("registro", [AuthController::class, "sign_up"])->name("auth.signup");
 Route::set("recuperacion", [AuthController::class, "recovery"])->name("auth.recovery");
-Route::set("auth.startSession", [AuthController::class, "start_session"])->name("auth.startSession");
+Route::set("auth/start", [AuthController::class, "start_session"])->name("auth.start");
+Route::set("auth/close", [AuthController::class, "close_session"])->name("auth.close");
 
 Route::set("eventos", [EventosController::class, "index"])->name("event");
 Route::set("galeria", [GaleriaController::class, "index"])->name("galery");

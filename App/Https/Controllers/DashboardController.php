@@ -26,7 +26,7 @@ class DashboardController extends Controller
     {
         render("dashboard/home", [
             "active" => "inicio",
-            "user" => Session::data("name")
+            "user" => Session::data("user_name")
         ]);
     }
 

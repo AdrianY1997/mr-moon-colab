@@ -10,6 +10,7 @@ return new class
         Schema::create("users", function (Blueprint $table) {
             $table->id();
             $table->string("nick")->unique();
+            $table->string("email");
             $table->string("pass");
             $table->string("name");
             $table->string("lastname");
