@@ -1,10 +1,9 @@
 .red-msg {
-    
-    position: absolute;
+    position: fixed;
     bottom: 0;
     left: 50%;
     transform: translate(-50%);
-    transition: .5s;
+    transition: 0.5s;
     opacity: 1;
 
     div {
@@ -15,14 +14,14 @@
     }
 
     .warning {
-        background: #ffeb3b!important;
+        background: #ffeb3b !important;
     }
 
     .error {
-        background: #f44336!important
+        background: #f44336 !important;
     }
 
     .success {
-        background: #4CAF50!important;
+        background: #4caf50 !important;
     }
 }

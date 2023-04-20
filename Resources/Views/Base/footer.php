@@ -39,16 +39,16 @@
         <hr>
         <div>
             <h1>Link</h1>
-            <a href="<?= route("inicio") ?>">
+            <a href="<?= route(constant("HOME")) ?>">
                 <p>Inicio</p>
             </a>
-            <a href="<?= route("eventos") ?>">
+            <a href="<?= route("event") ?>">
                 <p>Eventos</p>
             </a>
-            <a href="<?= route("galeria") ?>">
+            <a href="<?= route("galery") ?>">
                 <p>Galería</p>
             </a>
-            <a href="<?= route("auth/sign_up") ?>">
+            <a href="<?= route("auth.login") ?>">
                 <p>Ingreso</p>
             </a>
         </div>

@@ -2,6 +2,8 @@
 
 namespace Lib\Foxy\Core;
 
+use App\Models\User;
+
 class Session
 {
     static private array $data = [];
@@ -10,6 +12,7 @@ class Session
     static function start()
     {
         session_start();
+        self::load();
     }
 
     static function stop()
@@ -31,23 +34,23 @@ class Session
 
     static function load()
     {
-        // if (self::checkSession()) {
+        if (self::checkSession()) {
 
-        //     $name = $_SESSION["user"];
+            $name = $_SESSION["user"];
 
-        //     /**
-        //      * Instancia la clase para la tabla de usuarios
-        //      * 
-        //      * Sintaxis: `$user = new Model()` donde `Model` se cambia por tu modelo
-        //      * Generalmente la clase es `User()`
-        //      */
-        //     $user = new User();
+            /**
+             * Instancia la clase para la tabla de usuarios
+             * 
+             * Sintaxis: `$user = new Model()` donde `Model` se cambia por tu modelo
+             * Generalmente la clase es `User()`
+             */
+            $user = new User();
 
-        //     $user = $user->getAll(["name" => $name], true);
+            $user = $user->getAll(["user_name" => $name], true);
 
-        //     if (isset($user[0]))
-        //         self::$data = $user[0];
-        // }
+            if (isset($user))
+                self::$data = $user;
+        }
     }
 
     static function checkSession()

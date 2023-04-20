@@ -1,10 +1,11 @@
 <?php
 
+$messages = $GLOBALS["messages"];
+
 if (isset($messages["error"])) {
     $array = $messages["error"];
-
     foreach ($array as $key => $value) {
-        ?>
+?>
 
         <div class="red-msg container">
             <div class="error">
@@ -15,7 +16,7 @@ if (isset($messages["error"])) {
             </div>
         </div>
 
-        <?php
+    <?php
     }
 }
 
@@ -23,7 +24,7 @@ if (isset($messages["success"])) {
     $array = $messages["success"];
 
     foreach ($array as $key => $value) {
-        ?>
+    ?>
 
         <div class="red-msg container">
             <div class="success">
@@ -34,7 +35,7 @@ if (isset($messages["success"])) {
             </div>
         </div>
 
-        <?php
+<?php
     }
 }
 

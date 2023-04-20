@@ -14,7 +14,7 @@ class AuthController extends Controller
         parent::__construct();
 
         if (Session::checkSession())
-            redirect()->route("dash.home");
+            redirect()->route("dash.home")->send();
     }
 
     public function log_in()
@@ -39,15 +39,15 @@ class AuthController extends Controller
         $user = new User();
 
         $user = $user->getAll(["user_email" => $data["email"]]);
-        var_dump($user);
         if (!isset($user[0])) {
             Session::setMessage("error", "El correo ingresado no se encuentra registrado en la base de datos");
             redirect()->route("auth.login")->send();
         } else {
             $user = $user[0];
-            if (!password_verify($data["password"], $user["password"]))
+            if (!password_verify($data["password"], $user["user_pass"])) {
+                var_dump($data, $user);
                 Session::setMessage("error", "La contraseña ingresada no coincide con el correo");
-            else if (Session::save($user["user_name"]))
+            } else if (Session::save($user["user_name"]))
                 Session::setMessage("success", "Haz iniciado sesión correctamente");
         }
         if (Session::checkError())

@@ -14,12 +14,12 @@ class DashboardController extends Controller
         parent::__construct();
 
         if (!Session::checkSession())
-            redirect()->route("auth.login");
+            redirect()->route("auth.login")->send();
     }
 
     public function index()
     {
-        redirect()->route("dash.home");
+        redirect()->route("dash.home")->send();
     }
 
     public function inicio()
@@ -64,7 +64,7 @@ class DashboardController extends Controller
         else
             Session::setMessage("error", "No se pudo actualizar, por que la contraseña no coincide con tu usuario");
 
-        redirect()->route("dash.info");
+        redirect()->route("dash.info")->send();
     }
 
     public function usuarios()
