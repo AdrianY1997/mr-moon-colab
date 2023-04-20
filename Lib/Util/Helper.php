@@ -13,7 +13,7 @@ if (!function_exists("asset")) {
 if (!function_exists("resource")) {
     function resource($path)
     {
-        return constant("BASE_URL") . "App/Site/Resources/" . $path;
+        return constant("BASE_URL") . "Resources/" . $path;
     }
 }
 
