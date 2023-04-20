@@ -3,7 +3,7 @@
         <div class="container">
             <div class="navbar-brand ff-edu-nsw-act-foundation">
                 <a href="<?= route(constant("HOME")) ?>" class="navbar-item">
-                    <img src="<?= resource("img/logo.png") ?>" alt="">
+                    <img src="<?= asset("img/logo.png") ?>" alt="">
                 </a>
                 <div class="navbar-burger">
                     <span></span><span></span><span></span>
@@ -11,8 +11,7 @@
             </div>
             <div class="navbar-menu">
                 <div class="navbar-end">
-                    <a class="navbar-item" href="#"><i class="fa-brands fa-github"></i></a>
-                    <!-- <div class="navbar-item">
+                    <div class="navbar-item">
                         <p class="control">
                             <a href="#" class="button">
                                 <span class="icon">
@@ -21,7 +20,7 @@
                                 <span>GitHub</span>
                             </a>
                         </p>
-                    </div> -->
+                    </div>
                 </div>
             </div>
         </div>

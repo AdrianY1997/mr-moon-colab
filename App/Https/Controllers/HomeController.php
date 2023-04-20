@@ -8,6 +8,8 @@ class HomeController extends Controller
 {
     public function home()
     {
-        render("default/home");
+        render("default/home", [
+            "nombre" => "Foxy"
+        ]);
     }
 }

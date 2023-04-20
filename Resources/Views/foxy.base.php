@@ -16,13 +16,14 @@
 </head>
 
 <body>
-    <?php include_once "App\\Site\\Views\\static\\app.header.php" ?>
+    <?php include_once "Resources\\Views\\static\\app.header.php" ?>
 
     <main>
-        <?php include_once "App\\Site\\Views\\$view.php" ?>
+        <?php include_once "Resources\\Views\\$view.php" ?>
     </main>
 
-    <?php include_once "App\\Site\\Views\\static\\app.footer.php" ?>
+    <?php include_once "Resources\\Views\\static\\app.footer.php" ?>
+    <?php include_once "Resources\\Views\\static\\app.messages.php" ?>
 
     <script src="<?= asset("js/foxy.js") ?>"></script>
 </body>
