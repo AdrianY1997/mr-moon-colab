@@ -44,16 +44,18 @@ class Schema
         $stmt->closeCursor();
     }
 
-    static function insert(string $table, array $data)
+    static function insert(string $table, array $data, bool $prefix = false)
     {
         self::connect();
 
         $keys = array_keys($data);
         $values = array_values($data);
 
-        array_walk($keys, function (&$value) use ($table) {
-            $value = substr($table, 0, 4) . "_" . $value;
-        });
+        if (!$prefix) {
+            array_walk($keys, function (&$value) use ($table) {
+                $value = substr($table, 0, 4) . "_" . $value;
+            });
+        }
 
         $sql = "INSERT INTO $table (" . join(", ", $keys) . ") VALUES (" . rtrim(str_repeat("? ", count($data)), ", ") . ")";
 
