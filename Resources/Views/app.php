@@ -40,6 +40,7 @@ Webdata::initialView()
     <?php include_once "Resources/Views/Base/messages.php" ?>
 
     <script src="<?= asset("js/main.js") ?>"></script>
+    <script src="<?= resource("js/jquery.min.js") ?>"></script>
 </body>
 </body>
 

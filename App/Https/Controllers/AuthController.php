@@ -2,6 +2,7 @@
 
 namespace App\Https\Controllers;
 
+use App\Models\Code;
 use App\Models\User;
 use Lib\Foxy\Core\Base\Controller;
 use Lib\Foxy\Core\Request;
@@ -30,6 +31,22 @@ class AuthController extends Controller
     public function recovery()
     {
         render("auth/recovery");
+    }
+
+    public function request_recovery_code()
+    {
+        $data = Request::getData();
+
+        $code = new Code();
+        $randCode = rand(100000, 999999);
+
+        $code->insert("codes", [
+            "email" => $data["email"],
+            "code" => $randCode,
+            "status" => "waiting"
+        ]);
+
+        echo $randCode;
     }
 
     public function start_session()

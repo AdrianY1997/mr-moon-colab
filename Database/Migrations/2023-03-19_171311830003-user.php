@@ -16,6 +16,15 @@ return new class
             $table->string("lastname");
             $table->string("phone");
         });
+
+        Schema::insert("users", [
+            "nick" => "admin",
+            "email" => "no.set@mail.com",
+            "pass" => password_hash("123456789", PASSWORD_DEFAULT),
+            "name" => "Administrador",
+            "lastname" => "01",
+            "phone" => "000"
+        ]);
     }
 
     public function down()

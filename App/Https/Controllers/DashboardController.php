@@ -25,7 +25,7 @@ class DashboardController extends Controller
     public function inicio()
     {
         render("dashboard/home", [
-            "active" => "inicio",
+            "active" => "home",
             "user" => Session::data("user_name")
         ]);
     }

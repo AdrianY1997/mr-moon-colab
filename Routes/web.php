@@ -20,6 +20,9 @@ Route::set("recuperacion", [AuthController::class, "recovery"])->name("auth.reco
 Route::set("auth/start", [AuthController::class, "start_session"])->name("auth.start");
 Route::set("auth/close", [AuthController::class, "close_session"])->name("auth.close");
 
+Route::set("recovery/code/request", [AuthController::class, "request_recovery_code"])->name("auth.recovery.request.code");
+Route::set("auth/recovery/verify/code", [AuthController::class, "verify_recovery_code"])->name("auth.recovery.verify.code");
+
 Route::set("eventos", [EventosController::class, "index"])->name("event");
 Route::set("galeria", [GaleriaController::class, "index"])->name("galery");
 Route::set("menu", [MenuController::class, "index"])->name("menu");

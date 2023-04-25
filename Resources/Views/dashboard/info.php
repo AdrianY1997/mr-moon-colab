@@ -30,7 +30,7 @@
                             </div>
                             <div class="info-control">
                                 <p><span><i class="fa-regular fa-star"></i></span>
-                                    <?= explode("\\", $webdata["webd_logo"])[2] ?>
+                                    <?= explode("/", $webdata["webd_logo"])[2] ?>
                                 </p>
                             </div>
                         </div>
