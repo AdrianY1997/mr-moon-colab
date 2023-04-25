@@ -29,11 +29,17 @@ class Model
     public function insert(?string $table, array $data): bool
     {
 
+        $array_keys = [];
+
+        foreach (array_keys($data) as $key => $value) {
+            array_push($array_keys, substr($this->name, 0, 4) . "_" . $value);
+        }
+
         if (empty($table))
             $table = $this->name;
 
-        $columns = implode(", ", array_keys($data));
-        $values = rtrim(str_repeat("? ", count($data)), ", ");
+        $columns = implode(", ", $array_keys);
+        $values = rtrim(str_repeat("?, ", count($data)), ", ");
 
         try {
             $stmt = $this->db->connect()->prepare("INSERT INTO $table ($columns) VALUES ($values)");
