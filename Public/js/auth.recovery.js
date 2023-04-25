@@ -7,7 +7,6 @@ const notify = (data, status) => {
     notify.classList.add("container")
     switch (data.code) {
         case 1:
-
             text = "Se ha enviado un código de recuperación a " + data.email + ": " + data.data;
             break;
         case 2: text = "El email ingresado no es valido";

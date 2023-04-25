@@ -49,6 +49,20 @@ class AuthController extends Controller
         echo $randCode;
     }
 
+    public function verify_recovery_code()
+    {
+        // $data = Request::getData();
+
+        // $code = new Code();
+
+        // $x = $code->get("*", [
+        //     "code_email" => $data["email"],
+        //     "code_code" => $data["code"]
+        // ]);
+
+        // var_dump($x);
+    }
+
     public function start_session()
     {
         $data = Request::getData();
