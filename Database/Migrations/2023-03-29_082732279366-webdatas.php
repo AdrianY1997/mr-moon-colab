@@ -23,7 +23,6 @@ return new class
         });
 
         Schema::insert("webdatas", [
-            "id" => 1,
             "name" => "Mr. Moon",
             "subt" => "Coffee & Bar",
             "logo" => "img/static/mr_moon_logo.png",

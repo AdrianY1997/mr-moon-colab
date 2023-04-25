@@ -25,11 +25,13 @@
                 </h1>
                 <p>Inserta tú correo electrónico donde vas a recibir tú código de recuperación.</p>
                 <div>
-                    <form action="">
+                    <form id="send-code-form" action="<?= route("auth.recovery.request.code") ?>">
                         <div class="request-password">
-                            <input type="email" placeholder="forexample123@email.com">
-                            <button><a href="#">Enviar</a></button><br>
+                            <input name="email" type="email" placeholder="forexample123@email.com">
+                            <button type="submit" id="send-code-btn">Enviar</button><br>
                         </div>
+                    </form>
+                    <form action="#">
                         <input type="number" placeholder="# # # # # #">
                         <button><a href="#">Confirmar código</a></button>
                     </form>
@@ -56,5 +58,6 @@
 
         </div>
     </div>
+</div>
 
-    <script src="<?= asset("js/recovery.js") ?>"></script>
+<script src="<?= asset("js/auth.recovery.js") ?>"></script>

@@ -21,7 +21,8 @@
                 }
                 ?>
             </h1>
-            <p>Texto</p>
+            <p>Mision: En nuestra empresa aspira ser un negocio que sastistace las necesidades de nuestros clientes</p>
+            <p>Vision: En el año 2035 ser uno de los mas negocios mas populares y tener diferentes surcusales en el pais</p>
         </div>
         <hr>
         <div>

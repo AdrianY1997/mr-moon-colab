@@ -11,6 +11,11 @@ return new class
             $table->integer("user_id")->references("users");
             $table->integer("role_id")->references("roles");
         });
+
+        Schema::insert("user_role", [
+            "user_id" => 1,
+            "role_id" => 1
+        ], true);
     }
 
     public function down()

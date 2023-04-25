@@ -4,6 +4,11 @@
         <span class="d-none"><i class="fa-solid fa-times"></i></span>
     </div>
     <div class="items hide">
+        <div class="<?= $active == "home" ? "active" : "" ?>">
+            <a href="<?= route("dash.home") ?>">
+                <p>dashboard</p>
+            </a>
+        </div>
         <div class="<?= $active == "info" ? "active" : "" ?>">
             <a href="<?= route("dash.info") ?>">
                 <p>Información</p>
