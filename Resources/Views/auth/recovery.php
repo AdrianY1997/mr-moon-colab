@@ -11,11 +11,11 @@
                 <p>No podemos simplemente enviar tú antigua contraseña</p>
                 <p>Un link único para restablecer tú contraseña ha sido generado. Para restablecer tú contraseña has click en el siguiente link y sigue las instrucciones.</p>
                 <div>
-                    <button><a href="#">Restablecer Contraseña</a></button>
+                    <button class="send-code"><a href="#">Restablecer Contraseña</a></button>
                 </div>
             </div>
         </div>
-        <div class="container">
+        <div class="container d-none">
             <div>
                 <img src="<?= asset("img\static\mr_moon_logo.png") ?>">
             </div>
@@ -36,7 +36,7 @@
                 </div>
             </div>
         </div>
-        <div class="container">
+        <div class="container d-none">
             <div>
                 <img src="<?= asset("img\static\mr_moon_logo.png") ?>">
             </div>
@@ -56,3 +56,5 @@
 
         </div>
     </div>
+
+    <script src="<?= asset("js/recovery.js") ?>"></script>
