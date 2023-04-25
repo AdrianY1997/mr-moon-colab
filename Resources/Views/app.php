@@ -20,6 +20,7 @@ Webdata::initialView()
     <link rel="shortcut icon" href="<?= asset("img/static/mr_moon_logo.png") ?>" type="image/x-icon">
 
     <link rel="stylesheet" href="<?= asset("css/main.css") ?>">
+    <script src="<?= asset("js/pre.js") ?>"></script>
     <script src="<?= resource("js/fontawesome.min.js") ?>"></script>
 </head>
 
