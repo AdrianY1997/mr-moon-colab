@@ -1,7 +1,7 @@
 <?php
 
-use Lib\Foxy\Database\Schema\Blueprint;
-use Lib\Foxy\Facades\Schema;
+use FoxyMVC\Lib\Foxy\Database\Schema\Blueprint;
+use FoxyMVC\Lib\Foxy\Facades\Schema;
 
 return new class
 {

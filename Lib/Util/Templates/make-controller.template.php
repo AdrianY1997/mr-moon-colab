@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Https\Controllers;
+namespace FoxyMVC\App\Https\Controllers;
 
-use Lib\Foxy\Core\Base\Controller;
+use FoxyMVC\Lib\Foxy\Core\Base\Controller;
 
 class __controllerController extends Controller
 {

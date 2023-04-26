@@ -1,7 +1,7 @@
 <?php
 
-use Lib\Foxy\Core\Redirector;
-use Lib\Foxy\Core\Route;
+use FoxyMVC\Lib\Foxy\Core\Redirector;
+use FoxyMVC\Lib\Foxy\Core\Route;
 
 if (!function_exists("asset")) {
     function asset($path)

@@ -1,13 +1,12 @@
 <?php
 
-namespace Lib\Foxy\Database;
+namespace FoxyMVC\Lib\Foxy\Database;
 
 use PDO;
 use PDOException;
 
 
-class MySQL
-{
+class MySQL {
     private $host;
     private $name;
     private $user;
@@ -17,10 +16,12 @@ class MySQL
 
     protected $test;
 
+    public const LOG_INSERT = "insert";
+    public const LOG_UPDATE = "update";
+
     static $connection = [];
 
-    function __construct()
-    {
+    function __construct() {
         $this->host = constant('DBHOST');
         $this->name = constant('DBNAME');
         $this->user = constant('DBUSER');
@@ -34,8 +35,7 @@ class MySQL
      * 
      * @return PDO|string Retorna la conexión a la base de datos o Imprime una excepción
      */
-    function connect($options = []): PDO|string
-    {
+    function connect($options = []): PDO|string {
         $db_name = ";dbname=" . $this->name;
 
         if (isset($options["dbname"]) && !$options["dbname"]) {
@@ -59,14 +59,16 @@ class MySQL
         }
     }
 
-    public function drop($name)
-    {
+    public function drop($name) {
         $stmt = $this->connect()->prepare("DROP TABLE ?");
         $stmt->execute([$name]);
     }
 
-    public static function closeConnection()
-    {
+    public function getDbName() {
+        return $this->name;
+    }
+
+    public static function closeConnection() {
         foreach (self::$connection as $pdo) {
             $pdo = null;
         }

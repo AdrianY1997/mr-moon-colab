@@ -1,7 +1,7 @@
 <?php
 
-use Lib\Cli\Core\Application;
-use Lib\Util\DotEnv;
+use FoxyMVC\Lib\Cli\Core\Application;
+use FoxyMVC\Lib\Util\DotEnv;
 
 $dotenv = new DotEnv(constant("DIR") . '/.env');
 $dotenv->load();

@@ -1,9 +1,8 @@
 <?php
 
-namespace Lib\Foxy\Core;
+namespace FoxyMVC\Lib\Foxy\Core;
 
-class Route
-{
+class Route {
     static $routes = [];
 
     protected $name;
@@ -12,60 +11,50 @@ class Route
     protected $method;
     protected $params;
 
-    public function __construct($url, $action)
-    {
+    public function __construct($url, $action) {
         $this->url = $url;
         $this->controller = $action[0];
         $this->method = $action[1];
     }
 
-    public function name($name)
-    {
+    public function name($name) {
         $this->name = $name;
         self::$routes[$name] = $this;
         return $this;
     }
 
-    public function getUrl()
-    {
+    public function getUrl() {
         return $this->url;
     }
 
-    public function getName()
-    {
+    public function getName() {
         return $this->name;
     }
 
-    public function getController()
-    {
+    public function getController() {
         return $this->controller;
     }
 
-    public function getMethod()
-    {
+    public function getMethod() {
         return $this->method;
     }
 
-    static public function loadRoutes()
-    {
+    static public function loadRoutes() {
         $routes = glob("Routes\\*.php");
         foreach ($routes as $value) {
             require_once $value;
         }
     }
 
-    static public function set($url, $action)
-    {
+    static public function set($url, $action) {
         return new self($url, $action);
     }
 
-    static function getRoute($name)
-    {
+    static function getRoute($name) {
         return self::$routes[$name];
     }
 
-    static public function getRouteFromUrl($url)
-    {
+    static public function getRouteFromUrl($url) {
         self::loadRoutes();
 
         foreach (Route::$routes as $route) {

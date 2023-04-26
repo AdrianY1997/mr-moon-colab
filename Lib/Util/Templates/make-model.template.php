@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Models;
+namespace FoxyMVC\App\Models;
 
-use Lib\Foxy\Core\Base\Model;
+use FoxyMVC\Lib\Foxy\Core\Base\Model;
 
 class __model extends Model
 {

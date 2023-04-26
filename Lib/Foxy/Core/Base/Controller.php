@@ -1,15 +1,18 @@
 <?php
 
-namespace Lib\Foxy\Core\Base;
+namespace FoxyMVC\Lib\Foxy\Core\Base;
 
-use Lib\Foxy\Core\Session;
+use FoxyMVC\Lib\Foxy\Core\Session;
 
-class Controller
-{
-    protected $engine;
-
-    public function __construct()
-    {
+/**
+ * Clase base de los controladores
+ */
+class Controller {
+    /**
+     * Constructor de la clase Controller
+     */
+    public function __construct() {
+        // Asigna a las variables globales mensajes de notificación
         $GLOBALS["messages"] = Session::getMessage();
     }
 }

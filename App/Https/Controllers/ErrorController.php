@@ -1,13 +1,21 @@
 <?php
 
-namespace App\Https\Controllers;
+namespace FoxyMVC\App\Https\Controllers;
 
-use Lib\Foxy\Core\Base\Controller;
+use FoxyMVC\Lib\Foxy\Core\Base\Controller;
 
-class ErrorController extends Controller
-{
-    public function code($msg)
-    {
+/**
+ * Controlador para manejar errores.
+ */
+class ErrorController extends Controller {
+    /**
+     * Muestra una página de error con un código y un mensaje específicos.
+     *
+     * @param string $msg Clave del mensaje de error a mostrar.
+     */
+    public function code(string $msg): void {
+
+        // Definir los códigos y mensajes de error disponibles
         $codes = [
             "page-not-found" => [
                 "404",
@@ -19,8 +27,10 @@ class ErrorController extends Controller
             ]
         ];
 
+        // Obtener el código y el mensaje de error correspondientes a la clave proporcionada
         [$code, $subtitle] = $codes[$msg];
 
+        // Mostrar la página de error
         render("default/error", [
             "code" => $code,
             "subtitle" => $subtitle

@@ -1,6 +1,6 @@
 <?php
 
-namespace Lib\Foxy\Database\Schema;
+namespace FoxyMVC\Lib\Foxy\Database\Schema;
 
 class Blueprint
 {
@@ -13,6 +13,11 @@ class Blueprint
     {
         $this->tableName = $tableName;
         $this->acronym = substr($tableName, 0, 4) . "_";
+    }
+
+    public function isManyToMany()
+    {
+        $this->acronym = "";
     }
 
     public function id()

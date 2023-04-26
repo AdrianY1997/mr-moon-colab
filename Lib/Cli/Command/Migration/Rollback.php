@@ -1,43 +1,35 @@
 <?php
 
-namespace Lib\Cli\Command\Migration;
+namespace FoxyMVC\Lib\Cli\Command\Migration;
 
-use Lib\Cli\Command\Database\Create;
-use Lib\Cli\Command\Database\Drop;
-use Lib\Cli\Core\Base\Command;
-use PDO;
+use FoxyMVC\Lib\Cli\Command\Database\Drop;
+use FoxyMVC\Lib\Cli\Core\Base\Command;
 
-class Rollback extends Command
-{
-    public function __construct($pro, $avs)
-    {
+/**
+ * Clase para migrar la base de datos
+ */
+class Rollback extends Command {
+    /**
+     * Constructor de la clase Rollback
+     *
+     * @param array $pro Propiedades
+     * @param array $avs Argumentos
+     */
+    public function __construct($pro, $avs) {
         parent::__construct($pro, $avs);
     }
 
-    public function init()
-    {
-        $name = constant('DBNAME');
-        $host = constant('DBHOST');
-        $user = constant('DBUSER');
-        $pass = constant('DBPASS');
-        $port = constant('DBPORT');
-        $chst = constant('DBCHST');
+    /**
+     * Inicializa la eliminación
+     *
+     * @return void
+     */
+    public function init() {
+        // Obtiene los archivos en la carpeta de migraciones
+        $migrationsFolder = constant("DIR") . "/Database/Migrations/*.php";
+        $migrationFiles = glob($migrationsFolder);
 
-        $pdo = new PDO("mysql:host=$host;port=$port,charset=$chst", $user, $pass);
-
-        $this->printer->display("info", "Comprobando si existe una base de datos con el mismo nombre");
-
-        $migrationFiles = glob(constant("DIR") . '\\App\\Site\\Migrations\\*.php');
-        $pdo->exec("USE $name;");
-
-        foreach ($migrationFiles as $key => $migrationFile) {
-            $migration = require_once $migrationFile;
-
-            if (method_exists($migration, "down")) {
-                $pdo->exec($migration->down());
-            }
-        }
-
+        // Crear una instancia de la clase Drop del comando database:drop y la inicializa
         $database = new Drop();
         $database->init();
     }

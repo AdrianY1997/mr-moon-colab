@@ -1,6 +1,6 @@
 <?php
 
-namespace Lib\Util;
+namespace FoxyMVC\Lib\Util;
 
 class DotEnv
 {

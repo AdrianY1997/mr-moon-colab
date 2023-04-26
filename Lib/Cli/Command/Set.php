@@ -1,13 +1,19 @@
 <?php
 
-namespace Lib\Cli\Command;
+namespace FoxyMVC\Lib\Cli\Command;
 
-use Lib\Cli\Core\Register;
+use FoxyMVC\Lib\Cli\Core\Register;
 
-class Set
-{
-    public function init()
-    {
+/**
+ * Clase donde se asignan los comandos
+ */
+class Set {
+    /**
+     * Inicializa la clase
+     *
+     * @return void
+     */
+    public function init() {
         Register::command("make",  [
             "controller",
             "migration",
@@ -15,8 +21,7 @@ class Set
         ]);
 
         Register::command("migration", [
-            "migrate",
-            "rollback"
+            "run",
         ]);
 
         Register::command("server", [

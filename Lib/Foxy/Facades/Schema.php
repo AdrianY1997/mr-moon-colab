@@ -1,35 +1,18 @@
 <?php
 
-namespace Lib\Foxy\Facades;
+namespace FoxyMVC\Lib\Foxy\Facades;
 
-use Lib\Foxy\Database\MySQL;
-use Lib\Foxy\Database\Schema\Blueprint;
-use PDO;
+use FoxyMVC\Lib\Foxy\Database\MySQL;
+use FoxyMVC\Lib\Foxy\Database\Schema\Blueprint;
 
-class Schema
-{
+class Schema {
     protected static $pdo;
 
-    static function connect()
-    {
-        $host = constant('DBHOST');
-        $user = constant('DBUSER');
-        $pass = constant('DBPASS');
-        $port = constant('DBPORT');
-        $name = constant("DBNAME");
-        $chst = constant('DBCHST');
-
-        $options = [
-            PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
-            PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
-            PDO::ATTR_EMULATE_PREPARES => false,
-        ];
-
+    static function connect() {
         self::$pdo = new MySQL();
     }
 
-    static function create(string $tableName, callable $blueprint)
-    {
+    static function create(string $tableName, callable $blueprint) {
         self::connect();
 
         $blueprintObj = new Blueprint($tableName);
@@ -44,8 +27,7 @@ class Schema
         $stmt->closeCursor();
     }
 
-    static function insert(string $table, array $data, bool $prefix = false)
-    {
+    static function insert(string $table, array $data, bool $prefix = false) {
         self::connect();
 
         $keys = array_keys($data);
@@ -64,8 +46,7 @@ class Schema
         $stmt->closeCursor();
     }
 
-    static function dropIfExists($tableName)
-    {
+    static function dropIfExists($tableName) {
         $sql = "DROP TABLE IF EXISTS ?";
 
         $stmt = self::$pdo->connect()->prepare($sql);

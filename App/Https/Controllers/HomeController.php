@@ -1,15 +1,17 @@
 <?php
 
-namespace App\Https\Controllers;
+namespace FoxyMVC\App\Https\Controllers;
 
-use Lib\Foxy\Core\Base\Controller;
+use FoxyMVC\Lib\Foxy\Core\Base\Controller;
 
-class HomeController extends Controller
-{
-    public function home()
-    {
-        render("default/home", [
-            "nombre" => "Foxy"
-        ]);
+/**
+ * Controlador para la página de inicio.
+ */
+class HomeController extends Controller {
+    /**
+     * Muestra la página de inicio.
+     */
+    public function home(): void {
+        render("default/home");
     }
 }
