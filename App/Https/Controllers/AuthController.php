@@ -45,8 +45,6 @@ class AuthController extends Controller
             "code" => $randCode,
             "status" => "waiting"
         ]);
-
-        echo $randCode;
     }
 
     public function verify_recovery_code()
