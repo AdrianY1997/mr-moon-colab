@@ -8,7 +8,7 @@ span[data-function="toggle-footer"] {
 
 .complete-footer {
     display: grid !important;
-    grid-template-columns: 1fr 8fr 1fr 1fr 1fr 1fr 1fr 1fr;
+    grid-template-columns: 1fr 8fr repeat(5,1fr);
 }
 
 .copy {
