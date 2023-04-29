@@ -2,59 +2,157 @@
 
 namespace FoxyMVC\Lib\Foxy\Core;
 
-class Route {
-    static $routes = [];
+/**
+ * Clase para manejar la rutas del software
+ */
+class Route
+{
+    /**
+     * Listado de rutas guardadas con el metodo set
+     * 
+     * @var array
+     */
+    static array $routes = [];
 
-    protected $name;
-    protected $url;
-    protected $controller;
-    protected $method;
-    protected $params;
+    /**
+     * Nombre que se le asigna a la ruta
+     *
+     * @var string
+     */
+    protected string $name;
 
-    public function __construct($url, $action) {
+    /**
+     * Url asignada
+     *
+     * @var string
+     */
+    protected string $url;
+
+    /**
+     * Nombre del controlador asignado a la ruta
+     *
+     * @var string
+     */
+    protected string $controller;
+
+    /**
+     * Nombre de la función asignada a la ruta
+     *
+     * @var string
+     */
+    protected string $method;
+
+    /**
+     * Constructor de la clase Route
+     *
+     * @param string $url
+     * @param string[] $action
+     */
+    public function __construct(string $url, array $action)
+    {
         $this->url = $url;
         $this->controller = $action[0];
         $this->method = $action[1];
     }
 
-    public function name($name) {
+    /**
+     * Asigna el nombre de la ruta
+     *
+     * @param string $name
+     * @return Route
+     */
+    public function name($name): Route
+    {
         $this->name = $name;
         self::$routes[$name] = $this;
         return $this;
     }
 
-    public function getUrl() {
+    /**
+     * Obtiene la url de la ruta
+     *
+     * @return string
+     */
+    public function getUrl(): string
+    {
         return $this->url;
     }
 
-    public function getName() {
+    /**
+     * Obtiene el nombre de la ruta
+     *
+     * @return string
+     */
+    public function getName(): string
+    {
         return $this->name;
     }
 
-    public function getController() {
+    /**
+     * Obtiene el nombre del controlador de la ruta
+     *
+     * @return string
+     */
+    public function getController(): string
+    {
         return $this->controller;
     }
 
-    public function getMethod() {
+    /**
+     * Obtiene el método asignado en la ruta
+     *
+     * @return string
+     */
+    public function getMethod(): string
+    {
         return $this->method;
     }
 
-    static public function loadRoutes() {
+    /**
+     * Carga las rutas desde la carpeta de rutas
+     *
+     * @return void
+     */
+    static public function loadRoutes(): void
+    {
         $routes = glob("Routes\\*.php");
         foreach ($routes as $value) {
             require_once $value;
         }
     }
 
-    static public function set($url, $action) {
+    /**
+     * Retorna una instancia de la clase Route
+     *
+     * @param string $url
+     * @param string[] $action
+     * @return Route
+     */
+    static public function set($url, $action): Route
+    {
         return new self($url, $action);
     }
 
-    static function getRoute($name) {
+    /**
+     * Obtiene el una instancia guardada en el listado de rutas según el nombre dado
+     *
+     * @param string $name
+     * @return Route
+     */
+    static function getRoute($name): Route
+    {
         return self::$routes[$name];
     }
 
-    static public function getRouteFromUrl($url) {
+    /**
+     * Obtiene un array asociativo con el controlador, método y parámetros según la url dada
+     *
+     * @param string $url
+     * @return array|false
+     */
+    static public function getRouteFromUrl($url): array|false
+    {
+        // Carga las rutas guardadas
         self::loadRoutes();
 
         foreach (Route::$routes as $route) {

@@ -14,8 +14,6 @@ class MySQL {
     private $port;
     private $chst;
 
-    protected $test;
-
     public const LOG_INSERT = "insert";
     public const LOG_UPDATE = "update";
 
