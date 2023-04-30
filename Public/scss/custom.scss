@@ -29,13 +29,22 @@ main {
     opacity: 0.25;
 }
 
-.red-msg {
+#notifications {
     position: fixed;
-    bottom: 0;
+    bottom: .5rem;
     left: 50%;
     transform: translate(-50%);
+}
+
+.red-msg {
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
     transition: 0.5s;
     opacity: 1;
+
+    .close {
+        cursor: pointer;
+    }
 
     div {
         display: flex;

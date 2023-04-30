@@ -5,8 +5,7 @@
     "license": "MIT",
     "autoload": {
         "psr-4": {
-            "FoxyMVC\\App\\": "App/",
-            "FoxyMVC\\Lib\\": "Lib/"
+            "FoxyMVC\\": ""
         }
     },
     "authors": [

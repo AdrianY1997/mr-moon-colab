@@ -2,6 +2,8 @@
 
 namespace FoxyMVC\Lib\Foxy\Core;
 
+use FoxyMVC\Lib\Foxy\Core\Route;
+use FoxyMVC\Lib\Foxy\Core\Request;
 use FoxyMVC\Lib\Foxy\Core\Session;
 use FoxyMVC\Lib\Foxy\Database\MySQL;
 

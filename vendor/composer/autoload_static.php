@@ -9,19 +9,14 @@ class ComposerStaticInitc42ec4eb3ddc4feed3d841a0f2237669
     public static $prefixLengthsPsr4 = array (
         'F' => 
         array (
-            'FoxyMVC\\Lib\\' => 12,
-            'FoxyMVC\\App\\' => 12,
+            'FoxyMVC\\' => 8,
         ),
     );
 
     public static $prefixDirsPsr4 = array (
-        'FoxyMVC\\Lib\\' => 
+        'FoxyMVC\\' => 
         array (
-            0 => __DIR__ . '/../..' . '/Lib',
-        ),
-        'FoxyMVC\\App\\' => 
-        array (
-            0 => __DIR__ . '/../..' . '/App',
+            0 => __DIR__ . '/../..' . '/',
         ),
     );
 

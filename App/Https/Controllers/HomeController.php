@@ -2,6 +2,7 @@
 
 namespace FoxyMVC\App\Https\Controllers;
 
+use FoxyMVC\Lib\Foxy\Core\Session;
 use FoxyMVC\Lib\Foxy\Core\Base\Controller;
 
 /**
@@ -12,6 +13,6 @@ class HomeController extends Controller {
      * Muestra la página de inicio.
      */
     public function home(): void {
-        render("default/home");
+        render("default.home", ["hola" => "x"]);
     }
 }

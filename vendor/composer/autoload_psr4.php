@@ -6,6 +6,5 @@ $vendorDir = dirname(__DIR__);
 $baseDir = dirname($vendorDir);
 
 return array(
-    'FoxyMVC\\Lib\\' => array($baseDir . '/Lib'),
-    'FoxyMVC\\App\\' => array($baseDir . '/App'),
+    'FoxyMVC\\' => array($baseDir . '/'),
 );

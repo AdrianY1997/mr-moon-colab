@@ -5,6 +5,7 @@ namespace FoxyMVC\Lib\Foxy\Core;
 class Session {
     static private array $data = [];
     static private array $messages = [];
+    static private array $notifications = [];
 
     static function start() {
         session_start();
@@ -57,10 +58,13 @@ class Session {
     }
 
     static function setMessage($message) {
-        setcookie("messages", serialize($message), time() + 5, "/");
+        [$key, $value] = explode(":", $message);
+        Session::$notifications[$key] = $value;
+        $_COOKIE["messages"] = serialize(["notifications" => Session::$notifications]);
+        setcookie("messages", serialize(Session::$notifications), time() + 5, "/");
     }
 
     static function getMessage() {
-        return isset($_COOKIE["messages"]) ? unserialize($_COOKIE["messages"]) : false;
+        return isset($_COOKIE["messages"]) ? unserialize($_COOKIE["messages"]) : [];
     }
 }

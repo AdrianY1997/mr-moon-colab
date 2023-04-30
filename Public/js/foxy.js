@@ -1,10 +1,3 @@
-window.addEventListener('resize', () => {
-    resizeMain();
-    errorResize();
-});
-
-resizeMain();
-
 function resizeMain() {
     let main = document.querySelector('main');
     let footer = document.querySelector('footer');
@@ -16,6 +9,7 @@ function errorResize() {
     let errorPageContent = document.querySelector('[data-foxy-element="error-page-content"]');
     let errorPageSvg = document.querySelector('[data-foxy-element="error-page-svg"]')
     let media = window.matchMedia('(max-width: 700px)');
+    if (!errorPageContent) return
 
     console.log(media)
 
@@ -37,3 +31,10 @@ function errorResize() {
         errorPageSvg.classList.remove('opacity-quarter')
     }
 }
+
+window.addEventListener('resize', () => {
+    resizeMain();
+    errorResize();
+});
+
+resizeMain();

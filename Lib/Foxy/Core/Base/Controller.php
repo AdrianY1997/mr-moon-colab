@@ -12,7 +12,5 @@ class Controller {
      * Constructor de la clase Controller
      */
     public function __construct() {
-        // Asigna a las variables globales mensajes de notificación
-        $GLOBALS["messages"] = Session::getMessage();
     }
 }
