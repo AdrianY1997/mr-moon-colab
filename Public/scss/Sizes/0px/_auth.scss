@@ -1,5 +1,9 @@
-.auth, .recovery {
+.auth>div:first-child {
+    width: 90%;
+}
 
+.auth,
+.recovery {
     padding-top: 4.5rem;
     padding-bottom: 1.5rem;
     min-height: 100vh;
@@ -24,7 +28,6 @@
 
         .container {
             background: white;
-            box-shadow: var(--shadow);
             padding: 2rem;
             border-radius: 5px;
 
@@ -46,9 +49,6 @@
                 border: none;
                 background: none;
                 width: 100%;
-                padding: .5rem 1rem;
-                box-shadow: var(--shadow);
-                margin: 1rem auto;
                 border-radius: 5px;
                 font-size: 12pt;
             }
@@ -103,7 +103,7 @@
     .container {
         p {
             text-align: center;
-        } 
+        }
 
         img {
             width: 100px;
@@ -123,10 +123,12 @@
                 }
             }
         }
+
         form {
             input[type="email"] {
                 width: 80%;
             }
+
             input[type="number"] {
                 width: 30%;
             }

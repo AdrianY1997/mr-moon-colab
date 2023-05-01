@@ -12,6 +12,7 @@
 
     <link rel="stylesheet" href="{{ asset('css/boostrap.min.css') }}">
     <link rel="stylesheet" href="{{ asset('css/custom.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/main.css') }}">
 
     <script src="{{ asset('js/fontawesome.min.js') }}"></script>
 </head>
@@ -25,7 +26,7 @@
         @include($view)
     </main>
 
-    <footer class="footer" style="background-color: lightgray; padding: 2rem">
+    <footer class="footer shadow">
         @include('static.app-footer')
     </footer>
 

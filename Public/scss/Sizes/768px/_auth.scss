@@ -1,0 +1,14 @@
+.auth {
+
+    .container {
+
+        display: grid;
+        grid-template-columns: 50% 50%;
+        gap: 1rem;
+
+        .auth-social {
+
+            margin-top: 0 !important;
+        }
+    }
+}

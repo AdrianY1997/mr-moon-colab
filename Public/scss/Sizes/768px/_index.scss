@@ -1,7 +1,8 @@
-@media (min-width: 768px) { 
+@media (min-width: 768px) {
     @import "header";
 
     @import "eventos";
     @import "galeria";
+    @import "auth";
     @import "dash";
 }

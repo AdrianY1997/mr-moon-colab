@@ -1,8 +1,13 @@
 function resizeMain() {
-    let main = document.querySelector('main');
-    let footer = document.querySelector('footer');
+    const header = document.querySelector('header');
+    const main = document.querySelector('main');
+    const footer = document.querySelector('footer');
 
-    main.style.minHeight = 'calc(100vh - 3.25rem - ' + footer.clientHeight + 'px)';
+    let hnfHeight = header.clientHeight + footer.clientHeight;
+
+    let minHeight = 'calc(100vh - ' + footer.clientHeight + 'px)';
+
+    main.style.minHeight = minHeight;
 }
 
 function errorResize() {

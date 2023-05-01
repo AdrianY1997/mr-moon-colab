@@ -17,6 +17,6 @@ class HomeController extends Controller {
     }
 
     public function home(): void {
-        render("home");
+        render("web.home");
     }
 }
