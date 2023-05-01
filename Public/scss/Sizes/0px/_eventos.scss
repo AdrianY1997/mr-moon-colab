@@ -1,0 +1,22 @@
+.event {
+    .imgs {
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-gap: 1rem;
+    }
+
+    .imgs>div {
+        background-color: white;
+        box-shadow: 0 0 5px 0 lightgray;
+        border-radius: 5px;
+    }
+
+    .imgs>div {
+        margin: 1rem auto;
+        padding: 1rem;
+    }
+
+    img {
+        width: 100%;
+    }
+}

@@ -1,0 +1,33 @@
+.event {
+    .imgse {
+        padding: 2rem;
+        display: grid;
+        grid-template-columns: 5fr 5fr;
+
+        div {
+            padding: 0.5rem;
+            text-align: center;
+
+            h2 {
+                text-align: left;
+            }
+
+            h4 {
+                text-align: left;
+            }
+        }
+
+        div div p {
+            font-size: medium;
+            text-align: left;
+        }
+
+        div div img {
+            border-radius: 3px;
+        }
+    }
+
+    .imgs {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}

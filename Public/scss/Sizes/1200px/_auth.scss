@@ -1,0 +1,23 @@
+.auth {
+    .container {
+        > div {
+            padding: 0 2rem;
+        }
+    }
+}
+.auth.recovery {
+    .container {
+        h1 {
+           font-size: 18pt !important; 
+        }
+        p {
+            font-size: 15pt;
+        }
+        a {
+            font-size: 15pt;
+        }
+        input::placeholder {
+            font-size: 15pt;
+        }
+    }
+}

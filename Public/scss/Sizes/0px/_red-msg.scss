@@ -1,34 +1,3 @@
-@import "Component/fonts";
-
-main {
-    height: auto;
-    min-height: calc(100vh - 3.25rem);
-}
-
-.is-absolute {
-    position: absolute;
-}
-
-.is-full-width {
-    width: 100%;
-}
-
-.is-full-height {
-    height: 100%;
-}
-
-.overflow-hidden {
-    overflow: hidden;
-}
-
-.z-index-1n {
-    z-index: -1;
-}
-
-.opacity-quarter {
-    opacity: 0.25;
-}
-
 .red-msg {
     position: fixed;
     bottom: 0;

@@ -1,0 +1,46 @@
+.galeria .info {
+    margin: 3rem auto;
+}
+
+.galeria .info h1 {
+    margin-bottom: 1rem;
+}
+
+.galeria .info h1 {
+    margin-bottom: 1rem;
+}
+
+.galeria .text div:first-child p {
+    margin-bottom: 0.5rem;
+}
+
+.galeria .text div:last-child p {
+    font-size: 13px;
+}
+
+.galeria .imgs {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 1rem;
+}
+
+.galeria .imgs div {
+    margin: 0.5rem;
+}
+
+.galeria .imgs p:last-child {
+    font-size: 12px;
+}
+
+.galeria .imgs img {
+    width: 100%;
+}
+
+.galeria .carousel .images {
+    width: 100%;
+    max-width: 500px;
+
+    .image {
+        height: 250px;
+    }
+}

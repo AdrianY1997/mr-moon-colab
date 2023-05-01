@@ -1,0 +1,14 @@
+.reservas {
+    .info-mesa, .info-persona {
+        display: grid;
+        gap: 1rem;
+    }
+
+    .info-mesa {
+        grid-template-columns: repeat(4, 1fr);
+    }
+
+    .info-persona {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
