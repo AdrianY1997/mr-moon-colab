@@ -7,8 +7,8 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <link rel="shortcut icon" href="{{ resource('img/favicon.png') }}" type="image/x-icon">
-    <link rel="icon" href="{{ resource('img/favicon.png') }}" type="image/x-icon">
+    <link rel="shortcut icon" href="{{ asset('icon/favicon.ico') }}" type="image/x-icon">
+    <link rel="icon" href="{{ asset('icon/favicon.ico') }}" type="image/x-icon">
 
     <link rel="stylesheet" href="{{ asset('css/boostrap.min.css') }}">
     <link rel="stylesheet" href="{{ asset('css/custom.css') }}">
