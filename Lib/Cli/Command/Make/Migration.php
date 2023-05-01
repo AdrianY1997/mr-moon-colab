@@ -2,10 +2,10 @@
 
 namespace FoxyMVC\Lib\Cli\Command\Make;
 
-use FoxyMVC\Lib\Cli\Core\Base\Command;
-
 use DateTime;
+
 use DateTimeZone;
+use FoxyMVC\Lib\Cli\Core\Base\Command;
 
 /**
  * Clase para crear migraciones
@@ -28,9 +28,9 @@ class Migration extends Command {
      */
     public function init() {
         // Define las plantillas de cada tipo de relación y la carpeta donde se guardara
-        $otmMigrationTemplate = "Lib/Util/Templates/make-otm-migration.template.php";
-        $mtmMigrationTemplate = "Lib/Util/Templates/make-mtm-migration.template.php";
-        $migrationsFolder = "Database/Migrations";
+        $otmMigrationTemplate = "Lib\Util\Templates\make-otm-migration.template.php";
+        $mtmMigrationTemplate = "Lib\Util\Templates\make-mtm-migration.template.php";
+        $migrationsFolder = "Database\Migrations";
 
         $this->printer->display("info", "Iniciando creación de la migración");
 
@@ -112,7 +112,7 @@ class Migration extends Command {
         }
 
         // Genera la ruta de la migración
-        $migrationPath = $migrationsFolder . "/" . $date->format("Y-m-d_Hisu") . "-" . $tableName . ".php";
+        $migrationPath = $migrationsFolder . "\\" . $date->format("Y-m-d_Hisu") . "-" . $tableName . ".php";
         $this->printer->display("info", "Creando e la migración en \"$migrationsFolder\"");
         $migrationFile = fopen($migrationPath, "w");
         if (!$migrationFile) {
