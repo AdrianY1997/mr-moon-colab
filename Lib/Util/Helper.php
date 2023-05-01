@@ -37,7 +37,7 @@ if (!function_exists("extend")) {
         foreach (array_keys($data) as $e) {
             ${$e} = $data[$e];
         }
-        return include "View/" . $view . ".sly.php";
+        return include "Resources/View/" . $view . ".sly.php";
     }
 }
 
