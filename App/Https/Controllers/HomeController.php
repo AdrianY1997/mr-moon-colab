@@ -15,6 +15,6 @@ class HomeController extends Controller {
     }
 
     public function home(): void {
-        render("default.home", ["hola" => "x"]);
+        render("home");
     }
 }
