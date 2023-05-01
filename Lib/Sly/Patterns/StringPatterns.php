@@ -15,6 +15,9 @@ class StringPatterns {
             },
             '/@dump\s*\(\s*(.+?)\s*\)/' => function ($matches) {
                 return '<?php var_dump(' . $matches[1] . ') ?>';
+            },
+            '/@php\s+(.+?)\s+@endphp/s' => function ($matches) {
+                return '<?php ' . $matches[1] . ' ?>';
             }
         ];
     }
