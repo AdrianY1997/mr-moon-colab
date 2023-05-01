@@ -35,6 +35,9 @@ class SectionPatterns {
                 // Return the processed content
                 return $content;
             },
+            '/@extend\s*\(\s*(.+?)\s*\)/' => function ($matches) {
+                return '<?php extend(' . $matches[1] . ') ?>';
+            }
         ];
     }
 }
