@@ -1,8 +1,8 @@
 <?php
 
-use FoxyMVC\Lib\Foxy\Core\Redirector;
 use FoxyMVC\Lib\Foxy\Core\Route;
 use FoxyMVC\Lib\Sly\TemplateEngine;
+use FoxyMVC\Lib\Foxy\Core\Redirector;
 
 if (!function_exists("formatString")) {
     function formatString($input) {
@@ -37,7 +37,7 @@ if (!function_exists("extend")) {
         foreach (array_keys($data) as $e) {
             ${$e} = $data[$e];
         }
-        return include "View/" . $view . ".php";
+        return include "View/" . $view . ".sly.php";
     }
 }
 
