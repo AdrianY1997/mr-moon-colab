@@ -39,7 +39,7 @@ class Schema {
             });
         }
 
-        $sql = "INSERT INTO $table (" . join(", ", $keys) . ") VALUES (" . rtrim(str_repeat("? ", count($data)), ", ") . ")";
+        $sql = "INSERT INTO $table (" . join(", ", $keys) . ") VALUES (" . rtrim(str_repeat("?, ", count($data)), ", ") . ")";
 
         $stmt = self::$pdo->connect()->prepare($sql);
         $stmt->execute($values);
