@@ -25,8 +25,8 @@ class Controller extends Command {
      */
     public function init() {
         // Define la plantilla y la carpeta donde se guardara
-        $controllerTemplate = "Lib/Util/Templates/make-controller.template.php";
-        $controllersFolder = "App/Site/Controllers";
+        $controllerTemplate = "Lib\Util\Templates\make-controller.template.php";
+        $controllersFolder = "App\Https\Controllers";
 
         $this->printer->display("info", "Iniciando creación del controlador");
 
@@ -56,7 +56,7 @@ class Controller extends Command {
         $controllerContent = str_replace("__controller", ucfirst($controllerName), $templateContent);
 
         // Crea el archivo en la ruta de controladores
-        $controllerPath = $controllersFolder . "/" . ucfirst($controllerName) . "Controller.php";
+        $controllerPath = $controllersFolder . "\\" . ucfirst($controllerName) . "Controller.php";
         $this->printer->display("info", "Creando el controlador en \"$controllersFolder\"");
         $controllerFile = fopen($controllerPath, "w");
         if (!$controllerFile) {

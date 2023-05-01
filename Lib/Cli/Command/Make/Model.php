@@ -25,8 +25,8 @@ class Model extends Command {
      */
     public function init() {
         // Define las plantillas del modelo y la carpeta donde se guardara
-        $modelTemplate = "Lib/Util/Templates/make-model.template.php";
-        $modelsFolder = "App/Models";
+        $modelTemplate = "Lib\Util\Templates\make-model.template.php";
+        $modelsFolder = "App\Models";
 
         $this->printer->display("info", "Iniciando creación del modelo");
 
@@ -99,7 +99,7 @@ class Model extends Command {
         $modelContent = str_replace(["__model", "__tableName"], [$modelName, $tableName], $templateContent);
 
         // Genera la ruta del modelo
-        $modelPath = $modelsFolder . "/" . $modelName . ".php";
+        $modelPath = $modelsFolder . "\\" . $modelName . ".php";
         $this->printer->display("info", "Creando modelo en \"$modelsFolder\"");
         $modelFile = fopen($modelPath, "w");
         if (!$modelFile) {
