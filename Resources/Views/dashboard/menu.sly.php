@@ -1,9 +1,9 @@
-<div class="dash dash-home">
+<div class="dash dash-menu">
     <div>
         <div class="container">
             @include('dashboard/static/menu')
             <div class="content">
-                <p>Bienvenido de nuevo</p>
+                <p>Menu</p>
             </div>
         </div>
     </div>
