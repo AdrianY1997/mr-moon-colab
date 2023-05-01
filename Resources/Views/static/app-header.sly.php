@@ -1,3 +1,6 @@
+@php
+    
+@endphp
 <nav class="navbar navbar-expand-lg bg-body-tertiary">
     <div class="container">
         <div class="navbar-brand ff-edu-nsw-act-foundation">
@@ -5,7 +8,8 @@
                 <img src="{{ resource('img/logo.png') }}" alt="logo" height="24">
             </a>
         </div>
-        <button class="navbar-toggler btn btn-dark" type="button" data-bs-toggle="collapse" data-bs-target="#navbar-menu" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <button class="navbar-toggler btn btn-dark" type="button" data-bs-toggle="collapse" data-bs-target="#navbar-menu"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div id="navbar-menu" class="collapse navbar-collapse">

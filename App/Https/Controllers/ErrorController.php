@@ -8,6 +8,10 @@ use FoxyMVC\Lib\Foxy\Core\Base\Controller;
  * Controlador para manejar errores.
  */
 class ErrorController extends Controller {
+    public function __construct() {
+        parent::__construct();
+    }
+
     /**
      * Muestra una página de error con un código y un mensaje específicos.
      *
@@ -31,7 +35,7 @@ class ErrorController extends Controller {
         [$code, $subtitle] = $codes[$msg];
 
         // Mostrar la página de error
-        render("default/error", [
+        render("error", [
             "code" => $code,
             "subtitle" => $subtitle
         ]);
