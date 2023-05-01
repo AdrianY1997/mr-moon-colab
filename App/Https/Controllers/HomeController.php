@@ -13,6 +13,6 @@ class HomeController extends Controller {
      * Muestra la página de inicio.
      */
     public function home(): void {
-        render("default.home", ["hola" => "x"]);
+        render("home", ["hola" => "x"]);
     }
 }

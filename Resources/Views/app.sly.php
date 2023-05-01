@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <title>{{ constant("SITE") }}</title>
+    <title>{{ constant('SITE') }}</title>
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -18,7 +18,7 @@
 
 <body>
     <header>
-        @include("static.app-header")
+        @include('static.app-header')
     </header>
 
     <main>
@@ -26,11 +26,11 @@
     </main>
 
     <footer class="footer" style="background-color: lightgray; padding: 2rem">
-        @include("static.app-footer")
+        @include('static.app-footer')
     </footer>
 
     <div id="notifications" class="container">
-        @include("static.app-messages")
+        @include('static.app-messages')
     </div>
 
     <script src="{{ asset('js/foxy.js') }}"></script>
