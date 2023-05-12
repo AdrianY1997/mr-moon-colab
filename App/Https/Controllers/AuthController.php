@@ -82,4 +82,19 @@ class AuthController extends Controller {
         Session::destroy();
         redirect()->route(constant("HOME"))->send();
     }
+
+    public function new_user(){
+        if (Session::checkSession()) redirect()->route("dash.home")->send();
+        $data = Request::getData();
+
+        $user = new User();
+        $user->insert([
+            "user_email" => $data["email"],
+            "user_pass" =>  password_hash($data["password"], PASSWORD_DEFAULT),
+            "user_name" => $data["name"],
+            "user_lastname" => $data["lastname"], 
+             
+        ]);
+        redirect()->route("auth.login")->send();
+    }
 }
