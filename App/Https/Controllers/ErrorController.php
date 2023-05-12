@@ -35,7 +35,7 @@ class ErrorController extends Controller {
         [$code, $subtitle] = $codes[$msg];
 
         // Mostrar la página de error
-        render("error", [
+        render("web.error", [
             "code" => $code,
             "subtitle" => $subtitle
         ]);
