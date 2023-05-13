@@ -10,7 +10,7 @@ class IteratorPatterns implements TemplatePatterns {
     public function getPatterns() {
         return [
             '/@foreach\s*\((.+?)\)\s*(.*?)\s*@endforeach/s' => function ($matches, $patterns, $view, $data) {
-                return '<?php foreach (' . $matches[1] . ') { ?> ' . $matches[2] . ' <?php } ?>';
+                return '<?php foreach (' . $matches[1] . '): ?> ' . $matches[2] . ' <?php endforeach; ?>';
             }
         ];
     }

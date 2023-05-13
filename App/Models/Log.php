@@ -2,12 +2,12 @@
 
 namespace FoxyMVC\App\Models;
 
-use FoxyMVC\Lib\Foxy\Core\Base\Model;
+use FoxyMVC\Lib\Foxy\Database\Table;
 
 /**
  * Modelo para los registros
  */
-class Log extends Model {
+class Log extends Table {
     /**
      * Constructor de la clase Log
      */
