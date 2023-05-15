@@ -49,5 +49,10 @@
                 <p class="m-0">Galeria</p>
             </a>
         </div>
+        <div>
+            <a href="{{ route('auth.close') }}">
+                <p class="m-0">Cerrar sesion</p>
+            </a>
+        </div>
     </div>
 </div>
