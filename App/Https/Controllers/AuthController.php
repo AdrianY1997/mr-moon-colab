@@ -86,13 +86,19 @@ class AuthController extends Controller {
         $data = Request::getData();
 
         $user = new User();
-        $user->insert([
+        $usera = $user->getAll(["user_email" => $data["email"]]);
+        if(isset($usera[0])){
+            Session::setMessage("error", "Correo ya registrado");
+            redirect()->route("auth.signup")->send();
+        }else{
+            $user->insert([
             "user_email" => $data["email"],
             "user_pass" =>  password_hash($data["password"], PASSWORD_DEFAULT),
             "user_name" => $data["name"],
-            "user_lastname" => $data["lastname"],
-
+            "user_lastname" => $data["lastname"], 
+            "user_phone" => $data["number"], 
         ]);
-        redirect()->route("auth.login")->send();
+         redirect()->route("auth.login")->send();
+        }   
     }
 }
