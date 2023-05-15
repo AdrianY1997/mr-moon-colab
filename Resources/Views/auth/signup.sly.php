@@ -27,6 +27,11 @@
                             placeholder="password">
                         <label for="password">Contraseña</label>
                     </div>
+                    <div class="form-control mb-3">
+                        <input class="py-0" style="margin-bottom: 1px" type="text" name="number" id="number"
+                            placeholder="number">
+                        <label for="number">Numero</label>
+                    </div>
                     <div class="mb-3">
                         <button class="py-2">Registrarse</button>
                     </div>
