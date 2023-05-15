@@ -50,7 +50,7 @@ class Model {
      */
     private function getColumnNames($keys): array|bool {
         $table = $this->name;
-        $db = $this->db->getDbName();
+        $db = constant("DBNAME");
 
         // Construir la consulta SQL para seleccionar los nombres de las columnas
         $columnKeys = implode(" OR ", array_map(function ($value) {
