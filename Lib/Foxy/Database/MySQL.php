@@ -7,47 +7,38 @@ use PDOException;
 
 
 class MySQL {
-    private $host;
-    private $name;
-    private $user;
-    private $pass;
-    private $port;
-    private $chst;
-
     public const LOG_INSERT = "insert";
     public const LOG_UPDATE = "update";
 
     static $connection = [];
-
-    function __construct() {
-        $this->host = constant('DBHOST');
-        $this->name = constant('DBNAME');
-        $this->user = constant('DBUSER');
-        $this->pass = constant('DBPASS');
-        $this->port = constant("DBPORT");
-        $this->chst = constant("DBCHST");
-    }
 
     /**
      * Realiza la conexión a la base de datos
      * 
      * @return PDO|string Retorna la conexión a la base de datos o Imprime una excepción
      */
-    function connect($options = []) {
-        $db_name = ";dbname=" . $this->name;
+    public static function connect($options = []) {
+        $host = constant('DBHOST');
+        $name = constant('DBNAME');
+        $user = constant('DBUSER');
+        $pass = constant('DBPASS');
+        $port = constant("DBPORT");
+        $chst = constant("DBCHST");
+
+        $db_name = ";dbname=" . $name;
 
         if (isset($options["dbname"]) && !$options["dbname"]) {
             $db_name = "";
         }
 
         try {
-            $connection = "mysql:host=" . $this->host . $db_name . ";port=" . $this->port . ";charset=" . $this->chst;
+            $connection = "mysql:host=" . $host . $db_name . ";port=" . $port . ";charset=" . $chst;
             $options = [
                 PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
                 PDO::ATTR_EMULATE_PREPARES => false,
             ];
 
-            $pdo = new PDO($connection, $this->user, $this->pass, $options);
+            $pdo = new PDO($connection, $user, $pass, $options);
 
             self::$connection[] = $pdo;
 
@@ -60,10 +51,6 @@ class MySQL {
     public function drop($name) {
         $stmt = $this->connect()->prepare("DROP TABLE ?");
         $stmt->execute([$name]);
-    }
-
-    public function getDbName() {
-        return $this->name;
     }
 
     public static function closeConnection() {
