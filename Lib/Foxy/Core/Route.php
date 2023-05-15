@@ -7,7 +7,7 @@ namespace FoxyMVC\Lib\Foxy\Core;
  */
 class Route {
     /**
-     * Listado de rutas guardadas con el metodo set
+     * Listado de rutas guardadas con el método set
      * 
      * @var array
      */

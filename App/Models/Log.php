@@ -8,10 +8,10 @@ use FoxyMVC\Lib\Foxy\Database\Table;
  * Modelo para los registros
  */
 class Log extends Table {
-    /**
-     * Constructor de la clase Log
-     */
+
+    private string $name = "logs";
+
     public function __construct() {
-        parent::__construct("logs");
+        parent::__construct($this->name);
     }
 }

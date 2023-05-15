@@ -28,12 +28,12 @@ class Table {
         $this->exWhereArray = [];
     }
 
-    public function select(): Table {
+    public function select() {
         $this->columnText = implode(", ", func_get_args());
         return $this;
     }
 
-    public function where(): Table {
+    public function where() {
         $column = func_get_arg(0);
         if (func_num_args() > 2) {
             $comparator = func_get_arg(1);
@@ -42,14 +42,14 @@ class Table {
             $comparator = "=";
             $value = func_get_arg(1);
         }
-        
+
         array_push($this->exWhereArray, $value);
         $this->whereText .= $this->whereText ? " AND $column $comparator ?" : " WHERE $column $comparator ?";
 
         return $this;
     }
 
-    public function orWhere(): Table {
+    public function orWhere() {
         $column = func_get_arg(0);
         if (func_num_args() > 2) {
             $comparator = func_get_arg(1);
@@ -65,17 +65,17 @@ class Table {
         return $this;
     }
 
-    public function orderBy(string $column, string $mode): Table {
+    public function orderBy(string $column, string $mode) {
         $this->orderByText = $this->orderByText ? ", $column $mode" : " ORDER BY $column $mode";
         return $this;
     }
 
-    public function limit($limit = null): Table {
+    public function limit($limit = null) {
         $this->limitText = " LIMIT $limit";
         return $this;
     }
 
-    public function insert(array $data): bool {
+    public function insert(array $data) {
         $tableName = $this->tableName;
         $columns = implode(", ", array_keys($data));
         $values = rtrim(str_repeat("?, ", count($data)), ", ");
@@ -85,12 +85,11 @@ class Table {
             $stmt->execute(array_values($data));
             return true;
         } catch (PDOException $ex) {
-            echo $ex . "<br>";
             return false;
         }
     }
 
-    public function get(): array|bool {
+    public function get() {
         $columnText = $this->columnText;
         $tableName = $this->tableName;
         $whereText = $this->whereText;
@@ -98,7 +97,6 @@ class Table {
         $limitText = $this->limitText;
 
         $sentence = "SELECT $columnText FROM $tableName$whereText$orderByText$limitText";
-        echo $sentence . "<br>";
         try {
             $stmt = $this->db->connect()->prepare($sentence);
             $stmt->execute($this->exWhereArray);
@@ -112,17 +110,16 @@ class Table {
             $stmt->closeCursor();
             return $items;
         } catch (PDOException $ex) {
-            echo $ex . "<br>";
             return false;
         }
     }
 
-    public function first(): object|false {
+    public function first() {
         $item = $this->limit(1)->get();
         return $item[0] ?: false;
     }
 
-    public function update(array $data): bool {
+    public function update(array $data) {
         $tableName = $this->tableName;
         $WhereText = $this->whereText;
         $orderByText = $this->orderByText;
@@ -142,7 +139,7 @@ class Table {
         }
     }
 
-    public function delete(): bool {
+    public function delete() {
         $tableName = $this->tableName;
         $whereText = $this->whereText;
         $orderByText = $this->orderByText;
@@ -157,8 +154,8 @@ class Table {
             return false;
         }
     }
-    
-    public static function name(string $tableName): Table {
+
+    private static function name(string $tableName) {
         return new self($tableName);
     }
 }
