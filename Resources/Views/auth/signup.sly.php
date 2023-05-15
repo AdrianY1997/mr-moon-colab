@@ -6,7 +6,7 @@
                     Ingreso
                     <hr>
                 </h1>
-                <form action="#">
+                <form action="{{ route('user.star') }}" method="POST">
                     <div class="form-control mb-3">
                         <input class="py-0" style="margin-bottom: 1px" type="text" name="name" id="name"
                             placeholder="name">
