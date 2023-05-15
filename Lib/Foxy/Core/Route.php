@@ -5,8 +5,7 @@ namespace FoxyMVC\Lib\Foxy\Core;
 /**
  * Clase para manejar la rutas del software
  */
-class Route
-{
+class Route {
     /**
      * Listado de rutas guardadas con el metodo set
      * 
@@ -48,8 +47,7 @@ class Route
      * @param string $url
      * @param string[] $action
      */
-    public function __construct(string $url, array $action)
-    {
+    public function __construct(string $url, array $action) {
         $this->url = $url;
         $this->controller = $action[0];
         $this->method = $action[1];
@@ -61,8 +59,7 @@ class Route
      * @param string $name
      * @return Route
      */
-    public function name($name): Route
-    {
+    public function name($name): Route {
         $this->name = $name;
         self::$routes[$name] = $this;
         return $this;
@@ -73,8 +70,7 @@ class Route
      *
      * @return string
      */
-    public function getUrl(): string
-    {
+    public function getUrl(): string {
         return $this->url;
     }
 
@@ -83,8 +79,7 @@ class Route
      *
      * @return string
      */
-    public function getName(): string
-    {
+    public function getName(): string {
         return $this->name;
     }
 
@@ -93,8 +88,7 @@ class Route
      *
      * @return string
      */
-    public function getController(): string
-    {
+    public function getController(): string {
         return $this->controller;
     }
 
@@ -103,8 +97,7 @@ class Route
      *
      * @return string
      */
-    public function getMethod(): string
-    {
+    public function getMethod(): string {
         return $this->method;
     }
 
@@ -113,8 +106,7 @@ class Route
      *
      * @return void
      */
-    static public function loadRoutes(): void
-    {
+    static public function loadRoutes(): void {
         $routes = glob("Routes\\*.php");
         foreach ($routes as $value) {
             require_once $value;
@@ -128,8 +120,7 @@ class Route
      * @param string[] $action
      * @return Route
      */
-    static public function set($url, $action): Route
-    {
+    static public function set($url, $action): Route {
         return new self($url, $action);
     }
 
@@ -139,8 +130,7 @@ class Route
      * @param string $name
      * @return Route
      */
-    static function getRoute($name): Route
-    {
+    static function getRoute($name): Route {
         return self::$routes[$name];
     }
 
@@ -150,8 +140,7 @@ class Route
      * @param string $url
      * @return array|false
      */
-    static public function getRouteFromUrl($url): array|false
-    {
+    static public function getRouteFromUrl($url) {
         // Carga las rutas guardadas
         self::loadRoutes();
 

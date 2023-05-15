@@ -100,7 +100,7 @@ class Model {
      * @param string $operator Cadena opcional que especifica el operador lógico para combinar las condiciones en $where.
      * @return array|bool Arreglo con los registros seleccionados o falso en caso de error.
      */
-    public function get(array $keys, array $where = [], string $operator = "AND"): array|bool {
+    public function get(array $keys, array $where = [], string $operator = "AND") {
         $table = $this->name;
         $columnNames = $this->getColumnNames($keys);
         $columns = implode(", ", $columnNames);
@@ -138,7 +138,7 @@ class Model {
      * @param string $operator Cadena opcional que especifica el operador lógico para combinar las condiciones en $where.
      * @return array|bool Arreglo con los registros seleccionados o falso en caso de error.
      */
-    public function getAll(array $where = [], string $operator = "AND"): array|bool {
+    public function getAll(array $where = [], string $operator = "AND") {
         $table = $this->name;
 
         // Construir la cláusula WHERE si se proporcionaron condiciones

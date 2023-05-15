@@ -33,7 +33,7 @@ class MySQL {
      * 
      * @return PDO|string Retorna la conexión a la base de datos o Imprime una excepción
      */
-    function connect($options = []): PDO|string {
+    function connect($options = []) {
         $db_name = ";dbname=" . $this->name;
 
         if (isset($options["dbname"]) && !$options["dbname"]) {
