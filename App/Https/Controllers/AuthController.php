@@ -70,10 +70,10 @@ class AuthController extends Controller {
             if (!password_verify($data["password"], $user["user_pass"])) {
                 redirect()->route("auth.login")->with("error:La contraseña ingresada no coincide con el correo")->send();
             } else if (Session::save($user["user_name"]))
-                Session::setMessage("success", "Haz iniciado sesión correctamente");
-        }
+                redirect()->route("dash.home")->with("success:Haz iniciado sesión correctamente")->send();
 
-        redirect()->route("dash.home")->send();
+            redirect()->route(constant("HOME"))->with("error:Ha ocurrido un error");
+        }
     }
 
     public function close_session() {

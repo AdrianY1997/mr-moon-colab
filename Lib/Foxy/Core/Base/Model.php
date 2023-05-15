@@ -48,9 +48,9 @@ class Model {
      * @param array $keys Arreglo de claves para buscar en los nombres de las columnas.
      * @return array Arreglo con los nombres de las columnas que coinciden con las claves proporcionadas.
      */
-    private function getColumnNames($keys): array {
+    private function getColumnNames($keys): array|bool {
         $table = $this->name;
-        $db = $this->db->getDbName();
+        $db = constant("DBNAME");
 
         // Construir la consulta SQL para seleccionar los nombres de las columnas
         $columnKeys = implode(" OR ", array_map(function ($value) {
