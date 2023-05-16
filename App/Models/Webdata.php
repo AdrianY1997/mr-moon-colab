@@ -2,18 +2,15 @@
 
 namespace FoxyMVC\App\Models;
 
-use FoxyMVC\Lib\Foxy\Core\Base\Model;
+use FoxyMVC\Lib\Foxy\Database\Table;
 
-class Webdata extends Model {
-    public function __construct() {
-        parent::__construct("webdatas");
-    }
+class Webdata extends Table {
+    protected static string $table = "webdatas";
 
     static function initialView() {
         if (!isset($_COOKIE["webdata"])) {
 
-            $data = new self();
-            $data = $data->getAll(["webd_id" => 1]);
+            $data = self::where("webd_id", 1)->get();
 
             $s = $m = $h = $d = 1;
             $expires = time() + $s * $m * $h * $d;

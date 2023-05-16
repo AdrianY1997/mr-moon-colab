@@ -3,11 +3,8 @@
 namespace FoxyMVC\App\Models;
 
 use FoxyMVC\Lib\Foxy\Core\Base\Model;
+use FoxyMVC\Lib\Foxy\Database\Table;
 
-class ProductProvider extends Model
-{
-    public function __construct()
-    {
-        parent::__construct("product_provider");
-    }
+class ProductProvider extends Table {
+    protected static string $table = "product_provider";
 }

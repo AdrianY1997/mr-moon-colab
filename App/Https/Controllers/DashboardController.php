@@ -10,8 +10,7 @@ use FoxyMVC\Lib\Foxy\Core\Base\Controller;
 class DashboardController extends Controller {
     public function __construct() {
         parent::__construct();
-
-        if (!Session::checkSession()) redirect()->route("auth.login")->send();
+        if (!Session::checkSession()) redirect()->route("error", ["msg" => "missing-permissions"])->send();
     }
 
     public function index() {

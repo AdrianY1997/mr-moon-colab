@@ -1,15 +1,15 @@
 @php
-    $webdata = unserialize($_COOKIE['webdata']);
+$webdata = unserialize($_COOKIE['webdata']);
 @endphp
 <div>
     <div class="container header-content">
         <div>
             <div class="logo">
                 <a href="{{ route(constant('HOME')) }}" class="d-flex">
-                    <img width="30" height="30" src="{{ asset($webdata['webd_logo']) }}" alt="">
+                    <img width="30" height="30" src="{{ asset($webdata->webd_logo) }}" alt="">
                     <p class="mb-1">
-                        <span class="webname fs-xl">{{ $webdata['webd_name'] }}</span>
-                        <span class="websub">{{ $webdata['webd_subt'] }}</span>
+                        <span class="webname fs-xl">{{ $webdata->webd_name }}</span>
+                        <span class="websub">{{ $webdata->webd_subt }}</span>
                     </p>
                 </a>
             </div>

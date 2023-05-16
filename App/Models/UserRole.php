@@ -2,12 +2,8 @@
 
 namespace FoxyMVC\App\Models;
 
-use FoxyMVC\Lib\Foxy\Core\Base\Model;
+use FoxyMVC\Lib\Foxy\Database\Table;
 
-class UserRole extends Model
-{
-    public function __construct()
-    {
-        parent::__construct("user_role");
-    }
+class UserRole extends Table {
+    protected static string $table = "user_role";
 }

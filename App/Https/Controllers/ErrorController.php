@@ -20,6 +20,10 @@ class ErrorController extends Controller {
     public function code(string $msg): void {
         // Definir los códigos y mensajes de error disponibles
         $codes = [
+            "missing permissions" => [
+                "403",
+                "It seems that you do not have the necessary permissions to access this resource."
+            ],
             "page-not-found" => [
                 "404",
                 "The page you're looking for no longer exits <br> return to the home page and remember: you haven't seen anything."
