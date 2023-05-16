@@ -85,20 +85,18 @@ class AuthController extends Controller {
         if (Session::checkSession()) redirect()->route("dash.home")->send();
         $data = Request::getData();
 
-        $user = new User();
-        $usera = $user->getAll(["user_email" => $data["email"]]);
-        if(isset($usera[0])){
-            Session::setMessage("error", "Correo ya registrado");
-            redirect()->route("auth.signup")->send();
+        $user = User::where("user_email", $data["email"])->first();
+        if($user){
+            redirect()->route("auth.signup")->with("error:Correo ya registrado")->send();
         }else{
-            $user->insert([
-            "user_email" => $data["email"],
-            "user_pass" =>  password_hash($data["password"], PASSWORD_DEFAULT),
-            "user_name" => $data["name"],
-            "user_lastname" => $data["lastname"], 
-            "user_phone" => $data["number"], 
-        ]);
-         redirect()->route("auth.login")->send();
+            User::insert([
+                "user_email" => $data["email"],
+                "user_pass" =>  password_hash($data["password"], PASSWORD_DEFAULT),
+                "user_name" => $data["name"],
+                "user_lastname" => $data["lastname"], 
+                "user_phone" => $data["number"], 
+            ]);
+            redirect()->route("auth.login")->with("success:Te haz registrado con exito")->send();
         }   
     }
 }

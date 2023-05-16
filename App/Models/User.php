@@ -2,12 +2,11 @@
 
 namespace FoxyMVC\App\Models;
 
-use FoxyMVC\Lib\Foxy\Core\Base\Model;
+use FoxyMVC\Lib\Foxy\Database\Table;
 
-class User extends Model
-{
-    public function __construct()
-    {
-        parent::__construct("users");
-    }
+/**
+ * Modelo para los registros
+ */
+class User extends Table {
+    protected static string $table = "users";
 }
