@@ -60,20 +60,32 @@ class AuthController extends Controller {
         if (Session::checkSession()) redirect()->route("dash.home")->send();
         $data = Request::getData();
 
-        $user = new User();
+        $user = User::select("user_nick","user_email","user_pass")->where("user_email",$data["email"])->get();
 
-        $user = $user->getAll(["user_email" => $data["email"]]);
-        if (!isset($user[0])) {
-            redirect()->route("auth.login")->with("error:El correo no se encuentra registrado")->send();
-        } else {
-            $user = $user[0];
-            if (!password_verify($data["password"], $user["user_pass"])) {
-                redirect()->route("auth.login")->with("error:La contraseña ingresada no coincide con el correo")->send();
-            } else if (Session::save($user["user_name"]))
-                redirect()->route("dash.home")->with("success:Haz iniciado sesión correctamente")->send();
-
-            redirect()->route(constant("HOME"))->with("error:Ha ocurrido un error");
+        if(!$user){
+            // redirect()->route("auth.login")->with("error:El correo no se encuentra registrado")->send();
+        }else{
+            var_dump($user);
+            if(!password_verify($data["password"], $user["user_pass"])){
+                
+                echo"contramal";
+            }else {
+                echo "Inicio";
+            }
+            // redirect()->route(constant("HOME"))->with("error:Ha ocurrido un error");
         }
+        // $user = $user->getAll(["user_email" => $data["email"]]);
+        // if (!isset($user[0])) {
+        //     redirect()->route("auth.login")->with("error:El correo no se encuentra registrado")->send();
+        // } else {
+        //     $user = $user[0];
+        //     if (!password_verify($data["password"], $user["user_pass"])) {
+        //         redirect()->route("auth.login")->with("error:La contraseña ingresada no coincide con el correo")->send();
+        //     } else if (Session::save($user["user_name"]))
+        //         redirect()->route("dash.home")->with("success:Haz iniciado sesión correctamente")->send();
+
+        //     redirect()->route(constant("HOME"))->with("error:Ha ocurrido un error");
+        // }
     }
 
     public function close_session() {
