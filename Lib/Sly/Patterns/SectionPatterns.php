@@ -38,7 +38,7 @@ class SectionPatterns {
             },
             '/@extend\s*\(\s*(.+?)\s*\)/' => function ($matches) {
                 return '<?php extend(' . str_replace('.', '\\', $matches[1]) . ') ?>';
-            }
-        ];
-    }
+}
+];
+}
 }

@@ -2,12 +2,8 @@
 
 namespace FoxyMVC\App\Models;
 
-use FoxyMVC\Lib\Foxy\Core\Base\Model;
+use FoxyMVC\Lib\Foxy\Database\Table;
 
-class Reservation extends Model
-{
-    public function __construct()
-    {
-        parent::__construct("reservations");
-    }
+class Reservation extends Table {
+    protected static string $table = "reservations";
 }
