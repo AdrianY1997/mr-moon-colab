@@ -42,11 +42,6 @@ class Session {
         return isset($_SESSION["user"]) && $_SESSION["user"] ? true : false;
     }
 
-    static function checkError() {
-        if (array_key_exists("error", self::$messages) || array_key_exists("warning", self::$messages)) return true;
-        return false;
-    }
-
     static function data($key = null) {
         return $key ? self::$data[$key] : self::$data;
     }
@@ -55,7 +50,7 @@ class Session {
         [$key, $value] = explode(":", $message);
         Session::$notifications[$key] = $value;
         $_COOKIE["messages"] = serialize(["notifications" => Session::$notifications]);
-        setcookie("messages", serialize(Session::$notifications), time() + 5, "/");
+        setcookie("messages", serialize(["notifications" => Session::$notifications]), time() + 5, "/");
     }
 
     static function getMessage() {

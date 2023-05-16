@@ -22,6 +22,7 @@ class SectionPatterns {
 
                 // Include the view and capture its contents
                 ob_start();
+                extract($data);
                 include $viewPath;
                 $content = ob_get_clean();
 
