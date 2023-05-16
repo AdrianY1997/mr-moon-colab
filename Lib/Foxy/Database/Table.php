@@ -8,32 +8,19 @@ use FoxyMVC\Lib\Foxy\Database\MySQL;
 use PDOException;
 
 class Table {
-    protected MySQL $db;
+    protected static string $tableName = "";
+    protected static string $selectText = "*";
+    protected static string $whereText = "";
+    protected static string $orderByText = "";
+    protected static string $limitText = "";
+    protected static array $exWhereArray = [];
 
-    protected string $tableName;
-    protected string $columnText;
-    protected string $whereText;
-    protected string $orderByText;
-    protected string $limitText;
-    protected array $exWhereArray;
-
-    public function __construct(string $tableName) {
-        $this->db = new MySQL();
-        $this->tableName = $tableName;
-        $this->columnText = "*";
-        $this->whereText = "";
-        $this->orderByText = "";
-        $this->limitText = "";
-
-        $this->exWhereArray = [];
+    public static function select() {
+        self::$selectText = implode(", ", func_get_args());
+        return new static;
     }
 
-    public function select() {
-        $this->columnText = implode(", ", func_get_args());
-        return $this;
-    }
-
-    public function where() {
+    public static function where() {
         $column = func_get_arg(0);
         if (func_num_args() > 2) {
             $comparator = func_get_arg(1);
@@ -43,13 +30,13 @@ class Table {
             $value = func_get_arg(1);
         }
 
-        array_push($this->exWhereArray, $value);
-        $this->whereText .= $this->whereText ? " AND $column $comparator ?" : " WHERE $column $comparator ?";
+        array_push(self::$exWhereArray, $value);
+        self::$whereText .= self::$whereText ? " AND $column $comparator ?" : " WHERE $column $comparator ?";
 
-        return $this;
+        return new static;
     }
 
-    public function orWhere() {
+    public static function orWhere() {
         $column = func_get_arg(0);
         if (func_num_args() > 2) {
             $comparator = func_get_arg(1);
@@ -59,47 +46,34 @@ class Table {
             $value = func_get_arg(1);
         }
 
-        array_push($this->exWhereArray, $value);
-        $this->whereText .= $this->whereText ? " OR $column $comparator ?" : " WHERE $column $comparator ?";
+        array_push(self::$exWhereArray, $value);
+        self::$whereText .= self::$whereText ? " OR $column $comparator ?" : " WHERE $column $comparator ?";
 
-        return $this;
+        return new static;
     }
 
-    public function orderBy(string $column, string $mode) {
-        $this->orderByText = $this->orderByText ? ", $column $mode" : " ORDER BY $column $mode";
-        return $this;
+    public static function orderBy(string $column, string $mode) {
+        self::$orderByText = self::$orderByText ? ", $column $mode" : " ORDER BY $column $mode";
+        return new static;
     }
 
-    public function limit($limit = null) {
-        $this->limitText = " LIMIT $limit";
-        return $this;
+    public static function limit($limit) {
+        self::$limitText = " LIMIT $limit";
+        return new static;
     }
 
-    public function insert(array $data) {
-        $tableName = $this->tableName;
-        $columns = implode(", ", array_keys($data));
-        $values = rtrim(str_repeat("?, ", count($data)), ", ");
-        $sentence = "INSERT INTO $tableName ($columns) VALUES ($values)";
+    public static function name(string $tableName) {
+        self::$tableName = $tableName;
+        return new static;
+    }
+
+    public static function get() {
+        $values = self::$exWhereArray;
+        $sentence = "SELECT " . self::$selectText . " FROM " . (self::$tableName ?: static::$table) . self::$whereText . self::$orderByText . self::$limitText;
+        self::reset();
         try {
-            $stmt = $this->db->connect()->prepare($sentence);
-            $stmt->execute(array_values($data));
-            return true;
-        } catch (PDOException $ex) {
-            return false;
-        }
-    }
-
-    public function get() {
-        $columnText = $this->columnText;
-        $tableName = $this->tableName;
-        $whereText = $this->whereText;
-        $orderByText = $this->orderByText;
-        $limitText = $this->limitText;
-
-        $sentence = "SELECT $columnText FROM $tableName$whereText$orderByText$limitText";
-        try {
-            $stmt = $this->db->connect()->prepare($sentence);
-            $stmt->execute($this->exWhereArray);
+            $stmt = MySQL::connect()->prepare($sentence);
+            $stmt->execute($values);
 
             $items = [];
 
@@ -114,48 +88,60 @@ class Table {
         }
     }
 
-    public function first() {
-        $item = $this->limit(1)->get();
-        return $item[0] ?: false;
+    public static function first() {
+        $item = self::limit(1)->get();
+        return isset($item[0]) ? $item[0] : false;
     }
 
-    public function update(array $data) {
-        $tableName = $this->tableName;
-        $WhereText = $this->whereText;
-        $orderByText = $this->orderByText;
-        $limitText = $this->limitText;
+    public static function insert(array $data) {
+        $columns = implode(", ", array_keys($data));
+        $values = rtrim(str_repeat("?, ", count($data)), ", ");
+        $sentence = "INSERT INTO " . (self::$tableName ?: static::$table) . " ($columns) VALUES ($values)";
+        self::reset();
+        try {
+            $stmt = MySQL::connect()->prepare($sentence);
+            $stmt->execute(array_values($data));
+            return true;
+        } catch (PDOException $ex) {
+            return false;
+        }
+    }
 
+    public static function update(array $data) {
+        $values = self::$exWhereArray;
         $setText = implode(", ", array_map(function ($key) {
             return "$key = ?";
         }, array_keys($data)));
 
-        $sentence = "UPDATE $tableName SET $setText$WhereText$orderByText$limitText";
+        $sentence = "UPDATE " . (self::$tableName ?: static::$table) . " SET " . $setText . self::$whereText . self::$orderByText . self::$limitText;
+        self::reset();
         try {
-            $stmt = $this->db->connect()->prepare($sentence);
-            $stmt->execute(array_merge(array_values($data), array_values($this->exWhereArray)));
+            $stmt = MySQL::connect()->prepare($sentence);
+            $stmt->execute(array_merge(array_values($data), array_values($values)));
             return true;
         } catch (PDOException $e) {
             return false;
         }
     }
 
-    public function delete() {
-        $tableName = $this->tableName;
-        $whereText = $this->whereText;
-        $orderByText = $this->orderByText;
-        $limitText = $this->limitText;
-
-        $sentence = "DELETE FROM $tableName$whereText$orderByText$limitText";
+    public static function delete() {
+        $values = self::$exWhereArray;
+        $sentence = "DELETE FROM " . (self::$tableName ?: static::$table) . self::$whereText . self::$orderByText . self::$limitText;
+        self::reset();
         try {
-            $stmt = $this->db->connect()->prepare($sentence);
-            $stmt->execute(array_values($this->exWhereArray));
+            $stmt = MySQL::connect()->prepare($sentence);
+            $stmt->execute(array_values($values));
             return true;
         } catch (PDOException $e) {
             return false;
         }
     }
 
-    private static function name(string $tableName) {
-        return new self($tableName);
+    private static function reset() {
+        self::$selectText = "*";
+        self::$whereText = "";
+        self::$orderByText = "";
+        self::$limitText = "";
+        self::$exWhereArray = [];
     }
 }

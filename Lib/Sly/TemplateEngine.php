@@ -24,12 +24,11 @@ class TemplateEngine {
 
     public function render($view, $data = []) {
         // Convertir el array de datos en variables
-        extract($data);
         extract(Session::getMessage());
 
         // Capturar el contenido de la vista en un buffer
         ob_start();
-        include 'Resources/Views/app.sly.php';
+        include_once 'Resources/Views/app.sly.php';
         $content = ob_get_clean();
 
         // Procesar patrones

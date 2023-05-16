@@ -61,7 +61,7 @@ class Redirector {
      * @return $this
      */
     public function with(string $message) {
-        Session::setMessage(explode(":", $message));
+        Session::setMessage($message);
         return $this;
     }
 
@@ -96,7 +96,7 @@ class Redirector {
             preg_match_all(Redirector::PLACEHOLDER_PATTERN, $url, $matches);
             foreach ($matches[1] as $match) {
                 if (isset($this->param[$match])) {
-                    $url = str_replace("{$match}", $this->param[$match], $url);
+                    $url = str_replace("{{$match}}", $this->param[$match], $url);
                 } else {
                     throw new Exception("Falta el parámetro \"$match\" para la ruta \"$routeName\".");
                 }

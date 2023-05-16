@@ -18,7 +18,6 @@ class ErrorController extends Controller {
      * @param string $msg Clave del mensaje de error a mostrar.
      */
     public function code(string $msg): void {
-
         // Definir los códigos y mensajes de error disponibles
         $codes = [
             "page-not-found" => [
