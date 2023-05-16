@@ -28,6 +28,7 @@ class TemplateEngine {
 
         // Capturar el contenido de la vista en un buffer
         ob_start();
+        extract($data);
         include_once 'Resources/Views/app.sly.php';
         $content = ob_get_clean();
 
@@ -41,9 +42,9 @@ class TemplateEngine {
         // Evaluar el contenido procesado
         ob_start();
         eval('?>' . $content);
-$content = ob_get_clean();
+        $content = ob_get_clean();
 
-// Mostrar el contenido procesado
-echo $content;
-}
+        // Mostrar el contenido procesado
+        echo $content;
+    }
 }

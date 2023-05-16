@@ -20,27 +20,21 @@ class ErrorController extends Controller {
     public function code(string $msg): void {
         // Definir los códigos y mensajes de error disponibles
         $codes = [
-            "missing permissions" => [
+            "missing-permissions" => [
                 "403",
-                "It seems that you do not have the necessary permissions to access this resource."
             ],
             "page-not-found" => [
                 "404",
-                "The page you're looking for no longer exits <br> return to the home page and remember: you haven't seen anything."
             ],
             "service-unavailable" => [
                 "503",
-                "Sorry, this page is currently under construction or undergoing maintenance. Please check back later."
             ]
         ];
 
-        // Obtener el código y el mensaje de error correspondientes a la clave proporcionada
-        [$code, $subtitle] = $codes[$msg];
-
         // Mostrar la página de error
         render("web.error", [
-            "code" => $code,
-            "subtitle" => $subtitle
+            "num" => $codes[$msg][0],
+            "cod" => ucwords(str_replace('-', ' ', $msg))
         ]);
     }
 }

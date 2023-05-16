@@ -72,7 +72,7 @@ class Redirector {
         try {
             // Obtener la URL de la ruta y redirigir a ella
             $url = $this->getUrlFromRoute($this->route);
-            header("Location: " . constant("BASE_URL") . "$url");
+            header("Location: " . constant("BASE_URL") . $url);
             exit;
         } catch (Exception $e) {
             // Si ocurre un error al obtener la URL de la ruta, mostrar un mensaje de error
