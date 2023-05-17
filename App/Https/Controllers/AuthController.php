@@ -60,20 +60,19 @@ class AuthController extends Controller {
         if (Session::checkSession()) redirect()->route("dash.home")->send();
         $data = Request::getData();
 
-        $user = User::select("user_nick","user_email","user_name","user_pass")->where("user_email",$data["email"])->first();
+        $user = User::select("user_nick", "user_email", "user_name", "user_pass")->where("user_email", $data["email"])->first();
 
-        if(!$user){
+        if (!$user) {
             redirect()->route("auth.login")->with("error:El correo no se encuentra registrado")->send();
-        }else{
-            if(!password_verify($data["password"], $user->user_pass)){
-            redirect()->route("auth.login")->with("error:La contraseña ingresada no coincide con el correo")->send();
-            }else if(Session::save($user->user_name)){
-                if($user->user_nick){
+        } else {
+            if (!password_verify($data["password"], $user->user_pass)) {
+                redirect()->route("auth.login")->with("error:La contraseña ingresada no coincide con el correo")->send();
+            } else if (Session::save($user->user_name)) {
+                if ($user->user_nick) {
                     redirect()->route("dash.home")->with("success:Haz iniciado sesión correctamente")->send();
-                }else{
-                     redirect()->route("reserve")->with("success:Haz iniciado sesión correctamente")->send();
+                } else {
+                    redirect()->route("reserve")->with("success:Haz iniciado sesión correctamente")->send();
                 }
-            
             }
             redirect()->route(constant("HOME"))->with("error:Ha ocurrido un error");
         }
@@ -81,7 +80,7 @@ class AuthController extends Controller {
 
     public function close_session() {
         Session::destroy();
-        redirect()->route(constant("HOME"))->send();
+        redirect()->route(constant("HOME"))->with("success:Se ha cerrado sesión correctamente")->send();
     }
 
     public function new_user() {
@@ -89,17 +88,17 @@ class AuthController extends Controller {
         $data = Request::getData();
 
         $user = User::where("user_email", $data["email"])->first();
-        if($user){
+        if ($user) {
             redirect()->route("auth.signup")->with("error:Correo ya registrado")->send();
-        }else{
+        } else {
             User::insert([
                 "user_email" => $data["email"],
                 "user_pass" =>  password_hash($data["password"], PASSWORD_DEFAULT),
                 "user_name" => $data["name"],
-                "user_lastname" => $data["lastname"], 
-                "user_phone" => $data["number"], 
+                "user_lastname" => $data["lastname"],
+                "user_phone" => $data["number"],
             ]);
             redirect()->route("auth.login")->with("success:Te haz registrado con exito")->send();
-        }   
+        }
     }
 }

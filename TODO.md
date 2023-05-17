@@ -1,0 +1,3 @@
+- [x] Migrar modelos a la version alfa
+- [x] Rediseñar notificaciones 
+- [ ] Modificar notificaciones por ajax
