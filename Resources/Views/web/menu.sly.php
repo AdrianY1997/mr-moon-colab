@@ -5,26 +5,17 @@
     <div class="carousel">
         <div class="container">
             <div class="images">
+                @foreach($menus as $menu)
                 <div class="image">
                     <div>
                         <p>Bebidas</p>
                     </div>
+                    <img class="w-100" src="{{ asset($menu->menu_path) }}" alt="">
                 </div>
-                <div class="image active">
-                    <div>
-                        <p>Principal</p>
-                    </div>
-                </div>
-                <div class="image">
-                    <div>
-                        <p>Comidas</p>
-                    </div>
-                </div>
+                @endforeach
                 <div class="slider-btn">
-                    <span data-function="carousel-btn" data-type="slider" data-param="left"><i
-                            class="fa-solid fa-chevron-left"></i></span>
-                    <span data-function="carousel-btn" data-type="slider" data-param="right"><i
-                            class="fa-solid fa-chevron-right"></i></span>
+                    <span data-function="carousel-btn" data-type="slider" data-param="left"><i class="fa-solid fa-chevron-left"></i></span>
+                    <span data-function="carousel-btn" data-type="slider" data-param="right"><i class="fa-solid fa-chevron-right"></i></span>
                 </div>
             </div>
             <div class="dots">
@@ -37,16 +28,13 @@
     <div class="carousel-complete">
         <div class="container">
             <div class="images">
+                @foreach($menus as $menu)
                 <div class="image active">
-
+                    <img class="w-100" src="{{ asset($menu->menu_path) }}" alt="">
                 </div>
-                <div class="image active">
-
-                </div>
-                <div class="image active">
-
-                </div>
+                @endforeach
             </div>
         </div>
     </div>
 </div>
+<script src="{{ asset("js/carousel.js") }}"></script>

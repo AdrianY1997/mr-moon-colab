@@ -10,7 +10,7 @@
         padding: 4px;
     }
 
-    
+
 }
 
 .bol .container {
@@ -27,6 +27,10 @@
 
 .bol .container div {
     padding: 0.5rem;
+}
+
+.bol form div {
+    padding: 0 !important;
 }
 
 .bol .container div input {
