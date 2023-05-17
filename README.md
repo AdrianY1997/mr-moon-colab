@@ -10,6 +10,12 @@
 
 this README is keep under construction
 
+## TODO
+
+- [x] Migrar modelos a la version alfa
+- [x] Rediseñar notificaciones 
+- [ ] Modificar notificaciones por ajax
+
 ## License
 
 This project is licensed under the terms of the [MIT](http://opensource.org/licenses/mit-license.php) license.
