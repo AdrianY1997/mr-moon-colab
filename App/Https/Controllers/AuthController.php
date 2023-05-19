@@ -80,7 +80,7 @@ class AuthController extends Controller {
 
     public function close_session() {
         Session::destroy();
-        redirect()->route(constant("HOME"))->with("success:Se ha cerrado sesión correctamente")->send();
+        redirect()->route(constant("HOME"))->success("Se ha cerrado sesión correctamente")->send();
     }
 
     public function new_user() {
