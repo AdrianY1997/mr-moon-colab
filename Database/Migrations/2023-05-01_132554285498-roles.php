@@ -9,7 +9,7 @@ return new class {
     public function up() {
         Schema::create($this->tableName, function (Blueprint $table) {
             $table->id();
-            $table->string("name");
+            $table->string("name")->default("USER", true);
         });
 
         Schema::insert($this->tableName, [

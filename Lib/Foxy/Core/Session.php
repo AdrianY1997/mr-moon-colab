@@ -11,6 +11,7 @@ class Session {
 
     static function start() {
         session_start();
+        Session::load();
     }
 
     static function stop() {

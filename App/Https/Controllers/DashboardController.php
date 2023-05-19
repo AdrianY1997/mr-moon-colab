@@ -2,6 +2,7 @@
 
 namespace FoxyMVC\App\Https\Controllers;
 
+use FoxyMVC\App\Models\Role;
 use FoxyMVC\App\Models\Webdata;
 use FoxyMVC\Lib\Foxy\Core\Request;
 use FoxyMVC\Lib\Foxy\Core\Session;
@@ -11,10 +12,9 @@ class DashboardController extends Controller {
     public function __construct() {
         parent::__construct();
 
-        Session::load();
-        var_dump(Session::data("user_name"));
+        $role = Role::getUserRole(Session::data()->user_id);
 
-        if (!Session::checkSession()) redirect()->route("error", ["msg" => "missing-permissions"])->send();
+        if (!Session::checkSession() || $role->role_name != "ADMIN") redirect()->route("error", ["msg" => "missing-permissions"])->send();
     }
 
     public function index() {

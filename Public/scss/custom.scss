@@ -60,3 +60,20 @@ main {
         background: #4caf50 !important;
     }
 }
+
+.notification-loader {
+    height: 3px;
+    transition: 10s linear;
+    transform: translateY(-3px);
+    animation: loader-bar 10s linear;
+}
+
+@keyframes loader-bar {
+    0% {
+        width: 0%;
+    }
+
+    100% {
+        width: 100%;
+    }
+}

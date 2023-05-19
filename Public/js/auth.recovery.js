@@ -10,7 +10,8 @@ sendCodeBtn.addEventListener("click", (e) => {
 
     if (!emailRegex.exec(email)) return notify({
         text: "El email ingresado es invalido",
-        status: "error"
+        status: "error",
+        bg: "bg-danger"
     });
 
     $.ajax({
@@ -23,13 +24,15 @@ sendCodeBtn.addEventListener("click", (e) => {
         success: function () {
             notify({
                 text: "Se ha enviado un correo con el código a " + email,
-                status: "success"
+                status: "success",
+                bg: "bg-success"
             })
         },
         error: function () {
             notify({
                 text: "Ha ocurrido un error al ejecutar esta acción, inténtelo de nuevo o contacte al administrador",
-                status: "error"
+                status: "error",
+                bg: "bg-danger"
             })
         }
     });

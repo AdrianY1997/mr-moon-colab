@@ -1,27 +1,33 @@
-const notify = (data) => {
-    const notify = document.createElement("div")
+const TIME = 10000;
 
-    notify.classList.add("red-msg")
-    notify.classList.add("container")
+const notify = (data) => {
+    const id = (new Date()).getMilliseconds();
+
+    const notify = document.createElement("div")
+    notify.classList.add("toast-container", "position-fixed", "bottom-0", "end-0", "p-3");
     notify.innerHTML = `
-        <div class="${data.status}">
-            <p class="m-0">
+        <div id="liveToast" class="toast show" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="toast-header ${data.bg} text-white" style="margin-bottom: -3px;">
+                <i class="fa-solid fa-check-circle"></i>
+                <strong class="me-auto ms-2">${data.status}</strong>
+                <small>now</small>
+                <button type="button" class="btn p-0 m-0 ps-2" data-bs-dismiss="toast" aria-label="Close"><i class="fa-solid fa-times text-white"></i></button>
+            </div>
+            <div class="toast-loader bg-white notification-loader"></div>
+            <div class="toast-body">
                 ${data.text}
-            </p>
-            <p class="close m-0"><i class="fa-solid fa-times"></i></p>
+            </div>
         </div>
         `
     document.querySelector("#notifications").appendChild(notify)
-    setTimeout(() => { notify.remove() }, 5000)
+    setTimeout(() => {
+        document.querySelector("button[data-bs-dismiss='toast']").click()
+    }, TIME + 1000);
 }
 
 (() => {
     const toastLoader = document.querySelectorAll(".toast-loader")
-    toastLoader.forEach(e => {
-        e.style.setProperty("width", "100%");
-    })
-
     setTimeout(() => {
         document.querySelector("button[data-bs-dismiss='toast']").click()
-    }, 10000);
+    }, TIME);
 })()

@@ -98,7 +98,7 @@ class AuthController extends Controller {
                 "user_lastname" => $data["lastname"],
                 "user_phone" => $data["number"],
             ]);
-            redirect()->route("auth.login")->with("success:Te haz registrado con exito")->send();
+            redirect()->route("auth.login")->with("success:Te haz registrado con éxito")->send();
         }
     }
 }

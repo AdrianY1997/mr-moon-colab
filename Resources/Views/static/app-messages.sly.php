@@ -7,7 +7,7 @@
             <small>now</small>
             <button type="button" class="btn p-0 m-0 ps-2" data-bs-dismiss="toast" aria-label="Close"><i class="fa-solid fa-times text-white"></i></button>
         </div>
-        <div class="toast-loader bg-white" style="height: 3px; width: 0%; transition: 10s linear;transform: translateY(-3px);"></div>
+        <div class="toast-loader bg-white notification-loader"></div>
         <div class="toast-body">
             {{ $notifications['success'] }}
         </div>
@@ -24,7 +24,7 @@
             <small>now</small>
             <button type="button" class="btn p-0 m-0 ps-2" data-bs-dismiss="toast" aria-label="Close"><i class="fa-solid fa-times text-white"></i></button>
         </div>
-        <div class="toast-loader bg-white" style="height: 3px; width: 0%; transition: 10s linear;transform: translateY(-3px);"></div>
+        <div class="toast-loader bg-white notification-loader"></div>
         <div class="toast-body">
             {{ $notifications['warning'] }}
         </div>
@@ -41,10 +41,14 @@
             <small>now</small>
             <button type="button" class="btn p-0 m-0 ps-2" data-bs-dismiss="toast" aria-label="Close"><i class="fa-solid fa-times text-white"></i></button>
         </div>
-        <div class="toast-loader bg-white" style="height: 3px; width: 0%; transition: 10s linear;transform: translateY(-3px);"></div>
+        <div class="toast-loader bg-white notification-loader"></div>
         <div class="toast-body">
             {{ $notifications['error'] }}
         </div>
     </div>
 </div>
 @endisset
+@php
+unset ($_COOKIE ['messages']);
+setcookie ('messages', '', time () - 3600, '/');
+@endphp
