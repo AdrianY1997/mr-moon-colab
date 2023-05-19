@@ -3,6 +3,7 @@
 namespace FoxyMVC\Lib\Foxy\Core;
 
 use Exception;
+use FoxyMVC\Lib\Foxy\Core\Route;
 
 /**
  * Clase para redirigir a una ruta específica
@@ -63,6 +64,18 @@ class Redirector {
     public function with(string $message) {
         Session::setMessage($message);
         return $this;
+    }
+
+    public function success(string $message) {
+        Session::setMessage("success:$message");
+    }
+
+    public function warning(string $message) {
+        Session::setMessage("success:$message");
+    }
+
+    public function error(string $message) {
+        Session::setMessage("error:$message");
     }
 
     /**
