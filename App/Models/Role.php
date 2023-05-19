@@ -6,4 +6,7 @@ use FoxyMVC\Lib\Foxy\Database\Table;
 
 class Role extends Table {
     protected static string $table = "roles";
+
+    public function getUserRole() {
+    }
 }
