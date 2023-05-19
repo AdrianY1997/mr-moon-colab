@@ -78,6 +78,7 @@ class Redirector {
 
     public function error(string $message) {
         Session::setMessage("error:$message");
+        return $this;
     }
 
     /**
