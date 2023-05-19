@@ -68,10 +68,12 @@ class Redirector {
 
     public function success(string $message) {
         Session::setMessage("success:$message");
+        return $this;
     }
 
     public function warning(string $message) {
         Session::setMessage("success:$message");
+        return $this;
     }
 
     public function error(string $message) {
