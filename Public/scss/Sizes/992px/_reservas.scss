@@ -1,5 +1,7 @@
 .reservas {
-    .info-mesa, .info-persona {
+
+    .info-mesa,
+    .info-persona {
         display: grid;
         gap: 1rem;
     }
@@ -10,5 +12,17 @@
 
     .info-persona {
         grid-template-columns: repeat(2, 1fr);
+    }
+
+    .info-details {
+        margin-top: 1rem;
+    }
+
+    form {
+
+        input,
+        select {
+            margin: 0 !important;
+        }
     }
 }

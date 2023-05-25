@@ -10,6 +10,11 @@ use FoxyMVC\App\Https\Controllers\ReservasController;
 Route::set("", [HomeController::class, "index"])->name("root");
 Route::set("inicio", [HomeController::class, "home"])->name(constant("HOME"));
 Route::set("menu", [MenuController::class, "index"])->name("menu");
-Route::set("reservas", [ReservasController::class, "index"])->name("reserve");
 Route::set("eventos", [EventosController::class, "index"])->name("event");
 Route::set("galeria", [GaleriaController::class, "index"])->name("galery");
+
+Route::set("reservas", [ReservasController::class, "index"])->name("reserve");
+Route::set("reserve/new", [ReservasController::class, "new"])->name("reserve.new");
+
+Route::set("reserva/{id}", [ReservasController::class, "show"])->name("reserve.show");
+Route::set("reserve/confirm", [ReservasController::class, "confirm"])->name("reserve.confirm");

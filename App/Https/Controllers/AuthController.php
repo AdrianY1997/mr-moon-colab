@@ -63,18 +63,14 @@ class AuthController extends Controller {
         $user = User::select("user_nick", "user_email", "user_name", "user_pass")->where("user_email", $data["email"])->first();
 
         if (!$user) {
-            redirect()->route("auth.login")->with("error:El correo no se encuentra registrado")->send();
+            redirect()->route("auth.login")->error("El correo no se encuentra registrado")->send();
         } else {
             if (!password_verify($data["password"], $user->user_pass)) {
-                redirect()->route("auth.login")->with("error:La contraseña ingresada no coincide con el correo")->send();
+                redirect()->route("auth.login")->error("La contraseña ingresada no coincide con el correo")->send();
             } else if (Session::save($user->user_name)) {
-                if ($user->user_nick) {
-                    redirect()->route("dash.home")->with("success:Haz iniciado sesión correctamente")->send();
-                } else {
-                    redirect()->route("reserve")->with("success:Haz iniciado sesión correctamente")->send();
-                }
+                redirect()->route("dash.home")->success("Haz iniciado sesión correctamente")->send();
             }
-            redirect()->route(constant("HOME"))->with("error:Ha ocurrido un error");
+            redirect()->route(constant("HOME"))->error("Ha ocurrido un error");
         }
     }
 
@@ -89,7 +85,7 @@ class AuthController extends Controller {
 
         $user = User::where("user_email", $data["email"])->first();
         if ($user) {
-            redirect()->route("auth.signup")->with("error:Correo ya registrado")->send();
+            redirect()->route("auth.signup")->error("El usuario ingresado no esta disponible")->send();
         } else {
             User::insert([
                 "user_email" => $data["email"],
@@ -98,7 +94,7 @@ class AuthController extends Controller {
                 "user_lastname" => $data["lastname"],
                 "user_phone" => $data["number"],
             ]);
-            redirect()->route("auth.login")->with("success:Te haz registrado con éxito")->send();
+            redirect()->route("auth.login")->success("Te haz registrado con éxito")->send();
         }
     }
 }

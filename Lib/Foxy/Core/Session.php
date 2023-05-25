@@ -31,9 +31,7 @@ class Session {
     static function load() {
         if (self::checkSession()) {
             $name = $_SESSION["user"];
-
             $user = User::where("user_name", $name)->first();
-
             if (isset($user)) self::$data = $user;
         }
     }

@@ -4,7 +4,7 @@
     </div>
 
     <div class="form container">
-        <form action="#">
+        <form action="{{ route("reserve.new") }}" method="post">
             <div>
                 <p>Condiciones de antelación del servicio y pago anticipado</p>
             </div>
@@ -49,16 +49,15 @@
                     <input class="form-control" type="text" name="phone" id="phone" placeholder="phone">
                     <label for="">Teléfono</label>
                 </div>
-                <div class="mb-3">
-                    <label for="ant-pay" class="form-label">Default file input example</label>
-                    <input class="form-control" type="file" id="ant-pay" name="ant-pay" id="ant-pay">
-                </div>
             </div>
-            <div>
+            <div class="info-details">
                 <div class="form-floating">
                     <textarea class="form-control" type="text" name="details" id="details" placeholder="details"></textarea>
                     <label for="">Detalles</label>
                 </div>
+            </div>
+            <div class="info-send">
+                <button type="submit" class="btn btn-primary">Enviar</button>
             </div>
         </form>
     </div>

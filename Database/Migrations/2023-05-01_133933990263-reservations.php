@@ -9,9 +9,14 @@ return new class {
     public function up() {
         Schema::create($this->tableName, function (Blueprint $table) {
             $table->id();
-            $table->string("code")->unique();
+            $table->string("name");
+            $table->string("lastname");
+            $table->string("email");
+            $table->string("quantity");
             $table->string("table");
             $table->string("date");
+            $table->string("time");
+            $table->string("status")->default("pending", true);
             $table->integer("user_id")->references("users");
         });
     }
