@@ -4,6 +4,7 @@ namespace FoxyMVC\Lib\Foxy\Core;
 
 use Exception;
 use FoxyMVC\Lib\Foxy\Core\Route;
+use FoxyMVC\Lib\Foxy\Core\Session;
 
 /**
  * Clase para redirigir a una ruta específica
