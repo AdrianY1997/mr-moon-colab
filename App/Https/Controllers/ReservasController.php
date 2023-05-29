@@ -3,6 +3,7 @@
 namespace FoxyMVC\App\Https\Controllers;
 
 use FoxyMVC\App\Models\Reservation;
+use FoxyMVC\App\Models\Role;
 use FoxyMVC\Lib\Foxy\Core\Base\Controller;
 use FoxyMVC\Lib\Foxy\Core\Request;
 use FoxyMVC\Lib\Foxy\Core\Session;
@@ -38,17 +39,26 @@ class ReservasController extends Controller {
         else redirect()->route("reserve")->error("No se ha podido registrar su reserva")->send();
     }
 
-    public function show($id = null) {
-
-        if ($id) {
-            $reservation = Reservation::where("rese_urid", $id)->get();
-            render("web.reserve.confirm", [
-                "id" => $id,
-                "reservation" => $reservation
-            ]);
-        } else {
-            render("web.reserve.search");
+    public function search() {
+        $data = Request::getData();
+        if (isset($data["urid"])) {
+            $rese = Reservation::where("rese_urid", $data["urid"])->first();
+            if ($rese) redirect()->route("reserve.show", ["urid" => $rese->rese_urid])->send();
+            else redirect()->route("reserve.search")->error("El id de reservación no existe en el sistema")->send();
         }
+
+        render("web.reserve.search");
+    }
+
+    public function show($id) {
+        $rese = Reservation::where("rese_urid", $id)->first();
+        if (!$rese) {
+            redirect()->route("reserve.search")->error("La id de reservación no se encuentra en el sistema")->send();
+        }
+
+        render("web.reserve.confirm", [
+            "reservation" => $rese
+        ]);
     }
 
     public function confirm() {
