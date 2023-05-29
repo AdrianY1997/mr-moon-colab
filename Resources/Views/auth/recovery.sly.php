@@ -15,7 +15,7 @@
                 </div>
             </div>
         </div>
-        <div class="container">
+        <div class="container d-none">
             <div>
                 <img src="{{ asset('img\static\mr_moon_logo.png') }}">
             </div>
@@ -28,13 +28,12 @@
                     <form class="mb-5" id="send-code-form" action="{{ route('auth.recovery.request.code') }}">
                         <div class="d-flex justify-content-right">
                             <div class="request-password w-100">
-                                <input class="border px-3 py-2 w-100" name="email" type="email"
-                                    placeholder="forexample123@email.com">
+                                <input id="recovery-email" class="border px-3 py-2 w-100" name="email" type="email" placeholder="forexample123@email.com">
                             </div>
                             <button class="ms-3 px-3" type="submit" id="send-code-btn">Enviar&nbsp;codigó</button><br>
                         </div>
                     </form>
-                    <form action="#">
+                    <form action="{{ route('auth.recovery.verify.code') }}">
                         <div class="d-flex justify-content-center">
                             <input class="border px-3 py-2" type="number" placeholder="# # # # # #" class="border">
                             <button class="ms-3 px-3"><a href="#">Confirmar</a></button>

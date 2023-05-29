@@ -15,6 +15,10 @@ return new class {
         Schema::insert($this->tableName, [
             "name" => "ADMIN"
         ]);
+
+        Schema::insert($this->tableName, [
+            "name" => "USER"
+        ]);
     }
 
     public function down() {

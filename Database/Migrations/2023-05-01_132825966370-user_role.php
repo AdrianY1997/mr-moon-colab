@@ -17,6 +17,16 @@ return new class {
             "user_id" => 1,
             "role_id" => 1
         ], true);
+
+        Schema::insert($this->tableName, [
+            "user_id" => 1,
+            "role_id" => 2
+        ], true);
+
+        Schema::insert($this->tableName, [
+            "user_id" => 2,
+            "role_id" => 2
+        ], true);
     }
 
     public function down() {

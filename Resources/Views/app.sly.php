@@ -37,6 +37,7 @@
     <script src="{{ asset('js/foxy.js') }}"></script>
     <script src="{{ asset('js/boostrap.bundle.min.js') }}"></script>
     <script src="{{ resource('js/notification.js') }}"></script>
+    <script src="{{ asset('js/jquery.min.js') }}"></script>
 </body>
 
 </html>

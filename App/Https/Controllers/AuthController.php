@@ -7,6 +7,7 @@ use FoxyMVC\App\Models\User;
 use FoxyMVC\Lib\Foxy\Core\Request;
 use FoxyMVC\Lib\Foxy\Core\Session;
 use FoxyMVC\Lib\Foxy\Core\Base\Controller;
+use FoxyMVC\Lib\Foxy\Database\MySQL;
 
 class AuthController extends Controller {
     public function __construct() {
@@ -32,18 +33,23 @@ class AuthController extends Controller {
         if (Session::checkSession()) redirect()->route("dash.home")->send();
         $data = Request::getData();
 
-        $code = new Code();
-        $randCode = rand(100000, 999999);
+        if (filter_var($data["email"], FILTER_VALIDATE_EMAIL)) {
+            $randCode = rand(100000, 999999);
 
-        $code->insert(["codes"], [
-            "email" => $data["email"],
-            "code" => $randCode,
-            "status" => "waiting"
-        ]);
+            Code::insert([
+                "code_email" => $data["email"],
+                "code_code" => $randCode,
+                "code_status" => "waiting"
+            ]);
+            echo json_encode(["code" => $randCode]);
+        } else {
+            echo json_encode(["error" => "El email ingresado no existe", "code" => 1]);
+        }
     }
 
     public function verify_recovery_code() {
         if (Session::checkSession()) redirect()->route("dash.home")->send();
+
         // $data = Request::getData();
 
         // $code = new Code();

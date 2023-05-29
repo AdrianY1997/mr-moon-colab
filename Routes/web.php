@@ -16,5 +16,6 @@ Route::set("galeria", [GaleriaController::class, "index"])->name("galery");
 Route::set("reservas", [ReservasController::class, "index"])->name("reserve");
 Route::set("reserve/new", [ReservasController::class, "new"])->name("reserve.new");
 
-Route::set("reserva/{id}", [ReservasController::class, "show"])->name("reserve.show");
+Route::set("reserva", [ReservasController::class, "show"])->name("reserve.search");
+Route::set("reserva/{urid}", [ReservasController::class, "show"])->name("reserve.show");
 Route::set("reserve/confirm", [ReservasController::class, "confirm"])->name("reserve.confirm");

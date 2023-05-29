@@ -24,6 +24,14 @@ return new class {
             "name" => "Administrador",
             "lastname" => "01"
         ]);
+
+        Schema::insert($this->tableName, [
+            "nick" => "invitado",
+            "email" => "guest@mail.com",
+            "pass" => password_hash("invitado@123", PASSWORD_DEFAULT),
+            "name" => "Invitado",
+            "lastname" => "02"
+        ]);
     }
 
     public function down() {

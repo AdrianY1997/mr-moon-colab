@@ -9,6 +9,7 @@ return new class {
     public function up() {
         Schema::create($this->tableName, function (Blueprint $table) {
             $table->id();
+            $table->string("urid")->unique();
             $table->string("name");
             $table->string("lastname");
             $table->string("email");

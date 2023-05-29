@@ -2,17 +2,10 @@ const sendCodeBtn = document.querySelector("#send-code-btn");
 
 sendCodeBtn.addEventListener("click", (e) => {
     e.preventDefault();
+    e.stopPropagation();
 
     const form = sendCodeBtn.parentElement.parentElement;
-    const email = sendCodeBtn.previousElementSibling.value
-
-    const emailRegex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-
-    if (!emailRegex.exec(email)) return notify({
-        text: "El email ingresado es invalido",
-        status: "error",
-        bg: "bg-danger"
-    });
+    const email = document.querySelector("#recovery-email").value;
 
     $.ajax({
         url: form.getAttribute("action"),
@@ -21,12 +14,21 @@ sendCodeBtn.addEventListener("click", (e) => {
             email: email
         },
         dataType: "text",
-        success: function () {
-            notify({
-                text: "Se ha enviado un correo con el código a " + email,
-                status: "success",
-                bg: "bg-success"
-            })
+        success: function (response) {
+            response = JSON.parse(response);
+            if (response.error) {
+                notify({
+                    text: "El email ingresado es invalido",
+                    status: "error",
+                    bg: "bg-danger"
+                });
+            } else {
+                notify({
+                    text: "Se ha enviado un correo con el código a " + email + ", codigo: " + response.code,
+                    status: "success",
+                    bg: "bg-success"
+                })
+            }
         },
         error: function () {
             notify({
