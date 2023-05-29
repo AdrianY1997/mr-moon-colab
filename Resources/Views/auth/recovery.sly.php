@@ -8,8 +8,8 @@
                 <h1>Has solicitado recuperar tú contraseña
                     <hr>
                 </h1>
-                <p class="fs-5">No podemos simplemente enviar tú antigua contraseña</p>
-                <p class="fs-5">Para poder restablecerla has click y sigue las instrucciones.</p>
+                <p class="fs-5">No podemos simplemente enviar tú antigua contraseña.</p>
+                <p class="fs-5">Para poder restablecerla has click en el siguiente botón y sigue las instrucciones.</p>
                 <div>
                     <button class="send-code btn shadow">Restablecer Contraseña</button>
                 </div>
@@ -30,7 +30,7 @@
                             <div class="request-password w-100">
                                 <input id="recovery-email" class="border px-3 py-2 w-100" name="email" type="email" placeholder="forexample123@email.com">
                             </div>
-                            <button class="ms-3 px-3" type="submit" id="send-code-btn">Enviar&nbsp;codigó</button><br>
+                            <button class="ms-3 px-3" type="submit" id="send-code-btn">Enviar&nbsp;código</button><br>
                         </div>
                     </form>
                     <form action="{{ route('auth.recovery.verify.code') }}">
