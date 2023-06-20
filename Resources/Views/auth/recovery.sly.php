@@ -15,7 +15,7 @@
                 </div>
             </div>
         </div>
-        <div class="container d-none">
+        <div class="container">
             <div>
                 <img src="{{ asset('img\static\mr_moon_logo.png') }}">
             </div>

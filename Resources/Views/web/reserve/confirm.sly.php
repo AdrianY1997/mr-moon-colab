@@ -4,11 +4,6 @@
             <h1>Confirme su reserva</h1>
         </div>
         <div class="card-body">
-
-            @foreach($roles as $role)
-            {{ $role->role_name }}
-            @endforeach
-
             <form action="#" method="post">
                 <input type="file">
             </form>

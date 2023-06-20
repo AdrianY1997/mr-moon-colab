@@ -3,7 +3,9 @@
 namespace FoxyMVC\App\Https\Controllers;
 
 use FoxyMVC\App\Models\Code;
+use FoxyMVC\App\Models\Role;
 use FoxyMVC\App\Models\User;
+use FoxyMVC\App\Models\UserRole;
 use FoxyMVC\Lib\Foxy\Core\Request;
 use FoxyMVC\Lib\Foxy\Core\Session;
 use FoxyMVC\Lib\Foxy\Core\Base\Controller;
@@ -15,22 +17,46 @@ class AuthController extends Controller {
     }
 
     public function log_in() {
-        if (Session::checkSession()) redirect()->route("dash.home")->send();
+        if (Session::checkSession()) {
+            $roles = Role::getUserRole(Session::data("user_id"));
+            foreach ($roles as $role) {
+                if ($role->role_name == "ADMIN") redirect()->route("dash.home")->send();
+            }
+            redirect()->route("profile.show")->send();
+        }
         render("auth.login");
     }
 
     public function sign_up() {
-        if (Session::checkSession()) redirect()->route("dash.home")->send();
+        if (Session::checkSession()) {
+            $roles = Role::getUserRole(Session::data("user_id"));
+            foreach ($roles as $role) {
+                if ($role->role_name == "ADMIN") redirect()->route("dash.home")->send();
+            }
+            redirect()->route("profile.show")->send();
+        }
         render("auth.signup");
     }
 
     public function recovery() {
-        if (Session::checkSession()) redirect()->route("dash.home")->send();
+        if (Session::checkSession()) {
+            $roles = Role::getUserRole(Session::data("user_id"));
+            foreach ($roles as $role) {
+                if ($role->role_name == "ADMIN") redirect()->route("dash.home")->send();
+            }
+            redirect()->route("profile.show")->send();
+        }
         render("auth.recovery");
     }
 
     public function request_recovery_code() {
-        if (Session::checkSession()) redirect()->route("dash.home")->send();
+        if (Session::checkSession()) {
+            $roles = Role::getUserRole(Session::data("user_id"));
+            foreach ($roles as $role) {
+                if ($role->role_name == "ADMIN") redirect()->route("dash.home")->send();
+            }
+            redirect()->route("profile.show")->send();
+        }
         $data = Request::getData();
 
         if (filter_var($data["email"], FILTER_VALIDATE_EMAIL)) {
@@ -48,7 +74,13 @@ class AuthController extends Controller {
     }
 
     public function verify_recovery_code() {
-        if (Session::checkSession()) redirect()->route("dash.home")->send();
+        if (Session::checkSession()) {
+            $roles = Role::getUserRole(Session::data("user_id"));
+            foreach ($roles as $role) {
+                if ($role->role_name == "ADMIN") redirect()->route("dash.home")->send();
+            }
+            redirect()->route("profile.show")->send();
+        }
 
         // $data = Request::getData();
 
@@ -63,7 +95,13 @@ class AuthController extends Controller {
     }
 
     public function start_session() {
-        if (Session::checkSession()) redirect()->route("dash.home")->send();
+        if (Session::checkSession()) {
+            $roles = Role::getUserRole(Session::data("user_id"));
+            foreach ($roles as $role) {
+                if ($role->role_name == "ADMIN") redirect()->route("dash.home")->send();
+            }
+            redirect()->route("profile.show")->send();
+        }
         $data = Request::getData();
 
         $user = User::select("user_nick", "user_email", "user_name", "user_pass")->where("user_email", $data["email"])->first();
@@ -74,7 +112,12 @@ class AuthController extends Controller {
             if (!password_verify($data["password"], $user->user_pass)) {
                 redirect()->route("auth.login")->error("La contraseña ingresada no coincide con el correo")->send();
             } else if (Session::save($user->user_name)) {
-                redirect()->route("dash.home")->success("Haz iniciado sesión correctamente")->send();
+                Session::load();
+                $roles = Role::getUserRole(Session::data("user_id"));
+                foreach ($roles as $role) {
+                    if ($role->role_name == "ADMIN") redirect()->route("dash.home")->success("Haz iniciado sesión correctamente")->send();
+                }
+                redirect()->route("profile.show")->success("Haz iniciado sesión correctamente")->send();
             }
             redirect()->route(constant("HOME"))->error("Ha ocurrido un error");
         }
@@ -83,24 +126,5 @@ class AuthController extends Controller {
     public function close_session() {
         Session::destroy();
         redirect()->route(constant("HOME"))->success("Se ha cerrado sesión correctamente")->send();
-    }
-
-    public function new_user() {
-        if (Session::checkSession()) redirect()->route("dash.home")->send();
-        $data = Request::getData();
-
-        $user = User::where("user_email", $data["email"])->first();
-        if ($user) {
-            redirect()->route("auth.signup")->error("El usuario ingresado no esta disponible")->send();
-        } else {
-            User::insert([
-                "user_email" => $data["email"],
-                "user_pass" =>  password_hash($data["password"], PASSWORD_DEFAULT),
-                "user_name" => $data["name"],
-                "user_lastname" => $data["lastname"],
-                "user_phone" => $data["number"],
-            ]);
-            redirect()->route("auth.login")->success("Te haz registrado con éxito")->send();
-        }
     }
 }

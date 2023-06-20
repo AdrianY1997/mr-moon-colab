@@ -133,6 +133,7 @@ class Table {
             $stmt->execute(array_values($values));
             return true;
         } catch (PDOException $e) {
+            var_dump($e);
             return false;
         }
     }
