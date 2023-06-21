@@ -14,23 +14,25 @@ return new class {
             $table->string("pass");
             $table->string("name");
             $table->string("lastname");
+            $table->string("address");
             $table->string("phone");
+            $table->string("img_path")->default("img/static/profiles/avatar1.png", true);
         });
 
         Schema::insert($this->tableName, [
-            "nick" => "admin",
+            "nick" => "Administrator",
             "email" => "admin@mail.com",
-            "pass" => password_hash("Password@2023;", PASSWORD_DEFAULT),
-            "name" => "Administrador",
-            "lastname" => "01"
+            "pass" => password_hash("admin@2023;", PASSWORD_DEFAULT),
+            "name" => "John",
+            "lastname" => "Doe"
         ]);
 
         Schema::insert($this->tableName, [
-            "nick" => "invitado",
+            "nick" => "Guest",
             "email" => "guest@mail.com",
-            "pass" => password_hash("invitado@123", PASSWORD_DEFAULT),
-            "name" => "Invitado",
-            "lastname" => "02"
+            "pass" => password_hash("guest@2023;", PASSWORD_DEFAULT),
+            "name" => "John",
+            "lastname" => "Doe"
         ]);
     }
 

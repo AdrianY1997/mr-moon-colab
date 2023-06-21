@@ -59,3 +59,11 @@ if (!function_exists("redirect")) {
         return new Redirector;
     }
 }
+
+if (!function_exists("wordsDate")) {
+    function wordsDate($timestamp) {
+        $timestamp = explode(" ", $timestamp)[0];
+        $timestamp = date("F j, Y", strtotime($timestamp));
+        return $timestamp;
+    }
+}

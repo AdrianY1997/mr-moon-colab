@@ -22,3 +22,4 @@ Route::set("reserva/{urid}", [ReservasController::class, "show"])->name("reserve
 Route::set("reserve/confirm", [ReservasController::class, "confirm"])->name("reserve.confirm");
 
 Route::set("profile", [ProfileController::class, "show"])->name("profile.show");
+Route::set("profile/edit", [ProfileController::class, "edit"])->name("profile.edit");
