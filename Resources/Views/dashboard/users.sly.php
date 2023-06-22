@@ -12,8 +12,11 @@
                         </tr>
                     </thead>
                     <tbody>
+                        @php
+                        $l = count($usuarios);
+                        @endphp
                         @foreach($usuarios as $user)
-                        @if($user->user_id != 1 && $user->user_id != 2)
+                        @if($l > 2 && $user->user_id != 1 && $user->user_id != 2)
                         <tr>
                             <td style="vertical-align: middle">
                                 <p class="m-0">{{ $user->user_id }}</p>
@@ -29,6 +32,12 @@
                         </tr>
                         @endif
                         @endforeach
+                        @if($l <= 2) <tr>
+                            <td colspan="3">
+                                <p class="mb-0">No hay usuarios registrados</p>
+                            </td>
+                            </tr>
+                            @endif
                     </tbody>
                 </table>
             </div>

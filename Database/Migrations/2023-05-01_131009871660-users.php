@@ -22,7 +22,7 @@ return new class {
         Schema::insert($this->tableName, [
             "nick" => "Administrator",
             "email" => "admin@mail.com",
-            "pass" => password_hash("admin@2023;", PASSWORD_DEFAULT),
+            "pass" => password_hash("Admin@2023;", PASSWORD_DEFAULT),
             "name" => "John",
             "lastname" => "Doe"
         ]);
@@ -30,7 +30,7 @@ return new class {
         Schema::insert($this->tableName, [
             "nick" => "Guest",
             "email" => "guest@mail.com",
-            "pass" => password_hash("guest@2023;", PASSWORD_DEFAULT),
+            "pass" => password_hash("Guest@2023;", PASSWORD_DEFAULT),
             "name" => "John",
             "lastname" => "Doe"
         ]);
