@@ -71,6 +71,50 @@ class DashboardController extends Controller {
         ]);
     }
 
+    public function getUserInfo($id) {
+        $response = [];
+        if ($response["user"] = User::where("user_id", $id)->first()) {
+            $response["status"] = [
+                "code" => 200,
+                "message" => "Información cargada"
+            ];
+        } else {
+            $response["status"] = [
+                "code" => 500,
+                "message" => "Error al cargar la información"
+            ];
+        }
+        echo json_encode($response);
+    }
+
+    public function setUserInfo() {
+        $response = [];
+        $data = Request::getData();
+
+
+
+        if (User::where("user_id", $data["id"])->update([
+            "user_nick" => $data["nick"],
+            "user_name" => $data["name"],
+            "user_lastname" => $data["lastname"],
+            "user_email" => $data["email"],
+            "user_address" => $data["address"],
+            "user_phone" => $data["phone"],
+        ])) {
+            $response["status"] = [
+                "code" => 200,
+                "message" => "Información Actualizada",
+            ];
+        } else {
+            $response["status"] = [
+                "code" => 500,
+                "message" => "Error al actualizar la información"
+            ];
+        }
+
+        echo json_encode($response);
+    }
+
     public function inventario() {
         render("dashboard.inv", [
             "active" => "inventario"

@@ -13,3 +13,6 @@ Route::set("dashboard/menu", [DashboardController::class, "menu"])->name("dash.m
 Route::set("dashboard/reservas", [DashboardController::class, "reservas"])->name("dash.reserve");
 Route::set("dashboard/eventos", [DashboardController::class, "eventos"])->name("dash.event");
 Route::set("dashboard/galeria", [DashboardController::class, "galeria"])->name("dash.galery");
+
+Route::set("dashboard/usuarios/get/{id}", [DashboardController::class, "getUserInfo"])->name("dash.userGetInfo");
+Route::set("dashboard/usuarios/set", [DashboardController::class, "setUserInfo"])->name("dash.userSetInfo");

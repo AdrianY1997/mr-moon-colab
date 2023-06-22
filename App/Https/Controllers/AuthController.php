@@ -5,11 +5,9 @@ namespace FoxyMVC\App\Https\Controllers;
 use FoxyMVC\App\Models\Code;
 use FoxyMVC\App\Models\Role;
 use FoxyMVC\App\Models\User;
-use FoxyMVC\App\Models\UserRole;
 use FoxyMVC\Lib\Foxy\Core\Request;
 use FoxyMVC\Lib\Foxy\Core\Session;
 use FoxyMVC\Lib\Foxy\Core\Base\Controller;
-use FoxyMVC\Lib\Foxy\Database\MySQL;
 
 class AuthController extends Controller {
     public function __construct() {
@@ -111,7 +109,7 @@ class AuthController extends Controller {
         } else {
             if (!password_verify($data["password"], $user->user_pass)) {
                 redirect()->route("auth.login")->error("La contraseña ingresada no coincide con el correo")->send();
-            } else if (Session::save($user->user_name)) {
+            } else if (Session::save($user->user_email)) {
                 Session::load();
                 $roles = Role::getUserRole(Session::data("user_id"));
                 foreach ($roles as $role) {
@@ -119,7 +117,7 @@ class AuthController extends Controller {
                 }
                 redirect()->route("profile.show")->success("Haz iniciado sesión correctamente")->send();
             }
-            redirect()->route(constant("HOME"))->error("Ha ocurrido un error");
+            // redirect()->route(constant("HOME"))->error("Ha ocurrido un error")->send();
         }
     }
 

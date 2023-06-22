@@ -23,16 +23,12 @@ return new class {
             "nick" => "Administrator",
             "email" => "admin@mail.com",
             "pass" => password_hash("Admin@2023;", PASSWORD_DEFAULT),
-            "name" => "John",
-            "lastname" => "Doe"
         ]);
 
         Schema::insert($this->tableName, [
             "nick" => "Guest",
             "email" => "guest@mail.com",
             "pass" => password_hash("Guest@2023;", PASSWORD_DEFAULT),
-            "name" => "John",
-            "lastname" => "Doe"
         ]);
     }
 
