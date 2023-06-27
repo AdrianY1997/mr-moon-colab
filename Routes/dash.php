@@ -16,3 +16,5 @@ Route::set("dashboard/galeria", [DashboardController::class, "galeria"])->name("
 
 Route::set("dashboard/usuarios/get/{id}", [DashboardController::class, "getUserInfo"])->name("dash.userGetInfo");
 Route::set("dashboard/usuarios/set", [DashboardController::class, "setUserInfo"])->name("dash.userSetInfo");
+
+Route::set("dashboard/menus/set/image/{id}", [DashboardController::class, "setMenuImg"])->name("dash.menuSetImg");

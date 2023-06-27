@@ -82,7 +82,7 @@
         </div>
         <div class="copy">
             <p class="m-0">Copyright {{ date('Y') }} - <strong> {{ $webdata->webd_name }}
-                    {{ $webdata->webd_subt }}&copy;</strong> by HappyFox.Devs</p>
+                    {{ $webdata->webd_subt }}&copy;</strong> by <a href="https://adriany1997.github.io/porfolio/home" class="text-primary-emphasis" target="_blank">HappyFox.Devs</a></p>
         </div>
     </div>
 </div>

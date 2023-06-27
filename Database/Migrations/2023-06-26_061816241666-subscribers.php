@@ -4,16 +4,14 @@ use FoxyMVC\Lib\Foxy\Facades\Schema;
 use FoxyMVC\Lib\Foxy\Database\Schema\Blueprint;
 
 return new class {
-    private string $tableName = "products";
+    private string $tableName = "subscribers";
 
     public function up() {
         Schema::create($this->tableName, function (Blueprint $table) {
             $table->id();
-            $table->string("ref")->unique();
             $table->string("name");
-            $table->text("desc");
-            $table->string("stock");
-            $table->string("value");
+            $table->string("lastname");
+            $table->string("email");
         });
     }
 

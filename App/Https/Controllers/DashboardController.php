@@ -133,6 +133,26 @@ class DashboardController extends Controller {
         ]);
     }
 
+    public function setMenuImg($id) {
+        if (!isset($_FILES["menu-img"])) redirect()->route("dash.menu")->error("No se ha seleccionado una image")->send();
+
+        $menus = [
+            "1" => "menu-bebidas",
+            "2" => "menu-principal",
+            "3" => "menu-comidas",
+        ];
+
+        $targetDir = "Public/img/menu/";
+        $imageFileType = strtolower(pathinfo(basename($_FILES["menu-img"]["name"]), PATHINFO_EXTENSION));
+        $targetFile = $targetDir . $menus[$id] . "." . $imageFileType;
+
+        if (getimagesize($_FILES["menu-img"]["tmp_name"]) === false) redirect()->route("dash.menu")->error("Se ha seleccionado una imagen invalida")->send();
+        if ($_FILES["menu-img"]["size"] > 500000) redirect()->route("dash.menu")->error("El tamaño de la imagen debe ser menor a 500kb")->send();
+        if ($imageFileType != "jpg" && $imageFileType != "png") redirect()->route("dash.menu")->error("Solo se aceptan imágenes de tipo jpg y png")->send();
+        if (move_uploaded_file($_FILES["menu-img"]["tmp_name"], $targetFile)) redirect()->route("dash.menu")->success("Se ha guardado la imagen con éxito")->send();
+        else redirect()->route("dash.menu")->error("No se ha podido subir la imagen")->send();
+    }
+
     public function reservas() {
         render("dashboard.reservas", [
             "active" => "reservas"
