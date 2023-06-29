@@ -5,6 +5,11 @@ main {
     min-height: calc(100vh - 3.25rem);
 }
 
+.label-active {
+    opacity: .65;
+    transform: scale(0.85) translateY(-0.5rem) translateX(0.15rem);
+}
+
 .shadow {
     box-shadow: 0 0 5px 0 lightgrey !important;
 }
