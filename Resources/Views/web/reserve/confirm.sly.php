@@ -4,6 +4,7 @@
             <h1>Confirme su reserva</h1>
         </div>
         <div class="card-body">
+            <img src="{{ asset("img/qr.jpg") }}" alt="">
             <form action="#" method="post">
                 <input type="file">
             </form>

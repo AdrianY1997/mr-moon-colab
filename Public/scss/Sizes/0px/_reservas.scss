@@ -21,6 +21,19 @@
         .info-send {
             margin-top: 1rem;
         }
+
+        .time-cell {
+            cursor: pointer;
+
+            &.disabled {
+                background-color: lightcyan;
+                cursor: not-allowed;
+            }
+
+            &.active {
+                background-color: rgb(230, 174, 54);
+            }
+        }
     }
 }
 

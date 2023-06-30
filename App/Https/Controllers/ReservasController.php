@@ -42,6 +42,7 @@ class ReservasController extends Controller {
     public function search() {
         $data = Request::getData();
         if (isset($data["urid"])) {
+            echo $data["urid"];
             $rese = Reservation::where("rese_urid", $data["urid"])->first();
             if ($rese) redirect()->route("reserve.show", ["urid" => $rese->rese_urid])->send();
             else redirect()->route("reserve.search")->error("El id de reservación no existe en el sistema")->send();
@@ -50,8 +51,8 @@ class ReservasController extends Controller {
         render("web.reserve.search");
     }
 
-    public function show($id) {
-        $rese = Reservation::where("rese_urid", $id)->first();
+    public function show($urid) {
+        $rese = Reservation::where("rese_urid", $urid)->first();
         if (!$rese) {
             redirect()->route("reserve.search")->error("La id de reservación no se encuentra en el sistema")->send();
         }

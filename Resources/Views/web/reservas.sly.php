@@ -25,38 +25,41 @@
                 <div class="form-floating position-relative">
                     <button id="reserve-time-btn" class="btn border h-100 w-100 text-start" type="button" data-bs-toggle="collapse" data-bs-target="#reserve-time-container" aria-expanded="false" aria-controls="reserve-time-container"></button>
                     <!--<input class="form-control" type="time" name="time" id="time" placeholder="time">-->
-                    <label for="time">Hora</label>
-                    <div class="collapse position-absolute show w-100" style="z-index: 1" id="reserve-time-container">
+                    <label id="time-label" for="time">Hora</label>
+                    <div class="collapse position-absolute w-100" style="z-index: 1" id="reserve-time-container">
                         <div class="card card-body mt-2 d-flex flex-column gap-2">
                             <div class="position-absolute end-0 top-0 m-2 my-1">
-                                <div><i class="fa-solid fa-info-circle"></i></div>
+                                <div class="text-secondary" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="custom-tooltip" data-bs-title="Cuando Selecciones una hora, se deshabilitaran el resto a excepción la casillas siguiente."><i class="fa-solid fa-info-circle"></i></div>
                             </div>
                             <div>
                                 <p class="mb-0">Mañana</p>
-                                <div class="d-flex justify-content-between gap-2">
-                                    <div class="w-100 border text-center p-1">8</div>
-                                    <div class="w-100 border text-center p-1">9</div>
-                                    <div class="w-100 border text-center p-1">10</div>
-                                    <div class=" w-100 border text-center p-1">11</div>
+                                <div class="d-flex justify-content-between gap-2" data-day-section="morning">
+                                    <div class="time-cell w-100 border text-center p-1">8</div>
+                                    <div class="time-cell w-100 border text-center p-1">9</div>
+                                    <div class="time-cell w-100 border text-center p-1">10</div>
+                                    <div class="time-cell w-100 border text-center p-1">11</div>
                                 </div>
                             </div>
                             <div>
                                 <p class="mb-0">Tarde</p>
-                                <div class="d-flex justify-content-between gap-2">
-                                    <div class="w-100 border text-center p-1">2</div>
-                                    <div class="w-100 border text-center p-1">3</div>
-                                    <div class="w-100 border text-center p-1">4</div>
-                                    <div class="w-100 border text-center p-1">5</div>
+                                <div class="d-flex justify-content-between gap-2" data-day-section="afternoon">
+                                    <div class="time-cell w-100 border text-center p-1">2</div>
+                                    <div class="time-cell w-100 border text-center p-1">3</div>
+                                    <div class="time-cell w-100 border text-center p-1">4</div>
+                                    <div class="time-cell w-100 border text-center p-1">5</div>
                                 </div>
                             </div>
                             <div>
                                 <p class="mb-0">Noche</p>
-                                <div class="d-flex justify-content-between gap-2">
-                                    <div class="w-100 border text-center p-1">7</div>
-                                    <div class="w-100 border text-center p-1">8</div>
-                                    <div class="w-100 border text-center p-1">9</div>
-                                    <div class="w-100 border text-center p-1">10</div>
+                                <div class="d-flex justify-content-between gap-2" data-day-section="night">
+                                    <div class="time-cell w-100 border text-center p-1">7</div>
+                                    <div class="time-cell w-100 border text-center p-1">8</div>
+                                    <div class="time-cell w-100 border text-center p-1">9</div>
+                                    <div class="time-cell w-100 border text-center p-1">10</div>
                                 </div>
+                            </div>
+                            <div class="d-flex justify-content-between">
+                                <span id="time-clean" class="btn btn-outline-warning">Limpiar</span><span id="time-confirm" class="btn btn-outline-primary">Confirmar</span>
                             </div>
                         </div>
                     </div>
@@ -64,10 +67,6 @@
                 <div class="form-floating">
                     <input class="form-control" type="text" name="day" id="day" placeholder="day">
                     <label for="day">Fecha</label>
-                </div>
-                <div class="form-floating">
-                    <input class="form-control" type="text" name="month" id="month" placeholder="month">
-                    <label for="month">Fecha</label>
                 </div>
             </div>
             <hr>
@@ -98,6 +97,7 @@
             <div class="info-send">
                 <button type="submit" class="btn btn-primary">Enviar</button>
             </div>
+            <input type="hidden" id="time" name="time">
         </form>
     </div>
 </div>
