@@ -25,6 +25,7 @@ class TemplateEngine {
     public function render($view, $data = []) {
         // Convertir el array de datos en variables
         extract(Session::getMessage());
+        extract($data);
 
         // Capturar el contenido de la vista en un buffer
         ob_start();

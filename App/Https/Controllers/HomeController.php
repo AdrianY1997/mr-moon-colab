@@ -2,10 +2,7 @@
 
 namespace FoxyMVC\App\Https\Controllers;
 
-use FoxyMVC\App\Models\Log;
-use FoxyMVC\Lib\Foxy\Core\Session;
 use FoxyMVC\Lib\Foxy\Core\Base\Controller;
-use FoxyMVC\Lib\Foxy\Database\Table;
 
 /**
  * Controlador para la página de inicio.

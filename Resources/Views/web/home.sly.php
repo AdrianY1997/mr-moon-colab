@@ -8,10 +8,14 @@
             Iniciar
         </button>
     </a>
-    <a href="{{ route('error', ['msg' => 'service-unavailable']) }}" class="has-text-dark" aria-label="Documentación del sistema">
+    <a href="{{ route('error', ['msg' => 'service-unavailable']) }}" class="has-text-dark"
+        aria-label="Documentación del sistema">
         <button type="button" class="btn btn-secondary rounded-5 fs-4 p-3">
             <span class="mr-1"><i class="fa-solid fa-search"></i></span>
             Documentación
         </button>
     </a>
+    <div>
+        
+    </div>
 </div>
