@@ -1,13 +1,43 @@
+function initTogglers() {
+    const togglers = document.querySelectorAll("[data-dropdown-toggle]");
+    
+    togglers.forEach(t => {
+        t.addEventListener("click", () => {
+            let target = t.getAttribute("data-dropdown-toggle");
+            target = document.querySelector(`#${target}`);
+            let animDir = target.getAttribute("data-animation-direction");
+
+            if (target.classList.contains("hidden")) {
+                target.classList.remove("hidden");
+                setTimeout(() => {
+                    switch (animDir) {
+                        case "from-top":
+                            target.classList.remove("max-h-0");
+                            target.classList.add("max-h-10");
+                            break;
+                    }
+                }, 10);
+            } else {
+                switch (animDir) {
+                    case "from-top":
+                        target.classList.add("max-h-0");
+                        target.classList.remove("max-h-10");
+                        break;
+                }
+                setTimeout(() => target.classList.add("hidden"), 200)
+            }
+        })
+    });
+}
+
 function resizeMain() {
-    const header = document.querySelector('header');
-    const main = document.querySelector('main');
-    const footer = document.querySelector('footer');
+    let main = document.querySelector('main');
+    let header = document.querySelector('header');
+    let footer = document.querySelector('footer');
 
-    let hnfHeight = header.clientHeight + footer.clientHeight;
+    let size = header.clientHeight + footer.clientHeight;
 
-    let minHeight = 'calc(100vh - ' + footer.clientHeight + 'px)';
-
-    main.style.minHeight = minHeight;
+    main.style.minHeight = 'calc(100vh - ' + size + 'px)';
 }
 
 function errorResize() {
@@ -42,4 +72,7 @@ window.addEventListener('resize', () => {
     errorResize();
 });
 
-resizeMain();
+(() => {
+    initTogglers();
+    resizeMain();
+})()

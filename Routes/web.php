@@ -1,5 +1,9 @@
 <?php
 
+<<<<<<< HEAD
+=======
+use FoxyMVC\App\Controllers\HomeController;
+>>>>>>> a78acbf408630035d22c7afc35ce28aabd0196ea
 use FoxyMVC\Lib\Foxy\Core\Route;
 use FoxyMVC\App\Https\Controllers\HomeController;
 use FoxyMVC\App\Https\Controllers\MenuController;

@@ -29,6 +29,11 @@ class Session {
     }
 
     static function load() {
+
+        /**
+         * Se prevee que se utiliza para cargar la información del usuario en sesión
+         * tal vez para guardar en cookie (?)
+         */
         if (self::checkSession()) {
             $name = $_SESSION["user"];
             $user = User::where("user_email", $name)->first();

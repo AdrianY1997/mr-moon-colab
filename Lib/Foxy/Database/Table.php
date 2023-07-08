@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace FoxyMVC\Lib\Foxy\Database;
 
 use FoxyMVC\Lib\Foxy\Database\MySQL;
+use PDO;
 use PDOException;
 
 class Table {
@@ -69,7 +70,7 @@ class Table {
 
     public static function get() {
         $values = self::$exWhereArray;
-        $sentence = "SELECT " . self::$selectText . " FROM " . (self::$tableName ?: static::$table) . self::$whereText . self::$orderByText . self::$limitText;
+        $sentence = "SELECT " . self::$selectText . " FROM " . static::$tableName . self::$whereText . self::$orderByText . self::$limitText;
         self::reset();
         try {
             $stmt = MySQL::connect()->prepare($sentence);
@@ -78,7 +79,11 @@ class Table {
             $items = [];
 
             while ($item = $stmt->fetchObject()) {
-                array_push($items, $item);
+                $obj = new static;
+                foreach (get_object_vars($item) as $key => $column) {
+                    $obj->$key = strval($column);
+                };
+                array_push($items, $obj);
             }
 
             $stmt->closeCursor();
@@ -93,15 +98,34 @@ class Table {
         return isset($item[0]) ? $item[0] : false;
     }
 
-    public static function insert(array $data) {
-        $columns = implode(", ", array_keys($data));
-        $values = rtrim(str_repeat("?, ", count($data)), ", ");
-        $sentence = "INSERT INTO " . (self::$tableName ?: static::$table) . " ($columns) VALUES ($values)";
+    /**
+     * Insert data in Database Table
+     * @param mixed $data
+     * @return bool
+     */
+    public static function insert(...$models) {
+        $columns = $values = "";
+        $executeArray = [];
+
+        foreach ($models as $model) {
+            $columns = "(" . implode(", ", array_values($model->fillable)) . ")";
+            if ($values) {
+                $values .= ", (" . rtrim(str_repeat("?, ", count($model->fillable)), ", ") . ")";
+            } else {
+                $values = "(" . rtrim(str_repeat("?, ", count($model->fillable)), ", ") . ")";
+            }
+            foreach ($model->fillable as  $property) {
+                array_push($executeArray, $model->$property);
+            }
+        }
+
+        $sentence = "INSERT INTO " . static::$tableName . " $columns VALUES $values";
         self::reset();
         try {
-            $stmt = MySQL::connect()->prepare($sentence);
-            $stmt->execute(array_values($data));
-            return true;
+            $pdo = MySQL::connect();
+            $stmt = $pdo->prepare($sentence);
+            $stmt->execute($executeArray);
+            return $pdo->lastInsertId();
         } catch (PDOException $ex) {
             return false;
         }
@@ -113,7 +137,7 @@ class Table {
             return "$key = ?";
         }, array_keys($data)));
 
-        $sentence = "UPDATE " . (self::$tableName ?: static::$table) . " SET " . $setText . self::$whereText . self::$orderByText . self::$limitText;
+        $sentence = "UPDATE " . static::$tableName . " SET " . $setText . self::$whereText . self::$orderByText . self::$limitText;
         self::reset();
         try {
             $stmt = MySQL::connect()->prepare($sentence);
@@ -126,7 +150,7 @@ class Table {
 
     public static function delete() {
         $values = self::$exWhereArray;
-        $sentence = "DELETE FROM " . (self::$tableName ?: static::$table) . self::$whereText . self::$orderByText . self::$limitText;
+        $sentence = "DELETE FROM " . static::$tableName . self::$whereText . self::$orderByText . self::$limitText;
         self::reset();
         try {
             $stmt = MySQL::connect()->prepare($sentence);

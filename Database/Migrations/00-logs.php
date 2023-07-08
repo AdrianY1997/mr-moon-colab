@@ -13,7 +13,7 @@ return new class {
     public function up() {
         Schema::create("logs", function (Blueprint $table) {
             $table->id();
-            $table->string("table_name");
+            $table->string("tableName");
             $table->string("params");
             $table->string("action");
         });
