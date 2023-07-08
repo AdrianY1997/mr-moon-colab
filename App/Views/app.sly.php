@@ -16,7 +16,7 @@
     <script src="{{ asset('js/fontawesome.min.js') }}"></script>
 </head>
 
-<body>
+<body class="overflow-y-scroll overflow-x-hidden">
     <header>
         @include('static.app-header')
     </header>

@@ -15,7 +15,7 @@ class HomeController extends Controller {
     /**
      * Muestra la página de inicio.
      */
-    public function home(): void {
-        render("web.home");
+    public function home() {
+        return self::render("web.home");
     }
 }

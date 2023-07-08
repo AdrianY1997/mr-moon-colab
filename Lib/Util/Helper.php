@@ -25,13 +25,6 @@ if (!function_exists("resource")) {
     }
 }
 
-if (!function_exists("render")) {
-    function render($view, $data = []) {
-        $engine = new TemplateEngine();
-        $engine->render($view, $data);
-    }
-}
-
 if (!function_exists("extend")) {
     function extend($view, $data = []) {
         foreach (array_keys($data) as $e) {

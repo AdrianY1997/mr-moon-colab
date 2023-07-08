@@ -1,6 +1,6 @@
-<div class="container">
-    <div class="is-flex" data-foxy-element="error-page-content">
-        <div class="is-half column" data-foxy-element="error-page-svg">
+<div class="container mx-auto">
+    <div class="flex flex-col items-center justify-center" data-foxy-element="error-page-content">
+        <div class="w-[600px] md:w-[700px] mx-auto" data-foxy-element="error-page-svg">
             <div>
                 <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 800 600">
                     <g>
@@ -203,11 +203,11 @@
                 </svg>
             </div>
         </div>
-        <div class="column p-6 is-align-self-center">
-            <div class="title is-1"><?= $code ?></div>
-            <div class="subtitle">UH OH! You're lost.</div>
-            <div><?= $subtitle ?></div>
-            <button class="button is-primary is-rounded mt-4"><a href="<?= route(constant("HOME")) ?>" class="has-text-white">HOME</a></button>
+        <div class="p-6 text-center bg-white/80 border rounded-xl absolute w-[350px] mx-auto">
+            <div class="text-3xl font-bold"><?= $code ?></div>
+            <div class="text-xl font-semibold"><?= $subtitle ?></div>
+            <div class=""><?= $msg ?></div>
+            <button class="btn btn-success"><a href="<?= route(constant("HOME")) ?>" class="has-text-white">HOME</a></button>
         </div>
     </div>
 </div>
