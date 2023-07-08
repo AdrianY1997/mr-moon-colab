@@ -5,7 +5,47 @@ namespace FoxyMVC\App\Models;
 use FoxyMVC\Lib\Foxy\Database\Table;
 
 class Webdata extends Table {
-    protected static string $table = "webdatas";
+    // -- Generated
+    protected static string $tableName = "webdatas";
+    public string $webd_id;
+    public string $created_at;
+    public string $updated_at;
+    protected array $hidden = [
+        "webd_id",
+        "created_at",
+        "updated_at"
+    ];
+    // ----
+
+    // -- Here the columns
+    
+    public string $webd_name;
+    public string $webd_subt;
+    public string $webd_logo;
+    public string $webd_email;
+    public string $webd_phone;
+    public string $webd_address;
+    public string $webd_city;
+    public string $webd_fblink;
+    public string $webd_twlink;
+    public string $webd_iglink;
+    public string $webd_ytlink;
+    
+    protected array $fillable = [
+        "webd_name",
+        "webd_subt",
+        "webd_logo",
+        "webd_email",
+        "webd_phone",
+        "webd_address",
+        "webd_city",
+        "webd_fblink",
+        "webd_twlink",
+        "webd_iglink",
+        "webd_ytlink",
+    ];
+    
+    // ----
 
     static function initialView() {
         if (!isset($_COOKIE["webdata"])) {

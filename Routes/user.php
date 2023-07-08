@@ -1,6 +1,6 @@
 <?php
 
-use FoxyMVC\App\Https\Controllers\UserController;
+use FoxyMVC\App\Controllers\UserController;
 use FoxyMVC\Lib\Foxy\Core\Route;
 
 Route::set("user/star", [UserController::class, "new_user"])->name("user.star");

@@ -2,6 +2,7 @@
 
 namespace FoxyMVC\Lib\Foxy\Core;
 
+use FoxyMVC\App\Models\Webdata;
 use FoxyMVC\Lib\Foxy\Core\Route;
 use FoxyMVC\Lib\Foxy\Core\Request;
 use FoxyMVC\Lib\Foxy\Core\Session;
@@ -13,6 +14,7 @@ use FoxyMVC\Lib\Foxy\Database\MySQL;
 class Application {
     public function __construct() {
         Session::start();
+        Webdata::initialView();
     }
 
     public function handle() {

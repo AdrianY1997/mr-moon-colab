@@ -1,8 +1,8 @@
 <?php
 
 use FoxyMVC\Lib\Foxy\Core\Route;
-use FoxyMVC\App\Https\Controllers\AuthController;
-use FoxyMVC\App\Https\Controllers\UserController;
+use FoxyMVC\App\Controllers\AuthController;
+use FoxyMVC\App\Controllers\UserController;
 
 Route::set("ingreso", [AuthController::class, "log_in"])->name("auth.login");
 Route::set("registro", [AuthController::class, "sign_up"])->name("auth.signup");

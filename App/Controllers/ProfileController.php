@@ -1,6 +1,6 @@
 <?php
 
-namespace FoxyMVC\App\Https\Controllers;
+namespace FoxyMVC\App\Controllers;
 
 use FoxyMVC\App\Models\User;
 use FoxyMVC\Lib\Foxy\Core\Controller;

@@ -8,5 +8,5 @@ use FoxyMVC\Lib\Foxy\Database\Table;
  * Modelo para los registros
  */
 class User extends Table {
-    protected static string $table = "users";
+    protected static string $tableName = "users";
 }

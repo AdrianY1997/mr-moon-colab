@@ -1,7 +1,7 @@
 <?php
 
 use FoxyMVC\Lib\Foxy\Core\Route;
-use FoxyMVC\App\Https\Controllers\DashboardController;
+use FoxyMVC\App\Controllers\DashboardController;
 
 Route::set("dashboard", [DashboardController::class, "index"])->name("dash");
 Route::set("dashboard/inicio", [DashboardController::class, "inicio"])->name("dash.home");

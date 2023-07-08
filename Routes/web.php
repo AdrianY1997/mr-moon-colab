@@ -1,16 +1,12 @@
 <?php
 
-<<<<<<< HEAD
-=======
-use FoxyMVC\App\Controllers\HomeController;
->>>>>>> a78acbf408630035d22c7afc35ce28aabd0196ea
 use FoxyMVC\Lib\Foxy\Core\Route;
-use FoxyMVC\App\Https\Controllers\HomeController;
-use FoxyMVC\App\Https\Controllers\MenuController;
-use FoxyMVC\App\Https\Controllers\EventosController;
-use FoxyMVC\App\Https\Controllers\GaleriaController;
-use FoxyMVC\App\Https\Controllers\ProfileController;
-use FoxyMVC\App\Https\Controllers\ReservasController;
+use FoxyMVC\App\Controllers\HomeController;
+use FoxyMVC\App\Controllers\MenuController;
+use FoxyMVC\App\Controllers\EventosController;
+use FoxyMVC\App\Controllers\GaleriaController;
+use FoxyMVC\App\Controllers\ProfileController;
+use FoxyMVC\App\Controllers\ReservasController;
 
 Route::set("", [HomeController::class, "index"])->name("root");
 Route::set("inicio", [HomeController::class, "home"])->name(constant("HOME"));
