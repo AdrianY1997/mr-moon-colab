@@ -10,6 +10,20 @@
 
 this README is keep under construction
 
+## Notes
+
+1. In this version a small change is made in the folder structure for better code reading
+2. The interaction with the database through the models now has a direct relationship with its properties
+    
+    To insert you need to create an instance of the model, add the data described in `$fillable` and send it to the object.
+    
+    ```php
+    $user = new User();
+    $user->user_nick = "DarkMorita";
+    User::insert($user); 
+    User::insert([$user]);
+    ```
+
 ## License
 
 This project is licensed under the terms of the [MIT](http://opensource.org/licenses/mit-license.php) license.

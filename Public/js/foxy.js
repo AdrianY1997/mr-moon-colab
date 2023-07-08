@@ -1,8 +1,43 @@
+function initTogglers() {
+    const togglers = document.querySelectorAll("[data-dropdown-toggle]");
+    
+    togglers.forEach(t => {
+        t.addEventListener("click", () => {
+            let target = t.getAttribute("data-dropdown-toggle");
+            target = document.querySelector(`#${target}`);
+            let animDir = target.getAttribute("data-animation-direction");
+
+            if (target.classList.contains("hidden")) {
+                target.classList.remove("hidden");
+                setTimeout(() => {
+                    switch (animDir) {
+                        case "from-top":
+                            target.classList.remove("max-h-0");
+                            target.classList.add("max-h-10");
+                            break;
+                    }
+                }, 10);
+            } else {
+                switch (animDir) {
+                    case "from-top":
+                        target.classList.add("max-h-0");
+                        target.classList.remove("max-h-10");
+                        break;
+                }
+                setTimeout(() => target.classList.add("hidden"), 200)
+            }
+        })
+    });
+}
+
 function resizeMain() {
     let main = document.querySelector('main');
+    let header = document.querySelector('header');
     let footer = document.querySelector('footer');
 
-    main.style.minHeight = 'calc(100vh - 3.25rem - ' + footer.clientHeight + 'px)';
+    let size = header.clientHeight + footer.clientHeight;
+
+    main.style.minHeight = 'calc(100vh - ' + size + 'px)';
 }
 
 function errorResize() {
@@ -37,4 +72,7 @@ window.addEventListener('resize', () => {
     errorResize();
 });
 
-resizeMain();
+(() => {
+    initTogglers();
+    resizeMain();
+})()

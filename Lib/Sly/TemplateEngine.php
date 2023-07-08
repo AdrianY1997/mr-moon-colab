@@ -29,7 +29,7 @@ class TemplateEngine {
 
         // Capturar el contenido de la vista en un buffer
         ob_start();
-        include_once 'Resources/Views/app.sly.php';
+        include_once 'App/Views/app.sly.php';
         $content = ob_get_clean();
 
         // Procesar patrones

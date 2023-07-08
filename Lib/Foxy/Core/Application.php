@@ -8,20 +8,13 @@ use FoxyMVC\Lib\Foxy\Core\Session;
 use FoxyMVC\Lib\Foxy\Database\MySQL;
 
 /**
- * Clase principal del sistema
+ * Main class of FoxyMVC
  */
 class Application {
-    /**
-     * Constructor de la clase Application
-     */
     public function __construct() {
-        // Iniciar la sesión
         Session::start();
     }
 
-    /**
-     * Maneja la petición del usuario
-     */
     public function handle() {
         // Obtener la URL de la petición y la ruta correspondiente
         $route = Route::getRouteFromUrl(Request::getUrl());
@@ -31,6 +24,8 @@ class Application {
 
         // Llamar al método del controlador correspondiente a la ruta con los parámetros necesarios
         call_user_func_array([new $route["controller"], $route["method"]], $route["param"]);
+
+        return $this;
     }
 
     /**

@@ -26,8 +26,6 @@ class Request {
         // Obtener la URL de la petición y eliminar la parte correspondiente a la URL base
         $URL = urldecode(constant("URL"));
         $length = strlen(constant("BASE_URL"));
-        $url = substr($URL, $length);
-
-        return $url;
+        return substr($URL, $length);
     }
 }
