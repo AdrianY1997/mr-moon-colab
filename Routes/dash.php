@@ -7,7 +7,10 @@ Route::set("dashboard", [DashboardController::class, "index"])->name("dash");
 Route::set("dashboard/inicio", [DashboardController::class, "inicio"])->name("dash.home");
 Route::set("dashboard/info", [DashboardController::class, "info"])->name("dash.info");
 Route::set("dashboard/usuarios", [DashboardController::class, "usuarios"])->name("dash.users");
+
 Route::set("dashboard/inventario", [DashboardController::class, "inventario"])->name("dash.stock");
+Route::set("dashboard/inventario/item/{id}", [DashboardController::class, "getItem"])->name("dash.itemGetInfo");
+
 Route::set("dashboard/facturas", [DashboardController::class, "facturas"])->name("dash.bill");
 Route::set("dashboard/menu", [DashboardController::class, "menu"])->name("dash.menu");
 Route::set("dashboard/reservas", [DashboardController::class, "reservas"])->name("dash.reserve");

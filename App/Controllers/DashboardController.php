@@ -2,6 +2,7 @@
 
 namespace FoxyMVC\App\Controllers;
 
+use FoxyMVC\App\Models\Product;
 use FoxyMVC\App\Models\Role;
 use FoxyMVC\App\Models\User;
 use FoxyMVC\App\Models\Webdata;
@@ -117,8 +118,24 @@ class DashboardController extends Controller {
 
     public function inventario() {
         return self::render("dashboard.inv", [
-            "active" => "inventario"
+            "active" => "inventario",
+            "products" => Product::get(),
         ]);
+    }
+
+    public function getItem($id) {
+        $data = [];
+
+        $products = Product::getAllDataById($id);
+
+        if (!$products) {
+            $data["error"] = "Ubo un error al obtener los datos";
+            echo json_encode($data);
+            return;
+        }
+
+        $data[] = $products;
+        echo json_encode($data);
     }
 
     public function facturas() {
