@@ -7,7 +7,27 @@ use FoxyMVC\Lib\Foxy\Database\Table;
 use PDOException;
 
 class Role extends Table {
+    // -- Generated
     protected static string $tableName = "roles";
+    public string $role_id;
+    public string $created_at;
+    public string $updated_at;
+    protected array $hidden = [
+        "role_id",
+        "created_at",
+        "updated_at"
+    ];
+    // ----
+
+    // -- Here the columns
+
+    public string $role_name;
+
+    protected array $fillable = [
+        "role_name",
+    ];
+
+    // ----
 
     public static function getUserRole($data) {
         $query = "

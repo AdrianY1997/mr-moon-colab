@@ -22,20 +22,21 @@ class ReservasController extends Controller {
         $userId = Session::checkSession() ? Session::data("user_id") : 1;
         $urid = sprintf("%s-%010s-%s", $userId, time(), uniqid(true));
 
-        $wasRegistered = Reservation::insert([
-            "rese_urid" => $urid,
-            "rese_name" => $data["name"],
-            "rese_lastname" => $data["lastname"],
-            "rese_email" => $data["email"],
-            "rese_table" => $data["table"],
-            "rese_date" => $data["date"],
-            "rese_time" => $data["time"],
-            "rese_quantity" => $data["people"],
-            "user_id" => $userId
-        ]);
+        $reservation = new Reservation();
+        $reservation->rese_urid = $urid;
+        $reservation->rese_name = $data["name"];
+        $reservation->rese_lastname = $data["lastname"];
+        $reservation->rese_email = $data["email"];
+        $reservation->rese_table = $data["table"];
+        $reservation->rese_date = $data["date"];
+        $reservation->rese_time = $data["time"];
+        $reservation->rese_quantity = $data["people"];
+        $reservation->user_id = $userId;
 
-        if ($wasRegistered) redirect()->route("reserve.show", ["urid" => $urid])->success("Su reserva se ha registrado, por favor confirme el pago dentro de 2 horas")->send();
-        else redirect()->route("reserve")->error("No se ha podido registrar su reserva")->send();
+        if (Reservation::insert($reservation))
+            redirect()->route("reserve.show", ["urid" => $urid])->success("Su reserva se ha registrado, por favor confirme el pago dentro de 2 horas")->send();
+        else
+            redirect()->route("reserve")->error("No se ha podido registrar su reserva")->send();
     }
 
     public function search() {

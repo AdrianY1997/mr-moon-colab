@@ -60,11 +60,12 @@ class AuthController extends Controller {
         if (filter_var($data["email"], FILTER_VALIDATE_EMAIL)) {
             $randCode = rand(100000, 999999);
 
-            Code::insert([
-                "code_email" => $data["email"],
-                "code_code" => $randCode,
-                "code_status" => "waiting"
-            ]);
+            $code = new Code();
+            $code->code_email = $data["email"];
+            $code->code_code = $randCode;
+            $code->code_status = "waiting";
+
+            Code::insert($code);
             echo json_encode(["code" => $randCode]);
         } else {
             echo json_encode(["error" => "El email ingresado no existe", "code" => 1]);
