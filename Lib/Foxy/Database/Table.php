@@ -151,6 +151,7 @@ class Table {
     public static function delete() {
         $values = self::$exWhereArray;
         $sentence = "DELETE FROM " . static::$tableName . self::$whereText . self::$orderByText . self::$limitText;
+        var_dump($sentence);
         self::reset();
         try {
             $stmt = MySQL::connect()->prepare($sentence);

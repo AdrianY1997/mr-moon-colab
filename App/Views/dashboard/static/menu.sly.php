@@ -19,6 +19,11 @@
                 <p class="m-0">Usuarios</p>
             </a>
         </div>
+        <div class="{{ $active == 'proveedores' ? 'active' : '' }}">
+            <a href="{{ route('dash.prov') }}">
+                <p class="m-0">Proveedores</p>
+            </a>
+        </div>
         <div class="{{ $active == 'inventario' ? 'active' : '' }}">
             <a href="{{ route('dash.stock') }}">
                 <p class="m-0">Inventario</p>

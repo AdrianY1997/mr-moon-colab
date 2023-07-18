@@ -10,7 +10,7 @@
             </form>
         </div>
         <div class="card-footer">
-            <p>Tiene una hora para confirmar su reserva</p>
+            <p>Tiene 2 hora para confirmar su reserva</p>
         </div>
     </div>
 </div>
