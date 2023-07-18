@@ -43,13 +43,9 @@ items.forEach(item => {
         data = await request.json();
         data = data[0]
 
-        modalView.querySelector("[data-prod-ref]").innerHTML = data.prod_ref;
-        modalView.querySelector("[data-prod-name]").innerHTML = data.prod_name;
-        modalView.querySelector("[data-prod-desc]").innerHTML = data.prod_desc;
-        modalView.querySelector("[data-prod-stock]").innerHTML = data.prod_stock;
-        modalView.querySelector("[data-prod-val]").innerHTML = data.prod_value;
         modalView.querySelector("[data-prov-nit]").innerHTML = data.prov_nit;
         modalView.querySelector("[data-prov-name]").innerHTML = data.prov_name;
+        modalView.querySelector("[data-prov-email]").innerHTML = data.prov_email;
         modalView.querySelector("[data-prov-phone]").innerHTML = data.prov_phone;
 
         modalView.classList.add("show");
@@ -57,32 +53,19 @@ items.forEach(item => {
     })
 
     editItemBtn.addEventListener("click", async () => {
+        console.log("ss")
         request = await fetch(item.getAttribute("data-href"));
         data = await request.json();
         data = data[0]
 
-        modalEdit.querySelector("#item-edit-ref").value = data.prod_ref
-        modalEdit.querySelector("#item-edit-name").value = data.prod_name
-        modalEdit.querySelector("#item-edit-desc").value = data.prod_desc
-        modalEdit.querySelector("#item-edit-stock").value = data.prod_stock
-        modalEdit.querySelector("#item-edit-value").value = data.prod_value
-        modalEdit.querySelector("#item-edit-id").value = data.prod_id
+        modalEdit.querySelector("#prov-edit-nit").value = data.prov_nit
+        modalEdit.querySelector("#prov-edit-name").value = data.prov_name
+        modalEdit.querySelector("#prov-edit-email").value = data.prov_email
+        modalEdit.querySelector("#prov-edit-phone").value = data.prov_phone
+        modalEdit.querySelector("#prov-edit-id").value = data.prov_id
 
-        let prov = data.prov_id;
-
-        modalEdit.querySelector("form").setAttribute("action", modalEdit.querySelector("form").getAttribute("action").replace("{id}", data.prod_id))
+        modalEdit.querySelector("form").setAttribute("action", modalEdit.querySelector("form").getAttribute("action").replace("{id}", data.prov_id))
         modalEdit.classList.add("show");
-
-        const selectInput = document.querySelector("[data-get-prov]");
-        request = await fetch(selectInput.getAttribute("data-get-prov"));
-        response = await request.json();
-
-        let selectOptions = "<option disabled>Seleccione una opción...</option>";
-        response.forEach(e => {
-            selectOptions += `<option value="${e.prov_id}" ${prov == e.prov_id ? "selected" : ""}>${e.prov_nit}: ${e.prov_name}</option>`;
-        })
-
-        modalEdit.querySelector("#item-edit-prov").innerHTML = selectOptions;
     });
 });
 

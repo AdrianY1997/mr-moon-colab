@@ -28,8 +28,9 @@ class ReservasController extends Controller {
         $reservation->rese_lastname = $data["lastname"];
         $reservation->rese_email = $data["email"];
         $reservation->rese_table = $data["table"];
-        $reservation->rese_date = $data["date"];
+        $reservation->rese_date = $data["day"];
         $reservation->rese_time = $data["time"];
+        $reservation->rese_status = "PENDING";
         $reservation->rese_quantity = $data["people"];
         $reservation->user_id = $userId;
 
