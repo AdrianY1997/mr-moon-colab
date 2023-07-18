@@ -94,11 +94,11 @@
                     <label for="">Detalles</label>
                 </div>
             </div>
-            <div class="info-send">
-                <button type="submit" class="btn btn-primary">Enviar</button>
+            <div class="info-send d-grid gap-2">
+                <button type="submit" class="btn btn-dark p-2">Enviar</button>
             </div>
             <input type="hidden" id="time" name="time">
         </form>
-    </div>
+    </div> 
 </div>
 <script src="{{ asset("js/reserve.js") }}"></script>
