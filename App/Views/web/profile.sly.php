@@ -106,7 +106,7 @@
                                         </div>
                                         <div class="mb-3">
                                             <div class="form-floating">
-                                                <input name="nick" id="nick" type="text" class="form-control" placeholder="John Doe" value="@if($user->user_nick) {{ $user->user_nick }} @endif">
+                                                <input name="nick" id="nick" type="text" class="form-control" placeholder="John Doe" value="@if($user->user_nick){{ $user->user_nick }}@endif">
                                                 <label for="nick">Nick</label>
                                             </div>
                                         </div>
@@ -137,7 +137,7 @@
                                     </div>
                                     <div class="row mx-1 mb-3">
                                         <div class="form-floating p-0">
-                                            <input name="email" id="email" type="text" class="form-control" placeholder="mail@domain.com" value="@if($user->user_email) {{ $user->user_email }} @endif" disabled>
+                                            <input name="email" id="email" type="text" class="form-control" placeholder="mail@domain.com" value="@if($user->user_email){{ $user->user_email }}@endif">
                                             <label for="email">Email</label>
                                         </div>
                                     </div>
