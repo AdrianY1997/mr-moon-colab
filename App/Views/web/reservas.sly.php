@@ -22,9 +22,12 @@
                     </select>
                     <label for="table">Mesa</label>
                 </div>
+                <div class="form-floating">
+                    <input class="form-control" type="date" min="<?= $now ?>" name="day" id="day" placeholder="day" data-href="{{ route("reserve.hours") }}">
+                    <label for="day">Dia</label>
+                </div>
                 <div class="form-floating position-relative">
-                    <button id="reserve-time-btn" class="btn border h-100 w-100 text-start" type="button" data-bs-toggle="collapse" data-bs-target="#reserve-time-container" aria-expanded="false" aria-controls="reserve-time-container"></button>
-                    <!--<input class="form-control" type="time" name="time" id="time" placeholder="time">-->
+                    <button id="reserve-time-btn" class="btn border h-100 w-100 text-start" type="button" data-bs-target="#reserve-time-container" aria-expanded="false" aria-controls="reserve-time-container"></button>
                     <label id="time-label" for="time">Hora</label>
                     <div class="collapse position-absolute w-100" style="z-index: 1" id="reserve-time-container">
                         <div class="card card-body mt-2 d-flex flex-column gap-2">
@@ -64,10 +67,6 @@
                         </div>
                     </div>
                 </div>
-                <div class="form-floating">
-                    <input class="form-control" type="text" name="day" id="day" placeholder="day">
-                    <label for="day">Fecha</label>
-                </div>
             </div>
             <hr>
             <div class="info-persona">
@@ -97,8 +96,9 @@
             <div class="info-send d-grid gap-2">
                 <button type="submit" class="btn btn-dark p-2">Enviar</button>
             </div>
+            <!-- <input type="hidden" id="day" name="day"> -->
             <input type="hidden" id="time" name="time">
         </form>
-    </div> 
+    </div>
 </div>
 <script src="{{ asset("js/reserve.js") }}"></script>
