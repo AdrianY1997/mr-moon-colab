@@ -3,6 +3,7 @@
 namespace FoxyMVC\App\Controllers;
 
 use DateTime;
+use DateTimeZone;
 use FoxyMVC\App\Models\Reservation;
 use FoxyMVC\Lib\Foxy\Core\Controller;
 use FoxyMVC\Lib\Foxy\Core\Request;
@@ -23,9 +24,11 @@ class ReservasController extends Controller {
         $data = Request::getData();
         if (isset($data["urid"])) {
             echo $data["urid"];
-            $rese = Reservation::where("rese_urid", $data["urid"])->first();
-            if ($rese) redirect()->route("reserve.show", ["urid" => $rese->rese_urid])->send();
-            else redirect()->route("reserve.search")->error("El id de reservación no existe en el sistema")->send();
+            $rese = Reservation::where("rese_urid", $data["urid"])->where("rese_status", "NOT LIKE", "CANCELLED")->first();
+            if ($rese)
+                redirect()->route("reserve.show", ["urid" => $rese->rese_urid])->send();
+            else
+                redirect()->route("reserve.search")->error("El id de reservación no existe en el sistema o ha sido cancelada")->send();
         }
 
         return self::render("web.reserve.search");
@@ -33,23 +36,21 @@ class ReservasController extends Controller {
 
     public function show($urid) {
         $rese = Reservation::where("rese_urid", $urid)->first();
-
-        $created = new DateTime($rese->created_at);
-        $now = new DateTime(date("Y-m-d h:m:s", time()));
-        $interval = 1;
-        foreach (explode("-", $created->diff($now)->format("%y-%m-%d-%h-%i-%s")) as $key => $value) {
-            $interval = $interval * ($value == 0 ? 1 : $value);
-        }
+        $date1 = new DateTime($rese->created_at);
+        $date2 = new DateTime('now', new DateTimeZone('America/Bogota'));
+        $interval = $date2->diff($date1);
 
         if (!$rese)
             redirect()->route("reserve.search")->error("La id de reservación no se encuentra en el sistema")->send();
 
-        if ($interval > 7200) {
-            $rese->rese_status = "CANCELLED";
-            $rese->update();
-            redirect()->route("reserve")->error("El tiempo de espera para la confirmación ha finalizado y su reserva se cancelo. vuelva a intentarlo")->send();
-        }
-
+        // if ($interval > 7200) {
+        //     Reservation::where("rese_urid", $urid)->update([
+        //         "rese_status" => "CANCELLED"
+        //     ]);
+        //     // redirect()->route("reserve")->error("El tiempo de espera para la confirmación ha finalizado y su reserva se cancelo. vuelva a intentarlo")->send();
+        // }
+        echo "<br><br><br><br><br>";
+        var_dump($interval);
 
         return self::render("web.reserve.confirm", [
             "reservation" => $rese
@@ -62,6 +63,14 @@ class ReservasController extends Controller {
         $userId = Session::checkSession() ? Session::data("user_id") : 1;
         $urid = sprintf("%s-%010s-%s", $userId, time(), uniqid(true));
 
+        foreach ($_POST as $key => $value) {
+            if ($key == "details")
+                continue;
+
+            if ($value == "")
+                redirect()->route("reserve")->error("Se deben llenar los campos marcados (*)")->send();
+        }
+
         $reservation = new Reservation();
         $reservation->rese_urid = $urid;
         $reservation->rese_name = $data["name"];
@@ -72,6 +81,7 @@ class ReservasController extends Controller {
         $reservation->rese_time = $data["time"];
         $reservation->rese_status = "PENDING";
         $reservation->rese_quantity = $data["people"];
+        $reservation->rese_details = $data["details"];
         $reservation->user_id = $userId;
 
         if (Reservation::insert($reservation))

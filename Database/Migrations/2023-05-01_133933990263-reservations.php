@@ -17,7 +17,8 @@ return new class {
             $table->string("table");
             $table->string("day");
             $table->string("time");
-            $table->string("status")->default("pending", true);
+            $table->text("details");
+            $table->string("status")->default("PENDING", true);
             $table->integer("user_id")->references("users");
         });
     }

@@ -11,7 +11,7 @@
             <div class="info-mesa">
                 <div class="form-floating">
                     <input class="form-control" type="number" name="people" id="people" placeholder="people" min="1" max="4">
-                    <label for="people">Personas</label>
+                    <label for="people">Personas<span class="text-danger">*</span></label>
                 </div>
                 <div class="form-floating">
                     <select class="form-control" name="table" id="table" placeholder="table">
@@ -20,15 +20,15 @@
                         <option value="3">3</option>
                         <option value="4">4</option>
                     </select>
-                    <label for="table">Mesa</label>
+                    <label for="table">Mesa<span class="text-danger">*</span></label>
                 </div>
                 <div class="form-floating">
                     <input class="form-control" type="date" min="<?= $now ?>" name="day" id="day" placeholder="day" data-href="{{ route("reserve.hours") }}">
-                    <label for="day">Dia</label>
+                    <label for="day">Dia<span class="text-danger">*</span></label>
                 </div>
                 <div class="form-floating position-relative">
                     <button id="reserve-time-btn" class="btn border h-100 w-100 text-start" type="button" data-bs-target="#reserve-time-container" aria-expanded="false" aria-controls="reserve-time-container"></button>
-                    <label id="time-label" for="time">Hora</label>
+                    <label id="time-label" for="time">Hora<span class="text-danger">*</span></label>
                     <div class="collapse position-absolute w-100" style="z-index: 1" id="reserve-time-container">
                         <div class="card card-body mt-2 d-flex flex-column gap-2">
                             <div class="position-absolute end-0 top-0 m-2 my-1">
@@ -72,19 +72,19 @@
             <div class="info-persona">
                 <div class="form-floating">
                     <input class="form-control" type="text" name="name" id="name" placeholder="name">
-                    <label for="">Nombre</label>
+                    <label for="">Nombre<span class="text-danger">*</span></label>
                 </div>
                 <div class="form-floating">
                     <input class="form-control" type="text" name="lastname" id="lastname" placeholder="lastname">
-                    <label for="">Apellido</label>
+                    <label for="">Apellido<span class="text-danger">*</span></label>
                 </div>
                 <div class="form-floating">
                     <input class="form-control" type="text" name="email" id="email" placeholder="email">
-                    <label for="">Correo</label>
+                    <label for="">Correo<span class="text-danger">*</span></label>
                 </div>
                 <div class="form-floating">
                     <input class="form-control" type="text" name="phone" id="phone" placeholder="phone" pattern="3[0-9]{2}[0-9]{7}">
-                    <label for="">Teléfono</label>
+                    <label for="">Teléfono<span class="text-danger">*</span></label>
                 </div>
             </div>
             <div class="info-details">
