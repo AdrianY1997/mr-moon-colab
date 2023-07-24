@@ -51,7 +51,14 @@ let isSave = false;
 let reserveTimeIsShow = false;
 
 reserveTimeBtn.addEventListener("click", () => {
-    if (!reserveDayInput.value) return;
+    if (!reserveDayInput.value) {
+        notify({
+            bg: "bg-primary",
+            status: "Información",
+            text: "Primero debe seleccionar un dia"
+        })
+        return;
+    }
     reserveTimeIsShow = !reserveTimeIsShow;
     if (!reserveTimeIsShow) timeClean.click();
 })

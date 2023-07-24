@@ -10,7 +10,7 @@
             </div>
             <div class="info-mesa">
                 <div class="form-floating">
-                    <input class="form-control" type="number" name="people" id="people" placeholder="people">
+                    <input class="form-control" type="number" name="people" id="people" placeholder="people" min="1" max="4">
                     <label for="people">Personas</label>
                 </div>
                 <div class="form-floating">
@@ -83,7 +83,7 @@
                     <label for="">Correo</label>
                 </div>
                 <div class="form-floating">
-                    <input class="form-control" type="text" name="phone" id="phone" placeholder="phone">
+                    <input class="form-control" type="text" name="phone" id="phone" placeholder="phone" pattern="3[0-9]{2}[0-9]{7}">
                     <label for="">Teléfono</label>
                 </div>
             </div>

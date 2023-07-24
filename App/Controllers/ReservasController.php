@@ -33,9 +33,23 @@ class ReservasController extends Controller {
 
     public function show($urid) {
         $rese = Reservation::where("rese_urid", $urid)->first();
-        if (!$rese) {
-            redirect()->route("reserve.search")->error("La id de reservación no se encuentra en el sistema")->send();
+
+        $created = new DateTime($rese->created_at);
+        $now = new DateTime(date("Y-m-d h:m:s", time()));
+        $interval = 1;
+        foreach (explode("-", $created->diff($now)->format("%y-%m-%d-%h-%i-%s")) as $key => $value) {
+            $interval = $interval * ($value == 0 ? 1 : $value);
         }
+
+        if (!$rese)
+            redirect()->route("reserve.search")->error("La id de reservación no se encuentra en el sistema")->send();
+
+        if ($interval > 7200) {
+            $rese->rese_status = "CANCELLED";
+            $rese->update();
+            redirect()->route("reserve")->error("El tiempo de espera para la confirmación ha finalizado y su reserva se cancelo. vuelva a intentarlo")->send();
+        }
+
 
         return self::render("web.reserve.confirm", [
             "reservation" => $rese
