@@ -112,7 +112,7 @@
                                         </div>
                                         <div>
                                             <div class="form-floating">
-                                                <input name="new-pass" id="new-pass" type="text" class="form-control" placeholder="Contraseña" @endif">
+                                                <input name="new-pass" required id="new-pass" type="text" class="form-control" placeholder="Contraseña" @endif">
                                                 <label for="new-pass">Nueva Contraseña</label>
                                             </div>
                                         </div>
@@ -137,7 +137,7 @@
                                     </div>
                                     <div class="row mx-1 mb-3">
                                         <div class="form-floating p-0">
-                                            <input name="email" id="email" type="text" class="form-control" placeholder="mail@domain.com" value="@if($user->user_email){{ $user->user_email }}@endif">
+                                            <input name="email" id="email" type="text" class="form-control" placeholder="mail@domain.com" value="@if($user->user_email){{ $user->user_email }}@endif" readonly>
                                             <label for="email">Email</label>
                                         </div>
                                     </div>

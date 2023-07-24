@@ -10,7 +10,7 @@
             </div>
             <div class="info-mesa">
                 <div class="form-floating">
-                    <input class="form-control" type="number" name="people" id="people" placeholder="people">
+                    <input class="form-control" type="number" name="people" id="people" placeholder="people" min="0">
                     <label for="people">Personas</label>
                 </div>
                 <div class="form-floating">

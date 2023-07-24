@@ -28,7 +28,7 @@ class UserController extends Controller {
         if ($user) {
             redirect()->route("auth.signup")->error("El correo ingresado no esta disponible")->send();
         } else {
-            if(preg_match('/^(?=.*[A-Z])(?=.{8,16})(?=.*[!@#$%^&*()_+-]).*$/', $data["password"]))
+            if(!preg_match('/^(?=.*[A-Z])(?=.{8,16})(?=.*[!@#$%^&*()_+-]).*$/', $data["password"]))
                 redirect()->route("auth.signup")->error("La contraseña debe contener entre 8 y 16 caracteres, 1 letra mayúscula y un carácter especial")->send();
 
             $user = new User();
