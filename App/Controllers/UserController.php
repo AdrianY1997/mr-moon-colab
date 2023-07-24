@@ -27,32 +27,32 @@ class UserController extends Controller {
         $user = User::where("user_email", $data["email"])->first();
         if ($user) {
             redirect()->route("auth.signup")->error("El correo ingresado no esta disponible")->send();
-        } else {
-            if(preg_match('/^(?=.*[A-Z])(?=.{8,16})(?=.*[!@#$%^&*()_+-]).*$/', $data["password"]))
-                redirect()->route("auth.signup")->error("La contraseña debe contener entre 8 y 16 caracteres, 1 letra mayúscula y un carácter especial")->send();
-
-            $user = new User();
-
-            $user->user_email = $data["email"];
-            $user->user_address = $data["address"];
-            $user->user_pass =  password_hash($data["password"], PASSWORD_DEFAULT);
-            $user->user_name = $data["name"];
-            $user->user_lastname = $data["lastname"];
-            $user->user_phone = $data["number"];
-            $user->user_img_path = "img";
-            $user->user_nick = $data["name"] . $data["lastname"] . random_int(1,9);
-
-            User::insert($user);
-            $user = User::select("user_id")->where("user_email", $data["email"])->where("user_name", $data["name"])->first();
-            $role = Role::select("role_id")->where("role_name", "USER")->first();
-
-            $userRole = new UserRole();
-            $userRole->user_id = $user->user_id;
-            $userRole->role_id = $role->role_id;
-
-            UserRole::insert($userRole);
-            redirect()->route("auth.login")->success("Te haz registrado con éxito")->send();
         }
+
+        if (!preg_match('/^(?=.*[A-Z])(?=.{8,16})(?=.*[!@#$%^&*()_+-]).*$/', $data["password"]))
+            redirect()->route("auth.signup")->error("La contraseña debe contener entre 8 y 16 caracteres, 1 letra mayúscula y un carácter especial")->send();
+
+        $user = new User();
+
+        $user->user_email = $data["email"];
+        $user->user_address = $data["address"];
+        $user->user_pass =  password_hash($data["password"], PASSWORD_DEFAULT);
+        $user->user_name = $data["name"];
+        $user->user_lastname = $data["lastname"];
+        $user->user_phone = $data["number"];
+        $user->user_img_path = "img";
+        $user->user_nick = $data["name"] . $data["lastname"] . random_int(1, 9);
+
+        User::insert($user);
+        $user = User::select("user_id")->where("user_email", $data["email"])->where("user_name", $data["name"])->first();
+        $role = Role::select("role_id")->where("role_name", "USER")->first();
+
+        $userRole = new UserRole();
+        $userRole->user_id = $user->user_id;
+        $userRole->role_id = $role->role_id;
+
+        UserRole::insert($userRole);
+        redirect()->route("auth.login")->success("Te haz registrado con éxito")->send();
     }
 
     public function delete_user($user_id) {
