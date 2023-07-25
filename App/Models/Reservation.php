@@ -7,6 +7,11 @@ use FoxyMVC\Lib\Foxy\Database\Table;
 use PDOException;
 
 class Reservation extends Table {
+    public const CANCELLED = 0;
+    public const WAITING_FOR_PAYMENT = 1;
+    public const WAITING_FOR_CONFIRMATION = 2;
+    public const RESERVED = 3;
+
     // -- Generated
     protected static string $tableName = "reservations";
     public string $rese_id;

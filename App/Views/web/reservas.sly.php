@@ -4,9 +4,18 @@
     </div>
 
     <div class="form container">
+        <div>
+            <p>Si ya tienes tu reservación puedes introducirla aqui</p>
+            <div class="form-floating">
+                <input type="text" id="urid" name="urid" class="form-control" placeholder="12345">
+                <label for="urid">Identificación de reserva</label>
+            </div>
+            <button data-href="{{ route("reserve.show", ["urid" => ":urid"]) }}" class="btn btn-primary" id="search-reservation">Buscar</button>
+        </div>
+        <hr class="py-1" />
         <form action="{{ route("reserve.new") }}" method="post">
             <div>
-                <p>Condiciones de antelación del servicio y pago anticipado</p>
+                <p>Llena el siguiente formulario para realizar una reserva</p>
             </div>
             <div class="info-mesa">
                 <div class="form-floating">

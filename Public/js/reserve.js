@@ -8,6 +8,14 @@ const timeLabel = document.querySelector("#time-label");
 
 const reserveDayInput = document.querySelector("#day");
 
+const searchReservationBtn = document.querySelector("#search-reservation");
+const uridInput = document.querySelector("#urid");
+
+searchReservationBtn.addEventListener("click", () => {
+    let action = searchReservationBtn.getAttribute("data-href").replace(":urid", uridInput.value);
+    location.href = action;
+})
+
 reserveDayInput.addEventListener("change", async () => {
     reserveTimeBtn.setAttribute("data-bs-toggle", "collapse")
     let request = await fetch(reserveDayInput.getAttribute("data-href"), {
