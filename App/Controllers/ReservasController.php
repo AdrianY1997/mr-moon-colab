@@ -24,11 +24,11 @@ class ReservasController extends Controller {
         $data = Request::getData();
         if (isset($data["urid"])) {
             echo $data["urid"];
-            $rese = Reservation::where("rese_urid", $data["urid"])->where("rese_status", "NOT LIKE", "CANCELLED")->first();
+            $rese = Reservation::where("rese_urid", $data["urid"])->where("rese_status", "NOT LIKE", Reservation::CANCELLED)->first();
             if ($rese)
                 redirect()->route("reserve.show", ["urid" => $rese->rese_urid])->send();
             else
-                redirect()->route("reserve.search")->error("El id de reservación no existe en el sistema o ha sido cancelada")->send();
+                redirect()->route("reserve")->error("El id de reservación no existe en el sistema o ha sido cancelada")->send();
         }
 
         return self::render("web.reserve.search");
@@ -36,21 +36,19 @@ class ReservasController extends Controller {
 
     public function show($urid) {
         $rese = Reservation::where("rese_urid", $urid)->first();
-        $date1 = new DateTime($rese->created_at);
+        $date1 = new DateTime($rese->created_at, new DateTimeZone('America/Bogota'));
         $date2 = new DateTime('now', new DateTimeZone('America/Bogota'));
-        $interval = $date2->diff($date1);
+        $interval = $date2->getTimestamp() - $date1->getTimestamp();
 
         if (!$rese)
-            redirect()->route("reserve.search")->error("La id de reservación no se encuentra en el sistema")->send();
+            redirect()->route("reserve")->error("La id de reservación no se encuentra en el sistema")->send();
 
-        // if ($interval > 7200) {
-        //     Reservation::where("rese_urid", $urid)->update([
-        //         "rese_status" => "CANCELLED"
-        //     ]);
-        //     // redirect()->route("reserve")->error("El tiempo de espera para la confirmación ha finalizado y su reserva se cancelo. vuelva a intentarlo")->send();
-        // }
-        echo "<br><br><br><br><br>";
-        var_dump($interval);
+        if ($interval > 7200) {
+            Reservation::where("rese_urid", $urid)->update([
+                "rese_status" => Reservation::CANCELLED
+            ]);
+            redirect()->route("reserve")->error("El tiempo de espera para la confirmación ha finalizado y su reserva se cancelo. vuelva a intentarlo")->send();
+        }
 
         return self::render("web.reserve.confirm", [
             "reservation" => $rese
