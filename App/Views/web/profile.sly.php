@@ -112,7 +112,7 @@
                                         </div>
                                         <div>
                                             <div class="form-floating">
-                                                <input name="new-pass" required id="new-pass" type="text" class="form-control" placeholder="Contraseña" @endif">
+                                                <input name="new-pass" id="new-pass" type="text" class="form-control" placeholder="Contraseña" @endif">
                                                 <label for="new-pass">Nueva Contraseña</label>
                                             </div>
                                         </div>
