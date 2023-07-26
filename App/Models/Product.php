@@ -3,12 +3,14 @@
 namespace FoxyMVC\App\Models;
 
 use FoxyMVC\Lib\Foxy\Database\MySQL;
+use FoxyMVC\Lib\Foxy\Database\Model;
 use FoxyMVC\Lib\Foxy\Database\Table;
 use PDOException;
 
 class Product extends Table {
     // -- Generated
     public static string $tableName = "products";
+    public Model $model;
     public string $prod_id;
     public string $created_at;
     public string $updated_at;

@@ -2,11 +2,13 @@
 
 namespace FoxyMVC\App\Models;
 
+use FoxyMVC\Lib\Foxy\Database\Model;
 use FoxyMVC\Lib\Foxy\Database\Table;
 
 class Menu extends Table {
     // -- Generated
     public static string $tableName = "menus";
+    public Model $model;
     public string $menu_id;
     public string $created_at;
     public string $updated_at;

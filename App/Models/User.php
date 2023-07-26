@@ -9,8 +9,6 @@ use FoxyMVC\Lib\Foxy\Database\Table;
  * Modelo para los registros
  */
 class User extends Table {
-
-
     // -- Generated
     public static string $tableName = 'users';
     public Model $model;

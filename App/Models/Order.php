@@ -2,11 +2,13 @@
 
 namespace FoxyMVC\App\Models;
 
+use FoxyMVC\Lib\Foxy\Database\Model;
 use FoxyMVC\Lib\Foxy\Database\Table;
 
 class Order extends Table {
     // -- Generated
     public static string $tableName = "orders";
+    public Model $model;
     public string $orde_id;
     public string $created_at;
     public string $updated_at;

@@ -2,11 +2,13 @@
 
 namespace FoxyMVC\App\Models;
 
+use FoxyMVC\Lib\Foxy\Database\Model;
 use FoxyMVC\Lib\Foxy\Database\Table;
 
 class Employer extends Table {
     // -- Generated
     public static string $tableName = "employers";
+    public Model $model;
     public string $empl_id;
     public string $created_at;
     public string $updated_at;

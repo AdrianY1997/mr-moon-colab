@@ -3,6 +3,7 @@
 namespace FoxyMVC\App\Models;
 
 use FoxyMVC\Lib\Foxy\Database\Model;
+use FoxyMVC\Lib\Foxy\Database\Model;
 use FoxyMVC\Lib\Foxy\Database\Table;
 
 /**

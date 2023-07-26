@@ -3,6 +3,7 @@
 namespace FoxyMVC\App\Models;
 
 use FoxyMVC\Lib\Foxy\Database\MySQL;
+use FoxyMVC\Lib\Foxy\Database\Model;
 use FoxyMVC\Lib\Foxy\Database\Table;
 use PDOException;
 
@@ -13,6 +14,7 @@ class Role extends Table {
 
     // -- Generated
     public static string $tableName = "roles";
+    public Model $model;
     public string $role_id;
     public string $created_at;
     public string $updated_at;

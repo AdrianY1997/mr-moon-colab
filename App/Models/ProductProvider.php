@@ -2,12 +2,13 @@
 
 namespace FoxyMVC\App\Models;
 
-use FoxyMVC\Lib\Foxy\Core\Base\Model;
+use FoxyMVC\Lib\Foxy\Database\Model;
 use FoxyMVC\Lib\Foxy\Database\Table;
 
 class ProductProvider extends Table {
     // -- Generated
     public static string $tableName = "product_provider";
+    public Model $model;
     public string $created_at;
     public string $updated_at;
     protected array $hidden = [
