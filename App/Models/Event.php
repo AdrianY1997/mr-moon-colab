@@ -9,7 +9,7 @@ use FoxyMVC\Lib\Foxy\Database\Table;
  */
 class Event extends Table {
   // -- Generated
-  protected static string $tableName = 'events';
+  public static string $tableName = 'events';
   public string $even_id;
   public string $created_at;
   public string $updated_at;
