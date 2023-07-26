@@ -1,4 +1,19 @@
 const sendCodeBtn = document.querySelector("#send-code-btn");
+const sendCode = document.querySelector('#btn-recovery');
+
+var recovery = document.querySelector('#recovery');
+var recovery2 = document.querySelector('#recovery2');
+var recovery3 = document.querySelector('#recovery3');
+
+sendCode.addEventListener("click", (e) => {
+    e.preventDefault();
+    console.log("Hola")
+
+    recovery.classList.add("d-none");
+    recovery2.classList.remove("d-none");
+
+
+});
 
 sendCodeBtn.addEventListener("click", (e) => {
     e.preventDefault();
