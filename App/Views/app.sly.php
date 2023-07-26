@@ -38,6 +38,7 @@
     <script src="{{ asset('js/boostrap.bundle.min.js') }}"></script>
     <script src="{{ asset('js/notification.js') }}"></script>
     <script src="{{ asset('js/jquery.min.js') }}"></script>
+    <script src="{{ asset('js/main.js') }}"></script>
     <script>
         var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
         var tooltipList = tooltipTriggerList.map(function(tooltipTriggerEl) {

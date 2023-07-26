@@ -3,6 +3,8 @@
 namespace FoxyMVC\App\Controllers;
 
 use FoxyMVC\App\Models\Product;
+use FoxyMVC\App\Models\Provider;
+use FoxyMVC\App\Models\Reservation;
 use FoxyMVC\App\Models\Role;
 use FoxyMVC\App\Models\User;
 use FoxyMVC\App\Models\Webdata;
@@ -65,10 +67,9 @@ class DashboardController extends Controller {
 
     public function usuarios() {
         $usuarios = User::get();
-
         return self::render("dashboard.users", [
             "active" => "usuarios",
-            "usuarios" => $usuarios
+            "usuarios" => $usuarios,
         ]);
     }
 
@@ -116,17 +117,24 @@ class DashboardController extends Controller {
         echo json_encode($response);
     }
 
+    public function proveedores() {
+        return self::render("dashboard.prov", [
+            "active" => "proveedores",
+            "providers" => Provider::get()
+        ]);
+    }
+
     public function inventario() {
         return self::render("dashboard.inv", [
             "active" => "inventario",
-            "products" => Product::get(),
+            "products" => Product::getAllData(),
         ]);
     }
 
     public function getItem($id) {
         $data = [];
 
-        $products = Product::getAllDataById($id);
+        $products = Product::getAllData($id);
 
         if (!$products) {
             $data["error"] = "Ubo un error al obtener los datos";
@@ -134,7 +142,20 @@ class DashboardController extends Controller {
             return;
         }
 
-        $data[] = $products;
+        $data[] = $products[0];
+        echo json_encode($data);
+    }
+
+    public function getProv() {
+        $data = [];
+        $providers = Provider::get();
+        if (!$providers) {
+            $data["error"] = "No se ha podido obtener la lista de proveedores";
+            echo json_encode($data);
+            return;
+        }
+
+        $data = $providers;
         echo json_encode($data);
     }
 
@@ -172,7 +193,8 @@ class DashboardController extends Controller {
 
     public function reservas() {
         return self::render("dashboard.reservas", [
-            "active" => "reservas"
+            "active" => "reservas",
+            "reserves" => Reservation::select("rese_id", "rese_urid", "rese_status", "rese_time", "rese_date")->orderBy("rese_date", "ASC")->get(),
         ]);
     }
 

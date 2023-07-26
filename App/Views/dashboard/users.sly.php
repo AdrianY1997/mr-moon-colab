@@ -3,6 +3,7 @@
         <div class="container">
             @include('dashboard/static/menu')
             <div class="content">
+                <p>Lista de usuarios</p>
                 <table class="table">
                     <thead>
                         <tr>

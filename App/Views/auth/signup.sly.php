@@ -8,25 +8,31 @@
                 </h1>
                 <form action="{{ route('user.star') }}" method="POST">
                     <div class="form-floating mb-3">
-                        <input class="form-control border shadow fs-6" style="margin-bottom: 1px" type="text" name="name" id="name" placeholder="name">
+                        <input class="form-control border shadow fs-6" required style="margin-bottom: 1px" type="text" name="name" id="name" placeholder="name">
                         <label for="name">Nombre</label>
                     </div>
                     <div class="form-floating mb-3">
-                        <input class="form-control border shadow fs-6" style="margin-bottom: 1px" type="text" name="lastname" id="lastname" placeholder="lastname">
+                        <input class="form-control border shadow fs-6" required style="margin-bottom: 1px" type="text" name="lastname" id="lastname" placeholder="lastname">
                         <label for="lastname">Apellido</label>
                     </div>
+                 
                     <div class="form-floating mb-3">
-                        <input class="form-control border shadow fs-6" style="margin-bottom: 1px" type="text" name="email" id="email" placeholder="email">
+                        <input class="form-control border shadow fs-6" required pattern="[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*@[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{1,5}" style="margin-bottom: 1px" type="text" name="email" id="email" placeholder="email">
                         <label for="email">Email</label>
                     </div>
                     <div class="form-floating mb-3">
-                        <input class="form-control border shadow fs-6" style="margin-bottom: 1px" type="password" name="password" id="password" placeholder="password">
-                        <label for="password">Contraseña</label>
-                    </div>
-                    <div class="form-floating mb-3">
-                        <input class="form-control border shadow fs-6" style="margin-bottom: 1px" type="text" name="number" id="number" placeholder="number">
+                        <input class="form-control border shadow fs-6" required style="margin-bottom: 1px" type="number" maxlength="10" oninput="if(this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"  name="number" id="number" placeholder="number">
                         <label for="number">No. Telefono</label>
                     </div>
+                    <div class="form-floating mb-3">
+                        <input class="form-control border shadow fs-6" required style="margin-bottom: 1px" type="text" name="address" id="address" placeholder="address">
+                        <label for="number">Direccion</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input class="form-control border shadow fs-6" required style="margin-bottom: 1px" type="password" name="password" id="password" placeholder="password">
+                        <label for="password">Contraseña</label>
+                    </div>
+                    
                     <div class="mb-3">
                         <button class="py-2">Registrarse</button>
                     </div>

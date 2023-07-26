@@ -15,9 +15,10 @@ return new class {
             $table->string("email");
             $table->string("quantity");
             $table->string("table");
-            $table->string("date");
+            $table->string("day");
             $table->string("time");
-            $table->string("status")->default("pending", true);
+            $table->text("details");
+            $table->string("status")->default("PENDING", true);
             $table->integer("user_id")->references("users");
         });
     }

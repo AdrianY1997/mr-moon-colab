@@ -48,13 +48,6 @@ class AuthController extends Controller {
     }
 
     public function request_recovery_code() {
-        if (Session::checkSession()) {
-            $roles = Role::getUserRole(Session::data("user_id"));
-            foreach ($roles as $role) {
-                if ($role->role_name == "ADMIN") redirect()->route("dash.home")->send();
-            }
-            redirect()->route("profile.show")->send();
-        }
         $data = Request::getData();
 
         if (filter_var($data["email"], FILTER_VALIDATE_EMAIL)) {

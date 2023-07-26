@@ -2,9 +2,16 @@
 
 namespace FoxyMVC\App\Models;
 
+use FoxyMVC\Lib\Foxy\Database\MySQL;
 use FoxyMVC\Lib\Foxy\Database\Table;
+use PDOException;
 
 class Reservation extends Table {
+    public const CANCELLED = 0;
+    public const WAITING_FOR_PAYMENT = 1;
+    public const WAITING_FOR_CONFIRMATION = 2;
+    public const RESERVED = 3;
+
     // -- Generated
     protected static string $tableName = "reservations";
     public string $rese_id;
@@ -25,9 +32,10 @@ class Reservation extends Table {
     public string $rese_email;
     public string $rese_quantity;
     public string $rese_table;
-    public string $rese_date;
+    public string $rese_day;
     public string $rese_time;
     public string $rese_status;
+    public string $rese_details;
     public string $user_id;
 
     protected array $fillable = [
@@ -37,11 +45,26 @@ class Reservation extends Table {
         "rese_email",
         "rese_quantity",
         "rese_table",
-        "rese_date",
+        "rese_day",
         "rese_time",
         "rese_status",
+        "rese_details",
         "user_id",
     ];
 
     // ----
+
+    public static function getHours($day) {
+        $query = "SELECT rese_time, rese_status FROM " . static::$tableName . " WHERE rese_day = ? AND (rese_status = 'RESERVADO' OR rese_status = 'PENDIENTE')";
+        try {
+            $stmt = MySQL::connect()->prepare($query);
+            $stmt->execute([$day]);
+            $times = [];
+            while ($time = $stmt->fetchObject()) array_push($times, $time);
+            $stmt->closeCursor();
+            return $times;
+        } catch (PDOException $ex) {
+            return false;
+        }
+    }
 }

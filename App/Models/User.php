@@ -39,7 +39,7 @@ class User extends Table {
         "user_lastname",
         "user_address",
         "user_phone",
-        "user_img_path1",
+        "user_img_path",
     ];
 
     // ----

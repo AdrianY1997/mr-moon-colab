@@ -35,7 +35,7 @@
                     </form>
                     <form action="{{ route('auth.recovery.verify.code') }}">
                         <div class="d-flex justify-content-center">
-                            <input class="border px-3 py-2" type="number" placeholder="# # # # # #" class="border">
+                            <input class="border px-3 py-2" type="number" placeholder="######" class="border">
                             <button class="ms-3 px-3"><a href="#">Confirmar</a></button>
                         </div>
                     </form>
