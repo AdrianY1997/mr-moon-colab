@@ -80,17 +80,9 @@ class AuthController extends Controller {
             }
             redirect()->route("profile.show")->send();
         }
+        Code::where("code_email", )->where()->()
 
-        // $data = Request::getData();
-
-        // $code = new Code();
-
-        // $x = $code->get("*", [
-        //     "code_email" => $data["email"],
-        //     "code_code" => $data["code"]
-        // ]);
-
-        // var_dump($x);
+        
     }
 
     public function start_session() {
