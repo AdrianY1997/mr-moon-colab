@@ -2,6 +2,7 @@
 
 namespace FoxyMVC\App\Controllers;
 
+use FoxyMVC\App\Models\Event;
 use FoxyMVC\Lib\Foxy\Core\Controller;
 
 class EventosController extends Controller {
@@ -10,6 +11,8 @@ class EventosController extends Controller {
     }
 
     function index() {
-        return self::render("web.eventos");
+        return self::render("web.eventos", [
+            "events" => Event::get()
+        ]);
     }
 }
