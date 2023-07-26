@@ -112,7 +112,7 @@
                                         </div>
                                         <div>
                                             <div class="form-floating">
-                                                <input name="new-pass" id="new-pass" type="text" class="form-control" placeholder="Contraseña" @endif">
+                                                <input name="new-pass" id="new-pass" type="password" class="form-control" placeholder="Contraseña" @endif">
                                                 <label for="new-pass">Nueva Contraseña</label>
                                             </div>
                                         </div>
@@ -155,7 +155,7 @@
                                     </div>
                                     <div class="row mx-1 mb-3">
                                         <div class="form-floating p-0">
-                                            <input name="pass" id="pass" type="text" class="form-control" placeholder="*" required>
+                                            <input name="pass" id="pass" type="password" class="form-control" placeholder="*" required>
                                             <label for="pass">Contraseña Actual <sup class="text-danger">*</sup></label>
                                         </div>
                                     </div>
