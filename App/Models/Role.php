@@ -7,6 +7,10 @@ use FoxyMVC\Lib\Foxy\Database\Table;
 use PDOException;
 
 class Role extends Table {
+    public const GUEST = 0;
+    public const USER = 1;
+    public const ADMIN = 2;
+
     // -- Generated
     protected static string $tableName = "roles";
     public string $role_id;
