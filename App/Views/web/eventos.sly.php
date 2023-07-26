@@ -3,19 +3,40 @@
         <h1>Eventos</h1>
     </div>
     <div class="imgs container">
-    @foreach($events as $evento)
+        @if(!$events)
+        <tr>
+            <td>No hay Eventos.</td>
+        </tr>
+        @else
+        @foreach($events as $evento)
         <div>
             <div>
                 <img class="w-100" src="{{ asset($evento->even_path) }}" alt="">
                 <h2>{{ $evento->even_name }}</h2>
                 <h4>{{$evento->even_fech}}</h4>
-                <p>{{$evento->even_text}}
-                </p>
+                <p>{{$evento->even_text}}</p>
             </div>
         </div>
         @endforeach
+        @endif
     </div>
 </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
