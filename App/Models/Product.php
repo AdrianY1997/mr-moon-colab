@@ -8,7 +8,7 @@ use PDOException;
 
 class Product extends Table {
     // -- Generated
-    protected static string $tableName = "products";
+    public static string $tableName = "products";
     public string $prod_id;
     public string $created_at;
     public string $updated_at;
@@ -27,7 +27,7 @@ class Product extends Table {
     public string $prod_stock;
     public string $prod_value;
 
-    protected array $fillable = [
+    public array $fillable = [
         "prod_ref",
         "prod_name",
         "prod_desc",

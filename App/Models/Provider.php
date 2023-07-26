@@ -6,7 +6,7 @@ use FoxyMVC\Lib\Foxy\Database\Table;
 
 class Provider extends Table {
     // -- Generated
-    protected static string $tableName = "providers";
+    public static string $tableName = "providers";
     public string $prov_id;
     public string $created_at;
     public string $updated_at;
@@ -24,7 +24,7 @@ class Provider extends Table {
     public string $prov_email;
     public string $prov_phone;
 
-    protected array $fillable = [
+    public array $fillable = [
         "prov_nit",
         "prov_name",
         "prov_email",

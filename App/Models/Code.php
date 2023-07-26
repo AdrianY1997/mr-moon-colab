@@ -6,7 +6,7 @@ use FoxyMVC\Lib\Foxy\Database\Table;
 
 class Code extends Table {
     // -- Generated
-    protected static string $tableName = "codes";
+    public static string $tableName = "codes";
     public string $code_id;
     public string $created_at;
     public string $updated_at;
@@ -23,7 +23,7 @@ class Code extends Table {
     public string $code_code;
     public string $code_status;
 
-    protected array $fillable = [
+    public array $fillable = [
         "code_email",
         "code_code",
         "code_status",

@@ -27,17 +27,19 @@ class ProfileController extends Controller {
         $user = User::where("user_email", $data["email"])->first();
         if (!password_verify($data["pass"], $user->user_pass))
             redirect()->route("profile.show")->error("Debes ingresar tu contraseña antigua para realizar cambios en tu perfil")->send();
-            
-        if (!User::where("user_email", $data["email"])->update([
+
+        $isUpdated = User::where("user_email", $data["email"])->update([
             "user_nick" => $data["nick"],
             "user_pass" => password_hash($data["new-pass"], PASSWORD_DEFAULT),
             "user_name" => $data["name"],
             "user_lastname" => $data["lastname"],
             "user_address" => $data["address"],
             "user_phone" => $data["phone"],
-        ])) 
+        ]);
+
+        if (!$isUpdated)
             redirect()->route("profile.show")->success("Ha ocurrido un error al actualizar tus datos, contacte con un administrador")->send();
-            
+
         redirect()->route("profile.show")->success("Se ha actualizado tus datos correctamente")->send();
     }
 }

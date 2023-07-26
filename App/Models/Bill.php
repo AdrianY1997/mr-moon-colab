@@ -6,7 +6,7 @@ use FoxyMVC\Lib\Foxy\Database\Table;
 
 class Bill extends Table {
     // -- Generated
-    protected static string $tableName = "bills";
+    public static string $tableName = "bills";
     public string $bill_id;
     public string $created_at;
     public string $updated_at;
@@ -24,7 +24,7 @@ class Bill extends Table {
     public string $bill_total;
     public string $user_id;
 
-    protected array $fillable = [
+    public array $fillable = [
         "bill_serial",
         "bill_date",
         "bill_total",

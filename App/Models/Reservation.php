@@ -13,7 +13,7 @@ class Reservation extends Table {
     public const RESERVED = 3;
 
     // -- Generated
-    protected static string $tableName = "reservations";
+    public static string $tableName = "reservations";
     public string $rese_id;
     public string $created_at;
     public string $updated_at;
@@ -38,7 +38,7 @@ class Reservation extends Table {
     public string $rese_details;
     public string $user_id;
 
-    protected array $fillable = [
+    public array $fillable = [
         "rese_urid",
         "rese_name",
         "rese_lastname",

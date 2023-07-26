@@ -12,7 +12,7 @@ class Role extends Table {
     public const ADMIN = 2;
 
     // -- Generated
-    protected static string $tableName = "roles";
+    public static string $tableName = "roles";
     public string $role_id;
     public string $created_at;
     public string $updated_at;
@@ -27,7 +27,7 @@ class Role extends Table {
 
     public string $role_name;
 
-    protected array $fillable = [
+    public array $fillable = [
         "role_name",
     ];
 

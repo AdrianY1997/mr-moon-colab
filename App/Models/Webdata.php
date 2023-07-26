@@ -6,7 +6,7 @@ use FoxyMVC\Lib\Foxy\Database\Table;
 
 class Webdata extends Table {
     // -- Generated
-    protected static string $tableName = "webdatas";
+    public static string $tableName = "webdatas";
     public string $webd_id;
     public string $created_at;
     public string $updated_at;
@@ -18,7 +18,7 @@ class Webdata extends Table {
     // ----
 
     // -- Here the columns
-    
+
     public string $webd_name;
     public string $webd_subt;
     public string $webd_logo;
@@ -30,8 +30,8 @@ class Webdata extends Table {
     public string $webd_twlink;
     public string $webd_iglink;
     public string $webd_ytlink;
-    
-    protected array $fillable = [
+
+    public array $fillable = [
         "webd_name",
         "webd_subt",
         "webd_logo",
@@ -44,7 +44,7 @@ class Webdata extends Table {
         "webd_iglink",
         "webd_ytlink",
     ];
-    
+
     // ----
 
     static function initialView() {

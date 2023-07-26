@@ -6,7 +6,7 @@ use FoxyMVC\Lib\Foxy\Database\Table;
 
 class ProductMenu extends Table {
     // -- Generated
-    protected static string $tableName = "product_menu";
+    public static string $tableName = "product_menu";
     public string $created_at;
     public string $updated_at;
     protected array $hidden = [
@@ -20,7 +20,7 @@ class ProductMenu extends Table {
     public string $prod_id;
     public string $menu_id;
 
-    protected array $fillable = [
+    public array $fillable = [
         "prod_id",
         "menu_id",
     ];
