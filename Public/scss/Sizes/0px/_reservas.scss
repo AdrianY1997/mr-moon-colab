@@ -31,7 +31,17 @@
             }
 
             &.active {
+                background-color: rgb(63, 148, 52);
+            }
+
+            &.reserved {
+                background-color: rgb(253, 110, 110);
+                cursor: not-allowed;
+            }
+
+            &.pending {
                 background-color: rgb(230, 174, 54);
+                cursor: not-allowed;
             }
         }
     }

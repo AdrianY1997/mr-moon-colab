@@ -20,6 +20,7 @@ Route::set("reserve/new", [ReservasController::class, "new"])->name("reserve.new
 Route::set("reservas/buscar", [ReservasController::class, "search"])->name("reserve.search");
 Route::set("reserva/{urid}", [ReservasController::class, "show"])->name("reserve.show");
 Route::set("reserve/confirm", [ReservasController::class, "confirm"])->name("reserve.confirm");
+Route::set("reserve/hours", [ReservasController::class, "getHours"])->name("reserve.hours");
 
 Route::set("profile", [ProfileController::class, "show"])->name("profile.show");
 Route::set("profile/edit", [ProfileController::class, "edit"])->name("profile.edit");

@@ -11,7 +11,7 @@ class ConditionalPatterns implements TemplatePatterns {
         return [
             // '/@if\s*\(((?:[^()]+|(?R))*)\)/'
             '/@if\s*\(\s*([^)]*)\s*\)\s*(.*?)\s*@endif/s' => function ($matches) {
-                return '<?php if (' . $matches[1] . '): ?> ' . $matches[2] . ' <?php endif; ?>';
+                return '<?php if (' . $matches[1] . '): ?>' . $matches[2] . '<?php endif; ?>';
             },
             '/@else/s' => function () {
                 return '<?php else: ?>';

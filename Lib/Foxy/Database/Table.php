@@ -5,11 +5,10 @@ declare(strict_types=1);
 namespace FoxyMVC\Lib\Foxy\Database;
 
 use FoxyMVC\Lib\Foxy\Database\MySQL;
-use PDO;
 use PDOException;
 
 class Table {
-    protected static string $tableName = "";
+    public static string $tableName = "";
     protected static string $selectText = "*";
     protected static string $whereText = "";
     protected static string $orderByText = "";
@@ -80,9 +79,12 @@ class Table {
 
             while ($item = $stmt->fetchObject()) {
                 $obj = new static;
+                $id;
                 foreach (get_object_vars($item) as $key => $column) {
                     $obj->$key = strval($column);
+                    if (strpos($key, "_id")) $id = $key;
                 };
+                $obj->model = new Model($obj);
                 array_push($items, $obj);
             }
 

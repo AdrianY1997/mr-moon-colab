@@ -4,6 +4,7 @@ namespace FoxyMVC\App\Controllers;
 
 use FoxyMVC\App\Models\Product;
 use FoxyMVC\App\Models\Provider;
+use FoxyMVC\App\Models\Reservation;
 use FoxyMVC\App\Models\Role;
 use FoxyMVC\App\Models\User;
 use FoxyMVC\App\Models\Webdata;
@@ -19,7 +20,7 @@ class DashboardController extends Controller {
         if (!Session::checkSession()) {
             $roles = Role::getUserRole(Session::data("user_id"));
             foreach ($roles as $role) {
-                if ($role->role_name != "ADMIN") redirect()->route("error", ["msg" => "missing-permissions"])->send();
+                if ($role->role_name != Role::ADMIN) redirect()->route("error", ["msg" => "missing-permissions"])->send();
             }
         }
     }
@@ -66,10 +67,9 @@ class DashboardController extends Controller {
 
     public function usuarios() {
         $usuarios = User::get();
-
         return self::render("dashboard.users", [
             "active" => "usuarios",
-            "usuarios" => $usuarios
+            "usuarios" => $usuarios,
         ]);
     }
 
@@ -193,7 +193,8 @@ class DashboardController extends Controller {
 
     public function reservas() {
         return self::render("dashboard.reservas", [
-            "active" => "reservas"
+            "active" => "reservas",
+            "reserves" => Reservation::select("rese_id", "rese_urid", "rese_status", "rese_time", "rese_date")->orderBy("rese_date", "ASC")->get(),
         ]);
     }
 

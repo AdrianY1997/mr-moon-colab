@@ -106,13 +106,13 @@
                                         </div>
                                         <div class="mb-3">
                                             <div class="form-floating">
-                                                <input name="nick" id="nick" type="text" class="form-control" placeholder="John Doe" value="@if($user->user_nick) {{ $user->user_nick }} @endif">
+                                                <input name="nick" id="nick" type="text" class="form-control" placeholder="John Doe" value="@if($user->user_nick){{ $user->user_nick }}@endif">
                                                 <label for="nick">Nick</label>
                                             </div>
                                         </div>
                                         <div>
                                             <div class="form-floating">
-                                                <input name="new-pass" id="new-pass" type="text" class="form-control" placeholder="Contraseña" @endif">
+                                                <input name="new-pass" id="new-pass" type="password" class="form-control" placeholder="Contraseña" @endif">
                                                 <label for="new-pass">Nueva Contraseña</label>
                                             </div>
                                         </div>
@@ -137,7 +137,7 @@
                                     </div>
                                     <div class="row mx-1 mb-3">
                                         <div class="form-floating p-0">
-                                            <input name="email" id="email" type="text" class="form-control" placeholder="mail@domain.com" value="@if($user->user_email) {{ $user->user_email }} @endif" disabled>
+                                            <input name="email" id="email" type="text" class="form-control" placeholder="mail@domain.com" value="@if($user->user_email){{ $user->user_email }}@endif" readonly>
                                             <label for="email">Email</label>
                                         </div>
                                     </div>
@@ -155,7 +155,7 @@
                                     </div>
                                     <div class="row mx-1 mb-3">
                                         <div class="form-floating p-0">
-                                            <input name="pass" id="pass" type="text" class="form-control" placeholder="*" required>
+                                            <input name="pass" id="pass" type="password" class="form-control" placeholder="*" required>
                                             <label for="pass">Contraseña Actual <sup class="text-danger">*</sup></label>
                                         </div>
                                     </div>

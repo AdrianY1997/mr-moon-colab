@@ -18,7 +18,7 @@ class AuthController extends Controller {
         if (Session::checkSession()) {
             $roles = Role::getUserRole(Session::data("user_id"));
             foreach ($roles as $role) {
-                if ($role->role_name == "ADMIN") redirect()->route("dash.home")->send();
+                if ($role->role_name == Role::ADMIN) redirect()->route("dash.home")->send();
             }
             redirect()->route("profile.show")->send();
         }
@@ -29,7 +29,7 @@ class AuthController extends Controller {
         if (Session::checkSession()) {
             $roles = Role::getUserRole(Session::data("user_id"));
             foreach ($roles as $role) {
-                if ($role->role_name == "ADMIN") redirect()->route("dash.home")->send();
+                if ($role->role_name == Role::ADMIN) redirect()->route("dash.home")->send();
             }
             redirect()->route("profile.show")->send();
         }
@@ -40,7 +40,7 @@ class AuthController extends Controller {
         if (Session::checkSession()) {
             $roles = Role::getUserRole(Session::data("user_id"));
             foreach ($roles as $role) {
-                if ($role->role_name == "ADMIN") redirect()->route("dash.home")->send();
+                if ($role->role_name == Role::ADMIN) redirect()->route("dash.home")->send();
             }
             redirect()->route("profile.show")->send();
         }
@@ -48,13 +48,6 @@ class AuthController extends Controller {
     }
 
     public function request_recovery_code() {
-        if (Session::checkSession()) {
-            $roles = Role::getUserRole(Session::data("user_id"));
-            foreach ($roles as $role) {
-                if ($role->role_name == "ADMIN") redirect()->route("dash.home")->send();
-            }
-            redirect()->route("profile.show")->send();
-        }
         $data = Request::getData();
 
         if (filter_var($data["email"], FILTER_VALIDATE_EMAIL)) {
@@ -76,7 +69,7 @@ class AuthController extends Controller {
         if (Session::checkSession()) {
             $roles = Role::getUserRole(Session::data("user_id"));
             foreach ($roles as $role) {
-                if ($role->role_name == "ADMIN") redirect()->route("dash.home")->send();
+                if ($role->role_name == Role::ADMIN) redirect()->route("dash.home")->send();
             }
             redirect()->route("profile.show")->send();
         }
@@ -89,7 +82,7 @@ class AuthController extends Controller {
         if (Session::checkSession()) {
             $roles = Role::getUserRole(Session::data("user_id"));
             foreach ($roles as $role) {
-                if ($role->role_name == "ADMIN") redirect()->route("dash.home")->send();
+                if ($role->role_name == Role::ADMIN) redirect()->route("dash.home")->send();
             }
             redirect()->route("profile.show")->send();
         }
@@ -106,7 +99,7 @@ class AuthController extends Controller {
                 Session::load();
                 $roles = Role::getUserRole(Session::data("user_id"));
                 foreach ($roles as $role) {
-                    if ($role->role_name == "ADMIN") redirect()->route("dash.home")->success("Haz iniciado sesión correctamente")->send();
+                    if ($role->role_name == Role::ADMIN) redirect()->route("dash.home")->success("Haz iniciado sesión correctamente")->send();
                 }
                 redirect()->route("profile.show")->success("Haz iniciado sesión correctamente")->send();
             }
