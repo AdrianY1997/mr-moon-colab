@@ -8,6 +8,7 @@ use FoxyMVC\App\Models\Reservation;
 use FoxyMVC\App\Models\Role;
 use FoxyMVC\App\Models\User;
 use FoxyMVC\App\Models\Webdata;
+use FoxyMVC\App\Packages\Privileges;
 use FoxyMVC\Lib\Foxy\Core\Request;
 use FoxyMVC\Lib\Foxy\Core\Session;
 use FoxyMVC\Lib\Foxy\Core\Controller;
@@ -15,7 +16,7 @@ use FoxyMVC\Lib\Foxy\Core\Controller;
 class DashboardController extends Controller {
     public function __construct() {
         parent::__construct();
-        if (!Session::checkSession() || empty(Role::getUserRole(Session::data("user_id"), Role::ADMIN))) {
+        if (!Session::checkSession() || (Privileges::Admin->get() & Session::data("user_privileges") != Privileges::Admin->get())) {
             redirect()
                 ->route("error", ["msg" => "missing-permissions"])
                 ->send();

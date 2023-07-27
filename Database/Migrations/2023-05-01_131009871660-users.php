@@ -1,5 +1,6 @@
 <?php
 
+use FoxyMVC\App\Packages\Privileges;
 use FoxyMVC\Lib\Foxy\Facades\Schema;
 use FoxyMVC\Lib\Foxy\Database\Schema\Blueprint;
 
@@ -17,12 +18,14 @@ return new class {
             $table->string("address");
             $table->string("phone");
             $table->string("img_path")->default("img/static/profiles/avatar1.png", true);
+            $table->integer("privileges")->default(Privileges::User->get());
         });
 
         Schema::insert($this->tableName, [
             "nick" => "Administrator",
             "email" => "admin@mail.com",
             "pass" => password_hash("Admin@2023;", PASSWORD_DEFAULT),
+            "privileges" => Privileges::User->get() + Privileges::Admin->get()
         ]);
 
         Schema::insert($this->tableName, [

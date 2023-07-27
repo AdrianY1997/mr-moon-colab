@@ -4,6 +4,7 @@ namespace FoxyMVC\App\Controllers;
 
 use FoxyMVC\App\Models\Role;
 use FoxyMVC\App\Models\User;
+use FoxyMVC\App\Packages\Privileges;
 use FoxyMVC\Lib\Foxy\Core\Request;
 use FoxyMVC\Lib\Foxy\Core\Session;
 use FoxyMVC\Lib\Foxy\Core\Controller;
@@ -19,20 +20,19 @@ class AuthController extends Controller {
             return;
         }
 
-        $roles = Role::getUserRole(Session::data("user_id"));
-
-        foreach ($roles as $role) {
-            if ($role->role_name == Role::ADMIN) {
-                redirect()
-                    ->route("dash.home")
-                    ->send();
-                break;
-            }
+        if ((Privileges::Admin->get() & Session::data("user_privileges")) == Privileges::Admin->get()) {
+            redirect()
+                ->route("dash.home")
+                ->success("Haz iniciado sesión correctamente")
+                ->send();
         }
 
-        redirect()
-            ->route("profile.show")
-            ->send();
+        if ((Privileges::User->get() & Session::data("user_privileges")) == Privileges::User->get()) {
+            redirect()
+                ->route("profile.show")
+                ->success("Haz iniciado sesión correctamente")
+                ->send();
+        }
     }
 
     public function log_in() {
