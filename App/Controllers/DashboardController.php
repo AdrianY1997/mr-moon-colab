@@ -15,18 +15,17 @@ use FoxyMVC\Lib\Foxy\Core\Controller;
 class DashboardController extends Controller {
     public function __construct() {
         parent::__construct();
-
-        $role = Role::getUserRole(Session::data()->user_id);
-        if (!Session::checkSession()) {
-            $roles = Role::getUserRole(Session::data("user_id"));
-            foreach ($roles as $role) {
-                if ($role->role_name != Role::ADMIN) redirect()->route("error", ["msg" => "missing-permissions"])->send();
-            }
+        if (!Session::checkSession() || empty(Role::getUserRole(Session::data("user_id"), Role::ADMIN))) {
+            redirect()
+                ->route("error", ["msg" => "missing-permissions"])
+                ->send();
         }
     }
 
     public function index() {
-        redirect()->route("dash.home")->send();
+        redirect()
+            ->route("dash.home")
+            ->send();
     }
 
     public function inicio() {
@@ -46,23 +45,35 @@ class DashboardController extends Controller {
 
         $webdata = new Webdata();
 
-        if (password_verify($data["password"], Session::data("password")))
-            if ($webdata->update(["webd_id" => 1], [
-                "webd_name" => $data["name"],
-                "webd_subt" => $data["subt"],
-                "webd_email" => $data["email"],
-                "webd_phone" => $data["phone"],
-                "webd_address" => $data["address"],
-                "webd_city" => $data["city"],
-                "webd_fblink" => $data["fblink"],
-                "webd_twlink" => $data["twlink"],
-                "webd_iglink" => $data["iglink"],
-                "webd_ytlink" => $data["ytlink"],
-            ])) Session::setMessage("success", "Se ha actualizado la información de la pagina correctamente.");
-            else Session::setMessage("error", "Ubo un error al actualizar la información de la pagina.");
-        else Session::setMessage("error", "No se pudo actualizar, por que la contraseña no coincide con tu usuario");
+        if (!password_verify($data["password"], Session::data("password"))) {
+            redirect()
+                ->route("dash.info")
+                ->error("No se pudo actualizar, por que la contraseña no coincide con tu usuario")
+                ->send();
+        }
 
-        redirect()->route("dash.info")->send();
+        $webdata->webd_name = $data["name"];
+        $webdata->webd_subt = $data["subt"];
+        $webdata->webd_email = $data["email"];
+        $webdata->webd_phone = $data["phone"];
+        $webdata->webd_address = $data["address"];
+        $webdata->webd_city = $data["city"];
+        $webdata->webd_fblink = $data["fblink"];
+        $webdata->webd_twlink = $data["twlink"];
+        $webdata->webd_iglink = $data["iglink"];
+        $webdata->webd_ytlink = $data["ytlink"];
+
+        if (!$webdata->model->update()) {
+            redirect()
+                ->route("dash.info")
+                ->error("Ubo un error al actualizar la información de la pagina.")
+                ->send();
+        }
+
+        redirect()
+            ->route("dash.info")
+            ->route("Se ha actualizado la información de la pagina correctamente.")
+            ->send();
     }
 
     public function usuarios() {
