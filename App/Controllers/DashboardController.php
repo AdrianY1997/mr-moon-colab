@@ -5,7 +5,6 @@ namespace FoxyMVC\App\Controllers;
 use FoxyMVC\App\Models\Product;
 use FoxyMVC\App\Models\Provider;
 use FoxyMVC\App\Models\Reservation;
-use FoxyMVC\App\Models\Role;
 use FoxyMVC\App\Models\User;
 use FoxyMVC\App\Models\Webdata;
 use FoxyMVC\App\Packages\Privileges;
@@ -39,6 +38,58 @@ class DashboardController extends Controller {
     public function info() {
         return self::render("dashboard.info", [
             "active" => "info",
+        ]);
+    }
+
+    public function usuarios() {
+        return self::render("dashboard.users", [
+            "active" => "usuarios",
+            "usuarios" => User::get(),
+        ]);
+    }
+
+    public function proveedores() {
+        return self::render("dashboard.prov", [
+            "active" => "proveedores",
+            "providers" => Provider::get()
+        ]);
+    }
+
+    public function inventario() {
+        return self::render("dashboard.inv", [
+            "active" => "inventario",
+            "products" => Product::getAllData(),
+        ]);
+    }
+
+    public function facturas() {
+        return self::render("dashboard.fact", [
+            "active" => "facturas"
+        ]);
+    }
+
+    public function menu() {
+        return self::render("dashboard.menu", [
+            "active" => "menu"
+        ]);
+    }
+
+    public function reservas() {
+        return self::render("dashboard.reservas", [
+            "active" => "reservas",
+            "reserves" => Reservation::select("rese_id", "rese_urid", "rese_status", "rese_time", "rese_date")->orderBy("rese_date", "ASC")->get(),
+        ]);
+    }
+
+    public function eventos() {
+        return self::render("dashboard.eventos", [
+            "active" => "eventos"
+        ]);
+    }
+
+    public function galeria() {
+        return self::render("dashboard.galeria", [
+            "active" => "galeria"
         ]);
     }
 
@@ -78,70 +129,32 @@ class DashboardController extends Controller {
             ->send();
     }
 
-    public function usuarios() {
-        return self::render("dashboard.users", [
-            "active" => "usuarios",
-            "usuarios" => User::get(),
-        ]);
-    }
-
     public function getUserInfo($id) {
-        $message = "";
-
         $user = User::where("user_id", $id)->first();
-
         if (!$user) {
             Response::status(401)->send("Ha ocurrido un error al obtener la información del perfil.", "ISO-8859-1");
         }
-
-        Response::status(200)->json(["user" => $user]);
+        Response::status(200)->json(["user" => $user, "message" => "Se ha cargado la información"]);
     }
 
     public function setUserInfo() {
-        $response = [];
-        $data = Request::getData();
+        $data = Request::getFormData();
+        $isUpdated = User::where("user_id", $data->id)->update([
+            "user_nick" => $data->nick,
+            "user_name" => $data->name,
+            "user_lastname" => $data->lastname,
+            "user_email" => $data->email,
+            "user_address" => $data->address,
+            "user_phone" => $data->phone,
+        ]);
 
-
-
-        if (User::where("user_id", $data["id"])->update([
-            "user_nick" => $data["nick"],
-            "user_name" => $data["name"],
-            "user_lastname" => $data["lastname"],
-            "user_email" => $data["email"],
-            "user_address" => $data["address"],
-            "user_phone" => $data["phone"],
-        ])) {
-            $response["status"] = [
-                "code" => 200,
-                "message" => "Información Actualizada",
-            ];
-        } else {
-            $response["status"] = [
-                "code" => 500,
-                "message" => "Error al actualizar la información"
-            ];
+        if (!$isUpdated) {
+            Response::status(500)->end("Error al actualizar la información ");
         }
-
-        echo json_encode($response);
-    }
-
-    public function proveedores() {
-        return self::render("dashboard.prov", [
-            "active" => "proveedores",
-            "providers" => Provider::get()
-        ]);
-    }
-
-    public function inventario() {
-        return self::render("dashboard.inv", [
-            "active" => "inventario",
-            "products" => Product::getAllData(),
-        ]);
+        Response::status(200)->end("Se ha actualizado la información ");
     }
 
     public function getItem($id) {
-        $data = [];
-
         $products = Product::getAllData($id);
 
         if (!$products) {
@@ -155,32 +168,18 @@ class DashboardController extends Controller {
     }
 
     public function getProv() {
-        $data = [];
         $providers = Provider::get();
         if (!$providers) {
-            $data["error"] = "No se ha podido obtener la lista de proveedores";
-            echo json_encode($data);
-            return;
+            Response::status(500)->end("No se ha podido cargar la información ");
         }
 
-        $data = $providers;
-        echo json_encode($data);
-    }
-
-    public function facturas() {
-        return self::render("dashboard.fact", [
-            "active" => "facturas"
-        ]);
-    }
-
-    public function menu() {
-        return self::render("dashboard.menu", [
-            "active" => "menu"
-        ]);
+        Response::status(200)->json(["providers" => $providers]);
     }
 
     public function setMenuImg($id) {
-        if (!isset($_FILES["menu-img"])) redirect()->route("dash.menu")->error("No se ha seleccionado una image")->send();
+        if (!isset($_FILES["menu-img"])) {
+            redirect()->route("dash.menu")->error("No se ha seleccionado una image")->send();
+        }
 
         $menus = [
             "1" => "menu-bebidas",
@@ -192,29 +191,37 @@ class DashboardController extends Controller {
         $imageFileType = strtolower(pathinfo(basename($_FILES["menu-img"]["name"]), PATHINFO_EXTENSION));
         $targetFile = $targetDir . $menus[$id] . "." . $imageFileType;
 
-        if (getimagesize($_FILES["menu-img"]["tmp_name"]) === false) redirect()->route("dash.menu")->error("Se ha seleccionado una imagen invalida")->send();
-        if ($_FILES["menu-img"]["size"] > 500000) redirect()->route("dash.menu")->error("El tamaño de la imagen debe ser menor a 500kb")->send();
-        if ($imageFileType != "jpg" && $imageFileType != "png") redirect()->route("dash.menu")->error("Solo se aceptan imágenes de tipo jpg y png")->send();
-        if (move_uploaded_file($_FILES["menu-img"]["tmp_name"], $targetFile)) redirect()->route("dash.menu")->success("Se ha guardado la imagen con éxito")->send();
-        else redirect()->route("dash.menu")->error("No se ha podido subir la imagen")->send();
-    }
+        if (getimagesize($_FILES["menu-img"]["tmp_name"]) === false) {
+            redirect()
+                ->route("dash.menu")
+                ->error("Se ha seleccionado una imagen invalida")
+                ->send();
+        }
 
-    public function reservas() {
-        return self::render("dashboard.reservas", [
-            "active" => "reservas",
-            "reserves" => Reservation::select("rese_id", "rese_urid", "rese_status", "rese_time", "rese_date")->orderBy("rese_date", "ASC")->get(),
-        ]);
-    }
+        if ($_FILES["menu-img"]["size"] > 500000) {
+            redirect()
+                ->route("dash.menu")
+                ->error("El tamaño de la imagen debe ser menor a 500kb")
+                ->send();
+        }
 
-    public function eventos() {
-        return self::render("dashboard.eventos", [
-            "active" => "eventos"
-        ]);
-    }
+        if ($imageFileType != "jpg" && $imageFileType != "png") {
+            redirect()
+                ->route("dash.menu")
+                ->error("Solo se aceptan imágenes de tipo jpg y png")
+                ->send();
+        }
 
-    public function galeria() {
-        return self::render("dashboard.galeria", [
-            "active" => "galeria"
-        ]);
+        if (!move_uploaded_file($_FILES["menu-img"]["tmp_name"], $targetFile)) {
+            redirect()
+                ->route("dash.menu")
+                ->error("No se ha podido subir la imagen")
+                ->send();
+        }
+
+        redirect()
+            ->route("dash.menu")
+            ->success("Se ha guardado la imagen con éxito")
+            ->send();
     }
 }

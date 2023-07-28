@@ -18,9 +18,6 @@ sendCodeConfirm.addEventListener("click", async (e) => {
 
     let response = await fetch(url, {
         method: "POST",
-        headers: {
-            'content-type': 'application/json'
-        },
         body: JSON.stringify({ email: email, code: code }),
     });
 
@@ -33,42 +30,30 @@ sendCode.addEventListener("click", (e) => {
     recovery2.classList.remove("d-none");
 });
 
-sendCodeBtn.addEventListener("click", (e) => {
+sendCodeBtn.addEventListener("click", async (e) => {
     e.preventDefault();
     e.stopPropagation();
-
     const form = sendCodeBtn.parentElement.parentElement;
+    const email = form.querySelector("#recovery-email").value;
 
-    $.ajax({
-        url: form.getAttribute("action"),
-        type: "post",
-        data: {
-            email: email
-        },
-        dataType: "text",
-        success: function (response) {
-            response = JSON.parse(response);
-            if (response.error) {
-                notify({
-                    text: response.error,
-                    status: "error",
-                    bg: "bg-danger"
-                });
-            } else {
-                notify({
-                    text: "Se ha enviado un correo con el código a " + email + ", codigo: " + response.code,
-                    status: "success",
-                    bg: "bg-success"
-                })
-            }
-        },
-        error: function () {
-            notify({
-                text: "Ha ocurrido un error al ejecutar esta acción, inténtelo de nuevo o contacte al administrador",
-                status: "error",
-                bg: "bg-danger"
-            })
-        }
-    });
-    return true;
+    const response = await fetch(form.getAttribute("action"), {
+        method: "POST",
+        body: JSON.stringify({ email: email })
+    })
+
+    if (response.status != 200) {
+        return notify({
+            text: await response.text(),
+            status: "error",
+            bg: "bg-danger"
+        });
+    }
+
+    const data = await response.json();
+
+    return notify({
+        text: "Se ha enviado un correo con el código a " + email + ", codigo: " + data.code,
+        status: "success",
+        bg: "bg-success"
+    })
 })

@@ -2,7 +2,6 @@
 
 namespace FoxyMVC\App\Controllers;
 
-use FoxyMVC\App\Models\Role;
 use FoxyMVC\App\Models\User;
 use FoxyMVC\App\Packages\Privileges;
 use FoxyMVC\Lib\Foxy\Core\Request;

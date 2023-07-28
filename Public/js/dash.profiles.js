@@ -21,7 +21,7 @@ showProfileBtn.forEach(spb => {
         const userID = spb.parentElement.parentElement.getAttribute("data-user-id");
         const newUrl = url.replace(":id", userID);
 
-        let response = await fetch(newUrl, {
+        const response = await fetch(newUrl, {
             method: "post",
         });
 
@@ -34,95 +34,63 @@ showProfileBtn.forEach(spb => {
             });
         }
 
-        const result = await response.json();
+        const data = await response.json();
 
-        imgElement.setAttribute("src", `${imgElement.getAttribute("data-url-base")}${result.user.user_img_path}`);
+        imgElement.setAttribute("src", `${imgElement.getAttribute("data-url-base")}${data.user.user_img_path}`);
         avatarField.value = "Avatar 1";
-        nickField.value = result.user.user_nick ?? "";
-        nameField.value = result.user.user_name ?? "";
-        lastnameField.value = result.user.user_lastname ?? "";
-        emailField.value = result.user.user_email ?? "";
-        addressField.value = result.user.user_address ?? "";
-        phoneField.value = result.user.user_phone ?? "";
-        idField.value = result.user.user_id ?? "";
+        nickField.value = data.user.user_nick ?? "";
+        nameField.value = data.user.user_name ?? "";
+        lastnameField.value = data.user.user_lastname ?? "";
+        emailField.value = data.user.user_email ?? "";
+        addressField.value = data.user.user_address ?? "";
+        phoneField.value = data.user.user_phone ?? "";
+        idField.value = data.user.user_id ?? "";
 
-        document.querySelector("#show-profile").classList.add("show");
+        $("#show-profile").modal("show")
 
         return notify({
-            text: response.status.message,
+            text: data.message,
             status: "success",
             bg: "bg-success"
         });
-
-
-
-
-        // $.post(newUrl)
-        //     .done((response) => {
-        //         response = JSON.parse(response);
-        //         if (response.status.code != 200) {
-        //             resetShowProfileForm();
-        //             return notify({
-        //                 text: response.status.message,
-        //                 status: "error",
-        //                 bg: "bg-danger"
-        //             });
-        //         }
-
-        //         imgElement.setAttribute("src", `${imgElement.getAttribute("data-url-base")}${response.user.user_img_path}`);
-        //         avatarField.value = "Avatar 1";
-        //         nickField.value = response.user.user_nick ?? "";
-        //         nameField.value = response.user.user_name ?? "";
-        //         lastnameField.value = response.user.user_lastname ?? "";
-        //         emailField.value = response.user.user_email ?? "";
-        //         addressField.value = response.user.user_address ?? "";
-        //         phoneField.value = response.user.user_phone ?? "";
-        //         idField.value = response.user.user_id ?? "";
-
-        //         return notify({
-        //             text: response.status.message,
-        //             status: "success",
-        //             bg: "bg-success"
-        //         });
-        //     });
     });
 })
 
-showProfileForm.addEventListener("submit", (e) => {
+showProfileForm.addEventListener("submit", async (e) => {
     e.preventDefault();
     e.stopPropagation();
 
-    console.log(addressField.getAttribute("value"));
+    const url = showProfileForm.getAttribute("action");
+    const response = await fetch(url, {
+        method: "POST",
+        body: JSON.stringify({
+            id: idField.value,
+            nick: nickField.value,
+            name: nameField.value,
+            lastname: lastnameField.value,
+            email: emailField.value,
+            address: addressField.value,
+            phone: phoneField.value,
+        }),
+    })
 
-    $.post(showProfileForm.getAttribute("action"), {
-        id: idField.value,
-        nick: nickField.value,
-        name: nameField.value,
-        lastname: lastnameField.value,
-        email: emailField.value,
-        address: addressField.value,
-        phone: phoneField.value,
-    }).done((response) => {
-        response = JSON.parse(response);
-        if (response.status.code != 200) {
-            return notify({
-                text: response.status.message,
-                status: "error",
-                bg: "bg-danger"
-            });
-        }
-
-        const tableUserRow = document.querySelector(`[data-user-id="${idField.value}"]`);
-        tableUserRow.querySelector(".user-name").innerHTML = `${nameField.value} ${lastnameField.value}`
-
-        resetShowProfileForm();
+    if (response.status != 200) {
         return notify({
-            text: response.status.message,
-            status: "success",
-            bg: "bg-success"
+            text: response.statusText,
+            status: "error",
+            bg: "bg-danger"
         });
-    });
+    }
 
+    const tableUserRow = document.querySelector(`[data-user-id="${idField.value}"]`);
+    tableUserRow.querySelector(".user-name").innerHTML = `${nameField.value} ${lastnameField.value}`
+
+    resetShowProfileForm();
+    return notify({
+        text: await response.text(),
+        status: "success",
+        bg: "bg-success"
+    });
 })
 
 const resetShowProfileForm = () => {

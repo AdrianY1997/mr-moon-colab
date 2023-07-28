@@ -23,11 +23,11 @@ addItemBtn.addEventListener("click", async () => {
     if (selectInput.children.length > 1)
         return;
 
-    request = await fetch(selectInput.getAttribute("data-get-prov"));
-    response = await request.json();
+    const response = await fetch(selectInput.getAttribute("data-get-prov"));
+    const data = await response.json();
 
     let selectOptions = "<option selected disabled>Seleccione una opción...</option>";
-    response.forEach(e => {
+    data.providers.forEach(e => {
         selectOptions += `<option value="${e.prov_id}">${e.prov_nit}: ${e.prov_name}</option>`;
     })
 
@@ -40,6 +40,7 @@ items.forEach(item => {
 
     viewItemBtn.addEventListener("click", async () => {
         request = await fetch(item.getAttribute("data-href"));
+
         data = await request.json();
         data = data[0]
 

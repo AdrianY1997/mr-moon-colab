@@ -25,10 +25,10 @@ class ProfileController extends Controller {
     public function edit() {
         $data = Request::getData();
         $user = User::where("user_email", $data["email"])->first();
-        if (!password_verify($data["pass"], $user->user_pass))
-            redirect()->route("profile.show")->error("Debes ingresar tu contraseña antigua para realizar cambios en tu perfil")->send();
 
-        var_dump($data["new-pass"], $data["pass"], $user->user_pass);
+        if (!password_verify($data["pass"], $user->user_pass)) {
+            redirect()->route("profile.show")->error("Debes ingresar tu contraseña antigua para realizar cambios en tu perfil")->send();
+        }
 
         $isUpdated = User::where("user_email", $data["email"])->update([
             "user_nick" => $data["nick"],
@@ -40,8 +40,14 @@ class ProfileController extends Controller {
         ]);
 
         if (!$isUpdated)
-            redirect()->route("profile.show")->success("Ha ocurrido un error al actualizar tus datos, contacte con un administrador")->send();
+            redirect()
+                ->route("profile.show")
+                ->success("Ha ocurrido un error al actualizar tus datos, contacte con un administrador")
+                ->send();
 
-        redirect()->route("profile.show")->success("Se ha actualizado tus datos correctamente")->send();
+        redirect()
+            ->route("profile.show")
+            ->success("Se ha actualizado tus datos correctamente")
+            ->send();
     }
 }
