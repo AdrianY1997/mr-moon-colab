@@ -6,7 +6,7 @@
 
 ## Under Construction
 
-this README is keep under construction
+This version is not longer in development
 
 ## License
 
