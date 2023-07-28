@@ -7,6 +7,7 @@ use DateTimeZone;
 use FoxyMVC\App\Models\Reservation;
 use FoxyMVC\Lib\Foxy\Core\Controller;
 use FoxyMVC\Lib\Foxy\Core\Request;
+use FoxyMVC\Lib\Foxy\Core\Response;
 use FoxyMVC\Lib\Foxy\Core\Session;
 
 class ReservasController extends Controller {
@@ -106,33 +107,14 @@ class ReservasController extends Controller {
     }
 
     public function getHours() {
-        header('Content-Type: application/json');
-        $contentType = isset($_SERVER["CONTENT_TYPE"]) ? trim($_SERVER["CONTENT_TYPE"]) : '';
+        $data = Request::getFormData();
 
-        if ($contentType !== "application/json") {
-            echo json_encode([
-                "error" => "No se ha cargado la información correctamente"
-            ]);
-            return;
+        $result = Reservation::getHours($data->day);
+
+        if ($result === false) {
+            Response::status(500)->end("Ha ocurrido un error inesperado");
         }
 
-        $content = trim(file_get_contents("php://input"));
-        $decoded = json_decode($content, true);
-
-        if (!is_array($decoded)) {
-            echo json_encode([
-                "error" => "No hay datos que procesar"
-            ]);
-            return;
-        }
-
-        $day = $decoded["day"];
-
-        $result = Reservation::getHours($day);
-
-        echo json_encode([
-            "result" => $result,
-        ]);
-        return;
+        Response::status(200)->json(["hours" => $result]);
     }
 }

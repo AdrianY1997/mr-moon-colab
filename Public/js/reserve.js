@@ -17,42 +17,37 @@ searchReservationBtn.addEventListener("click", () => {
 })
 
 reserveDayInput.addEventListener("change", async () => {
-    reserveTimeBtn.setAttribute("data-bs-toggle", "collapse")
-    let request = await fetch(reserveDayInput.getAttribute("data-href"), {
+    const response = await fetch(reserveDayInput.getAttribute("data-href"), {
         method: "post",
-        headers: {
-            'content-type': 'application/json'
-        },
         body: JSON.stringify({ day: reserveDayInput.value }),
     });
 
-    let response = await request.text();
-    response = JSON.parse(response);
-
-    if (response.error) {
-        notify({
-            text: response.error,
+    if (response.status != 200) {
+        return notify({
+            text: await response.text(),
             status: "error",
             bg: "bg-danger"
         })
     }
 
-    response.result.forEach(e => {
+    const data = await response.json();
+
+    data.hours.forEach(e => {
         let [sec, time] = e.rese_time.split("-").map(e => e.trim());
         time = time.split(", ");
         const hours = document.querySelectorAll(`[data-day-section='${sec}']>div`);
         hours.forEach(h => {
             time.forEach(t => {
-                if (t == h.innerHTML && e.rese_status == "RESERVADO") {
-                    h.classList.add("reserved");
-                }
-
-                if (t == h.innerHTML && e.rese_status == "PENDIENTE") {
+                if (t == h.innerHTML && (e.rese_status == 1 || e.rese_status == 2)) {
                     h.classList.add("pending");
+                }
+                if (t == h.innerHTML && e.rese_status == 3) {
+                    h.classList.add("reserved");
                 }
             })
         })
     })
+    reserveTimeBtn.setAttribute("data-bs-toggle", "collapse")
 })
 
 let isSave = false;

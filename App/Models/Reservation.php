@@ -57,12 +57,14 @@ class Reservation extends Table {
     // ----
 
     public static function getHours($day) {
-        $query = "SELECT rese_time, rese_status FROM " . static::$tableName . " WHERE rese_day = ? AND (rese_status = 'RESERVADO' OR rese_status = 'PENDIENTE')";
+        $query = "SELECT rese_time, rese_status FROM " . static::$tableName . " WHERE rese_day = ? AND (rese_status = ? OR rese_status = ? OR rese_status = ?)";
         try {
             $stmt = MySQL::connect()->prepare($query);
-            $stmt->execute([$day]);
+            $stmt->execute([$day, Reservation::RESERVED, Reservation::WAITING_FOR_PAYMENT, Reservation::WAITING_FOR_PAYMENT]);
             $times = [];
-            while ($time = $stmt->fetchObject()) array_push($times, $time);
+            while ($time = $stmt->fetchObject()) {
+                array_push($times, $time);
+            }
             $stmt->closeCursor();
             return $times;
         } catch (PDOException $ex) {
