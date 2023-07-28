@@ -26,7 +26,7 @@
                                 <p class="user-name m-0">{{ $user->user_name }} {{ $user->user_lastname}}</p>
                             </td>
                             <td style="vertical-align: middle">
-                                <button class="btn text-primary show-profile-btn" data-bs-toggle="modal" data-bs-target="#show-profile"><i class="fa-solid fa-eye"></i></button>
+                                <button class="btn text-primary show-profile-btn" data-bs-target="#show-profile"><i class="fa-solid fa-eye"></i></button>
                                 <a href="{{ route("user.delete", ["user_id" => $user->user_id]) }}"><button class="btn text-danger"><i class="fa-solid fa-trash-alt"></i></button></a>
                             </td>
                         </tr>

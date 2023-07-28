@@ -14,37 +14,77 @@ const phoneField = document.querySelector("#show-profile-phone");
 const idField = document.querySelector("#show-profile-id");
 
 showProfileBtn.forEach(spb => {
-    spb.addEventListener("click", () => {
+    spb.addEventListener("click", async (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+
         const userID = spb.parentElement.parentElement.getAttribute("data-user-id");
         const newUrl = url.replace(":id", userID);
-        $.post(newUrl)
-            .done((response) => {
-                response = JSON.parse(response);
-                if (response.status.code != 200) {
-                    resetShowProfileForm();
-                    return notify({
-                        text: response.status.message,
-                        status: "error",
-                        bg: "bg-danger"
-                    });
-                }
 
-                imgElement.setAttribute("src", `${imgElement.getAttribute("data-url-base")}${response.user.user_img_path}`);
-                avatarField.value = "Avatar 1";
-                nickField.value = response.user.user_nick ?? "";
-                nameField.value = response.user.user_name ?? "";
-                lastnameField.value = response.user.user_lastname ?? "";
-                emailField.value = response.user.user_email ?? "";
-                addressField.value = response.user.user_address ?? "";
-                phoneField.value = response.user.user_phone ?? "";
-                idField.value = response.user.user_id ?? "";
+        let response = await fetch(newUrl, {
+            method: "post",
+        });
 
-                return notify({
-                    text: response.status.message,
-                    status: "success",
-                    bg: "bg-success"
-                });
+        if (response.status != 200) {
+            resetShowProfileForm();
+            return notify({
+                text: response.statusText,
+                status: "error",
+                bg: "bg-danger"
             });
+        }
+
+        const result = await response.json();
+
+        imgElement.setAttribute("src", `${imgElement.getAttribute("data-url-base")}${result.user.user_img_path}`);
+        avatarField.value = "Avatar 1";
+        nickField.value = result.user.user_nick ?? "";
+        nameField.value = result.user.user_name ?? "";
+        lastnameField.value = result.user.user_lastname ?? "";
+        emailField.value = result.user.user_email ?? "";
+        addressField.value = result.user.user_address ?? "";
+        phoneField.value = result.user.user_phone ?? "";
+        idField.value = result.user.user_id ?? "";
+
+        document.querySelector("#show-profile").classList.add("show");
+
+        return notify({
+            text: response.status.message,
+            status: "success",
+            bg: "bg-success"
+        });
+
+
+
+
+        // $.post(newUrl)
+        //     .done((response) => {
+        //         response = JSON.parse(response);
+        //         if (response.status.code != 200) {
+        //             resetShowProfileForm();
+        //             return notify({
+        //                 text: response.status.message,
+        //                 status: "error",
+        //                 bg: "bg-danger"
+        //             });
+        //         }
+
+        //         imgElement.setAttribute("src", `${imgElement.getAttribute("data-url-base")}${response.user.user_img_path}`);
+        //         avatarField.value = "Avatar 1";
+        //         nickField.value = response.user.user_nick ?? "";
+        //         nameField.value = response.user.user_name ?? "";
+        //         lastnameField.value = response.user.user_lastname ?? "";
+        //         emailField.value = response.user.user_email ?? "";
+        //         addressField.value = response.user.user_address ?? "";
+        //         phoneField.value = response.user.user_phone ?? "";
+        //         idField.value = response.user.user_id ?? "";
+
+        //         return notify({
+        //             text: response.status.message,
+        //             status: "success",
+        //             bg: "bg-success"
+        //         });
+        //     });
     });
 })
 

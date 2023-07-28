@@ -12,6 +12,7 @@ use FoxyMVC\App\Packages\Privileges;
 use FoxyMVC\Lib\Foxy\Core\Request;
 use FoxyMVC\Lib\Foxy\Core\Session;
 use FoxyMVC\Lib\Foxy\Core\Controller;
+use FoxyMVC\Lib\Foxy\Core\Response;
 
 class DashboardController extends Controller {
     public function __construct() {
@@ -78,27 +79,22 @@ class DashboardController extends Controller {
     }
 
     public function usuarios() {
-        $usuarios = User::get();
         return self::render("dashboard.users", [
             "active" => "usuarios",
-            "usuarios" => $usuarios,
+            "usuarios" => User::get(),
         ]);
     }
 
     public function getUserInfo($id) {
-        $response = [];
-        if ($response["user"] = User::where("user_id", $id)->first()) {
-            $response["status"] = [
-                "code" => 200,
-                "message" => "Información cargada"
-            ];
-        } else {
-            $response["status"] = [
-                "code" => 500,
-                "message" => "Error al cargar la información"
-            ];
+        $message = "";
+
+        $user = User::where("user_id", $id)->first();
+
+        if (!$user) {
+            Response::status(401)->send("Ha ocurrido un error al obtener la información del perfil.", "ISO-8859-1");
         }
-        echo json_encode($response);
+
+        Response::status(200)->json(["user" => $user]);
     }
 
     public function setUserInfo() {

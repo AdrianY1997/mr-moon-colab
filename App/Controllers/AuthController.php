@@ -15,7 +15,7 @@ class AuthController extends Controller {
         parent::__construct();
     }
 
-    private function checkRole() {
+    public function checkRole() {
         if (!Session::checkSession()) {
             return;
         }

@@ -1,7 +1,6 @@
 <?php
 
 use FoxyMVC\Lib\Foxy\Core\Route;
-use FoxyMVC\Lib\Sly\TemplateEngine;
 use FoxyMVC\Lib\Foxy\Core\Redirector;
 
 if (!function_exists("formatString")) {
@@ -50,6 +49,14 @@ if (!function_exists("route")) {
 if (!function_exists("redirect")) {
     function redirect() {
         return new Redirector;
+    }
+}
+
+if (!function_exists("wordsDate")) {
+    function wordsDate($timestamp) {
+        $timestamp = explode(" ", $timestamp)[0];
+        $timestamp = date("F j, Y", strtotime($timestamp));
+        return $timestamp;
     }
 }
 
