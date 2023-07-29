@@ -1,4 +1,5 @@
 const url = document.querySelector("tbody").getAttribute("data-url-info");
+
 const showProfileBtn = document.querySelectorAll(".show-profile-btn");
 const showProfileForm = document.querySelector("#show-profile-form");
 
@@ -13,6 +14,10 @@ const addressField = document.querySelector("#show-profile-address");
 const phoneField = document.querySelector("#show-profile-phone");
 const idField = document.querySelector("#show-profile-id");
 
+let response, data;
+
+
+
 showProfileBtn.forEach(spb => {
     spb.addEventListener("click", async (e) => {
         e.preventDefault();
@@ -21,20 +26,13 @@ showProfileBtn.forEach(spb => {
         const userID = spb.parentElement.parentElement.getAttribute("data-user-id");
         const newUrl = url.replace(":id", userID);
 
-        const response = await fetch(newUrl, {
-            method: "post",
+        response = await fetch(newUrl, {
+            method: "GET",
         });
 
-        if (response.status != 200) {
-            resetShowProfileForm();
-            return notify({
-                text: response.statusText,
-                status: "error",
-                bg: "bg-danger"
-            });
-        }
+        if (await checkFetchError(response)) return;
 
-        const data = await response.json();
+        data = await response.json();
 
         imgElement.setAttribute("src", `${imgElement.getAttribute("data-url-base")}${data.user.user_img_path}`);
         avatarField.value = "Avatar 1";
@@ -61,7 +59,7 @@ showProfileForm.addEventListener("submit", async (e) => {
     e.stopPropagation();
 
     const url = showProfileForm.getAttribute("action");
-    const response = await fetch(url, {
+    response = await fetch(url, {
         method: "POST",
         body: JSON.stringify({
             id: idField.value,
