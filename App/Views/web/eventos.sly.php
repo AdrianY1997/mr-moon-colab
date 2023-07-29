@@ -3,7 +3,7 @@
         <h1>Eventos</h1>
     </div>
     <div class="imgs container">
-        @foreach($events as $evento)
+        @foreach($events as $evento):
         <div>
             <div>
                 <img class="w-100" src="{{ asset($evento->even_path) }}" alt="">

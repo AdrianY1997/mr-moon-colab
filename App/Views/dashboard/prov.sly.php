@@ -20,12 +20,12 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @if(!$providers)
+                        @if(!$providers):
                         <tr>
                             <td>No hay datos.</td>
                         </tr>
                         @else
-                        @foreach($providers as $key => $provider)
+                        @foreach($providers as $key => $provider):
                         <tr class="item" data-href="{{ route("prov.getInfo", ["id" => $provider->prov_id]) }}">
                             <td>{{ $provider->prov_nit }}</td>
                             <td>{{ $provider->prov_name }}</td>

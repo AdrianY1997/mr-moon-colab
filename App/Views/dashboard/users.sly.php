@@ -4,39 +4,52 @@
             @include('dashboard/static/menu')
             <div class="content">
                 <p>Lista de usuarios</p>
+                @if($isMaster):
+                <div class="mb-3">
+                    <button class="btn btn-primary" id="add-item">
+                        <span>
+                            <i class="fa-solid fa-plus"></i> Agregar
+                        </span>
+                    </button>
+                </div>
+                @endif
                 <table class="table">
                     <thead>
                         <tr>
                             <th>ID</th>
+                            @if($isMaster):
+                            <th>Nick</th>
+                            @endif
                             <th>Nombres</th>
                             <th>Acciones</th>
                         </tr>
                     </thead>
                     <tbody data-url-info="{{ route("dash.userGetInfo", ["id" => ":id"]) }}">
-                        @php
-                        $l = count($usuarios);
-                        @endphp
-                        @foreach($usuarios as $user)
-                        @if($l > 2 && $user->user_id != 1 && $user->user_id != 2)
-                        <tr data-user-id="{{ $user->user_id }}">
-                            <td style="vertical-align: middle">
-                                <p class="m-0">{{ $user->user_id }}</p>
-                            </td>
-                            <td style="vertical-align: middle">
-                                <p class="user-name m-0">{{ $user->user_name }} {{ $user->user_lastname}}</p>
-                            </td>
-                            <td style="vertical-align: middle">
-                                <button class="btn text-primary show-profile-btn" data-bs-target="#show-profile"><i class="fa-solid fa-eye"></i></button>
-                                <a href="{{ route("user.delete", ["user_id" => $user->user_id]) }}"><button class="btn text-danger"><i class="fa-solid fa-trash-alt"></i></button></a>
-                            </td>
-                        </tr>
-                        @endif
-                        @endforeach
-                        @if($l <= 2) <tr>
+                        @if(count($usuarios) <= 3 && !$isMaster): <tr>
                             <td colspan="3">
                                 <p class="mb-0">No hay usuarios registrados</p>
                             </td>
                             </tr>
+                            @else
+                            @foreach($usuarios as $key => $user):
+                            <tr data-user-id="{{ $user->user_id }}">
+                                <td style="vertical-align: middle">
+                                    <p class="m-0">{{ $user->user_id }}</p>
+                                </td>
+                                <?php if ($isMaster) { ?>
+                                <td style="vertical-align: middle">
+                                    <p class="user-name m-0">{{ $user->user_nick }}</p>
+                                </td>
+                                <?php } ?>
+                                <td style="vertical-align: middle">
+                                    <p class="user-name m-0">{{ $user->user_name }} {{ $user->user_lastname}}</p>
+                                </td>
+                                <td style="vertical-align: middle">
+                                    <button class="btn text-primary show-profile-btn" data-bs-target="#show-profile"><i class="fa-solid fa-eye"></i></button>
+                                    <a href="{{ route("user.delete", ["user_id" => $user->user_id]) }}"><button class="btn text-danger"><i class="fa-solid fa-trash-alt"></i></button></a>
+                                </td>
+                            </tr>
+                            @endforeach
                             @endif
                     </tbody>
                 </table>
@@ -44,6 +57,86 @@
         </div>
     </div>
 </div>
+@if($isMaster):
+<div class="modal fade" id="add-profile" tabindex="-1" aria-labelledby="add-profile-label" aria-hidden="true">
+    <div class="modal-dialog container">
+        <div class="modal-content">
+            <form action="{{ route("profile.add") }}" method="post">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="add-profile-label">Editar Perfil</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row gutters-sm">
+                        <div class="col-md-4 mb-3">
+                            <div>
+                                <div class="card-body">
+                                    <div class="d-flex flex-column align-items-center text-center">
+                                        <div class="mb-3">
+                                            <div class="form-floating">
+                                                <input name="nick" id="nick" type="text" class="form-control" placeholder="John Doe" value="@if($user->user_nick) {{ $user->user_nick }} @endif">
+                                                <label for="nick">Nick</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-8">
+                            <div class="mb-3">
+                                <div class="card-body">
+                                    <div class="row mx-1 mb-3">
+                                        <div class="form-floating p-0">
+                                            <input name="name" id="name" type="text" class="form-control" placeholder="John" value="@if($user->user_name) {{ $user->user_name }} @endif">
+                                            <label for="name">Nombre</label>
+                                        </div>
+                                    </div>
+                                    <div class="row mx-1 mb-3">
+                                        <div class="form-floating p-0">
+                                            <input name="lastname" id="lastname" type="text" class="form-control" placeholder="Doe" value="@if($user->user_lastname) {{ $user->user_lastname }} @endif">
+                                            <label for="lastname">Apellido</label>
+                                        </div>
+                                    </div>
+                                    <div class="row mx-1 mb-3">
+                                        <div class="form-floating p-0">
+                                            <input name="email" id="email" type="text" class="form-control" placeholder="mail@domain.com" value="@if($user->user_email) {{ $user->user_email }} @endif" disabled>
+                                            <label for="email">Email</label>
+                                        </div>
+                                    </div>
+                                    <div class="row mx-1 mb-3">
+                                        <div class="form-floating p-0">
+                                            <input name="address" id="address" type="text" class="form-control" placeholder="mail@domain.com" value="@if($user->user_address) {{ $user->user_address }} @endif">
+                                            <label for="address">Dirección</label>
+                                        </div>
+                                    </div>
+                                    <div class="row mx-1 mb-3">
+                                        <div class="form-floating p-0">
+                                            <input name="phone" id="phone" type="text" class="form-control" placeholder="mail@domain.com" value="@if($user->user_phone) {{ $user->user_phone }} @endif">
+                                            <label for="phone">Teléfono</label>
+                                        </div>
+                                    </div>
+                                    <div class="row mx-1 mb-3">
+                                        <div class="form-floating p-0">
+                                            <input name="pass" id="pass" type="text" class="form-control" placeholder="*" required>
+                                            <label for="pass">Contraseña <sup class="text-danger">*</sup></label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer d-flex justify-content-between">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                    <div>
+                        <button type="submit" class="btn btn-primary">Guardar</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+@endif
 <div class="modal fade" id="show-profile" tabindex="-1" aria-labelledby="show-profile-label" aria-hidden="true">
     <div class="modal-dialog container">
         <div class="modal-content">

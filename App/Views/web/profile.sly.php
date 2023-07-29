@@ -8,7 +8,7 @@
                             <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="Admin" class="rounded-circle border" width="150">
                             <div class="mt-3">
                                 <h4>
-                                    @if($user->user_nick)
+                                    @if($user->user_nick):
                                     <p>{{ $user->user_nick }}</p>
                                     @else
                                     <p>Sin Especificar</p>

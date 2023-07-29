@@ -13,12 +13,12 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @if(!$reserves)
+                        @if(!$reserves):
                         <tr>
                             <td>No hay datos.</td>
                         </tr>
                         @else
-                        @foreach($reserves as $key => $reserve)
+                        @foreach($reserves as $key => $reserve):
                         <tr class="item" data-href="{{ route("dash.itemGetInfo", ["id" => $reserve->rese_id]) }}">
                             <td>{{ $reserve->rese_urid }}</td>
                             <td>{{ $reserve->rese_status }}</td>
