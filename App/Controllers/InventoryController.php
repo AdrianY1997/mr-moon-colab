@@ -64,7 +64,7 @@ class InventoryController extends Controller {
             ->send();
     }
 
-    public function delete($prod, $prov) {
+    public function delete($id) {
         // ProductProvider::where("prod_id", $prod)->where("prov_id", $prov)->delete();
         // Product::where("prod_id", $prod)->delete();
 

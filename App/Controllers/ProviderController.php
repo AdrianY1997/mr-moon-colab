@@ -13,13 +13,15 @@ class ProviderController extends Controller {
     }
 
     public function getProv($id) {
+        Response::checkMethod("GET");
 
-        $providers = Provider::first();
+        $providers = Provider::where("prov_id", $id)->first();
+
         if (!$providers) {
             Response::status(500)->end("No se ha podido cargar la información ");
         }
 
-        Response::status(200)->json(["provider" => $providers]);
+        Response::json(["provider" => $providers]);
     }
 
     public function add() {

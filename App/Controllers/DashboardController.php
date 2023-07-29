@@ -45,6 +45,7 @@ class DashboardController extends Controller {
         return self::render("dashboard.users", [
             "active" => "usuarios",
             "usuarios" => User::get(),
+            "isMaster" => (Privileges::Master->get() & Session::data("user_privileges")) == Privileges::Master->get()
         ]);
     }
 
@@ -132,9 +133,12 @@ class DashboardController extends Controller {
     public function getUserInfo($id) {
         $user = User::where("user_id", $id)->first();
         if (!$user) {
-            Response::status(401)->send("Ha ocurrido un error al obtener la información del perfil.", "ISO-8859-1");
+            Response::status(401)->end("Ha ocurrido un error al obtener la información del perfil.");
         }
-        Response::status(200)->json(["user" => $user, "message" => "Se ha cargado la información"]);
+        Response::json([
+            "message" => "Se ha cargado la información",
+            "user" => $user
+        ]);
     }
 
     public function setUserInfo() {
@@ -151,26 +155,25 @@ class DashboardController extends Controller {
         if (!$isUpdated) {
             Response::status(500)->end("Error al actualizar la información ");
         }
-        Response::status(200)->end("Se ha actualizado la información ");
+        Response::end("Se ha actualizado la información ");
     }
 
     public function getItem($id) {
         $products = Product::getAllData($id);
 
-        if (!$products) {
-            $data["error"] = "Ubo un error al obtener los datos";
-            echo json_encode($data);
-            return;
+        if ($products === false) {
+            Response::status(500)->end("Hubo un error al obtener los datos");
         }
 
-        $data[] = $products[0];
-        echo json_encode($data);
+        Response::json(["product" => $products[0]]);
     }
 
     public function getProv() {
+        Response::checkMethod("GET");
+
         $providers = Provider::get();
-        if (!$providers) {
-            Response::status(500)->end("No se ha podido cargar la información ");
+        if ($providers === false) {
+            Response::status(500)->json(["providers" => $providers, "message" => "No se ha podido cargar la información "]);
         }
 
         Response::status(200)->json(["providers" => $providers]);

@@ -3,6 +3,7 @@
 namespace FoxyMVC\App\Controllers;
 
 use FoxyMVC\App\Models\Code;
+use FoxyMVC\App\Models\User;
 use FoxyMVC\App\Packages\Privileges;
 use FoxyMVC\Lib\Foxy\Core\Controller;
 use FoxyMVC\Lib\Foxy\Core\Request;
@@ -29,10 +30,18 @@ class RecoveryController extends Controller {
     }
 
     public function request_recovery_code() {
+        Response::checkMethod("POST");
+
         $data = Request::getFormData();
 
         if (!filter_var($data->email, FILTER_VALIDATE_EMAIL)) {
-            Response::status(401)->json([$data]);
+            Response::status(401)->end("El email ingresado es invalido");
+        }
+
+        $user = User::where("user_email", $data->email)->first();
+
+        if (!$user) {
+            Response::status(401)->end("El email ingresado no se encuentra registrado");
         }
 
         $randCode = rand(100000, 999999);
@@ -44,7 +53,7 @@ class RecoveryController extends Controller {
 
         Code::insert($code);
 
-        Response::status(200)->json(["code" => $randCode]);
+        Response::json(["code" => $randCode]);
     }
 
     public function verify_recovery_code() {
