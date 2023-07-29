@@ -13,6 +13,9 @@ class StringPatterns {
             '/{{\s*(.+?)\s*}}/' => function ($matches, $view, $data) {
                 return '<?= htmlspecialchars(' . $matches[1] . ') ?>';
             },
+            '/{{--\s*(.+?)\s*--}}/' => function ($matches, $view, $data) {
+                return ('<!-- ' . $matches[1] . ') -->');
+            },
             '/@dump\s*\(\s*(.+?)\s*\)/' => function ($matches) {
                 return '<?php var_dump(' . $matches[1] . ') ?>';
             },
