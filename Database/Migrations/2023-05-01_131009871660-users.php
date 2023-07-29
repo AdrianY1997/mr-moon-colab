@@ -22,6 +22,12 @@ return new class {
         });
 
         Schema::insert($this->tableName, [
+            "nick" => "Guest",
+            "email" => "guest@mail.com",
+            "pass" => password_hash("Guest@2023;", PASSWORD_DEFAULT),
+        ]);
+
+        Schema::insert($this->tableName, [
             "nick" => "Administrator",
             "email" => "admin@mail.com",
             "pass" => password_hash("Admin@2023;", PASSWORD_DEFAULT),
@@ -29,9 +35,10 @@ return new class {
         ]);
 
         Schema::insert($this->tableName, [
-            "nick" => "Guest",
-            "email" => "guest@mail.com",
-            "pass" => password_hash("Guest@2023;", PASSWORD_DEFAULT),
+            "nick" => "Master",
+            "email" => "master@mail.com",
+            "pass" => password_hash("Master@2023;", PASSWORD_DEFAULT),
+            "privileges" => Privileges::User->get() + Privileges::Admin->get() + Privileges::Master->get()
         ]);
     }
 
