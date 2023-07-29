@@ -5,7 +5,6 @@
 
 <div style="width: 100%; text-align: center"><img src="./Public/img/favicon.png" height="200" style="" /></div>
 
-
 ## Under Construction
 
 Este documento aun se encuentra en construcción
