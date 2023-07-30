@@ -7,7 +7,7 @@ namespace FoxyMVC\Lib\Sly\Patterns;
 class SectionPatterns {
     public function getPatterns() {
         return [
-            '/@include\((.*?)\)(?!\))/' => function ($matches, $patterns, $view, $data) {
+            '/@include\s*\(\s*(.*?)\s*\)\:/s' => function ($matches, $patterns, $view, $data) {
                 // Determine if the captured text is a quoted string or a variable name
                 if (preg_match('/^[\'"](.+?)[\'"]$/', $matches[1], $stringMatches)) {
                     // Captured text is a quoted string

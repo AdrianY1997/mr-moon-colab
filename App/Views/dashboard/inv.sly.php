@@ -1,7 +1,7 @@
 <div class="dash dash-inventario">
     <div>
         <div class="container">
-            @include('dashboard/static/menu')
+            @include('dashboard/static/menu'):
             <div class="content position-relative">
                 <p>Inventario</p>
                 <div class="mb-3">
@@ -20,12 +20,12 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @if(!$products)
+                        @if(!$products):
                         <tr>
                             <td>No hay datos.</td>
                         </tr>
                         @else
-                        @foreach($products as $key => $product)
+                        @foreach($products as $key => $product):
                         <tr class="item" data-href="{{ route("dash.itemGetInfo", ["id" => $product->prod_id]) }}">
                             <td>{{ $product->prod_ref }}</td>
                             <td>{{ $product->prod_name }}</td>

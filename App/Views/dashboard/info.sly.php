@@ -1,7 +1,7 @@
 <div class="dash dash-info">
     <div>
         <div class="container">
-            @include('dashboard/static/menu')
+            @include('dashboard/static/menu'):
             <div class="content">
                 <div class="sections">
                     <p style="cursor: pointer" class="active text-black" data-section="0">Ver Información</p>

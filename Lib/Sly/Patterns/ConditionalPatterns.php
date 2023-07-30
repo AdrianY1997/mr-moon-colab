@@ -8,11 +8,11 @@ use FoxyMVC\Lib\Sly\Interfaces\TemplatePatterns;
 class ConditionalPatterns implements TemplatePatterns {
     public function getPatterns() {
         return [
-            '/@if\((.*?)\)(?!\))/s' => function ($matches) {
-                return '<?php if (' . $this->replaceDelimiters($matches[1]) . ') { ?>';
+            '/@if\s*\(\s*(.*?)\s*\)\:/s' => function ($matches) {
+                return '<?php if (' . $matches[1] . ') { ?>';
             },
-            '/@elseif\s*\(\s*(.*?)\)(?!\s*\))/s' => function ($matches) {
-                return "<?php } else if (" . $this->replaceDelimiters($matches[1]) . ') { ?>';
+            '/@elseif\s*\(\s*(.*?)\s*\)\:/s' => function ($matches) {
+                return "<?php } else if (" . $matches[1] . ') { ?>';
             },
             '/@else/s' => function () {
                 return '<?php } else { ?>';
@@ -20,16 +20,12 @@ class ConditionalPatterns implements TemplatePatterns {
             '/@endif/s' => function () {
                 return "<?php } ?>";
             },
-            '/@isset\s*\(\s*(.*?)\)(?!\s*\))/s' => function ($matches) {
-                return '<?php if (isset(' . $this->replaceDelimiters($matches[1]) . ')) { ?>';
+            '/@isset\s*\(\s*(.*?)\s*\)\:/s' => function ($matches) {
+                return '<?php if (isset(' . $matches[1] . ')) { ?>';
             },
             '/@endisset/s' => function () {
                 return '<?php } ?>';
             },
         ];
-    }
-
-    private function replaceDelimiters($expression) {
-        return str_replace(['<?', '?>'], ['_OPEN_TAG_', '_CLOSE_TAG_'], $expression);
     }
 }

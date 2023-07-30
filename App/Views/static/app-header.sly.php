@@ -29,9 +29,20 @@ $webdata = unserialize($_COOKIE['webdata']);
                 <a href="{{ route('galery') }}">
                     <p class="m-0">Galería</p>
                 </a>
+                @if(!Session::checkSession()):
                 <a href="{{ route('auth.login') }}">
                     <p class="m-0"><i class="fa-solid fa-user-circle"></i></p>
                 </a>
+                @else
+                    <a class="px-1" href="{{ route('profile.show') }}">
+                        <p class="m-0"><i class="fa-solid fa-user-circle"></i></p>
+                    </a>
+                    @if((Privileges::Admin->get() & Session::data("user_privileges")) == Privileges::Admin->get()):
+                    <a class="px-1" href="{{ route('dash.home') }}">
+                        <p class="m-0"><i class="fa-solid fa-gauge"></i></p>
+                    </a>
+                    @endif
+                @endif
             </div>
             <div class="mb-menu">
                 <p data-group="nav" data-type="button"><i class="fa-solid fa-bars"></i></p>
@@ -54,9 +65,20 @@ $webdata = unserialize($_COOKIE['webdata']);
             <a href="{{ route('galery') }}">
                 <p class="m-0">Galería</p>
             </a>
+            @if(!Session::checkSession()):
             <a href="{{ route('auth.login') }}">
                 <p class="m-0"><i class="fa-solid fa-user-circle"></i></p>
             </a>
+            @else
+            @if((Privileges::Admin->get() & Session::data("user_privileges")) == Privileges::Admin->get()):
+            <a href="{{ route('profile.show') }}">
+                <p class="m-0"><i class="fa-solid fa-user-circle"></i></p>
+            </a>
+            <a href="{{ route('auth.login') }}">
+                <p class="m-0"><i class="fa-solid fa-gauge"></i></p>
+            </a>
+            @endif
+            @endif
         </nav>
     </div>
 </div>
