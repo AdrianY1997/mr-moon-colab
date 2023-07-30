@@ -7,7 +7,7 @@ namespace FoxyMVC\Lib\Sly\Patterns;
 class SectionPatterns {
     public function getPatterns() {
         return [
-            '/@include\s*\(\s*(.+?)\s*\)/' => function ($matches, $patterns, $view, $data) {
+            '/@include\((.*?)\)(?!\))/' => function ($matches, $patterns, $view, $data) {
                 // Determine if the captured text is a quoted string or a variable name
                 if (preg_match('/^[\'"](.+?)[\'"]$/', $matches[1], $stringMatches)) {
                     // Captured text is a quoted string
@@ -25,20 +25,16 @@ class SectionPatterns {
                 extract($data);
                 include $viewPath;
                 $content = ob_get_clean();
-
+                
                 // Process patterns
                 foreach ($patterns as $pattern => $callback) {
                     $content = preg_replace_callback($pattern, function ($matches) use ($callback, $patterns, $view, $data) {
                         return call_user_func($callback, $matches, $patterns, $view, $data);
                     }, $content);
                 }
-
                 // Return the processed content
                 return $content;
-            },
-            '/@extend\s*\(\s*(.+?)\s*\)/' => function ($matches) {
-                return '<?php extend(' . str_replace('.', '\\', $matches[1]) . ') ?>';
-}
-];
-}
+            }
+        ];
+    }
 }

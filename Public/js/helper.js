@@ -41,6 +41,9 @@ const checkFetchError = async (response) => {
 (() => {
     const toastLoader = document.querySelectorAll(".toast-loader")
     setTimeout(() => {
-        document.querySelector("button[data-bs-dismiss='toast']").click()
+        const toastClose = document.querySelector("button[data-bs-dismiss='toast']")
+        if (toastClose) {
+            toastClose.click()
+        }
     }, TIME);
 })()

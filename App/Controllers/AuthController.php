@@ -14,6 +14,16 @@ class AuthController extends Controller {
         parent::__construct();
     }
 
+    public function log_in() {
+        $this->checkRole();
+        return self::render("auth.login");
+    }
+
+    public function sign_up() {
+        $this->checkRole();
+        return self::render("auth.signup");
+    }
+
     public function checkRole() {
         if (!Session::checkSession()) {
             return;
@@ -32,16 +42,6 @@ class AuthController extends Controller {
                 ->success("Haz iniciado sesión correctamente")
                 ->send();
         }
-    }
-
-    public function log_in() {
-        $this->checkRole();
-        return self::render("auth.login");
-    }
-
-    public function sign_up() {
-        $this->checkRole();
-        return self::render("auth.signup");
     }
 
     public function start_session() {

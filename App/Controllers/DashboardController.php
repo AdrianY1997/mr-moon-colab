@@ -45,7 +45,6 @@ class DashboardController extends Controller {
         return self::render("dashboard.users", [
             "active" => "usuarios",
             "usuarios" => User::get(),
-            "isMaster" => (Privileges::Master->get() & Session::data("user_privileges")) == Privileges::Master->get()
         ]);
     }
 
