@@ -1,7 +1,7 @@
 <div class="dash dash-reservas">
     <div>
         <div class="container">
-            @include('dashboard/static/menu')
+            @include('dashboard/static/menu'):
             <div class="content">
                 <p>Reservas</p>
                 <table class="table">

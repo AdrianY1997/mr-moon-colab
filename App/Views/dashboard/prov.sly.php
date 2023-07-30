@@ -1,7 +1,7 @@
 <div class="dash dash-proveedores">
     <div>
         <div class="container">
-            @include('dashboard/static/menu')
+            @include('dashboard/static/menu'):
             <div class="content position-relative">
                 <p>Proveedores</p>
                 <div class="mb-3">

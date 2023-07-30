@@ -12,6 +12,25 @@ if (!function_exists("formatString")) {
     }
 }
 
+function search_file($ruta, $patron) {
+    $archivos = array();
+    if ($handle = opendir($ruta)) {
+        while (false !== ($entry = readdir($handle))) {
+            if ($entry != "." && $entry != "..") {
+                if (is_dir($ruta . '/' . $entry)) {
+                    $archivos = array_merge($archivos, search_file($ruta . '/' . $entry, $patron));
+                } else {
+                    if (fnmatch($patron, $entry)) {
+                        $archivos[] = $ruta . '/' . $entry;
+                    }
+                }
+            }
+        }
+        closedir($handle);
+    }
+    return $archivos;
+}
+
 if (!function_exists("asset")) {
     function asset($path) {
         return constant("BASE_URL") . "Public/" . $path;

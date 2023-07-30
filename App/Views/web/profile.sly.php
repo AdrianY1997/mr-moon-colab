@@ -106,13 +106,13 @@
                                         </div>
                                         <div class="mb-3">
                                             <div class="form-floating">
-                                                <input name="nick" id="nick" type="text" class="form-control" placeholder="John Doe" value="@if($user->user_nick){{ $user->user_nick }}@endif">
+                                                <input name="nick" id="nick" type="text" class="form-control" placeholder="John Doe" value="@if($user->user_nick): {{ $user->user_nick }}@endif">
                                                 <label for="nick">Nick</label>
                                             </div>
                                         </div>
                                         <div>
                                             <div class="form-floating">
-                                                <input name="new-pass" id="new-pass" type="password" class="form-control" placeholder="Contraseña" @endif">
+                                                <input name="new-pass" id="new-pass" type="password" class="form-control" placeholder="Contraseña">
                                                 <label for="new-pass">Nueva Contraseña</label>
                                             </div>
                                         </div>
@@ -125,31 +125,31 @@
                                 <div class="card-body">
                                     <div class="row mx-1 mb-3">
                                         <div class="form-floating p-0">
-                                            <input name="name" id="name" type="text" class="form-control" placeholder="John" value="@if($user->user_name) {{ $user->user_name }} @endif">
+                                            <input name="name" id="name" type="text" class="form-control" placeholder="John" value="@if($user->user_name): {{ $user->user_name }} @endif">
                                             <label for="name">Nombre</label>
                                         </div>
                                     </div>
                                     <div class="row mx-1 mb-3">
                                         <div class="form-floating p-0">
-                                            <input name="lastname" id="lastname" type="text" class="form-control" placeholder="Doe" value="@if($user->user_lastname) {{ $user->user_lastname }} @endif">
+                                            <input name="lastname" id="lastname" type="text" class="form-control" placeholder="Doe" value="@if($user->user_lastname): {{ $user->user_lastname }} @endif">
                                             <label for="lastname">Apellido</label>
                                         </div>
                                     </div>
                                     <div class="row mx-1 mb-3">
                                         <div class="form-floating p-0">
-                                            <input name="email" id="email" type="text" class="form-control" placeholder="mail@domain.com" value="@if($user->user_email){{ $user->user_email }}@endif" readonly>
+                                            <input name="email" id="email" type="text" class="form-control" placeholder="mail@domain.com" value="@if($user->user_email): {{ $user->user_email }}@endif" readonly>
                                             <label for="email">Email</label>
                                         </div>
                                     </div>
                                     <div class="row mx-1 mb-3">
                                         <div class="form-floating p-0">
-                                            <input name="address" id="address" type="text" class="form-control" placeholder="mail@domain.com" value="@if($user->user_address) {{ $user->user_address }} @endif">
+                                            <input name="address" id="address" type="text" class="form-control" placeholder="mail@domain.com" value="@if($user->user_address): {{ $user->user_address }} @endif">
                                             <label for="address">Dirección</label>
                                         </div>
                                     </div>
                                     <div class="row mx-1 mb-3">
                                         <div class="form-floating p-0">
-                                            <input name="phone" id="phone" type="text" class="form-control" placeholder="mail@domain.com" value="@if($user->user_phone) {{ $user->user_phone }} @endif">
+                                            <input name="phone" id="phone" type="text" class="form-control" placeholder="mail@domain.com" value="@if($user->user_phone): {{ $user->user_phone }} @endif">
                                             <label for="phone">Teléfono</label>
                                         </div>
                                     </div>
