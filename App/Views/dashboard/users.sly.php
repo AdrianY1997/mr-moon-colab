@@ -4,7 +4,7 @@
             @include('dashboard/static/menu')
             <div class="content">
                 <p>Lista de usuarios</p>
-                @if($isMaster):
+                @if($isMaster)
                 <div class="mb-3">
                     <button class="btn btn-primary" id="add-item">
                         <span>
@@ -17,7 +17,7 @@
                     <thead>
                         <tr>
                             <th>ID</th>
-                            @if($isMaster):
+                            @if($isMaster)
                             <th>Nick</th>
                             @endif
                             <th>Nombres</th>
@@ -25,13 +25,13 @@
                         </tr>
                     </thead>
                     <tbody data-url-info="{{ route("dash.userGetInfo", ["id" => ":id"]) }}">
-                        @if(count($usuarios) <= 3 && !$isMaster): <tr>
+                        @if(count($usuarios) <= 3 && !$isMaster) <tr>
                             <td colspan="3">
                                 <p class="mb-0">No hay usuarios registrados</p>
                             </td>
                             </tr>
                             @else
-                            @foreach($usuarios as $key => $user):
+                            @foreach($usuarios as $key => $user)
                             <tr data-user-id="{{ $user->user_id }}">
                                 <td style="vertical-align: middle">
                                     <p class="m-0">{{ $user->user_id }}</p>
@@ -57,7 +57,7 @@
         </div>
     </div>
 </div>
-@if($isMaster):
+@if($isMaster)
 <div class="modal fade" id="add-profile" tabindex="-1" aria-labelledby="add-profile-label" aria-hidden="true">
     <div class="modal-dialog container">
         <div class="modal-content">
