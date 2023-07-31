@@ -3,19 +3,43 @@
         <h1>Eventos</h1>
     </div>
     <div class="imgs container">
+        @if(!$events):
+        <tr>
+            <td>No hay Eventos.</td>
+        </tr>
+        @else
         @foreach($events as $evento):
-        <div>
-            <div>
+        <div class="evento-item">
+            {{route("despliegue", ["id" => $evento->even_id])}}
+            <div class="imagen" onclick="expandirInformacion(this)">
                 <img class="w-100" src="{{ asset($evento->even_path) }}" alt="">
+            </div>
+            <div class="informacion hidden">
                 <h2>{{ $evento->even_name }}</h2>
                 <h4>{{$evento->even_fech}}</h4>
-                <p>{{$evento->even_text}}
-                </p>
+                <p>{{$evento->even_text}}</p>
             </div>
         </div>
         @endforeach
+        @endif
     </div>
-</div>
+  </div>
+  <script src="Public/js/script.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
