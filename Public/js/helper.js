@@ -25,9 +25,25 @@ const notify = (data) => {
     }, TIME + 1000);
 }
 
+const checkFetchError = async (response) => {
+    if (response.status != 200) {
+        notify({
+            text: await response.text(),
+            status: "error",
+            bg: "bg-danger"
+        });
+        return true;
+    }
+
+    return false;
+}
+
 (() => {
     const toastLoader = document.querySelectorAll(".toast-loader")
     setTimeout(() => {
-        document.querySelector("button[data-bs-dismiss='toast']").click()
+        const toastClose = document.querySelector("button[data-bs-dismiss='toast']")
+        if (toastClose) {
+            toastClose.click()
+        }
     }, TIME);
 })()

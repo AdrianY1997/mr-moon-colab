@@ -1,7 +1,7 @@
 <div class="dash dash-inventario">
     <div>
         <div class="container">
-            @include('dashboard/static/menu')
+            @include('dashboard/static/menu'):
             <div class="content position-relative">
                 <p>Inventario</p>
                 <div class="mb-3">
@@ -20,28 +20,28 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @if(!$products)
+                        @if(!$products):
                         <tr>
                             <td>No hay datos.</td>
                         </tr>
                         @else
-                        @foreach($products as $key => $product)
-                        <tr class="item" data-href="{{ route("dash.itemGetInfo", ["id" => $product->prod_id]) }}">
-                            <td>{{ $product->prod_ref }}</td>
-                            <td>{{ $product->prod_name }}</td>
-                            <td class="d-flex gap-2">
-                                <span class="view-item btn p-0 px-2">
-                                    <i class="fa-solid fa-eye"></i>
-                                </span>
-                                <span class="edit-item  btn p-0 px-2">
-                                    <i class="fa-solid fa-edit"></i>
-                                </span>
-                                <a href="{{ route("inv.delete", ["id" => $product->prod_id]) }}" class="delete-item btn p-0 px-2 text-danger">
-                                    <i class="fa-solid fa-trash"></i>
-                                </a>
-                            </td>
-                        </tr>
-                        @endforeach
+                            @foreach($products as $key => $product):
+                            <tr class="item" data-href="{{ route("dash.itemGetInfo", ["id" => $product->prod_id]) }}">
+                                <td>{{ $product->prod_ref }}</td>
+                                <td>{{ $product->prod_name }}</td>
+                                <td class="d-flex gap-2">
+                                    <span class="view-item btn p-0 px-2">
+                                        <i class="fa-solid fa-eye"></i>
+                                    </span>
+                                    <span class="edit-item  btn p-0 px-2">
+                                        <i class="fa-solid fa-edit"></i>
+                                    </span>
+                                    <a href="{{ route("inv.delete", ["id" => $product->prod_id]) }}" class="delete-item btn p-0 px-2 text-danger">
+                                        <i class="fa-solid fa-trash"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                            @endforeach
                         @endif
                     </tbody>
                 </table>

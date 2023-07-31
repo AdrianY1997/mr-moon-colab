@@ -73,7 +73,7 @@ class Redirector {
     }
 
     public function warning(string $message) {
-        Session::setMessage("success:$message");
+        Session::setMessage("warning:$message");
         return $this;
     }
 

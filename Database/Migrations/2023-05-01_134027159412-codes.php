@@ -11,7 +11,7 @@ return new class {
             $table->id();
             $table->string("email");
             $table->string("code");
-            $table->string("status");
+            $table->integer("status");
         });
     }
 

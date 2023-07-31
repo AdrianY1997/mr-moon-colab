@@ -32,6 +32,7 @@ class User extends Table {
     public string $user_address;
     public string $user_phone;
     public string $user_img_path;
+    public string $user_privileges;
 
     public array $fillable = [
         "user_nick",
@@ -42,6 +43,7 @@ class User extends Table {
         "user_address",
         "user_phone",
         "user_img_path",
+        "user_privileges"
     ];
 
     // ----

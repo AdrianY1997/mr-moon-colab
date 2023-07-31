@@ -7,6 +7,7 @@ use DateTimeZone;
 use FoxyMVC\App\Models\Reservation;
 use FoxyMVC\Lib\Foxy\Core\Controller;
 use FoxyMVC\Lib\Foxy\Core\Request;
+use FoxyMVC\Lib\Foxy\Core\Response;
 use FoxyMVC\Lib\Foxy\Core\Session;
 
 class ReservasController extends Controller {
@@ -23,12 +24,12 @@ class ReservasController extends Controller {
     public function search() {
         $data = Request::getData();
         if (isset($data["urid"])) {
-            echo $data["urid"];
             $rese = Reservation::where("rese_urid", $data["urid"])->where("rese_status", "NOT LIKE", Reservation::CANCELLED)->first();
-            if ($rese)
-                redirect()->route("reserve.show", ["urid" => $rese->rese_urid])->send();
-            else
+            if (!$rese) {
                 redirect()->route("reserve")->error("El id de reservación no existe en el sistema o ha sido cancelada")->send();
+            }
+
+            redirect()->route("reserve.show", ["urid" => $rese->rese_urid])->send();
         }
 
         return self::render("web.reserve.search");
@@ -40,8 +41,9 @@ class ReservasController extends Controller {
         $date2 = new DateTime('now', new DateTimeZone('America/Bogota'));
         $interval = $date2->getTimestamp() - $date1->getTimestamp();
 
-        if (!$rese)
+        if (!$rese) {
             redirect()->route("reserve")->error("La id de reservación no se encuentra en el sistema")->send();
+        }
 
         if ($interval > 7200) {
             Reservation::where("rese_urid", $urid)->update([
@@ -62,11 +64,16 @@ class ReservasController extends Controller {
         $urid = sprintf("%s-%010s-%s", $userId, time(), uniqid(true));
 
         foreach ($_POST as $key => $value) {
-            if ($key == "details")
+            if ($key == "details") {
                 continue;
+            }
 
-            if ($value == "")
-                redirect()->route("reserve")->error("Se deben llenar los campos marcados (*)")->send();
+            if ($value == "") {
+                redirect()
+                    ->route("reserve")
+                    ->error("Se deben llenar los campos marcados (*)")
+                    ->send();
+            }
         }
 
         $reservation = new Reservation();
@@ -82,10 +89,17 @@ class ReservasController extends Controller {
         $reservation->rese_details = $data["details"];
         $reservation->user_id = $userId;
 
-        if (Reservation::insert($reservation))
-            redirect()->route("reserve.show", ["urid" => $urid])->success("Su reserva se ha registrado, por favor confirme el pago dentro de 2 horas")->send();
-        else
-            redirect()->route("reserve")->error("No se ha podido registrar su reserva")->send();
+        if (!Reservation::insert($reservation)) {
+            redirect()
+                ->route("reserve")
+                ->error("No se ha podido registrar su reserva")
+                ->send();
+        }
+
+        redirect()
+            ->route("reserve.show", ["urid" => $urid])
+            ->success("Su reserva se ha registrado, por favor confirme el pago dentro de 2 horas")
+            ->send();
     }
 
     public function confirm() {
@@ -93,34 +107,14 @@ class ReservasController extends Controller {
     }
 
     public function getHours() {
+        $data = Request::getFormData();
 
-        header('Content-Type: application/json');
-        $contentType = isset($_SERVER["CONTENT_TYPE"]) ? trim($_SERVER["CONTENT_TYPE"]) : '';
+        $result = Reservation::getHours($data->day);
 
-        if ($contentType !== "application/json") {
-            echo json_encode([
-                "error" => "No se ha cargado la información correctamente"
-            ]);
-            return;
+        if ($result === false) {
+            Response::status(500)->end("Ha ocurrido un error inesperado");
         }
 
-        $content = trim(file_get_contents("php://input"));
-        $decoded = json_decode($content, true);
-
-        if (!is_array($decoded)) {
-            echo json_encode([
-                "error" => "No hay datos que procesar"
-            ]);
-            return;
-        }
-
-        $day = $decoded["day"];
-
-        $result = Reservation::getHours($day);
-
-        echo json_encode([
-            "result" => $result,
-        ]);
-        return;
+        Response::status(200)->json(["hours" => $result]);
     }
 }

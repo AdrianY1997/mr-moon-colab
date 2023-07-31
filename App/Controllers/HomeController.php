@@ -2,6 +2,8 @@
 
 namespace FoxyMVC\App\Controllers;
 
+use FoxyMVC\App\Models\User;
+use FoxyMVC\App\Privileges;
 use FoxyMVC\Lib\Foxy\Core\Controller;
 use FoxyMVC\Lib\Foxy\Core\Session;
 
@@ -22,7 +24,8 @@ class HomeController extends Controller {
      */
     public function home() {
         return self::render("web.home", [
-            "session" => Session::checkSession()
+            "session" => Session::checkSession(),
+
         ]);
     }
 }

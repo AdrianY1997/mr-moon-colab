@@ -28,4 +28,8 @@ class Request {
         $length = strlen(constant("BASE_URL"));
         return substr($URL, $length);
     }
+
+    static function getFormData() {
+        return json_decode(file_get_contents('php://input') ?: stream_get_contents(STDIN));
+    }
 }
