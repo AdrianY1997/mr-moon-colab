@@ -1,7 +1,24 @@
 <?php
 
+use FoxyMVC\App\Packages\Privileges;
 use FoxyMVC\Lib\Foxy\Core\Route;
 use FoxyMVC\Lib\Foxy\Core\Redirector;
+use FoxyMVC\Lib\Foxy\Core\Session;
+
+if (!function_exists("asset")) {
+    function asset($path) {
+        return constant("BASE_URL") . "Public/" . $path;
+    }
+}
+
+if (!function_exists("extend")) {
+    function extend($view, $data = []) {
+        foreach (array_keys($data) as $e) {
+            ${$e} = $data[$e];
+        }
+        return include "Resources/Views/" . $view . ".sly.php";
+    }
+}
 
 if (!function_exists("formatString")) {
     function formatString($input) {
@@ -12,43 +29,36 @@ if (!function_exists("formatString")) {
     }
 }
 
-function search_file($ruta, $patron) {
-    $archivos = array();
-    if ($handle = opendir($ruta)) {
-        while (false !== ($entry = readdir($handle))) {
-            if ($entry != "." && $entry != "..") {
-                if (is_dir($ruta . '/' . $entry)) {
-                    $archivos = array_merge($archivos, search_file($ruta . '/' . $entry, $patron));
-                } else {
-                    if (fnmatch($patron, $entry)) {
-                        $archivos[] = $ruta . '/' . $entry;
+if (!function_exists("search_file")) {
+    function search_file($ruta, $patron) {
+        $archivos = array();
+        if ($handle = opendir($ruta)) {
+            while (false !== ($entry = readdir($handle))) {
+                if ($entry != "." && $entry != "..") {
+                    if (is_dir($ruta . '/' . $entry)) {
+                        $archivos = array_merge($archivos, search_file($ruta . '/' . $entry, $patron));
+                    } else {
+                        if (fnmatch($patron, $entry)) {
+                            $archivos[] = $ruta . '/' . $entry;
+                        }
                     }
                 }
             }
+            closedir($handle);
         }
-        closedir($handle);
+        return $archivos;
     }
-    return $archivos;
 }
 
-if (!function_exists("asset")) {
-    function asset($path) {
-        return constant("BASE_URL") . "Public/" . $path;
+if (!function_exists("redirect")) {
+    function redirect() {
+        return new Redirector;
     }
 }
 
 if (!function_exists("resource")) {
     function resource($path) {
         return constant("BASE_URL") . "Resources/" . $path;
-    }
-}
-
-if (!function_exists("extend")) {
-    function extend($view, $data = []) {
-        foreach (array_keys($data) as $e) {
-            ${$e} = $data[$e];
-        }
-        return include "Resources/Views/" . $view . ".sly.php";
     }
 }
 
@@ -62,20 +72,6 @@ if (!function_exists("route")) {
         }
 
         return constant("BASE_URL") . $url;
-    }
-}
-
-if (!function_exists("redirect")) {
-    function redirect() {
-        return new Redirector;
-    }
-}
-
-if (!function_exists("wordsDate")) {
-    function wordsDate($timestamp) {
-        $timestamp = explode(" ", $timestamp)[0];
-        $timestamp = date("F j, Y", strtotime($timestamp));
-        return $timestamp;
     }
 }
 
