@@ -15,4 +15,9 @@ class EventosController extends Controller {
             "events" => Event::get()
         ]);
     }
+    function despliegue($id){
+        return self::render("web.eventos.despliegue", [
+            "events" => Event::get()
+        ]);
+    }
 }

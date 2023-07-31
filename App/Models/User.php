@@ -2,6 +2,7 @@
 
 namespace FoxyMVC\App\Models;
 
+use FoxyMVC\Lib\Foxy\Database\Model;
 use FoxyMVC\Lib\Foxy\Database\Table;
 
 /**
@@ -9,7 +10,8 @@ use FoxyMVC\Lib\Foxy\Database\Table;
  */
 class User extends Table {
     // -- Generated
-    protected static string $tableName = 'users';
+    public static string $tableName = 'users';
+    public Model $model;
     public string $user_id;
     public string $created_at;
     public string $updated_at;
@@ -31,7 +33,7 @@ class User extends Table {
     public string $user_phone;
     public string $user_img_path;
 
-    protected array $fillable = [
+    public array $fillable = [
         "user_nick",
         "user_email",
         "user_pass",

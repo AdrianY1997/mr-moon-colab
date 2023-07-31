@@ -1,6 +1,6 @@
 <div class="auth recovery">
     <div style="display: block;">
-        <div class="container">
+        <div class="container" id="recovery">
             <div>
                 <img src="{{ asset('img\static\mr_moon_logo.png') }}">
             </div>
@@ -11,11 +11,11 @@
                 <p class="fs-5">No podemos simplemente enviar tú antigua contraseña.</p>
                 <p class="fs-5">Para poder restablecerla has click en el siguiente botón y sigue las instrucciones.</p>
                 <div>
-                    <button class="send-code btn shadow">Restablecer Contraseña</button>
+                    <button class="send-code btn shadow" id="btn-recovery">Restablecer Contraseña</button>
                 </div>
             </div>
         </div>
-        <div class="container">
+        <div class="container d-none" id="recovery2">
             <div>
                 <img src="{{ asset('img\static\mr_moon_logo.png') }}">
             </div>
@@ -35,14 +35,14 @@
                     </form>
                     <form action="{{ route('auth.recovery.verify.code') }}">
                         <div class="d-flex justify-content-center">
-                            <input class="border px-3 py-2" type="number" placeholder="######" class="border">
-                            <button class="ms-3 px-3"><a href="#">Confirmar</a></button>
+                            <input class="border px-3 py-2" type="number" placeholder="# # # # # #" class="border">
+                            <button class="ms-3 px-3" id="btn-confirm"><a href="#">Confirmar</a></button>
                         </div>
                     </form>
                 </div>
             </div>
         </div>
-        <div class="container d-none">
+        <div class="container d-none" id="recovery3">
             <div>
                 <img src="{{ asset('img\static\mr_moon_logo.png') }}">
             </div>

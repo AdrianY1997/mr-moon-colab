@@ -26,7 +26,7 @@ class Controller extends Command {
     public function init() {
         // Define la plantilla y la carpeta donde se guardara
         $controllerTemplate = "Lib\Util\Templates\make-controller.template.php";
-        $controllersFolder = "App\Https\Controllers";
+        $controllersFolder = "App\Controllers";
 
         $this->printer->display("info", "Iniciando creación del controlador");
 
@@ -61,7 +61,7 @@ class Controller extends Command {
         $controllerFile = fopen($controllerPath, "w");
         if (!$controllerFile) {
             $this->printer->error(
-                "Ubo un problema al crear el archivo",
+                "Hubo un problema al crear el archivo",
                 "Contacte con el desarrollador",
             );
         }

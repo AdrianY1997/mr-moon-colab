@@ -9,9 +9,12 @@
         </tr>
         @else
         @foreach($events as $evento)
-        <div>
-            <div>
+        <div class="evento-item">
+            {{route("despliegue", ["id" => $evento->even_id])}}
+            <div class="imagen" onclick="expandirInformacion(this)">
                 <img class="w-100" src="{{ asset($evento->even_path) }}" alt="">
+            </div>
+            <div class="informacion hidden">
                 <h2>{{ $evento->even_name }}</h2>
                 <h4>{{$evento->even_fech}}</h4>
                 <p>{{$evento->even_text}}</p>
@@ -20,8 +23,8 @@
         @endforeach
         @endif
     </div>
-</div>
-
+  </div>
+  <script src="Public/js/script.js"></script>
 
 
 

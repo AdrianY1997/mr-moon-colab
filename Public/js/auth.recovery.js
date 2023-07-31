@@ -1,4 +1,22 @@
 const sendCodeBtn = document.querySelector("#send-code-btn");
+const sendCode = document.querySelector('#btn-recovery');
+const sendCodeConfirm = document.querySelector('#btn-confirm');
+
+var recovery = document.querySelector('#recovery');
+var recovery2 = document.querySelector('#recovery2');
+var recovery3 = document.querySelector('#recovery3');
+
+sendCodeConfirm.addEventListener("click", (e) => {
+    e.preventDefault();
+
+})
+
+sendCode.addEventListener("click", (e) => {
+
+    recovery.classList.add("d-none");
+    recovery2.classList.remove("d-none");
+
+});
 
 sendCodeBtn.addEventListener("click", (e) => {
     e.preventDefault();
@@ -40,3 +58,4 @@ sendCodeBtn.addEventListener("click", (e) => {
     });
     return true;
 })
+

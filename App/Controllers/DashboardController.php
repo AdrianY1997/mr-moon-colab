@@ -20,7 +20,7 @@ class DashboardController extends Controller {
         if (!Session::checkSession()) {
             $roles = Role::getUserRole(Session::data("user_id"));
             foreach ($roles as $role) {
-                if ($role->role_name != "ADMIN") redirect()->route("error", ["msg" => "missing-permissions"])->send();
+                if ($role->role_name != Role::ADMIN) redirect()->route("error", ["msg" => "missing-permissions"])->send();
             }
         }
     }

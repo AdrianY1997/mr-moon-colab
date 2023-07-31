@@ -2,6 +2,7 @@
 
 namespace FoxyMVC\App\Models;
 
+use FoxyMVC\Lib\Foxy\Database\Model;
 use FoxyMVC\Lib\Foxy\Database\Table;
 
 /**
@@ -9,7 +10,8 @@ use FoxyMVC\Lib\Foxy\Database\Table;
  */
 class Subscriber extends Table {
     // -- Generated
-    protected static string $tableName = "subscribers";
+    public static string $tableName = "subscribers";
+    public Model $model;
     public string $subs_id;
     public string $created_at;
     public string $updated_at;
@@ -26,7 +28,7 @@ class Subscriber extends Table {
     public string $subs_lastname;
     public string $subs_email;
 
-    protected array $fillable = [
+    public array $fillable = [
         "subs_name",
         "subs_lastname",
         "subs_email",

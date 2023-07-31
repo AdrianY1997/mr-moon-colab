@@ -2,6 +2,7 @@
 
 namespace FoxyMVC\App\Models;
 
+use FoxyMVC\Lib\Foxy\Database\Model;
 use FoxyMVC\Lib\Foxy\Database\Table;
 
 /**
@@ -9,7 +10,8 @@ use FoxyMVC\Lib\Foxy\Database\Table;
  */
 class Log extends Table {
     // -- Generated
-    protected static string $tableName = 'logs';
+    public static string $tableName = 'logs';
+    public Model $model;
     public string $logs_id;
     public string $created_at;
     public string $updated_at;
@@ -23,16 +25,16 @@ class Log extends Table {
     // -- Here the columns
 
     public string $logs_tableName;
-    
+
     public string $logs_params;
-    
+
     public string $logs_action;
-    
-    protected array $fillable = [
+
+    public array $fillable = [
         "logs_tableName",
         "logs_params",
         "logs_action",
     ];
-    
+
     // ----
 }

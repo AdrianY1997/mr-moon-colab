@@ -18,7 +18,7 @@ class UserController extends Controller {
         if (Session::checkSession()) {
             $roles = Role::getUserRole(Session::data("user_id"));
             foreach ($roles as $role) {
-                if ($role->role_name == "ADMIN") redirect()->route("dash.home")->send();
+                if ($role->role_name == Role::ADMIN) redirect()->route("dash.home")->send();
             }
             redirect()->route("profile.show")->send();
         }
@@ -45,7 +45,7 @@ class UserController extends Controller {
 
         User::insert($user);
         $user = User::select("user_id")->where("user_email", $data["email"])->where("user_name", $data["name"])->first();
-        $role = Role::select("role_id")->where("role_name", "USER")->first();
+        $role = Role::select("role_id")->where("role_name", Role::USER)->first();
 
         $userRole = new UserRole();
         $userRole->user_id = $user->user_id;
@@ -60,7 +60,7 @@ class UserController extends Controller {
         if (!Session::checkSession()) {
             $roles = Role::getUserRole(Session::data("user_id"));
             foreach ($roles as $role) {
-                if ($role->role_name != "ADMIN") redirect()->route("error", ["msg" => "missing-permissions"])->send();
+                if ($role->role_name != Role::ADMIN) redirect()->route("error", ["msg" => "missing-permissions"])->send();
             }
         }
 

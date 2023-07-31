@@ -2,6 +2,7 @@
 
 namespace FoxyMVC\App\Models;
 
+use FoxyMVC\Lib\Foxy\Database\Model;
 use FoxyMVC\Lib\Foxy\Database\Table;
 
 /**
@@ -9,7 +10,8 @@ use FoxyMVC\Lib\Foxy\Database\Table;
  */
 class __model extends Table {
   // -- Generated
-  protected static string $tableName = '__tableName';
+  public static string $tableName = '__tableName';
+  public Model $model;
   public string $__tableName_id;
   public string $created_at;
   public string $updated_at;
@@ -22,9 +24,11 @@ class __model extends Table {
 
   // -- Here the columns
 
-  protected array $fillable = [
-
-  ];
+  public array $fillable = [];
 
   // ----
+
+  public function __construct() {
+    $this->model = new Model($this->hidden["__tableName_id"], $this->fillable);
+  }
 }

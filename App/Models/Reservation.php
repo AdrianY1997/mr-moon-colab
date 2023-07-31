@@ -3,6 +3,7 @@
 namespace FoxyMVC\App\Models;
 
 use FoxyMVC\Lib\Foxy\Database\MySQL;
+use FoxyMVC\Lib\Foxy\Database\Model;
 use FoxyMVC\Lib\Foxy\Database\Table;
 use PDOException;
 
@@ -13,7 +14,8 @@ class Reservation extends Table {
     public const RESERVED = 3;
 
     // -- Generated
-    protected static string $tableName = "reservations";
+    public static string $tableName = "reservations";
+    public Model $model;
     public string $rese_id;
     public string $created_at;
     public string $updated_at;
@@ -38,7 +40,7 @@ class Reservation extends Table {
     public string $rese_details;
     public string $user_id;
 
-    protected array $fillable = [
+    public array $fillable = [
         "rese_urid",
         "rese_name",
         "rese_lastname",

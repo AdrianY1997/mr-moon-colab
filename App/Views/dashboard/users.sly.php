@@ -58,7 +58,7 @@
                             <div>
                                 <div class="card-body">
                                     <div class="d-flex flex-column align-items-center text-center">
-                                        <img id="show-profile-item-img" data-url-base="{{ asset("") }}" src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="Admin" class="rounded-circle border mb-4" width="150" heigth="150">
+                                        <img id="show-profile-item-img" src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="Admin" class="rounded-circle border mb-4" width="150" heigth="150">
                                         <div class="mb-3">
                                             <div class="form-floating">
                                                 <input name="img_path" id="show-profile-img-path" type="input" class="form-control" placeholder="John Doe" disabled>

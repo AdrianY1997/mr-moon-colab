@@ -3,12 +3,18 @@
 namespace FoxyMVC\App\Models;
 
 use FoxyMVC\Lib\Foxy\Database\MySQL;
+use FoxyMVC\Lib\Foxy\Database\Model;
 use FoxyMVC\Lib\Foxy\Database\Table;
 use PDOException;
 
 class Role extends Table {
+    public const GUEST = 0;
+    public const USER = 1;
+    public const ADMIN = 2;
+
     // -- Generated
-    protected static string $tableName = "roles";
+    public static string $tableName = "roles";
+    public Model $model;
     public string $role_id;
     public string $created_at;
     public string $updated_at;
@@ -23,7 +29,7 @@ class Role extends Table {
 
     public string $role_name;
 
-    protected array $fillable = [
+    public array $fillable = [
         "role_name",
     ];
 
