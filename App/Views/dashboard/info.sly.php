@@ -82,9 +82,11 @@
                     <p class="m-0">Datos del sitio web</p>
                     <div class="web-data">
                         <div class="logo">
-                            @php
-                            echo $webdata->webd_logo ? "<img class=\"show\" width=\"150px\" src=\"" . asset($webdata->webd_logo) . "\" alt=\"\">" : "<p class=\"show\" style=\"width:150px;height:150px;display:flex;justify-content:center;align-items:center;box-shadow:0 0 5px 0 lightgrey\">NO IMAGE</p>";
-                            @endphp
+                        @if($webdata->webd_logo):
+                            <img class="show" width="150px" src="{{ asset($webdata->webd_logo) }}" alt="">
+                        @else
+                            <p class="show" style="width:150px;height:150px;display:flex;justify-content:center;align-items:center;box-shadow:0 0 5px 0 lightgrey">NO IMAGE</p>
+                        @endif
                         </div>
                         <div>
                             <div class="form-control">

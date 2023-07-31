@@ -20,28 +20,28 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @if(!$providers)
+                        @if(!$providers):
                         <tr>
                             <td>No hay datos.</td>
                         </tr>
                         @else
-                        @foreach($providers as $key => $provider)
-                        <tr class="item" data-href="{{ route("prov.getInfo", ["id" => $provider->prov_id]) }}">
-                            <td>{{ $provider->prov_nit }}</td>
-                            <td>{{ $provider->prov_name }}</td>
-                            <td class="d-flex gap-2">
-                                <span class="view-item btn p-0 px-2">
-                                    <i class="fa-solid fa-eye"></i>
-                                </span>
-                                <span class="edit-item  btn p-0 px-2">
-                                    <i class="fa-solid fa-edit"></i>
-                                </span>
-                                <a href="{{ route("prov.delete", ["id" => $provider->prov_id]) }}" class="delete-item btn p-0 px-2 text-danger">
-                                    <i class="fa-solid fa-trash"></i>
-                                </a>
-                            </td>
-                        </tr>
-                        @endforeach
+                            @foreach($providers as $key => $provider):
+                            <tr class="item" data-href="{{ route("prov.getInfo", ["id" => $provider->prov_id]) }}">
+                                <td>{{ $provider->prov_nit }}</td>
+                                <td>{{ $provider->prov_name }}</td>
+                                <td class="d-flex gap-2">
+                                    <span class="view-item btn p-0 px-2">
+                                        <i class="fa-solid fa-eye"></i>
+                                    </span>
+                                    <span class="edit-item  btn p-0 px-2">
+                                        <i class="fa-solid fa-edit"></i>
+                                    </span>
+                                    <a href="{{ route("prov.delete", ["id" => $provider->prov_id]) }}" class="delete-item btn p-0 px-2 text-danger">
+                                        <i class="fa-solid fa-trash"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                            @endforeach
                         @endif
                     </tbody>
                 </table>

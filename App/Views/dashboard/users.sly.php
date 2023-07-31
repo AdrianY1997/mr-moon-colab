@@ -25,31 +25,32 @@
                         </tr>
                     </thead>
                     <tbody data-url-info="{{ route("dash.userGetInfo", ["id" => ":id"]) }}">
-                        @if(count($usuarios) <= 3 && !(Privileges::Master->get() & Session::data("user_privileges")) == Privileges::Master->get()): <tr>
+                        @if(count($usuarios) <= 3 && !(Privileges::Master->get() & Session::data("user_privileges")) == Privileges::Master->get()): 
+                        <tr>
                             <td colspan="3">
                                 <p class="mb-0">No hay usuarios registrados</p>
                             </td>
                         </tr>
                         @else
-                        @foreach($usuarios as $key => $user):
-                        <tr data-user-id="{{ $user->user_id }}">
-                            <td style="vertical-align: middle">
-                                <p class="m-0">{{ $user->user_id }}</p>
-                            </td>
-                            @if((Privileges::Master->get() & Session::data("user_privileges")) == Privileges::Master->get()):
-                            <td style="vertical-align: middle">
-                                <p class="user-name m-0">{{ $user->user_nick }}</p>
-                            </td>
-                            @endif
-                            <td style="vertical-align: middle">
-                                <p class="user-name m-0">{{ $user->user_name }} {{ $user->user_lastname }}</p>
-                            </td>
-                            <td style="vertical-align: middle">
-                                <button class="btn text-primary show-profile-btn" data-bs-target="#show-profile"><i class="fa-solid fa-eye"></i></button>
-                                <a href="{{ route("user.delete", ["user_id" => $user->user_id]) }}"><button class="btn text-danger"><i class="fa-solid fa-trash-alt"></i></button></a>
-                            </td>
-                        </tr>
-                        @endforeach
+                            @foreach($usuarios as $key => $user):
+                            <tr data-user-id="{{ $user->user_id }}">
+                                <td style="vertical-align: middle">
+                                    <p class="m-0">{{ $user->user_id }}</p>
+                                </td>
+                                @if((Privileges::Master->get() & Session::data("user_privileges")) == Privileges::Master->get()):
+                                <td style="vertical-align: middle">
+                                    <p class="user-name m-0">{{ $user->user_nick }}</p>
+                                </td>
+                                @endif
+                                <td style="vertical-align: middle">
+                                    <p class="user-name m-0">{{ $user->user_name }} {{ $user->user_lastname }}</p>
+                                </td>
+                                <td style="vertical-align: middle">
+                                    <button class="btn text-primary show-profile-btn" data-bs-target="#show-profile"><i class="fa-solid fa-eye"></i></button>
+                                    <a href="{{ route("user.delete", ["user_id" => $user->user_id]) }}"><button class="btn text-danger"><i class="fa-solid fa-trash-alt"></i></button></a>
+                                </td>
+                            </tr>
+                            @endforeach
                         @endif
                     </tbody>
                 </table>

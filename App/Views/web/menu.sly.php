@@ -5,7 +5,7 @@
     <div class="carousel">
         <div class="container">
             <div class="images">
-                @foreach($menus as $menu)
+                @foreach($menus as $menu):
                 <div class="image">
                     <div>
                         <p>Bebidas</p>
@@ -28,7 +28,7 @@
     <div class="carousel-complete">
         <div class="container">
             <div class="images">
-                @foreach($menus as $menu)
+                @foreach($menus as $menu):
                 <div class="image active">
                     <img class="w-100" src="{{ asset($menu->menu_path) }}" alt="">
                 </div>
