@@ -73,7 +73,7 @@ class AuthController extends Controller {
             }
             redirect()->route("profile.show")->send();
         }
-        Code::where("code_email", )->where()->()
+        // Code::where("code_email", )->where()->()
 
         
     }
