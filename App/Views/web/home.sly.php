@@ -6,7 +6,7 @@
                 <p class="m-0">Somos <strong>Mr. Moon Coffee & Bar</strong></p>
                 <p class="m-0">Estamos en Calle 4 Sur # 5- 456</p>
                 <p class="m-0">La Plata, Huila - Colombia</p>
-                @if(!$session)
+                @if(!$session):
                 <p class="m-0">
                     <a href="{{ route('auth.login') }}">Iniciar Sesión</a>
                     <span>|</span>

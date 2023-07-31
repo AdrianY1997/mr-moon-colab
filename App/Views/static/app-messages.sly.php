@@ -1,4 +1,4 @@
-@isset($notifications['success'])
+@isset($notifications['success']):
 <div class="toast-container position-fixed bottom-0 end-0 p-3">
     <div id="liveToast" class="toast show" role="alert" aria-live="assertive" aria-atomic="true">
         <div class="toast-header bg-success text-white" style="margin-bottom: -3px;">
@@ -15,7 +15,7 @@
 </div>
 @endisset
 
-@isset($notifications['warning'])
+@isset($notifications['warning']):
 <div class="toast-container position-fixed bottom-0 end-0 p-3">
     <div id="liveToast" class="toast show" role="alert" aria-live="assertive" aria-atomic="true">
         <div class="toast-header bg-warning text-white" style="margin-bottom: -3px;">
@@ -32,7 +32,7 @@
 </div>
 @endisset
 
-@isset($notifications['error'])
+@isset($notifications['error']):
 <div class="toast-container position-fixed bottom-0 end-0 p-3">
     <div id="liveToast" class="toast show" role="alert" aria-live="assertive" aria-atomic="true">
         <div class="toast-header bg-danger text-white" style="margin-bottom: -3px;">

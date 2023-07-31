@@ -70,14 +70,14 @@ $webdata = unserialize($_COOKIE['webdata']);
                 <p class="m-0"><i class="fa-solid fa-user-circle"></i></p>
             </a>
             @else
-            @if((Privileges::Admin->get() & Session::data("user_privileges")) == Privileges::Admin->get()):
-            <a href="{{ route('profile.show') }}">
-                <p class="m-0"><i class="fa-solid fa-user-circle"></i></p>
-            </a>
-            <a href="{{ route('auth.login') }}">
-                <p class="m-0"><i class="fa-solid fa-gauge"></i></p>
-            </a>
-            @endif
+                @if((Privileges::Admin->get() & Session::data("user_privileges")) == Privileges::Admin->get()):
+                <a href="{{ route('profile.show') }}">
+                    <p class="m-0"><i class="fa-solid fa-user-circle"></i></p>
+                </a>
+                <a href="{{ route('auth.login') }}">
+                    <p class="m-0"><i class="fa-solid fa-gauge"></i></p>
+                </a>
+                @endif
             @endif
         </nav>
     </div>
