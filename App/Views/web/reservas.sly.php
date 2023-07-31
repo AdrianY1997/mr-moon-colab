@@ -12,7 +12,7 @@
             </div>
             <button data-href="{{ route("reserve.show", ["urid" => ":urid"]) }}" class="btn btn-primary" id="search-reservation">Buscar</button>
         </div>
-        <hr class="py-1" />
+        <hr class="border-3 border-success-subtle" />
         <form action="{{ route("reserve.new") }}" method="post">
             <div>
                 <p>Llena el siguiente formulario para realizar una reserva</p>
@@ -77,8 +77,7 @@
                     </div>
                 </div>
             </div>
-            <hr>
-            <div class="info-persona">
+            <div class="info-persona mt-3">
                 <div class="form-floating">
                     <input class="form-control" type="text" name="name" id="name" placeholder="name">
                     <label for="">Nombre<span class="text-danger">*</span></label>

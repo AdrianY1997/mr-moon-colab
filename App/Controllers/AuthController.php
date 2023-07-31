@@ -29,7 +29,7 @@ class AuthController extends Controller {
             return;
         }
 
-        if ((Privileges::Admin->get() & Session::data("user_privileges")) == Privileges::Admin->get()) {
+        if (Privileges::check(Privileges::Master->get())) {
             redirect()
                 ->route("dash.home")
                 ->success("Haz iniciado sesión correctamente")

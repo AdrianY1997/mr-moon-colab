@@ -7,8 +7,10 @@ use FoxyMVC\App\Controllers\ProviderController;
 
 Route::set("dashboard", [DashboardController::class, "index"])->name("dash");
 Route::set("dashboard/inicio", [DashboardController::class, "inicio"])->name("dash.home");
-Route::set("dashboard/info", [DashboardController::class, "info"])->name("dash.info");
 Route::set("dashboard/usuarios", [DashboardController::class, "usuarios"])->name("dash.users");
+
+Route::set("dashboard/info", [DashboardController::class, "info"])->name("dash.info");
+Route::set("dashboard/webinfo/update", [DashboardController::class, "updateWebInfo"])->name("dash.info.update");
 
 Route::set("dashboard/proveedores", [DashboardController::class, "proveedores"])->name("dash.prov");
 Route::set("dashboard/proveedores/item/{id}", [ProviderController::class, "getProv"])->name("prov.getInfo");
