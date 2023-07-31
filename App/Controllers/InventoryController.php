@@ -30,7 +30,10 @@ class InventoryController extends Controller {
 
         $ppId = ProductProvider::insert($pp);
 
-        redirect()->route("dash.stock")->success("Se ha añadido un producto nuevo.")->send();
+        redirect()
+            ->route("dash.stock")
+            ->success("Se ha añadido un producto nuevo.")
+            ->send();
     }
 
     public function edit($id) {
@@ -50,12 +53,18 @@ class InventoryController extends Controller {
         ];
 
         Product::where("prod_id", $data["item-edit-id"])->update($prod);
-        ProductProvider::where("prod_id", $data["item-edit-id"])->where("prov_id", $data["item-edit-prov"])->update($pp);
 
-        redirect()->route("dash.stock")->success("Se ha actualizado el producto.")->send();
+        ProductProvider::where("prod_id", $data["item-edit-id"])
+            ->where("prov_id", $data["item-edit-prov"])
+            ->update($pp);
+
+        redirect()
+            ->route("dash.stock")
+            ->success("Se ha actualizado el producto.")
+            ->send();
     }
 
-    public function delete($prod, $prov) {
+    public function delete($id) {
         // ProductProvider::where("prod_id", $prod)->where("prov_id", $prov)->delete();
         // Product::where("prod_id", $prod)->delete();
 

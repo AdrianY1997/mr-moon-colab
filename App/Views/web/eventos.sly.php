@@ -3,7 +3,7 @@
         <h1>Eventos</h1>
     </div>
     <div class="imgs container">
-        @foreach($events as $evento)
+        @foreach($events as $evento):
         <div>
             <div>
                 <img class="w-100" src="{{ asset($evento->even_path) }}" alt="">
@@ -39,7 +39,7 @@
     <div class="carousel">
         <div class="container">
             <div class="images">
-                @foreach($events as $evento)
+                @foreach($events as $evento):
                 <div class="image">
                     <div>
                         <p>{{ $evento->even_name }}</p>
@@ -52,7 +52,7 @@
         <div class="carousel-complete">
             <div class="container">
                 <div class="images">
-                    @foreach($events as $evento)
+                    @foreach($events as $evento):
                     <div class="image-active">
                         <h4>{{ $evento->even_name }}</h4>
                         <img class="w-100" src="{{ asset($evento->even_path) }}" alt="">

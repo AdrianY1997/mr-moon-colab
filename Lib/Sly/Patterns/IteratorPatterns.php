@@ -9,9 +9,12 @@ use FoxyMVC\Lib\Sly\Interfaces\TemplatePatterns;
 class IteratorPatterns implements TemplatePatterns {
     public function getPatterns() {
         return [
-            '/@foreach\s*\((.+?)\)\s*(.*?)\s*@endforeach/s' => function ($matches, $patterns, $view, $data) {
-                return '<?php foreach (' . $matches[1] . '): ?> ' . $matches[2] . ' <?php endforeach; ?>';
-            }
+            '/@foreach\s*\(\s*(.*?)\s*\)\:/s' => function ($matches, $patterns, $view, $data) {
+                return '<?php foreach (' . $matches[1] . ') { ?>';
+            },
+            '/@endforeach/' => function () {
+                return '<?php } ?>';
+            },
         ];
     }
 }

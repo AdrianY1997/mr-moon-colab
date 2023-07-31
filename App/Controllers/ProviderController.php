@@ -2,11 +2,10 @@
 
 namespace FoxyMVC\App\Controllers;
 
-use FoxyMVC\App\Models\Product;
-use FoxyMVC\App\Models\ProductProvider;
 use FoxyMVC\App\Models\Provider;
 use FoxyMVC\Lib\Foxy\Core\Controller;
 use FoxyMVC\Lib\Foxy\Core\Request;
+use FoxyMVC\Lib\Foxy\Core\Response;
 
 class ProviderController extends Controller {
     public function __construct() {
@@ -14,18 +13,15 @@ class ProviderController extends Controller {
     }
 
     public function getProv($id) {
-        $data = [];
+        Response::checkMethod("GET");
 
-        $products = Provider::where("prov_id", $id)->get();
+        $providers = Provider::where("prov_id", $id)->first();
 
-        if (!$products) {
-            $data["error"] = "Ubo un error al obtener los datos";
-            echo json_encode($data);
-            return;
+        if (!$providers) {
+            Response::status(500)->end("No se ha podido cargar la información ");
         }
 
-        $data[] = $products[0];
-        echo json_encode($data);
+        Response::json(["provider" => $providers]);
     }
 
     public function add() {
@@ -40,7 +36,10 @@ class ProviderController extends Controller {
 
         $provId = Provider::insert($prov);
 
-        redirect()->route("dash.prov")->success("Se ha añadido un proveedor nuevo.")->send();
+        redirect()
+            ->route("dash.prov")
+            ->success("Se ha añadido un proveedor nuevo.")
+            ->send();
     }
 
     public function edit($id) {
@@ -55,13 +54,19 @@ class ProviderController extends Controller {
 
         Provider::where("prov_id", $data["prov-edit-id"])->update($prov);
 
-        redirect()->route("dash.prov")->success("Se ha actualizado el producto.")->send();
+        redirect()
+            ->route("dash.prov")
+            ->success("Se ha actualizado el producto.")
+            ->send();
     }
 
     public function delete($id) {
         // Provider::where("prov_id", $id)->delete();
         // ProductProvider::where("prov_id", $id)->delete();
 
-        redirect()->route("dash.prov")->warning("Esta funcionalidad no se ha implementado aun.")->send();
+        redirect()
+            ->route("dash.prov")
+            ->warning("Esta funcionalidad no se ha implementado aun.")
+            ->send();
     }
 }

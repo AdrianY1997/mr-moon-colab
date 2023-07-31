@@ -1,3 +1,6 @@
+const email = document.querySelector("#recovery-email");
+const code = document.querySelector("#recovery-code");
+
 const sendCodeBtn = document.querySelector("#send-code-btn");
 const sendCode = document.querySelector('#btn-recovery');
 const sendCodeConfirm = document.querySelector('#btn-confirm');
@@ -6,56 +9,45 @@ var recovery = document.querySelector('#recovery');
 var recovery2 = document.querySelector('#recovery2');
 var recovery3 = document.querySelector('#recovery3');
 
-sendCodeConfirm.addEventListener("click", (e) => {
-    e.preventDefault();
+let response, data;
 
-})
-
-sendCode.addEventListener("click", (e) => {
-
-    recovery.classList.add("d-none");
-    recovery2.classList.remove("d-none");
-
-});
-
-sendCodeBtn.addEventListener("click", (e) => {
+sendCodeBtn.addEventListener("click", async (e) => {
     e.preventDefault();
     e.stopPropagation();
 
     const form = sendCodeBtn.parentElement.parentElement;
-    const email = document.querySelector("#recovery-email").value;
 
-    $.ajax({
-        url: form.getAttribute("action"),
-        type: "post",
-        data: {
-            email: email
-        },
-        dataType: "text",
-        success: function (response) {
-            response = JSON.parse(response);
-            if (response.error) {
-                notify({
-                    text: "El email ingresado es invalido",
-                    status: "error",
-                    bg: "bg-danger"
-                });
-            } else {
-                notify({
-                    text: "Se ha enviado un correo con el código a " + email + ", codigo: " + response.code,
-                    status: "success",
-                    bg: "bg-success"
-                })
-            }
-        },
-        error: function () {
-            notify({
-                text: "Ha ocurrido un error al ejecutar esta acción, inténtelo de nuevo o contacte al administrador",
-                status: "error",
-                bg: "bg-danger"
-            })
-        }
-    });
-    return true;
+    response = await fetch(form.getAttribute("action"), {
+        method: "POST",
+        body: JSON.stringify({ email: email.value })
+    })
+
+    if (await checkFetchError(response)) return;
+
+    data = await response.json();
+
+    return notify({
+        text: "Se ha enviado un correo con el código a " + email.value + ", codigo: " + data.code,
+        status: "success",
+        bg: "bg-success"
+    })
 })
 
+sendCodeConfirm.addEventListener("click", async (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+
+    const form = sendCodeConfirm.parentElement.parentElement;
+
+    let response = await fetch(form.getAttribute("action"), {
+        method: "POST",
+        body: JSON.stringify({ email: email, code: code.value }),
+    });
+
+    response = await response.text();
+})
+
+sendCode.addEventListener("click", (e) => {
+    recovery.classList.add("d-none");
+    recovery2.classList.remove("d-none");
+});

@@ -1,7 +1,7 @@
 <div class="dash dash-menu">
     <div>
         <div class="container">
-            @include('dashboard/static/menu')
+            @include('dashboard/static/menu'):
             <div class="content d-flex gap-3">
                 <div class="dash-menu-item-container" data-img="main">
                     <p>Principal</p>
