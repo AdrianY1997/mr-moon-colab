@@ -42,6 +42,9 @@ class AuthController extends Controller {
                 ->success("Haz iniciado sesión correctamente")
                 ->send();
         }
+        // Code::where("code_email", )->where()->()
+
+        
     }
 
     public function start_session() {
