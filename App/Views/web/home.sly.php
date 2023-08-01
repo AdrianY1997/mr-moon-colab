@@ -20,17 +20,17 @@
         <div class="container">
             <p class="">Suscríbete a nuestro boletín</p>
             <p>Regístrate con tu dirección de correo electrónico para recibir noticias y actualizaciones</p>
-            <form action="#">
+            <form action="{{ route('home.star') }}" method="POST">
                 <div class="form-floating mb-2">
-                    <input class="form-control" type="text" placeholder="Nombre" name="name" id="name">
+                    <input class="form-control" type="text" required placeholder="Nombre" name="name" id="name">
                     <label for="name">Nombre</label>
                 </div>
                 <div class="form-floating mb-2">
-                    <input class="form-control" type="text" placeholder="Apellido" name="lastname" id="lastname">
+                    <input class="form-control" type="text" required placeholder="Apellido" name="lastname" id="lastname">
                     <label for="lastname">Apellido</label>
                 </div>
                 <div class="form-floating mb-2">
-                    <input class="form-control" type="text" placeholder="Correo" name="email" id="email">
+                    <input class="form-control" type="text" required placeholder="Correo" name="email" id="email">
                     <label for="email">Correo</label>
                 </div>
                 <div><button class="btn p-3" type="submit">Subscribirse</button></div>
