@@ -79,19 +79,19 @@
             </div>
             <div class="info-persona mt-3">
                 <div class="form-floating">
-                    <input class="form-control" type="text" name="name" id="name" placeholder="name">
+                    <input class="form-control" type="text" name="name" id="name" placeholder="name" value="{{ Session::data("user_name") ?: "" }}">
                     <label for="">Nombre<span class="text-danger">*</span></label>
                 </div>
                 <div class="form-floating">
-                    <input class="form-control" type="text" name="lastname" id="lastname" placeholder="lastname">
+                    <input class="form-control" type="text" name="lastname" id="lastname" placeholder="lastname" value="{{ Session::data("user_lastname") ?: "" }}">
                     <label for="">Apellido<span class="text-danger">*</span></label>
                 </div>
                 <div class="form-floating">
-                    <input class="form-control" type="text" name="email" id="email" placeholder="email">
+                    <input class="form-control" type="text" name="email" id="email" placeholder="email" value="{{ Session::data("user_email") ?: "" }}">
                     <label for="">Correo<span class="text-danger">*</span></label>
                 </div>
                 <div class="form-floating">
-                    <input class="form-control" type="text" name="phone" id="phone" placeholder="phone" pattern="3[0-9]{2}[0-9]{7}">
+                    <input class="form-control" type="text" name="phone" id="phone" placeholder="phone" pattern="3[0-9]{2}[0-9]{7}" value="{{ Session::data("user_phone") ?: "" }}">
                     <label for="">Teléfono<span class="text-danger">*</span></label>
                 </div>
             </div>

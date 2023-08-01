@@ -5,7 +5,7 @@
             <div class="content">
                 <div class="sections">
                     <p style="cursor: pointer" class="active text-black" data-section="0">Ver Información</p>
-                    @if(Privileges::check(Privileges::Admin->get())):
+                    @if(Privileges::check(Privileges::Master->get())):
                     <p style="cursor: pointer" data-section="1">Editar</p>
                     @endif
                 </div>

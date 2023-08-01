@@ -4,9 +4,9 @@
             @include('dashboard/static/menu'):
             <div class="content">
                 <p>Lista de usuarios</p>
-                @if((Privileges::Master->get() & Session::data("user_privileges")) == Privileges::Master->get()):
+                @if(Privileges::check(Privileges::Master->get())):
                 <div class="mb-3">
-                    <button class="btn btn-primary" id="add-item">
+                    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#add-user-modal" id="add-user-btn">
                         <span>
                             <i class="fa-solid fa-plus"></i> Agregar
                         </span>
@@ -17,7 +17,7 @@
                     <thead>
                         <tr>
                             <th>ID</th>
-                            @if((Privileges::Master->get() & Session::data("user_privileges")) == Privileges::Master->get()):
+                            @if(Privileges::check(Privileges::Master->get())):
                             <th>Nick</th>
                             @endif
                             <th>Nombres</th>
@@ -25,19 +25,19 @@
                         </tr>
                     </thead>
                     <tbody data-url-info="{{ route("dash.userGetInfo", ["id" => ":id"]) }}">
-                        @if(count($usuarios) <= 3 && !(Privileges::Master->get() & Session::data("user_privileges")) == Privileges::Master->get()): 
-                        <tr>
-                            <td colspan="3">
-                                <p class="mb-0">No hay usuarios registrados</p>
-                            </td>
-                        </tr>
-                        @else
+                        @if(count($usuarios) <= 3 && !Privileges::check(Privileges::Master->get())):
+                            <tr>
+                                <td colspan="3">
+                                    <p class="mb-0">No hay usuarios registrados</p>
+                                </td>
+                            </tr>
+                            @else
                             @foreach($usuarios as $key => $user):
                             <tr data-user-id="{{ $user->user_id }}">
                                 <td style="vertical-align: middle">
                                     <p class="m-0">{{ $user->user_id }}</p>
                                 </td>
-                                @if((Privileges::Master->get() & Session::data("user_privileges")) == Privileges::Master->get()):
+                                @if(Privileges::check(Privileges::Master->get())):
                                 <td style="vertical-align: middle">
                                     <p class="user-name m-0">{{ $user->user_nick }}</p>
                                 </td>
@@ -51,79 +51,97 @@
                                 </td>
                             </tr>
                             @endforeach
-                        @endif
+                            @endif
                     </tbody>
                 </table>
             </div>
         </div>
     </div>
 </div>
-@if((Privileges::Master->get() & Session::data("user_privileges")) == Privileges::Master->get()):
-<div class="modal fade" id="add-profile" tabindex="-1" aria-labelledby="add-profile-label" aria-hidden="true">
+@if(Privileges::check(Privileges::Master->get())):
+<div class="modal fade" id="add-user-modal" tabindex="-1" aria-labelledby="add-profile-label" aria-hidden="true">
     <div class="modal-dialog container">
         <div class="modal-content">
-            <form action="{{ route("profile.add") }}" method="post">
+            <form id="add-profile-form" action="{{ route("profile.add") }}" method="post">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="add-profile-label">Editar Perfil</h5>
+                    <h5 class="modal-title" id="add-profile-label">Añadir Perfil</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <div class="row gutters-sm">
-                        <div class="col-md-4 mb-3">
-                            <div>
-                                <div class="card-body">
-                                    <div class="d-flex flex-column align-items-center text-center">
-                                        <div class="mb-3">
-                                            <div class="form-floating">
-                                                <input name="nick" id="nick" type="text" class="form-control" placeholder="John Doe" value="@if($user->user_nick): {{ $user->user_nick }} @endif">
-                                                <label for="nick">Nick</label>
-                                            </div>
-                                        </div>
+                    <div class="mb-3">
+                        <div class="row g-3">
+                            <div class="col-md">
+                                <div class="d-flex justify-content-center px-5 py-2">
+                                    <img class="rounded-circle shadow-sm w-100" src="{{ asset("img/static/profiles/avatar1.png") }}" alt="Imagen predeterminada">
+                                </div>
+                            </div>
+                            <div class="col-md">
+                                <div class="input-group mb-3">
+                                    <span class="input-group-text"><i class="fa-solid fa-address-card"></i></span>
+                                    <div class="form-floating">
+                                        <input type="text" class="form-control" name="name" id="name" placeholder="Jonh">
+                                        <label for="name">Nombre</label>
+                                    </div>
+                                </div>
+                                <div class="input-group">
+                                    <span class="input-group-text"><i class="fa-solid fa-signature"></i></span>
+                                    <div class="form-floating">
+                                        <input type="text" class="form-control" name="last" id="last" placeholder="Doe">
+                                        <label for="last">Apellido</label>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-8">
-                            <div class="mb-3">
-                                <div class="card-body">
-                                    <div class="row mx-1 mb-3">
-                                        <div class="form-floating p-0">
-                                            <input name="name" id="name" type="text" class="form-control" placeholder="John" value="@if($user->user_name): {{ $user->user_name }} @endif">
-                                            <label for="name">Nombre</label>
-                                        </div>
-                                    </div>
-                                    <div class="row mx-1 mb-3">
-                                        <div class="form-floating p-0">
-                                            <input name="lastname" id="lastname" type="text" class="form-control" placeholder="Doe" value="@if($user->user_lastname): {{ $user->user_lastname }} @endif">
-                                            <label for="lastname">Apellido</label>
-                                        </div>
-                                    </div>
-                                    <div class="row mx-1 mb-3">
-                                        <div class="form-floating p-0">
-                                            <input name="email" id="email" type="text" class="form-control" placeholder="mail@domain.com" value="@if($user->user_email): {{ $user->user_email }} @endif" disabled>
-                                            <label for="email">Email</label>
-                                        </div>
-                                    </div>
-                                    <div class="row mx-1 mb-3">
-                                        <div class="form-floating p-0">
-                                            <input name="address" id="address" type="text" class="form-control" placeholder="mail@domain.com" value="@if($user->user_address): {{ $user->user_address }} @endif">
-                                            <label for="address">Dirección</label>
-                                        </div>
-                                    </div>
-                                    <div class="row mx-1 mb-3">
-                                        <div class="form-floating p-0">
-                                            <input name="phone" id="phone" type="text" class="form-control" placeholder="mail@domain.com" value="@if($user->user_phone): {{ $user->user_phone }} @endif">
-                                            <label for="phone">Teléfono</label>
-                                        </div>
-                                    </div>
-                                    <div class="row mx-1 mb-3">
-                                        <div class="form-floating p-0">
-                                            <input name="pass" id="pass" type="text" class="form-control" placeholder="*" required>
-                                            <label for="pass">Contraseña <sup class="text-danger">*</sup></label>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                    </div>
+                    <div class="input-group mb-3">
+                        <span class="input-group-text"><i class="fa-solid fa-diamond"></i></span>
+                        <div class="form-floating">
+                            <input type="text" class="form-control" name="nick" id="nick" placeholder="JonhDoe">
+                            <label for="nick">Nick</label>
+                        </div>
+                    </div>
+                    <div class="input-group mb-3">
+                        <span class="input-group-text"><i class="fa-solid fa-at"></i></span>
+                        <div class="form-floating">
+                            <input type="text" class="form-control" name="email" id="email" placeholder="mail@domain.com">
+                            <label for="email">Correo Electronico</label>
+                        </div>
+                    </div>
+                    <div class="input-group mb-3">
+                        <span class="input-group-text"><i class="fa-solid fa-lock"></i></span>
+                        <div class="form-floating">
+                            <input type="text" class="form-control" name="pass" id="pass" placeholder="*********">
+                            <label for="pass">Contraseña</label>
+                        </div>
+                    </div>
+                    <div class="input-group mb-3">
+                        <span class="input-group-text"><i class="fa-solid fa-location-dot"></i></span>
+                        <div class="form-floating">
+                            <input type="text" class="form-control" name="address" id="address" placeholder="KRA x">
+                            <label for="address">Dirección</label>
+                        </div>
+                    </div>
+                    <div class="input-group">
+                        <span class="input-group-text"><i class="fa-solid fa-square-phone"></i></span>
+                        <div class="form-floating">
+                            <input type="text" class="form-control" name="phone" id="phone" placeholder="555555555">
+                            <label for="phone">Teléfono</label>
+                        </div>
+                    </div>
+                    <hr class="my-3">
+                    <p>Privilegios</p>
+                    <div class="d-flex gap-3 justify-content-evenly">
+                        <div class="form-check form-switch">
+                            <input class="form-check-input" name="priv-user" type="checkbox" role="switch" id="priv-user" value="{{ Privileges::User->get() }}" checked>
+                            <label class="form-check-label" for="priv-user">Usuario</label>
+                        </div>
+                        <div class="form-check form-switch">
+                            <input class="form-check-input" name="priv-admin" type="checkbox" role="switch" id="priv-admin" value="{{ Privileges::Admin->get() }}">
+                            <label class="form-check-label" for="priv-admin">Admin</label>
+                        </div>
+                        <div class="form-check form-switch">
+                            <input class="form-check-input" name="priv-master" type="checkbox" role="switch" id="priv-master" value="{{ Privileges::Master->get() }}">
+                            <label class="form-check-label" for="priv-master">Maestro</label>
                         </div>
                     </div>
                 </div>
@@ -319,4 +337,7 @@
         </div>
     </div>
 </div>
-<script src="{{ asset("js/dash.profiles.js") }}"></script>
+@if(Privileges::check(Privileges::Master->get())):
+<script src="{{ asset("js/dashboard/profiles/add.js") }}"></script>
+@endif
+<script src="{{ asset("js/dashboard/profiles/index.js") }}"></script>

@@ -5,7 +5,7 @@ namespace FoxyMVC\Lib\Foxy\Core;
 use FoxyMVC\App\Models\User;
 
 class Session {
-    static private object $data;
+    static private object|bool $data = false;
     static private array $messages = [];
     static private array $notifications = [];
 
@@ -46,7 +46,8 @@ class Session {
     }
 
     static function data($key = null) {
-        return $key ? self::$data->$key : self::$data;
+        return !Session::$data ? Session::$data : ($key ? self::$data->$key : self::$data);
+        
     }
 
     static function setMessage($message) {

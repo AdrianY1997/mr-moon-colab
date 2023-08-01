@@ -3,6 +3,7 @@
 namespace FoxyMVC\App\Controllers;
 
 use FoxyMVC\App\Models\User;
+use FoxyMVC\App\Packages\Privileges;
 use FoxyMVC\Lib\Foxy\Core\Controller;
 use FoxyMVC\Lib\Foxy\Core\Request;
 use FoxyMVC\Lib\Foxy\Core\Session;
@@ -13,6 +14,21 @@ class ProfileController extends Controller {
         if (!Session::checkSession()) {
             redirect()->route("error", ["msg" => "missing-permissions"])->send();
         }
+    }
+
+    public function add() {
+        if (!Privileges::check(Privileges::Master->get())) {
+            redirect()
+                ->route(constant("HOME"))
+                ->error("No tiene permisos para acceder a este recurso")
+                ->send();
+        }
+
+        $data = Request::getData();
+
+        $data["priv-generated"] = $data["priv-user"] ?? 0 + $data["priv-admin"] ?? 0 + $data["priv-master"] ?? 0;
+
+        var_dump($data);
     }
 
     public function show() {

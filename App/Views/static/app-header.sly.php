@@ -37,7 +37,7 @@ $webdata = unserialize($_COOKIE['webdata']);
                     <a class="px-1" href="{{ route('profile.show') }}">
                         <p class="m-0"><i class="fa-solid fa-user-circle"></i></p>
                     </a>
-                    @if(Privileges::check(Privileges::Master->get())):
+                    @if(Privileges::check(Privileges::Admin->get())):
                     <a class="px-1" href="{{ route('dash.home') }}">
                         <p class="m-0"><i class="fa-solid fa-gauge"></i></p>
                     </a>
@@ -70,11 +70,11 @@ $webdata = unserialize($_COOKIE['webdata']);
                 <p class="m-0"><i class="fa-solid fa-user-circle"></i></p>
             </a>
             @else
-                @if(Privileges::check(Privileges::Master->get())):
-                <a href="{{ route('profile.show') }}">
+                <a class="px-1" href="{{ route('profile.show') }}">
                     <p class="m-0"><i class="fa-solid fa-user-circle"></i></p>
                 </a>
-                <a href="{{ route('auth.login') }}">
+                @if(Privileges::check(Privileges::Admin->get())):
+                <a class="px-1" href="{{ route('dash.home') }}">
                     <p class="m-0"><i class="fa-solid fa-gauge"></i></p>
                 </a>
                 @endif
