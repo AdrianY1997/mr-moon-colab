@@ -10,6 +10,7 @@ use FoxyMVC\App\Controllers\ReservasController;
 
 Route::set("", [HomeController::class, "index"])->name("root");
 Route::set("inicio", [HomeController::class, "home"])->name(constant("HOME"));
+Route::set("inicio/star",[HomeController::class,"sus"])->name("home.star");
 Route::set("menu", [MenuController::class, "index"])->name("menu");
 Route::set("eventos", [EventosController::class, "index"])->name("event");
 Route::set("galeria", [GaleriaController::class, "index"])->name("galery");
@@ -23,6 +24,7 @@ Route::set("reserve/confirm", [ReservasController::class, "confirm"])->name("res
 Route::set("reserve/hours", [ReservasController::class, "getHours"])->name("reserve.hours");
 
 Route::set("profile", [ProfileController::class, "show"])->name("profile.show");
+Route::set("profile/add", [ProfileController::class, "add"])->name("profile.add");
 Route::set("profile/edit", [ProfileController::class, "edit"])->name("profile.edit");
 
 Route::set("evento/{id}", [EventosController::class, "despliegue"])->name("despliegue");

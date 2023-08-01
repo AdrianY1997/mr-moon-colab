@@ -16,8 +16,6 @@ const idField = document.querySelector("#show-profile-id");
 
 let response, data;
 
-
-
 showProfileBtn.forEach(spb => {
     spb.addEventListener("click", async (e) => {
         e.preventDefault();
