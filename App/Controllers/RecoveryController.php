@@ -2,6 +2,8 @@
 
 namespace FoxyMVC\App\Controllers;
 
+use DateTime;
+use DateTimeZone;
 use FoxyMVC\App\Models\Code;
 use FoxyMVC\App\Models\User;
 use FoxyMVC\App\Packages\Privileges;
@@ -44,6 +46,14 @@ class RecoveryController extends Controller {
             Response::status(401)->end("El email ingresado no se encuentra registrado");
         }
 
+        $code = Code::where("code_email", $data->email)->where("code_status", Code::WAITING)->first();
+
+        if($code) {
+            Response::status(401)->end("Ya existe un código de verificación. Revisa tu mail en inténtalo de nuevo.");
+        }
+
+
+
         $randCode = rand(100000, 999999);
 
         $code = new Code();
@@ -51,11 +61,36 @@ class RecoveryController extends Controller {
         $code->code_code = $randCode;
         $code->code_status = Code::WAITING;
 
-        Code::insert($code);
+        if (!Code::insert($code)) {
+            Response::status(500)->end("No se ha podido guardar el codigo, contacte con el administrador");
+        }
 
         Response::json(["code" => $randCode]);
     }
 
     public function verify_recovery_code() {
+        Response::checkMethod("POST");
+
+        $data = Request::getFormData();
+
+        $code = Code::where("code_code", $data->code)->where("code_email", $data->email)->first();
+
+        if (!$code) {
+            Response::status(401)->end("El código ingresado no coincide.");
+        }
+
+        $date1 = new DateTime($code->created_at, new DateTimeZone('America/Bogota'));
+        $date2 = new DateTime('now', new DateTimeZone('America/Bogota'));
+        $interval = $date2->getTimestamp() - $date1->getTimestamp();
+
+        if ($interval > 7200) {
+            $code->code_status = Code::CANCELLED;
+
+            if ($code->model->update()){
+                Response::status(401)->end("El codigo de recuperación expiró, vuelve a generarlo nuevamente.");
+            }
+
+            Response::status(500)->end("El código expiró, pero no puede ser actualizado. Contacte con el administrador.");
+        }
     }
 }

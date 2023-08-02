@@ -8,6 +8,7 @@ use FoxyMVC\Lib\Foxy\Database\Table;
 class Code extends Table {
     public const WAITING = 0;
     public const CONFIRMED = 1;
+    public const CANCELLED = 2;
 
     // -- Generated
     public static string $tableName = "codes";
