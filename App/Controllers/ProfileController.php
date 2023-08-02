@@ -46,6 +46,13 @@ class ProfileController extends Controller {
             redirect()->route("profile.show")->error("Debes ingresar tu contraseña antigua para realizar cambios en tu perfil")->send();
         }
 
+        if (!preg_match('/^(?=.*[A-Z])(?=.{8,16})(?=.*[!@#$%^&*()_+-]).*$/', $data["new-pass"])) {
+            redirect()
+                ->route("profile.show")
+                ->error("La contraseña debe contener entre 8 y 16 caracteres, 1 letra mayúscula y un carácter especial")
+                ->send();
+        }
+
         $isUpdated = User::where("user_email", $data["email"])->update([
             "user_nick" => $data["nick"],
             "user_pass" => $data["new-pass"] != "" ? password_hash($data["new-pass"], PASSWORD_DEFAULT) : $user->user_pass,
