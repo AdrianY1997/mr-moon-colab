@@ -1,32 +1,4 @@
 .event .imgs {
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(1, 1fr);
 }
-.event {
-    /* Estilos para el contenedor principal de eventos */
-  }
-  
-  .title {
-    /* Estilos para el título con imagen de fondo */
-  }
-  
-  .imgs.container {
-    /* Estilos para el contenedor de imágenes */
-  }
-  
-  .evento-item {
-    /* Estilos para cada evento */
-    cursor: pointer;
-    margin-bottom: 20px;
-  }
-  
-  .imagen img {
-    /* Estilos para la imagen de cada evento */
-    width: 100%;
-    height: auto;
-  }
-  
-  .informacion {
-    /* Estilos para la información adicional */
-    display: none;
-  }
-  
+

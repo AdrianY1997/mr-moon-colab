@@ -29,7 +29,7 @@
                         <label for="number">Direccion</label>
                     </div>
                     <div class="form-floating mb-3">
-                        <input class="form-control border shadow fs-6" required style="margin-bottom: 1px" type="password" name="password" id="password" placeholder="password">
+                        <input class="form-control border shadow fs-6"  data-bs-toggle="tooltip" data-bs-placement="right" data-bs-custom-class="custom-tooltip" data-bs-title="La contraseña debe contener entre 8 y 16 caracteres, 1 letra mayúscula y un carácter especial" required style="margin-bottom: 1px" type="password" name="password" id="password" placeholder="password">
                         <label for="password">Contraseña</label>
                     </div>
                     
