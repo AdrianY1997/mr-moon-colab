@@ -15,37 +15,28 @@
     <link rel="stylesheet" href="{{ asset('css/main.css') }}">
 
     <script src="{{ asset('js/fontawesome.min.js') }}"></script>
-    <script src="{{ asset('js/boostrap.bundle.min.js') }}"></script>
 </head>
 
 <body>
     <header>
-        @include('static.app-header'):
+        @include('static.app-header')
     </header>
 
     <main>
-        @include($view):
+        @include($view)
     </main>
 
     <footer class="footer shadow">
-        @include('static.app-footer'):
+        @include('static.app-footer')
     </footer>
 
     <div id="notifications" class="container">
-        @include('static.app-messages'):
+        @include('static.app-messages')
     </div>
 
     <script src="{{ asset('js/foxy.js') }}"></script>
-    <script src="{{ asset('js/helper.js') }}"></script>
-    <script src="{{ asset('js/jquery.min.js') }}"></script>
-    <script src="{{ asset('js/main.js') }}"></script>
-    <script>
-        var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
-        var tooltipList = tooltipTriggerList.map(function(tooltipTriggerEl) {
-            return new bootstrap.Tooltip(tooltipTriggerEl)
-        })
-
-    </script>
+    <script src="{{ asset('js/boostrap.bundle.min.js') }}"></script>
+    <script src="{{ resource('js/notification.js') }}"></script>
 </body>
 
 </html>

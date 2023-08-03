@@ -27,22 +27,22 @@
                 </h1>
 
                 <div class="mb-3">
-                    <button class="google py-2 btn">
+                    <button class="google py-2">
                         <span><i class="fa-brands fa-google"></i> Google</span>
                     </button>
                 </div>
                 <div class="mb-3">
-                    <button class="facebook py-2 btn">
+                    <button class="facebook py-2">
                         <span><i class="fa-brands fa-facebook"></i> Facebook</span>
                     </button>
                 </div>
                 <div class="mb-3">
-                    <button class="twitter py-2 btn">
+                    <button class="twitter py-2">
                         <span><i class="fa-brands fa-twitter"></i> Twitter</span>
                     </button>
                 </div>
                 <div class="mb-3">
-                    <button class="instagram py-2 btn">
+                    <button class="instagram py-2">
                         <span><i class="fa-brands fa-instagram"></i> Instagram</span>
                     </button>
                 </div>

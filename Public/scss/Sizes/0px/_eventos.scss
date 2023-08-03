@@ -3,7 +3,7 @@
         display: grid;
         grid-template-columns: 1fr;
         grid-gap: 1rem;
-        
+
     }
 
     .imgs>div {
@@ -15,10 +15,16 @@
     .imgs>div {
         margin: 1rem auto;
         padding: 1rem;
+        border-radius: 13px;
     }
 
     img {
-        height: 150px;
-        border-radius: 20px;
+        height: 162px;
+        border-radius: 10px;
+        width: 301px;
+    }
+    .detalles>button{
+        background-color: #dfb240;
+        border: none;
     }
 }
