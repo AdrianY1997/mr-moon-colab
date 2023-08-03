@@ -11,17 +11,17 @@
         @foreach($events as $evento):
         <div class="evento-item" data-event-href="{{ route("event.get", ["id" => 1]) }}">
             <div class="imagen">
-                <img class="w-100" src="{{ asset($evento->even_path) }}" alt="">
-            </div>
-            <div class="informacion hidden">
-                <h2>{{$evento->even_name}}</h2>
-                <h4>{{$evento->even_fech}}</h4>
-                <p>{{$evento->even_text}}</p>
+                <img src="{{ asset($evento->even_path) }}" alt="">
+                <div>
+                    <h2>{{$evento->even_name}}</h2>
+                    <h4>{{$evento->even_fech}}</h4>
+                    <p>{{$evento->even_text}}</p>
+                </div>
             </div>
         </div>
+
         @endforeach
         @endif
     </div>
-  </div>
-  <script src="{{ asset("js/eventos/show.js") }}"></script>
-  <script src="Public/js/script.js"></script>
+</div>
+<script src="{{ asset("js/eventos/show.js") }}"></script>
