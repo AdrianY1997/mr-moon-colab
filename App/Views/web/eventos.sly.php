@@ -10,7 +10,7 @@
         @else
         @foreach($events as $evento):
         <div class="evento-item">
-            {{route("despliegue", ["id" => $evento->even_id])}}
+            <a href="{{route("despliegue", ["id" => $evento->even_id])}}">{{ $evento->even_name }}</a>
             <div class="imagen" onclick="expandirInformacion(this)">
                 <img class="w-100" src="{{ asset($evento->even_path) }}" alt="">
             </div>
