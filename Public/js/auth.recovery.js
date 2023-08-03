@@ -4,7 +4,10 @@ const code = document.querySelector("#recovery-code");
 const sendCodeBtn = document.querySelector("#send-code-btn");
 const sendCode = document.querySelector('#btn-recovery');
 const sendCodeConfirm = document.querySelector('#btn-confirm');
+const sendNewPass = document.querySelector('#btn-new-pass');
 
+const newPass = document.querySelector('#new--pass');
+const confirmPass = document.querySelector('#confirm-pass');
 
 var recovery = document.querySelector('#recovery');
 var recovery2 = document.querySelector('#recovery2');
@@ -52,7 +55,20 @@ sendCodeConfirm.addEventListener("click", async (e) => {
     
 });
 
+sendNewPass.addEventListener("click", async (e) => {
+    e.preventDefault();
+    e.stopPropagation();
 
+    const form = sendNewPass.parentElement.parentElement;
+
+    let response = await fetch(form.getAttribute("action"), {
+        method: "POST",
+        body: JSON.stringify({ email: email, code: code.value }),
+    });
+
+    if (await checkFetchError(response)) return;
+
+});
 
 sendCode.addEventListener("click", (e) => {
     recovery.classList.add("d-none");
