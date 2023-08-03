@@ -15,11 +15,16 @@
     .imgs>div {
         margin: 1rem auto;
         padding: 1rem;
+        border-radius: 45px;
     }
 
     img {
         height: 162px;
-        border-radius: 50px;
+        border-radius: 26px;
         width: 301px;
+    }
+    .detalles>button{
+        background-color: #dfb240;
+        border: none;
     }
 }

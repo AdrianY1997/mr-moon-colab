@@ -1,4 +1,12 @@
 .event .imgs {
-    grid-template-columns: repeat(1, 1fr);
+    grid-template-columns: repeat(4, 1fr);
+    justify-content: center;
+}
+.informacion{
+    text-align: center;
+    margin: 16px
+}
+.detalles{
+    text-align: center;
 }
 
