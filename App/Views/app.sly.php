@@ -15,6 +15,7 @@
     <link rel="stylesheet" href="{{ asset('css/main.css') }}">
 
     <script src="{{ asset('js/fontawesome.min.js') }}"></script>
+    <script src="{{ asset('js/boostrap.bundle.min.js') }}"></script>
 </head>
 
 <body>
@@ -35,7 +36,6 @@
     </div>
 
     <script src="{{ asset('js/foxy.js') }}"></script>
-    <script src="{{ asset('js/boostrap.bundle.min.js') }}"></script>
     <script src="{{ asset('js/helper.js') }}"></script>
     <script src="{{ asset('js/jquery.min.js') }}"></script>
     <script src="{{ asset('js/main.js') }}"></script>
