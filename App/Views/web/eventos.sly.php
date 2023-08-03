@@ -9,6 +9,15 @@
         </tr>
         @else
         @foreach($events as $evento):
+        <div class="evento-item">
+            <a href="{{route("despliegue", ["id" => $evento->even_id])}}">{{ $evento->even_name }}</a>
+            <div class="imagen" onclick="expandirInformacion(this)">
+                <img class="w-100" src="{{ asset($evento->even_path) }}" alt="">
+            </div>
+            <div class="informacion hidden">
+                <h2>{{ $evento->even_name }}</h2>
+                <h4>{{$evento->even_fech}}</h4>
+                <p>{{$evento->even_text}}</p>
         <div class="evento-item" data-event-href="{{ route("event.get", ["id" => $evento->even_id]) }}" type="button" data-bs-target="#show-event-modal">
             <div class="imagen">
                 <img src="{{ asset($evento->even_path) }}" alt="">
