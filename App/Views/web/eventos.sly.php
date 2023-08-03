@@ -14,7 +14,7 @@
                 <img src="{{ asset($evento->even_path) }}" alt="">
             </div>
             <div class="informacion">
-                <h5 class="fw-woff">{{$evento->even_name}}</h5>
+                <h5 class="fw-bold">{{$evento->even_name}}</h5>
             </div>
             <div class="detalles"><button  type="button" class="btn btn-primary" style="width: fit-content" aria-label="Close">Ver Detalles</button></div>
         </div>
