@@ -33,14 +33,10 @@
 }
 
 .galeria .imgs img {
-    width: 100%;
+    width: 420px;
+    height: 248px;
 }
 
-.galeria .carousel .images {
+.image {
     width: 100%;
-    max-width: 500px;
-
-    .image {
-        height: 250px;
-    }
 }
