@@ -60,8 +60,8 @@
     }
 
 </style>
-<div class="container reserve-confirm-container bg-light d-md-flex align-items-center justify-content-center mb-4">
-    <div class="card box1 shadow-sm p-md-5 p-md-5 p-5 px-3">
+<div class="container reserve-confirm-container d-md-flex align-items-center justify-content-center mb-5">
+    <div class="card box1 shadow-sm p-md-5 p-md-5 p-5 px-3 rounded-start-3">
         <p class="fs-5">Detalles</p>
         <div class="align-items-center pb-2">
             <p class="m-0">A nombre de:</p>
@@ -128,30 +128,35 @@
             <li class="nav-item ms-auto position-relative">
                 <a class="nav-link px-2" href="#" type="button" data-bs-toggle="collapse" data-bs-target="#payment-choises" aria-expanded="false" aria-controls="payment-choises">+ Opciones</a>
                 <div class="collapse position-absolute end-0 bg-white shadow" id="payment-choises" style="z-index: 1">
-                    <p class="m-0 px-3 py-2" data-method="NEQU" data-logo="{{ asset("img/logos/nequi.webp") }}" data-img="{{ asset("img/qr.jpg") }}">Nequi</p>
-                    <p class="m-0 px-3 py-2" data-method="AALM" data-logo="{{ asset("img/logos/ahorroalamano") }}" data-img="{{ asset("img/qr.jpg") }}">Ahorro a la mano</p>
-                    <p class="m-0 px-3 py-2" data-method="DVPT" data-logo="{{ asset("img/logos/daviplata") }}" data-img="{{ asset("img/qr.jpg") }}">Daviplata</p>
-                    <p class="m-0 px-3 py-2" data-method="TPSE" data-logo="{{ asset("img/logos/pse") }}" data-img="{{ asset("img/qr.jpg") }}">Transferencia bancaria (PSE)</p>
+                    <p class="m-0 px-3 py-2" data-method="NEQU" data-logo="{{ asset("img/logos/nequi.webp") }}" data-img="{{ asset("img/logos/nequi-qr.png") }}">Nequi</p>
+                    <p class="m-0 px-3 py-2" data-method="AALM" data-logo="{{ asset("img/logos/ahorroalamano.webp") }}" data-img="{{ asset("img/logos/ahorroalamano-qr.png") }}">Ahorro a la mano</p>
+                    <p class="m-0 px-3 py-2" data-method="DVPT" data-logo="{{ asset("img/logos/daviplata.png") }}" data-img="{{ asset("img/logos/daviplata-qr.png") }}">Daviplata</p>
+                    <!--<p class="m-0 px-3 py-2" data-method="TPSE" data-logo="{{ asset("img/logos/pse.webp") }}" data-img="{{ asset("img/logos/pse-qr.png") }}">Transferencia bancaria (PSE)</p>-->
                 </div>
             </li>
         </ul>
         <div class="d-flex flex-column align-items-center mb-4">
             <div style="width: 150px;" class="mb-2">
-                <img id="pay-img" src="{{ asset("img/qr.jpg") }}" class="w-100 h-100" alt="">
+                <img id="pay-img" src="{{ asset("img/logos/nequi-qr.png") }}" class="w-100 h-100" alt="">
             </div>
-            <p>Escanee este codigo QR<br>con su aplicación Nequi</p>
+            <p id="pay-sub" class="text-center">Escanee este codigo QR<br>con su aplicación Nequi</p>
         </div>
-        <form action="">
+        <form id="pay-form" action="">
             <div class="row">
                 <div class="col-12">
                     <div class="d-flex flex-column px-md-5 px-4 mb-4">
-                        <span class="mb-2">Captura de pantalla:</span>
-                        <div class="inputWithIcon form-group">
+                        <div class="inputWithIcon form-group" style="cursor: pointer" id="pay-input">
                             <div class="form-control">
-                                <p class="m-0">Elejir archivo</p>
+                                <p class="m-0" id="pay-input-text">Elejir archivo</p>
                             </div>
-                            <input class="form-control d-none" type="file"> <span class=""> <img style="width: fit-content" class="me-2" id="pay-logo" src="{{ asset("img/logos/nequi.webp") }}" alt=""></span>
+                            <div>
+                                <input class="form-control d-none" type="file">
+                                <span class="">
+                                    <img style="width: fit-content" class="me-2" id="pay-logo" src="{{ asset("img/logos/nequi.webp") }}" alt="">
+                                </span>
+                            </div>
                         </div>
+                    <p class="mt-3">Confirme su reservación subiendo una captura de pantalla de la transferencia</p>
                     </div>
                 </div>
                 <div class="col-12 px-md-5 px-4 mt-3">
