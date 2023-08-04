@@ -52,7 +52,7 @@
                 </h1>
                 <p class="fs-5">Ingresa tu nueva contraseña.</p>
                 <div>
-                    <form action="">
+                    <form action="" data-route="{{ route('auth.login') }}">
                         <input class="mb-3 border px-3 py-2" id="new-pass" type="password" placeholder="Escribe tú nueva contraseña">
                         <input class="mb-3 border px-3 py-2" id="confirm-pass" type="password" placeholder="Confirma tú contraseña">
                         <button class="mb-3 ms-3 px-3" id="btn-new-pass"><a href="#">Confirmar Contraseña</a></button>
