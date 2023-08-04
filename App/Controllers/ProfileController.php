@@ -46,11 +46,12 @@ class ProfileController extends Controller {
             redirect()->route("profile.show")->error("Debes ingresar tu contraseña antigua para realizar cambios en tu perfil")->send();
         }
 
-        if (!preg_match('/^(?=.*[A-Z])(?=.{8,16})(?=.*[!@#$%^&*()_+-]).*$/', $data["new-pass"])) {
-            redirect()
-                ->route("profile.show")
-                ->error("La contraseña debe contener entre 8 y 16 caracteres, 1 letra mayúscula y un carácter especial")
-                ->send();
+        if($data["new-pass"] == $data["pass"]){
+            redirect()->route("profile.show")->error("Las contraseñas son las mismas")->send();
+        }
+
+        if(!is_numeric($data["phone"])){
+            redirect()->route("profile.show")->error("Solo se aceptan numeros")->send();
         }
 
         $isUpdated = User::where("user_email", $data["email"])->update([
