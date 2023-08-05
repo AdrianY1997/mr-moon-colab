@@ -47,18 +47,26 @@
     }
 }
 
+#pay-img {
+    animation: fade .2s normal;
+}
+
+#pay-input-text {
+    text-wrap: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: calc(100% - 1.2rem);
+}
+
 .reserve-confirm-container {
     margin-top: 5rem;
-
-    #pay-img {
-        animation: fade .2s normal;
-    }
 }
 
 @keyframes fade {
     0% {
         opacity: 0;
     }
+
     100% {
         opacity: 1;
     }

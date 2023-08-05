@@ -13,6 +13,15 @@ class Reservation extends Table {
     public const WAITING_FOR_CONFIRMATION = 2;
     public const RESERVED = 3;
 
+    public static function getText($number) {
+        return match(intval($number)) {
+            0 => "Cancelado",
+            1 => "Esperando Pago",
+            2 => "Esperando confirmación",
+            3 => "Reservado",
+        };
+    }
+
     // -- Generated
     public static string $tableName = "reservations";
     public Model $model;
@@ -37,6 +46,7 @@ class Reservation extends Table {
     public string $rese_day;
     public string $rese_time;
     public string $rese_status;
+    public string $rese_method;
     public string $rese_details;
     public string $user_id;
 
@@ -50,6 +60,7 @@ class Reservation extends Table {
         "rese_day",
         "rese_time",
         "rese_status",
+        "rese_method",
         "rese_details",
         "user_id",
     ];
