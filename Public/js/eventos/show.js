@@ -14,9 +14,9 @@ const eventDescription = document.querySelector("[data-event-description]");
 
 let response, data;
 
-eventModalClose.addEventListener("click", () => {
-    showEventModal.hide();
-})
+// eventModalClose.addEventListener("click", () => {
+//     showEventModal.hide();
+// })
 
 eventos.forEach(evento => {
     const url = evento.getAttribute("data-event-href");
