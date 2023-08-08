@@ -99,5 +99,5 @@ payForm.addEventListener("submit", async (e) => {
     if (await checkFetchError(response)) {
         return;
     }
-    // location.reload();
+    location.reload();
 })

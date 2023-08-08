@@ -10,7 +10,7 @@
             </span>
             <span>
                 <a target="_blank" href="{{ $webdata->webd_twlink }}">
-                    <i class="fa-brands fa-twitter"></i>
+                    <i class="fa-brands fa-x-twitter"></i>
                 </a>
             </span>
             <span>
