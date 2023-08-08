@@ -6,7 +6,7 @@
         @foreach($galerias as $galeria):
         <div>
             <div>
-                <img src="{{ asset($galeria->gale_path) }}" alt="">
+                <img class="gal-img" src="{{ asset($galeria->gale_path) }}" alt="">
             </div>
         </div>
 

@@ -25,7 +25,7 @@ return new class {
 
         Schema::insert($this->tableName, [
             "name" => "Galeria",
-            "path" => "img/gallery/unnamed (2).png"
+            "path" => "img/gallery/cafebar}.jpg"
         ]);
 
         Schema::insert($this->tableName, [

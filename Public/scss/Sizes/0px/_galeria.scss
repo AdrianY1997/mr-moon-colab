@@ -1,6 +1,6 @@
 .galeria .imgs {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(1, 1fr);
     grid-gap: 1rem;
 }
 .galeria .info {
@@ -32,11 +32,14 @@
 
 .galeria .imgs img {
     width: 100%;
-    height: auto;
     object-fit: cover;
     border-radius: 26px;
 }
 
 .image {
     width: 100%;
+}
+
+.gal-img{
+    height: 214px;
 }
