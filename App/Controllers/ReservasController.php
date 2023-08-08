@@ -24,9 +24,12 @@ class ReservasController extends Controller {
     public function search() {
         $data = Request::getData();
         if (isset($data["urid"])) {
-            $rese = Reservation::where("rese_urid", $data["urid"])->where("rese_status", "NOT LIKE", Reservation::CANCELLED)->first();
+            $rese = Reservation::where("rese_urid", $data["urid"])->first();
             if (!$rese) {
-                redirect()->route("reserve")->error("El id de reservación no existe en el sistema o ha sido cancelada")->send();
+                redirect()
+                    ->route("reserve")
+                    ->error("El id de reservación no existe en el sistema, por favor revise correctamente y vuelva a intentarlo.")
+                    ->send();
             }
 
             redirect()->route("reserve.show", ["urid" => $rese->rese_urid])->send();
@@ -46,10 +49,8 @@ class ReservasController extends Controller {
         }
 
         if ($interval > 7200) {
-            Reservation::where("rese_urid", $urid)->update([
-                "rese_status" => Reservation::CANCELLED
-            ]);
-            redirect()->route("reserve")->error("El tiempo de espera para la confirmación ha finalizado y su reserva se cancelo. vuelva a intentarlo")->send();
+            $rese->rese_status = Reservation::CANCELLED;
+            $rese->model->update();
         }
 
         return self::render("web.reserve.confirm", [
@@ -84,9 +85,10 @@ class ReservasController extends Controller {
         $reservation->rese_table = $data["table"];
         $reservation->rese_day = $data["day"];
         $reservation->rese_time = $data["time"];
-        $reservation->rese_status = "PENDING";
+        $reservation->rese_status = Reservation::WAITING_FOR_PAYMENT;
         $reservation->rese_quantity = $data["people"];
         $reservation->rese_details = $data["details"];
+        $reservation->rese_method = "";
         $reservation->user_id = $userId;
 
         if (!Reservation::insert($reservation)) {
@@ -103,7 +105,29 @@ class ReservasController extends Controller {
     }
 
     public function confirm() {
-        $data = Request::getData();
+        Response::checkMethod("POST");
+
+        $data = Request::getFormData();
+
+        $file = $_FILES['image'];
+        $tmp_name = $file['tmp_name'];
+        $name = time() . $data["urid"] . "." . pathinfo($file["name"], PATHINFO_EXTENSION);
+        $path = "Public/img/facturas/" . $name;
+
+        if (!move_uploaded_file($tmp_name, $path)) {
+            Response::status(500)->end("No ha sido posible guardar su factura, contacte con administración");
+        }
+
+        $reservation = Reservation::where("rese_id", $data["urid"])->first();
+        $reservation->rese_status = Reservation::WAITING_FOR_CONFIRMATION;
+        $reservation->rese_method = $data["pay-selected"];
+
+        if (!$reservation->model->update()) {
+            unlink($path);
+            Response::status(500)->end("Ha ocurrido un error en la operación, contacte con administración");
+        }
+
+        Response::status(200)->end();
     }
 
     public function getHours() {

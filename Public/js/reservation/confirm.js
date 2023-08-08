@@ -22,7 +22,7 @@ const strt = {
 payMethods.forEach(method => {
     method.addEventListener("click", () => {
         const reseChoises = new bootstrap.Collapse('#payment-choises');
-        
+
         payMethods.forEach(e => e.classList.remove("active"));
         method.classList.add("active");
 
@@ -55,4 +55,49 @@ payInput.addEventListener("click", () => {
 
 payInput.querySelector("input").addEventListener("change", (e) => {
     payInputText.innerHTML = e.target.files[0].name
+})
+
+payForm.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+
+    const url = payForm.getAttribute("action")
+    const input = payInput.querySelector("input");
+
+    if (input.files.length == 0) {
+        notify({
+            text: "Primero debes subir una imagen",
+            status: "error",
+            bg: "bg-danger"
+        });
+        return;
+    }
+
+    var str = input.files[0].name;
+    var dotIndex = str.lastIndexOf('.');
+    var ext = str.substring(dotIndex);
+
+    if (![".jpeg", ".jpg", ".png"].includes(ext)) {
+        notify({
+            text: "La extensión de la imagen no esta soportada",
+            status: "error",
+            bg: "bg-danger"
+        });
+        return;
+    }
+
+    const data = new FormData();
+    data.append("image", input.files[0])
+    data.append("urid", document.querySelector("#pay-id-input").value)
+    data.append("pay-selected", paySelected.innerHTML[0].toUpperCase() + paySelected.innerHTML.substring(1));
+    
+    const response = await fetch(url, {
+        method: "POST",
+        body: data
+    })
+
+    if (await checkFetchError(response)) {
+        return;
+    }
+    location.reload();
 })

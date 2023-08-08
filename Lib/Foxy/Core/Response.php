@@ -62,7 +62,7 @@ class Response {
         exit;
     }
 
-    public static function end(string $text) {
+    public static function end(string $text = "") {
         header("Content-Type: text/plain");
         header("Content-Length: " . strlen($text));
         header('HTTP/1.1 ' . self::$code);

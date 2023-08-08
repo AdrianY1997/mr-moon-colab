@@ -30,6 +30,10 @@ class Request {
     }
 
     static function getFormData() {
-        return json_decode(file_get_contents('php://input') ?: stream_get_contents(STDIN));
+        if ($data = file_get_contents("php://input")) {
+            return json_decode($data);
+        }
+        
+        return array_merge($_POST, $_GET, $_FILES);
     }
 }

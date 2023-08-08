@@ -9,7 +9,6 @@ use FoxyMVC\Lib\Foxy\Core\Session;
 use FoxyMVC\Lib\Foxy\Core\Controller;
 
 class AuthController extends Controller {
-
     public function __construct() {
         parent::__construct();
     }
