@@ -188,7 +188,7 @@
         </div>
         @if($reservation->rese_status == Reservation::WAITING_FOR_PAYMENT):
         <form id="pay-form" action="{{ route("reserve.confirm") }}" enctype="multipart/form-data">
-            <div class="row">
+            <div class="col">
                 <div class="col-12">
                     <div class="d-flex flex-column px-md-5 px-4 mb-4">
                         <div class="inputWithIcon form-group" style="cursor: pointer" id="pay-input">
@@ -212,7 +212,7 @@
             </div>
         </form>
         @else
-        <div class="row">
+        <div class="col">
             <div class="col-12">
                 <div class="d-flex flex-column px-md-5 px-4 mb-4">
                     @if($reservation->rese_status == Reservation::CANCELLED):
