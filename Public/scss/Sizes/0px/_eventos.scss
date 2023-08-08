@@ -1,3 +1,6 @@
+.event .imgs {
+    grid-template-columns: repeat(4, 1fr);
+}
 .event {
     .imgs {
         display: grid;
@@ -16,6 +19,7 @@
         margin: 1rem auto;
         padding: 1rem;
         border-radius: 13px;
+        text-align: center;
     }
 
     img {

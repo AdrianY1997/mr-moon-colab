@@ -44,9 +44,10 @@
                 </div>
             </div>
             <div class="p-4 modal-footer d-flex justify-content-center border-top-0 pt-2" data-event-description>
+
             </div>
             <div class="text-center mb-4">
-                <button type="button" id="event-modal-close" class="btn btn-primary" style="width: fit-content" data-mdb-dismiss="modal" aria-label="Close">Cerrar</button>
+                <button type="button" class="btn btn-primary" style="width: fit-content" data-bs-dismiss="modal" aria-label="Close">Cerrar</button>
             </div>
         </div>
     </div>
