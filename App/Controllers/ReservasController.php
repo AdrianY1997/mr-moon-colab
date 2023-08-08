@@ -60,7 +60,7 @@ class ReservasController extends Controller {
     public function new() {
         $data = Request::getData();
 
-        $userId = Session::checkSession() ? Session::data("user_id") : 0;
+        $userId = Session::checkSession() ? Session::data("user_id") : 1;
         $urid = sprintf("%s-%010s-%s", $userId, time(), uniqid(true));
 
         foreach ($_POST as $key => $value) {

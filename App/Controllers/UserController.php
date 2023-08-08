@@ -28,11 +28,15 @@ class UserController extends Controller {
                 ->send();
         }
 
-        if (!preg_match('/^(?=.*[A-Z])(?=.{8,16})(?=.*[!@#$%^&*()_+-]).*$/', $data["password"])) {
+        if (!preg_match('/^(?=.*[A-Z])(?=.{8,16})(?=.*[!@#$%^&*.()_+-]).*$/', $data["password"])) {
             redirect()
                 ->route("auth.signup")
                 ->error("La contraseña debe contener entre 8 y 16 caracteres, 1 letra mayúscula y un carácter especial")
                 ->send();
+        }
+
+        if(!is_numeric($data["number"])){
+            redirect()->route("profile.show")->error("Solo se aceptan numeros")->send();
         }
 
         $user = new User();

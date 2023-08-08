@@ -3,6 +3,7 @@ const showEventModal = new bootstrap.Modal('#show-event-modal', {
 })
 
 const eventos = document.querySelectorAll("[data-event-href]");
+const eventModalClose = document.querySelector("#event-modal-close");
 
 const eventImage = document.querySelector("[data-event-image]");
 const eventTitle = document.querySelector("[data-event-title]");
@@ -12,6 +13,10 @@ const eventTime = document.querySelector("[data-event-time]");
 const eventDescription = document.querySelector("[data-event-description]");
 
 let response, data;
+
+eventModalClose.addEventListener("click", () => {
+    showEventModal.hide();
+})
 
 eventos.forEach(evento => {
     const url = evento.getAttribute("data-event-href");
@@ -30,6 +35,7 @@ eventos.forEach(evento => {
         eventImage.setAttribute("src", "Public/" + data.even_path);
         eventTitle.innerHTML = data.even_name;
         eventDate.innerHTML = new Date(date).toLocaleString("default", { dateStyle: "long" });
+
         eventTime.innerHTML = time;
         eventDescription.innerHTML = data.even_text;
         showEventModal.show();

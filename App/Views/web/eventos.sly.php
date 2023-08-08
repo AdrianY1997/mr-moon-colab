@@ -18,7 +18,6 @@
             </div>
             <div class="detalles"><button  type="button" class="btn btn-primary" style="width: fit-content" aria-label="Close">Ver Detalles</button></div>
         </div>
-
         @endforeach
         @endif
     </div>
@@ -46,6 +45,9 @@
             </div>
             <div class="p-4 modal-footer d-flex justify-content-center border-top-0 pt-2" data-event-description>
 
+            </div>
+            <div class="text-center mb-4">
+                <button type="button" class="btn btn-primary" style="width: fit-content" data-mdb-dismiss="modal" aria-label="Close">Cerrar</button>
             </div>
         </div>
     </div>
