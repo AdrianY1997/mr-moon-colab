@@ -3,7 +3,7 @@
     <div id="liveToast" class="toast show" role="alert" aria-live="assertive" aria-atomic="true">
         <div class="toast-header bg-success text-white" style="margin-bottom: -3px;">
             <i class="fa-solid fa-check-circle"></i>
-            <strong class="me-auto ms-2">Success</strong>
+            <strong class="me-auto ms-2">Acceso permitido</strong>
             <small>now</small>
             <button type="button" class="btn p-0 m-0 ps-2" data-bs-dismiss="toast" aria-label="Close"><i class="fa-solid fa-times text-white"></i></button>
         </div>
@@ -37,7 +37,7 @@
     <div id="liveToast" class="toast show" role="alert" aria-live="assertive" aria-atomic="true">
         <div class="toast-header bg-danger text-white" style="margin-bottom: -3px;">
             <i class="fa-solid fa-check-circle"></i>
-            <strong class="me-auto ms-2">Error</strong>
+            <strong class="me-auto ms-2">Acceso denegado</strong>
             <small>now</small>
             <button type="button" class="btn p-0 m-0 ps-2" data-bs-dismiss="toast" aria-label="Close"><i class="fa-solid fa-times text-white"></i></button>
         </div>
