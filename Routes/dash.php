@@ -40,3 +40,5 @@ Route::set("dashboard/menus/set/image/{id}", [DashboardController::class, "setMe
 
 Route::set("dashboard/reservas", [DashboardController::class, "reservas"])->name("dash.reserve");
 Route::set("dashboard/reserves/get", [ReservasController::class, "get"])->name("dash.reserve.get");
+Route::set("dashboard/reserves/confirm-payment", [ReservasController::class, "confirmPayment"])->name("dash.reserve.confirm.payment");
+Route::set("dashboard/reserves/cancel-payment", [ReservasController::class, "cancelPayment"])->name("dash.reserve.cancel.payment");

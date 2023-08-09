@@ -170,4 +170,35 @@ class ReservasController extends Controller {
         
         Response::json($newRese);
     }
+
+    public function confirmPayment() {
+        Response::checkMethod("POST");
+
+        $data = Request::getFormData();
+
+        $rese = Reservation::where("rese_urid", $data->urid)->first();
+        $rese->rese_status = Reservation::RESERVED;
+        $rese->model->update();
+
+        Response::json([
+            "text" => "Se ha actualizado el estado de la reservación",
+            "status" => Reservation::getText(Reservation::RESERVED),
+        ]);
+    }
+
+    public function cancelPayment() {
+        Response::checkMethod("POST");
+
+        $data = Request::getFormData();
+
+        $rese = Reservation::where("rese_urid", $data->urid)->first();
+        $rese->rese_status = Reservation::CANCELLED;
+        $rese->rese_details = $data->details;
+        $rese->model->update();
+
+        Response::json([
+            "text" => "Se ha actualizado el estado de la reservación",
+            "status" => Reservation::getText(Reservation::CANCELLED),
+        ]);
+    }
 }

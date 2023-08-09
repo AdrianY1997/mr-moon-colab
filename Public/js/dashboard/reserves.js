@@ -1,10 +1,11 @@
 const reseStatus = new bootstrap.Collapse('#reserve-status', { toggle: false });
-const showReservation = new bootstrap.Modal('#reservation-modal', {
-    keyboard: true
-})
+const showReservation = new bootstrap.Modal('#reservation-modal', { keyboard: true });
+
 const table = document.querySelector("table#reserves-table");
 const hashes = document.querySelectorAll("[data-hash]");
 const statusTitle = document.querySelector("#status-title")
+const confirmPayment = document.querySelector("#confirm-payment")
+const cancelPayment = document.querySelector("#cancel-payment")
 
 const modalImage = document.querySelector("[data-reservation-image]");
 const modalStatus = document.querySelector("[data-reservation-status]");
@@ -18,6 +19,21 @@ const modalDay = document.querySelector("[data-reservation-day]");
 const modalTime = document.querySelector("[data-reservation-time]");
 const modalDesc = document.querySelector("[data-reservation-description]");
 
+function resetModal () {
+    modalImage.src = "";
+    modalDate.innerHTML = "";
+    modalStatus.innerHTML = "";
+    modalUrid.innerHTML = "";
+    modalName.innerHTML = "";
+    modalEmail.innerHTML = "";
+    modalQuantity.innerHTML = "";
+    modalTable.innerHTML = "";
+    modalDay.innerHTML = "";
+    modalDesc.innerHTML = "";
+    modalTime.innerHTML = "";
+    modalDesc.innerHTML = "";
+}
+
 async function viewReservation(e) {
     let response = await fetch(table.getAttribute("data-ref"), {
         method: "POST",
@@ -30,7 +46,6 @@ async function viewReservation(e) {
     
     let data = (await response.json())[0];
 
-    console.log(data)
     modalImage.src = modalImage.getAttribute("data-root") + "/" + data.rese_pay_img;
     modalDate.innerHTML = new Date(data.created_at).toLocaleString("default", { dateStyle: "long" });
     modalStatus.innerHTML = data.rese_status
@@ -179,6 +194,69 @@ hashes.forEach((element) => {
         statusTitle.innerHTML = element.querySelector("span:last-child").innerHTML;
         reseStatus.toggle();
     })
+});
+
+confirmPayment.addEventListener("click", async () => {
+    if (!confirm("Estas seguro que desea confirmar el pago?")) {
+        return;
+    }
+
+    const urid = modalUrid.innerHTML;
+
+    let response = await fetch(confirmPayment.getAttribute("data-href"), {
+        method: "POST",
+        body: JSON.stringify({ urid: urid })
+    });
+
+    if (await checkFetchError(response)) {
+        return;
+    }
+
+    let data = await response.json();
+
+    notify({
+        text: data.text,
+        status: "Correcto!",
+        bg: "bg-success"
+    });
+
+    resetModal();
+    showReservation.hide();
+    document.querySelector(`[data-urid='${urid}']`).children[1].innerHTML = data.status;
+});
+
+cancelPayment.addEventListener("click", async () => {
+    let detalles = prompt("Escriba el motivo por el que se cancelara la reserva");
+
+    if (!detalles) {
+        return;
+    }
+
+    const urid = modalUrid.innerHTML;
+
+    let response = await fetch(cancelPayment.getAttribute("data-href"), {
+        method: "POST",
+        body: JSON.stringify({ 
+            urid: urid,
+            details: detalles
+         })
+    });
+
+    if (await checkFetchError(response)) {
+        return;
+    }
+
+    let data = await response.json();
+
+    notify({
+        text: data.text,
+        status: "Correcto!",
+        bg: "bg-success"
+    });
+
+    resetModal();
+    showReservation.hide();
+    document.querySelector(`[data-urid='${urid}']`).children[1].innerHTML = data.status;
 });
 
 window.addEventListener("hashchange", () => {

@@ -139,11 +139,9 @@
                     </div>
                 </div>
                 <div class="p-4 modal-footer border-top-0 pt-2">
-                    <p class="m-0">Nota: </p>
-                    <p class="m-0" data-reservation></p>
-                </div>
-                <div class="text-center mb-4">
-                    <button type="button" class="btn btn-primary" style="width: fit-content" data-bs-dismiss="modal" aria-label="Close">Cerrar</button>
+                    <button type="button" class="btn btn-success" style="width: fit-content" id="confirm-payment" data-href="{{route("dash.reserve.confirm.payment")}}">Confirmar Pago</button>
+                    <button type="button" class="btn btn-danger" style="width: fit-content" id="cancel-payment" data-href="{{route("dash.reserve.cancel.payment")}}">Rechazar Pago</button>
+                    <button type="button" class="btn btn-outline-danger" style="width: fit-content" data-bs-dismiss="modal" aria-label="Close">Cerrar</button>
                 </div>
             </div>
         </div>
