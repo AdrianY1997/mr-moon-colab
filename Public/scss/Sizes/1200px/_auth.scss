@@ -5,8 +5,11 @@
         }
     }
 }
-.auth.recovery {
+
+.recovery {
     .container {
+        display: grid;
+        
         h1 {
            font-size: 18pt !important; 
         }
@@ -19,5 +22,21 @@
         input::placeholder {
             font-size: 15pt;
         }
+    }
+}
+
+.auth {
+    div:first-child {
+        text-align: center;
+    .container { 
+        .form{
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+        }
+        img {
+            width: 20% !important;
+        }
+    }
     }
 }
