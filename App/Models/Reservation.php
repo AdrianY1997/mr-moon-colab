@@ -47,6 +47,7 @@ class Reservation extends Table {
     public string $rese_time;
     public string $rese_status;
     public string $rese_method;
+    public string $rese_pay_img;
     public string $rese_details;
     public string $user_id;
 
@@ -61,6 +62,7 @@ class Reservation extends Table {
         "rese_time",
         "rese_status",
         "rese_method",
+        "rese_pay_img",
         "rese_details",
         "user_id",
     ];

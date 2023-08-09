@@ -4,6 +4,7 @@ use FoxyMVC\Lib\Foxy\Core\Route;
 use FoxyMVC\App\Controllers\DashboardController;
 use FoxyMVC\App\Controllers\InventoryController;
 use FoxyMVC\App\Controllers\ProviderController;
+use FoxyMVC\App\Controllers\ReservasController;
 
 Route::set("dashboard", [DashboardController::class, "index"])->name("dash");
 Route::set("dashboard/inicio", [DashboardController::class, "inicio"])->name("dash.home");
@@ -29,7 +30,6 @@ Route::set("dashboard/inventario/delete-item/{id}", [InventoryController::class,
 
 Route::set("dashboard/facturas", [DashboardController::class, "facturas"])->name("dash.bill");
 Route::set("dashboard/menu", [DashboardController::class, "menu"])->name("dash.menu");
-Route::set("dashboard/reservas", [DashboardController::class, "reservas"])->name("dash.reserve");
 Route::set("dashboard/eventos", [DashboardController::class, "eventos"])->name("dash.event");
 Route::set("dashboard/galeria", [DashboardController::class, "galeria"])->name("dash.galery");
 
@@ -37,3 +37,6 @@ Route::set("dashboard/usuarios/get/{id}", [DashboardController::class, "getUserI
 Route::set("dashboard/usuarios/set", [DashboardController::class, "setUserInfo"])->name("dash.userSetInfo");
 
 Route::set("dashboard/menus/set/image/{id}", [DashboardController::class, "setMenuImg"])->name("dash.menuSetImg");
+
+Route::set("dashboard/reservas", [DashboardController::class, "reservas"])->name("dash.reserve");
+Route::set("dashboard/reserves/get", [ReservasController::class, "get"])->name("dash.reserve.get");
