@@ -2,7 +2,7 @@
     <div>
         <div class="container">
             <div>
-                <img src="{{ asset('img\static\mr_moon_logo.png') }}">
+                <img class="img-login" src="{{ asset('img\static\mr_moon_logo.png') }}">
             </div>
             <div class="form">
                 <div class="auth-form">
