@@ -60,6 +60,20 @@ async function viewReservation(e) {
     let textTime = time.split(":")[0] == "morning" ? " am" : " pm";
     modalTime.innerHTML = time.split(":")[1] + textTime;
     modalDesc.innerHTML = data.rese_details === "" ? "Sin comentario" : data.rese_details
+
+    console.log(data.rese_status.toLowerCase() != "esperando confirmación")
+    console.log(data.rese_status.toLowerCase() != "esperando pago");
+
+    if (data.rese_status.toLowerCase() == "esperando confirmación") { 
+        confirmPayment.classList.remove("disabled")
+        cancelPayment.classList.remove("disabled")
+    } else if (data.rese_status.toLowerCase() == "esperando pago") {
+        confirmPayment.classList.remove("disabled")
+        cancelPayment.classList.remove("disabled")
+    } else {
+        confirmPayment.classList.add("disabled")
+        cancelPayment.classList.add("disabled")
+    }
 }
 
 function deleteReservation(e) {
