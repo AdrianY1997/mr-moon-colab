@@ -49,8 +49,16 @@ class HomeController extends Controller {
 
         redirect()
             ->route(constant('HOME'))
-            ->success("Usted se ha registrado con éxito, ". $data["name"]." bienvenido a la familia Mr. Moon")
+            ->success("Usted se ha registrado con éxito al boletin, ". $data["name"]." bienvenido a la familia Mr. Moon")
             ->send();
 
+        $user = Subscriber::where("subs_email", $data["email"])
+            ->first();
+        if ($user) {
+            redirect()
+                ->route(constant('HOME'))
+                ->error("El correo ingresado ya se esta en nuestro boletin")
+                ->send();
+        }
     }
 }
