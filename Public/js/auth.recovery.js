@@ -68,7 +68,7 @@ sendNewPass.addEventListener("click", async (e) => {
 
     if (await checkFetchError(response)) return;
 
-    location.href = form.getAttribute('data-route');
+    // location.href = form.getAttribute('data-route');
 
 });
 
