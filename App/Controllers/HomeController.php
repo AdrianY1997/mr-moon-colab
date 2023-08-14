@@ -34,6 +34,14 @@ class HomeController extends Controller {
 
         $data = Request::getData();
         
+        $user = Subscriber::where("subs_email", $data["email"])->first();
+            if ($user) {
+                redirect()
+                ->route(constant('HOME'))
+                ->error("El correo ingresado ya se esta en nuestro boletin")
+                ->send();
+        }
+        
         $user = new Subscriber();
 
         $user->subs_name = $data["name"];
@@ -46,19 +54,9 @@ class HomeController extends Controller {
                 ->error("No se ha podido agregar al boletin, contacte con un administrador")
                 ->send();
         }
-
         redirect()
             ->route(constant('HOME'))
             ->success("Usted se ha registrado con éxito al boletin, ". $data["name"]." bienvenido a la familia Mr. Moon")
             ->send();
-
-        $user = Subscriber::where("subs_email", $data["email"])
-            ->first();
-        if ($user) {
-            redirect()
-                ->route(constant('HOME'))
-                ->error("El correo ingresado ya se esta en nuestro boletin")
-                ->send();
-        }
     }
 }
