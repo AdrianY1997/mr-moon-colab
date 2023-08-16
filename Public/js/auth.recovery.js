@@ -59,8 +59,8 @@ sendCodeConfirm.addEventListener("click", async (e) => {
     if(email.value == "" || code.value == ""){
         return notify({
             text: "Por favor rellenar los espacios",
-            status: "warning",
-            bg: "bg-warning"
+            status: "Error",
+            bg: "bg-danger"
         })
     }else{
         recovery2.classList.add("d-none");

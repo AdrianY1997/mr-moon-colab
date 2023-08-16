@@ -3,7 +3,7 @@
         <div class="container">
             <div class="auth-form">
                 <h1>
-                    Ingreso
+                    Registro
                     <hr>
                 </h1>
                 <form action="{{ route('user.star') }}" method="POST">
@@ -40,7 +40,7 @@
                 <p>¿Ya tienes cuenta? <a href="{{ route('auth.login') }}">Inicia Sesión</a></p>
             </div>
             <div class="auth-social">
-                <h1>O
+                <h1>Inicia también con:
                     <hr>
                 </h1>
 

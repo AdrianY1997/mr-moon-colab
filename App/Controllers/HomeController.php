@@ -30,7 +30,7 @@ class HomeController extends Controller {
 
         ]);
     }
-    public function sus(){
+    public function suscriber(){
 
         $data = Request::getData();
         
