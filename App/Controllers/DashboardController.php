@@ -2,6 +2,7 @@
 
 namespace FoxyMVC\App\Controllers;
 
+use FoxyMVC\App\Models\Event;
 use FoxyMVC\App\Models\Product;
 use FoxyMVC\App\Models\Provider;
 use FoxyMVC\App\Models\Reservation;
@@ -82,7 +83,11 @@ class DashboardController extends Controller {
 
     public function eventos() {
         return self::render("dashboard.eventos", [
-            "active" => "eventos"
+            "active" => "eventos",
+            "evento" => Event::select("even_id", "even_name", "even_text", "even_fech")->orderBy("even_id", "ASC")->get(),
+
+
+            
         ]);
     }
 

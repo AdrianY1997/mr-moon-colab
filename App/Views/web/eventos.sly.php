@@ -52,6 +52,5 @@
         </div>
     </div>
 </div>
-
 <script src="{{ asset("js/eventos/show.js") }}"></script>
 <script src="Public/js/script.js"></script>

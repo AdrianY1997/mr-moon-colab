@@ -67,7 +67,7 @@
                         </p>
                     </div>
                 </div>
-                <table class="table w-100" id="reserves-table" data-ref="{{ route("dash.reserve.get") }}">
+                <table class="table w-100" id="reserves-table" data-ref="">
                     <thead class="table-dark">
                         <tr>
                             <th>URID.</th>
