@@ -2,7 +2,7 @@
     <div style="display: block;">
         <div class="container" id="recovery">
             <div>
-                <img src="{{ asset('img\static\mr_moon_logo.png') }}">
+                <img class="img-recovery" src="{{ asset('img\static\mr_moon_logo.png') }}">
             </div>
             <div>
                 <h1>Has solicitado recuperar tú contraseña
@@ -17,7 +17,7 @@
         </div>
         <div class="container d-none" id="recovery2">
             <div>
-                <img src="{{ asset('img\static\mr_moon_logo.png') }}">
+                <img class="img-recovery" src="{{ asset('img\static\mr_moon_logo.png') }}">
             </div>
             <div>
                 <h1>Has solicitado recuperar tú contraseña
@@ -44,7 +44,7 @@
         </div>
         <div class="container d-none" id="recovery3">
             <div>
-                <img src="{{ asset('img\static\mr_moon_logo.png') }}">
+                <img class="img-recovery" src="{{ asset('img\static\mr_moon_logo.png') }}">
             </div>
             <div>
                 <h1>Has solicitado recuperar tu contraseña

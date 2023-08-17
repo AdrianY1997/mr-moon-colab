@@ -47,10 +47,10 @@
 
             </div>
             <div class="text-center mb-4">
-                <button type="button" class="btn btn-primary" style="width: fit-content" data-bs-dismiss="modal" aria-label="Close">Cerrar</button>
+                <button type="button" class="btn btn-primary alpha" style="width: fit-content" data-bs-dismiss="modal" aria-label="Close">Cerrar</button>
             </div>
         </div>
     </div>
 </div>
-<script src="{{ asset("js/dashboard/eventos/evento.js") }}"></script>
+<script src="{{ asset("js/eventos/show.js") }}"></script>
 <script src="Public/js/script.js"></script>

@@ -5,6 +5,7 @@ namespace FoxyMVC\App\Controllers;
 use DateTime;
 use DateTimeZone;
 use FoxyMVC\App\Models\Reservation;
+use FoxyMVC\Lib\Cli\Command\Migration\Reset;
 use FoxyMVC\Lib\Foxy\Core\Controller;
 use FoxyMVC\Lib\Foxy\Core\Request;
 use FoxyMVC\Lib\Foxy\Core\Response;
@@ -89,6 +90,7 @@ class ReservasController extends Controller {
         $reservation->rese_quantity = $data["people"];
         $reservation->rese_details = $data["details"];
         $reservation->rese_method = "";
+        $reservation->rese_pay_img = "";
         $reservation->user_id = $userId;
 
         if (!Reservation::insert($reservation)) {
@@ -121,6 +123,7 @@ class ReservasController extends Controller {
         $reservation = Reservation::where("rese_id", $data["urid"])->first();
         $reservation->rese_status = Reservation::WAITING_FOR_CONFIRMATION;
         $reservation->rese_method = $data["pay-selected"];
+        $reservation->rese_pay_img = $path;
 
         if (!$reservation->model->update()) {
             unlink($path);
@@ -140,5 +143,62 @@ class ReservasController extends Controller {
         }
 
         Response::status(200)->json(["hours" => $result]);
+    }
+
+    public function get() {
+        Response::checkMethod("POST");
+
+        $data = Request::getFormData();
+
+        $selectText = isset($data->all) ? ["*"] : ["rese_urid", "rese_status"];
+
+        
+        $status = isset($data->status) ? ["rese_status", explode("-", $data->status)[0]] : ["rese_status", "!=", "null"];
+        $urid = isset($data->urid) ? ["rese_urid", $data->urid] : ["rese_urid", "!=", "null"];
+        
+        $rese = Reservation::select(...$selectText)->where(...$urid)->where(...$status)->get();
+
+        if ($rese === false) {
+            Response::status(500)->end("Ha ocurrido un error al obtener los datos");
+        }
+        
+        $newRese = array_map(function ($r) {
+            unset($r->model, $r->fillable);
+            $r->rese_status = Reservation::getText($r->rese_status);
+            return $r;
+        }, $rese);
+        
+        Response::json($newRese);
+    }
+
+    public function confirmPayment() {
+        Response::checkMethod("POST");
+
+        $data = Request::getFormData();
+
+        $rese = Reservation::where("rese_urid", $data->urid)->first();
+        $rese->rese_status = Reservation::RESERVED;
+        $rese->model->update();
+
+        Response::json([
+            "text" => "Se ha actualizado el estado de la reservación",
+            "status" => Reservation::getText(Reservation::RESERVED),
+        ]);
+    }
+
+    public function cancelPayment() {
+        Response::checkMethod("POST");
+
+        $data = Request::getFormData();
+
+        $rese = Reservation::where("rese_urid", $data->urid)->first();
+        $rese->rese_status = Reservation::CANCELLED;
+        $rese->rese_details = $data->details;
+        $rese->model->update();
+
+        Response::json([
+            "text" => "Se ha actualizado el estado de la reservación",
+            "status" => Reservation::getText(Reservation::CANCELLED),
+        ]);
     }
 }

@@ -100,7 +100,7 @@
                         "text": "Tarde"
                         , "sect": "pm"
                     }
-                    , "evening": {
+                    , "night": {
                         "text": "Noche"
                         , "sect": "pm"
                     }

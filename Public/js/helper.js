@@ -29,7 +29,7 @@ const checkFetchError = async (response) => {
     if (response.status != 200) {
         notify({
             text: await response.text(),
-            status: "error",
+            status: "Acceso denegado",
             bg: "bg-danger"
         });
         return true;

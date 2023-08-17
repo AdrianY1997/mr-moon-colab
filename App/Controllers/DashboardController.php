@@ -78,14 +78,13 @@ class DashboardController extends Controller {
     public function reservas() {
         return self::render("dashboard.reservas", [
             "active" => "reservas",
-            "reserves" => Reservation::select("rese_id", "rese_urid", "rese_status", "rese_time", "rese_day")->orderBy("rese_day", "ASC")->get(),
         ]);
     }
 
     public function eventos() {
         return self::render("dashboard.eventos", [
             "active" => "eventos",
-            "evento" => Event::select("even_id", "even_name", "even_fech", "even_text")->orderBy("even_id", "ASC")->get(),
+            "evento" => Event::select("even_id", "even_name", "even_text", "even_fech")->orderBy("even_id", "ASC")->get(),
 
 
             

@@ -31,6 +31,15 @@
             padding: 2rem;
             border-radius: 5px;
 
+            div {
+                text-align: center;
+            }
+
+            .img-login {
+                width: 30%;
+                margin: 2rem;
+            }
+
             h1 {
                 width: fit-content;
                 margin: auto;
@@ -82,7 +91,7 @@
                 }
 
                 .twitter {
-                    background: #1DA1F2;
+                    background: #000000;
                 }
 
                 .instagram {

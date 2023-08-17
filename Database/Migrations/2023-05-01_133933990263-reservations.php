@@ -18,7 +18,8 @@ return new class {
             $table->string("day");
             $table->string("time");
             $table->text("details");
-            $table->text("method");
+            $table->string("method");
+            $table->text("pay_img");
             $table->string("status")->default("PENDING", true);
             $table->integer("user_id")->references("users");
         });

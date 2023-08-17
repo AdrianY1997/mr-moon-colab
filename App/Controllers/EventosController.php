@@ -40,31 +40,40 @@ class EventosController extends Controller {
         $event->even_name = $data["item-name"];
         $event->even_fech = $data["item-fech"];
         $event->even_text = $data["item-text"];
+        $event->even_path = "";
 
         $evenId = Event::insert($event);
 
         redirect()
-        ->route("dash.event")
-        ->success("Se ha añadido un evento nuevo")
-        ->send();
+            ->route("dash.event")
+            ->success("Se ha añadido un evento nuevo")
+            ->send();
     }
 
     public function edit($id) {
         $data = Request::getData();
 
         $event = [
-            "even_name" => $data["event-edit-name"],
-            "even_fech" => $data["event-edit-fech"],
-            "even_text" => $data["event-edit-text"],
+            "even_name" => $data["even-edit-name"],
+            "even_fech" => $data["even-edit-fech"],
+            "even_text" => $data["even-edit-text"],
         ];
 
-        Event::where("event_id", $data["event-edit-id"])->update($event);
+        Event::where("even_id", $data["even-edit-id"])->update($event);
 
         redirect()
-            ->route("dash.event")
+            ->route("dash.even")
             ->success("Se ha actualizado el evento")
             ->send();
     }
+    public function delete($id) {
+        // Event::where("even_id", $id)->delete();
+        
 
+        redirect()
+            ->route("dash.even")
+            ->warning("Esta funcionalidad no se ha implementado aun.")
+            ->send();
+    }
     
 }
