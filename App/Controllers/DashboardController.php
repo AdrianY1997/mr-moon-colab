@@ -183,6 +183,7 @@ class DashboardController extends Controller {
     }
 
 
+
     public function setMenuImg($id) {
         if (!isset($_FILES["menu-img"])) {
             redirect()->route("dash.menu")->error("No se ha seleccionado una image")->send();

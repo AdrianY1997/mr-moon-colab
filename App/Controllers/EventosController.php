@@ -31,22 +31,21 @@ class EventosController extends Controller {
 
         Response::json([$event]);
     }
-
     public function add() {
         $data = Request::getData();
 
         $even = new Event();
 
         $even->even_name = $data["item-name"];
-        $even->even_fech = $data["item-fech"];
         $even->even_text = $data["item-text"];
+        $even->even_fech = $data["item-fech"];
         $even->even_path = "";
 
         $evenId = Event::insert($even);
 
         redirect()
             ->route("dash.even")
-            ->success("Se ha añadido un evento nuevo")
+            ->success("Se ha añadido un evento nuevo nuevo.")
             ->send();
     }
 
@@ -55,25 +54,26 @@ class EventosController extends Controller {
 
         $even = [
             "even_name" => $data["even-edit-name"],
-            "even_fech" => $data["even-edit-fech"],
             "even_text" => $data["even-edit-text"],
+            "even_fech" => $data["even-edit-fech"],
+            "even_path" => $data["even-edit-path"],
         ];
 
         Event::where("even_id", $data["even-edit-id"])->update($even);
 
         redirect()
             ->route("dash.even")
-            ->success("Se ha actualizado el evento")
+            ->success("Se ha actualizado el evento.")
             ->send();
     }
+
     public function delete($id) {
-        // Event::where("even_id", $id)->delete();
-        
+        // Provider::where("prov_id", $id)->delete();
+        // ProductProvider::where("prov_id", $id)->delete();
 
         redirect()
             ->route("dash.even")
             ->warning("Esta funcionalidad no se ha implementado aun.")
             ->send();
     }
-    
 }
