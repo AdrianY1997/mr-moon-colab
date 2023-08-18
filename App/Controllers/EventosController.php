@@ -35,17 +35,17 @@ class EventosController extends Controller {
     public function add() {
         $data = Request::getData();
 
-        $event = new Event();
+        $even = new Event();
 
-        $event->even_name = $data["item-name"];
-        $event->even_fech = $data["item-fech"];
-        $event->even_text = $data["item-text"];
-        $event->even_path = "";
+        $even->even_name = $data["item-name"];
+        $even->even_fech = $data["item-fech"];
+        $even->even_text = $data["item-text"];
+        $even->even_path = "";
 
-        $evenId = Event::insert($event);
+        $evenId = Event::insert($even);
 
         redirect()
-            ->route("dash.event")
+            ->route("dash.even")
             ->success("Se ha añadido un evento nuevo")
             ->send();
     }
@@ -53,13 +53,13 @@ class EventosController extends Controller {
     public function edit($id) {
         $data = Request::getData();
 
-        $event = [
+        $even = [
             "even_name" => $data["even-edit-name"],
             "even_fech" => $data["even-edit-fech"],
             "even_text" => $data["even-edit-text"],
         ];
 
-        Event::where("even_id", $data["even-edit-id"])->update($event);
+        Event::where("even_id", $data["even-edit-id"])->update($even);
 
         redirect()
             ->route("dash.even")
