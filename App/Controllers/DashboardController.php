@@ -84,7 +84,7 @@ class DashboardController extends Controller {
     public function eventos() {
         return self::render("dashboard.eventos", [
             "active" => "eventos",
-            "evento" => Event::select("even_id", "even_name", "even_text", "even_fech")->orderBy("even_id", "ASC")->get(),
+            "evento" => Event::get()
 
 
             
@@ -182,6 +182,7 @@ class DashboardController extends Controller {
         Response::status(200)->json(["providers" => $providers]);
     }
 
+
     public function setMenuImg($id) {
         if (!isset($_FILES["menu-img"])) {
             redirect()->route("dash.menu")->error("No se ha seleccionado una image")->send();
@@ -231,3 +232,6 @@ class DashboardController extends Controller {
             ->send();
     }
 }
+
+    
+   
