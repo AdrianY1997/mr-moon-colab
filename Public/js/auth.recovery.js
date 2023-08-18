@@ -58,8 +58,8 @@ sendCodeConfirm.addEventListener("click", async (e) => {
 
     if(email.value == "" || code.value == ""){
         return notify({
-            text: "Por favor rellenar los espacios",
-            status: "Error",
+            text: "Diligencia todos los campos",
+            status: "Acceso denegado",
             bg: "bg-danger"
         })
     }else{

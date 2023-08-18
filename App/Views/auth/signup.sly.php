@@ -56,7 +56,7 @@
                 </div>
                 <div class="mb-3">
                     <button class="twitter py-2">
-                        <span><i class="fa-brands fa-twitter"></i> Twitter</span>
+                        <span><i class="fa-brands fa-x-twitter"></i> X</span>
                     </button>
                 </div>
                 <div class="mb-3">
