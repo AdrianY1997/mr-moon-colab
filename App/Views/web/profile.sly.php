@@ -149,7 +149,7 @@
                                     </div>
                                     <div class="row mx-1 mb-3">
                                         <div class="form-floating p-0">
-                                            <input name="phone" id="phone" type="text" class="form-control" placeholder="mail@domain.com" value="@if($user->user_phone):{{ $user->user_phone }}@endif">
+                                            <input name="phone" id="phone" type="text" maxlength="10" oninput="if(this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" class="form-control" placeholder="mail@domain.com" value="@if($user->user_phone):{{ $user->user_phone }}@endif">
                                             <label for="phone">Teléfono</label>
                                         </div>
                                     </div>
