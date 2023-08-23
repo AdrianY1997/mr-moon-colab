@@ -93,7 +93,7 @@ class DashboardController extends Controller {
 
     public function galeria() {
         return self::render("dashboard.galeria", [
-            "active" => "galeria"
+            "active" => "galeria",
         ]);
     }
 
@@ -232,7 +232,64 @@ class DashboardController extends Controller {
             ->success("Se ha guardado la imagen con éxito")
             ->send();
     }
+
+
+    
+    public function setGaleriaImg($id) {
+        if (!isset($_FILES["gallery-img"])) {
+            redirect()->route("dash.gallery")->error("No se ha seleccionado una image")->send();
+        }
+
+        $galerias = [
+            "1" => "gallery-copteles",
+            "2" => "gallery-unnamed",
+            "3" => "gallery-cafebar}",
+        ];
+
+        $targetDir = "Public/img/gallery/";
+        $imageFileType = strtolower(pathinfo(basename($_FILES["gallery-img"]["name"]), PATHINFO_EXTENSION));
+        $targetFile = $targetDir . $galerias[$id] . "." . $imageFileType;
+
+        if (getimagesize($_FILES["gallery-img"]["tmp_name"]) === false) {
+            redirect()
+                ->route("dash.gallery")
+                ->error("Se ha seleccionado una imagen invalida")
+                ->send();
+        }
+
+        if ($_FILES["gallery-img"]["size"] > 500000) {
+            redirect()
+                ->route("dash.gallery")
+                ->error("El tamaño de la imagen debe ser menor a 500kb")
+                ->send();
+        }
+
+        if ($imageFileType != "jpg" && $imageFileType != "png") {
+            redirect()
+                ->route("dash.gallery")
+                ->error("Solo se aceptan imágenes de tipo jpg y png")
+                ->send();
+        }
+
+        if (!move_uploaded_file($_FILES["gallery-img"]["tmp_name"], $targetFile)) {
+            redirect()
+                ->route("dash.gallery")
+                ->error("No se ha podido subir la imagen")
+                ->send();
+        }
+
+        redirect()
+            ->route("dash.gallery")
+            ->success("Se ha guardado la imagen con éxito")
+            ->send();
+    }
 }
 
+
+
+
+
+
+    
     
    
