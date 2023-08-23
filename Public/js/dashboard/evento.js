@@ -1,3 +1,5 @@
+const itemsContainers = document.querySelectorAll(".dash-eventos-item-container");
+
 const modals = {
     add: document.querySelector("#modal-add"),
     view: document.querySelector("#modal-view"),
@@ -29,13 +31,13 @@ const modals = {
     modalView.querySelector("[data-even-path]").innerHTML = data.even_path;
   }
   
-  function updateEditModal(data) {
+  function updateEditModal(data)
+  {
     const modalEdit = modals.edit;
-    modalEdit.querySelector("#even-edit-nit").value = data.Event.even_name;
-    modalEdit.querySelector("#even-edit-name").value = data.Event.even_text;
-    modalEdit.querySelector("#even-edit-email").value = data.Event.even_fech;
-    modalEdit.querySelector("#even-edit-phone").value = data.Event.even_path;
-    modalEdit.querySelector("#even-edit-id").value = data.Event.even_id;
+    modalEdit.querySelector("#even-edit-name").value = data.even_name;
+    modalEdit.querySelector("#even-edit-text").value = data.even_text;
+    modalEdit.querySelector("#even-edit-fech").value = data.even_fech;
+    modalEdit.querySelector("#even-edit-id").value = data.even_id;
   
     const editForm = modalEdit.querySelector("form");
     editForm.setAttribute("action", editForm.getAttribute("action").replace("{id}", data.even_id));
@@ -60,7 +62,7 @@ const modals = {
     const response = await fetch(item.getAttribute("data-href"));
   
     if (response.status !== 200) {
-      console.error("Error fetching data:", response.statusText);
+      console.error("Error fetching data:", response.statusInput);
       return;
     }
   
@@ -88,7 +90,27 @@ const modals = {
     });
   });
   
+  
 
+  itemsContainers.forEach(ic => {
+      const form = ic.querySelector("form");
+      const imgContainer = ic.querySelector("img");
+      const imgField = ic.querySelector(".eventos-img")
+      const uploadImg = ic.querySelector(".upload-img");
+      const saveImg = ic.querySelector(".save-img");
+  
+      imgField.addEventListener("change", () => {
+          if (imgField.value) saveImg.removeAttribute("disabled");
+          const reader = new FileReader();
+          reader.addEventListener("load", (event) => {
+              imgContainer.src = event.target.result;
+          });
+          reader.readAsDataURL(imgField.files[0]);
+      });
+  
+      uploadImg.addEventListener("click", () => imgField.click());
+      saveImg.addEventListener("click", () => form.submit());
+  });
 
 
 

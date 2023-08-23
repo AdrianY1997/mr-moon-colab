@@ -97,6 +97,10 @@
                                 <label for="even-edit-fech">Fecha</label>
                                 <input type="text" id="even-edit-fech" name="even-edit-fech" placeholder="">
                             </div>
+                            <div class="form-label-group mb-3">
+                                <label for="even-edit-path">imagen</label>
+                                <input type="file" id="even-edit-path" name="even-edit-path" placeholder="">
+                            </div>
                             <div class="d-flex justify-content-between">
                                 <button type="submit" class="btn btn-primary">Editar</button>
                             </div>

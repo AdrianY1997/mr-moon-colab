@@ -52,3 +52,5 @@ Route::set("dashboard/eventos", [DashboardController::class, "evento"])->name("d
 Route::set("dashboard/galerias/set/image/{id}", [DashboardController::class, "setGaleriaImg"])->name("dash.gallerySetImg");
 
 
+Route::set("dashboard/events/set/image/{id}", [DashboardController::class, "setEventosImg"])->name("dash.eventoSetImg");
+
