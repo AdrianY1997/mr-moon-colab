@@ -4,6 +4,7 @@ namespace FoxyMVC\App\Controllers;
 
 use FoxyMVC\App\Models\Event;
 use FoxyMVC\Lib\Foxy\Core\Controller;
+use FoxyMVC\Lib\Foxy\Core\Request;
 use FoxyMVC\Lib\Foxy\Core\Response;
 
 class EventosController extends Controller {
@@ -30,4 +31,50 @@ class EventosController extends Controller {
 
         Response::json([$event]);
     }
+    public function add() {
+        $data = Request::getData();
+    
+        $even = new Event();
+    
+        $even->even_name = $data["item-name"];
+        $even->even_text = $data["item-text"];
+        $even->even_fech = $data["item-fech"];
+        $even->even_path = $data["item-path"];
+    
+        $evenId = Event::insert($even);
+    
+        return redirect()
+            ->route("dash.even")
+            ->success("Se ha añadido un evento nuevo.")
+            ->send();
+    }
+    
+    public function edit($id) {
+        $data = Request::getData();
+    
+        $even = [
+            "even_name" => $data["even-edit-name"],
+            "even_text" => $data["even-edit-text"],
+            "even_fech" => $data["even-edit-fech"],
+            "even_path" => "img/eventos/" . $data["even-edit-path"]
+        ];
+    
+        Event::where("even_id", $data["even-edit-id"])->update($even);
+    
+        return redirect()
+            ->route("dash.even")
+            ->success("Se ha actualizado el evento.")
+            ->send();
+    }
+    
+    public function delete($id) {
+        // Provider::where("prov_id", $id)->delete();
+        // ProductProvider::where("prov_id", $id)->delete();
+    
+        return redirect()
+            ->route("dash.even")
+            ->warning("Esta funcionalidad no se ha implementado aún.")
+            ->send();
+    }
+    
 }

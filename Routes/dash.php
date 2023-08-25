@@ -2,6 +2,7 @@
 
 use FoxyMVC\Lib\Foxy\Core\Route;
 use FoxyMVC\App\Controllers\DashboardController;
+use FoxyMVC\App\Controllers\EventosController;
 use FoxyMVC\App\Controllers\InventoryController;
 use FoxyMVC\App\Controllers\ProviderController;
 use FoxyMVC\App\Controllers\ReservasController;
@@ -30,7 +31,6 @@ Route::set("dashboard/inventario/delete-item/{id}", [InventoryController::class,
 
 Route::set("dashboard/facturas", [DashboardController::class, "facturas"])->name("dash.bill");
 Route::set("dashboard/menu", [DashboardController::class, "menu"])->name("dash.menu");
-Route::set("dashboard/eventos", [DashboardController::class, "eventos"])->name("dash.event");
 Route::set("dashboard/galeria", [DashboardController::class, "galeria"])->name("dash.galery");
 
 Route::set("dashboard/usuarios/get/{id}", [DashboardController::class, "getUserInfo"])->name("dash.userGetInfo");
@@ -42,3 +42,15 @@ Route::set("dashboard/reservas", [DashboardController::class, "reservas"])->name
 Route::set("dashboard/reserves/get", [ReservasController::class, "get"])->name("dash.reserve.get");
 Route::set("dashboard/reserves/confirm-payment", [ReservasController::class, "confirmPayment"])->name("dash.reserve.confirm.payment");
 Route::set("dashboard/reserves/cancel-payment", [ReservasController::class, "cancelPayment"])->name("dash.reserve.cancel.payment");
+
+Route::set("dashboard/eventos", [DashboardController::class, "eventos"])->name("dash.event");
+Route::set("dashboard/eventos/new-item", [EventosController::class, "add"])->name("even.add");
+Route::set("dashboard/eventos/edit-item/{id}", [EventosController::class, "edit"])->name("even.edit");
+Route::set("dashboard/eventos/delete-item/{id}", [EventosController::class, "delete"])->name("even.delete");
+Route::set("dashboard/eventos", [DashboardController::class, "evento"])->name("dash.even");
+
+Route::set("dashboard/galerias/set/image/{id}", [DashboardController::class, "setGaleriaImg"])->name("dash.gallerySetImg");
+
+
+Route::set("dashboard/events/set/image/{id}", [DashboardController::class, "setEventosImg"])->name("dash.eventoSetImg");
+

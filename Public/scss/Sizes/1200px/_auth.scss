@@ -1,13 +1,18 @@
 .auth {
     .container {
         > div {
-            padding: 0 2rem;
+            padding: -1px 2rem;
         }
     }
 }
 
 .recovery {
     .container {
+
+        .img-recovery {
+            width: 40%;
+        }
+
         display: grid;
         
         h1 {
@@ -34,8 +39,8 @@
             grid-template-columns: 1fr 1fr;
             gap: 2rem;
         }
-        img {
-            width: 20% !important;
+        .img-login {
+            width: 20%;
         }
     }
     }
