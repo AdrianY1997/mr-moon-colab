@@ -235,54 +235,57 @@ class DashboardController extends Controller {
 
 
     
-    public function setGaleriaImg($id) {
-        if (!isset($_FILES["gallery-img"])) {
-            redirect()->route("dash.gallery")->error("No se ha seleccionado una image")->send();
+
+    public function setEventosImg($id) {
+        if (!isset($_FILES["Event-img"])) {
+            redirect()->route("dash.Event")->error("No se ha seleccionado una imagen")->send();
         }
-
-        $galerias = [
-            "1" => "gallery-copteles",
-            "2" => "gallery-unnamed",
-            "3" => "gallery-cafebar}",
+    
+        $events = [
+            "1" => "eventos-Bartender invitado",
+            "2" => "eventos-Noche de Karaoke",
+            "3" => "eventos-Festividades",
+            "4" => "eventos-Trivia",
         ];
-
-        $targetDir = "Public/img/gallery/";
-        $imageFileType = strtolower(pathinfo(basename($_FILES["gallery-img"]["name"]), PATHINFO_EXTENSION));
-        $targetFile = $targetDir . $galerias[$id] . "." . $imageFileType;
-
-        if (getimagesize($_FILES["gallery-img"]["tmp_name"]) === false) {
+    
+        $targetDir = "Public/img/eventos/";
+        $imageFileType = strtolower(pathinfo(basename($_FILES["Events-img"]["name"]), PATHINFO_EXTENSION));
+        $targetFile = $targetDir . $events[$id] . "." . $imageFileType;
+    
+        if (getimagesize($_FILES["Events-img"]["tmp_name"]) === false) {
             redirect()
-                ->route("dash.gallery")
+                ->route("dash.Events")
                 ->error("Se ha seleccionado una imagen invalida")
                 ->send();
         }
 
-        if ($_FILES["gallery-img"]["size"] > 500000) {
+        if ($_FILES["Events-img"]["size"] > 500000) {
             redirect()
-                ->route("dash.gallery")
+                ->route("dash.Events")
                 ->error("El tamaño de la imagen debe ser menor a 500kb")
                 ->send();
         }
 
         if ($imageFileType != "jpg" && $imageFileType != "png") {
             redirect()
-                ->route("dash.gallery")
+                ->route("dash.Events")
                 ->error("Solo se aceptan imágenes de tipo jpg y png")
                 ->send();
         }
 
-        if (!move_uploaded_file($_FILES["gallery-img"]["tmp_name"], $targetFile)) {
+        if (!move_uploaded_file($_FILES["Events-img"]["tmp_name"], $targetFile)) {
             redirect()
-                ->route("dash.gallery")
+                ->route("dash.Events")
                 ->error("No se ha podido subir la imagen")
                 ->send();
         }
 
         redirect()
-            ->route("dash.gallery")
+            ->route("dash.Events")
             ->success("Se ha guardado la imagen con éxito")
             ->send();
     }
+    
 
 
 
@@ -292,55 +295,60 @@ class DashboardController extends Controller {
 
 
 
-public function setEventosImg($id) {
-    if (!isset($_FILES["eventos-img"])) {
-        redirect()->route("dash.eventos")->error("No se ha seleccionado una image")->send();
-    }
 
-    $events = [
-        "1" => "eventos-Bartender invitado",
-        "2" => "eventos-Noche de Karaoke",
-        "3" => "eventos-Festividades",
-        "4" => "eventos-Trivia",
-    ];
 
-    $targetDir = "Public/img/eventos/";
-    $imageFileType = strtolower(pathinfo(basename($_FILES["eventos-img"]["name"]), PATHINFO_EXTENSION));
-    $targetFile = $targetDir . $events[$id] . "." . $imageFileType;
 
-    if (getimagesize($_FILES["eventos-img"]["tmp_name"]) === false) {
-        redirect()
-            ->route("dash.eventos")
-            ->error("Se ha seleccionado una imagen invalida")
-            ->send();
-    }
 
-    if ($_FILES["eventos-img"]["size"] > 500000) {
-        redirect()
-            ->route("dash.eventos")
-            ->error("El tamaño de la imagen debe ser menor a 500kb")
-            ->send();
-    }
 
-    if ($imageFileType != "jpg" && $imageFileType != "png") {
-        redirect()
-            ->route("dash.eventos")
-            ->error("Solo se aceptan imágenes de tipo jpg y png")
-            ->send();
-    }
+// public function setEventosImg($id) {
+//     if (!isset($_FILES["eventos-img"])) {
+//         redirect()->route("dash.eventos")->error("No se ha seleccionado una image")->send();
+//     }
 
-    if (!move_uploaded_file($_FILES["eventos-img"]["tmp_name"], $targetFile)) {
-        redirect()
-            ->route("dash.eventos")
-            ->error("No se ha podido subir la imagen")
-            ->send();
-    }
+//     $events = [
+//         "1" => "eventos-Bartender invitado",
+//         "2" => "eventos-Noche de Karaoke",
+//         "3" => "eventos-Festividades",
+//         "4" => "eventos-Trivia",
+//     ];
 
-    redirect()
-        ->route("dash.eventos")
-        ->success("Se ha guardado la imagen con éxito")
-        ->send();
-}
+//     $targetDir = "Public/img/eventos/";
+//     $imageFileType = strtolower(pathinfo(basename($_FILES["eventos-img"]["name"]), PATHINFO_EXTENSION));
+//     $targetFile = $targetDir . $events[$id] . "." . $imageFileType;
+
+//     if (getimagesize($_FILES["eventos-img"]["tmp_name"]) === false) {
+//         redirect()
+//             ->route("dash.evento")
+//             ->error("Se ha seleccionado una imagen invalida")
+//             ->send();
+//     }
+
+//     if ($_FILES["eventos-img"]["size"] > 500000) {
+//         redirect()
+//             ->route("dash.evento")
+//             ->error("El tamaño de la imagen debe ser menor a 500kb")
+//             ->send();
+//     }
+
+//     if ($imageFileType != "jpg" && $imageFileType != "png") {
+//         redirect()
+//             ->route("dash.eventos")
+//             ->error("Solo se aceptan imágenes de tipo jpg y png")
+//             ->send();
+//     }
+
+//     if (!move_uploaded_file($_FILES["eventos-img"]["tmp_name"], $targetFile)) {
+//         redirect()
+//             ->route("dash.evento")
+//             ->error("No se ha podido subir la imagen")
+//             ->send();
+//     }
+
+//     redirect()
+//         ->route("dash.evento")
+//         ->success("Se ha guardado la imagen con éxito")
+//         ->send();
+// }
 
 }
 

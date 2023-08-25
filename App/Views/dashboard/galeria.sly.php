@@ -5,40 +5,20 @@
             <div class="content d-flex gap-3">
                 <div class="dash-gallery-item-container" data-img="main">
                     <p></p>
-                    <img class="w-100" src="{{ asset("img/gallery") }}" alt="">
-                    <div class="text-center d-flex gap-3 justify-content-center mt-3">
-                        <button class="btn btn-success upload-img">Subir</button>
-                        <button class="btn btn-primary save-img" disabled>Guardar</button>
-                    </div>
-                    <form action="{{ route("dash.gallerySetImg", ["id" => 2]) }}" method="post" class="d-none" enctype="multipart/form-data">
-                        <input class="gallery-img" name="gallery-img" type="file">
-                    </form>
-                </div>
-                <div class="dash-gallery-item-container" data-img="drink">
-                    <p></p>
-                    <img class="w-100" src="{{ asset("img/gallery") }}" alt="">
-                    <div class="text-center d-flex gap-3 justify-content-center mt-3">
-                        <button class="btn btn-success upload-img">Subir</button>
-                        <button class="btn btn-primary save-img" disabled>Guardar</button>
-                    </div>
-                    <form action="{{ route("dash.gallerySetImg", ["id" => 1]) }}" method="post" class="d-none" enctype="multipart/form-data">
-                        <input class="gallery-img" name="gallery-img" type="file">
-                    </form>
-                </div>
-                <div class="dash-gallery-item-container" data-img="food">
-                    <p></p>
-                    <img class="w-100" src="{{ asset("img/gallery") }}" alt="">
-                    <div class="text-center d-flex gap-3 justify-content-center mt-3">
-                        <button class="btn btn-success upload-img">Subir</button>
-                        <button class="btn btn-primary save-img" disabled>Guardar</button>
-                    </div>
-                    <form action="{{ route("dash.gallerySetImg", ["id" => 3]) }}" method="post" class="d-none" enctype="multipart/form-data">
-                        <input class="gallery-img" name="gallery-img" type="file">
-                    </form>
+                    <img class="gal-img" src="{{ asset("img/gallery/home-event.jpg") }}" alt="">
+                    <img class="gal-img" src="{{ asset("img/gallery/home-drink.jpg") }}" alt="">
+                    <img class="gal-img" src="{{ asset("img/gallery/cafebar}.jpg") }}" alt="">
+                    <img class="gal-img" src="{{ asset("img/gallery/home-food.jpg") }}" alt="">
+                    <img class="gal-img" src="{{ asset("img/gallery/unnamed (1).png") }}" alt="">
+                    <img class="gal-img" src="{{ asset("img/gallery/granizado-de-cafe-2.jpg") }}" alt="">
+                    <img class="gal-img" src="{{ asset("img/gallery/unnamed (2).png") }}" alt="">
+                    <img class="gal-img" src="{{ asset("img/gallery/unnamed.png") }}" alt="">
+                    <img class="gal-img" src="{{ asset("img/gallery/unnamed (3).png") }}" alt="">
+                    <img class="gal-img" src="{{ asset("img/gallery/copteles.jpeg") }}" alt="">
+                    <img class="gal-img" src="{{ asset("img/gallery/cockteleles-modernos.jpg") }}" alt="">
+                    <img class="gal-img" src="{{ asset("img/gallery/50caf20e7f61dbe6fd88d1d18af34420.jpg") }}" alt="">
                 </div>
             </div>
         </div>
     </div>
 </div>
-
-<script src="{{ asset("js/dash.gallery.js") }}"></script>

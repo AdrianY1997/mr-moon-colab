@@ -70,7 +70,7 @@
                             </div>
                             <div class="form-label-group mb-3">
                                 <label for="item-path">Imagen</label>
-                                <input type="url" id="item-path" name="item-path">
+                                <input type="file" id="item-path" name="item-path">
                             </div>
                             <div class="d-flex justify-content-between">
                                 <button type="submit" class="btn btn-primary">Agregar</button>
@@ -141,3 +141,4 @@
     </div>
 </div>
 <script src="{{ asset("js/dashboard/evento.js") }}"></script>
+<script src="{{ asset("js/dash.eventos.js") }}"></script>
