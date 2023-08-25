@@ -8,7 +8,10 @@ use FoxyMVC\Lib\Foxy\Database\MySQL;
 use PDOException;
 
 class Table {
+    public Model $model;
+
     public static string $tableName = "";
+    
     protected static string $selectText = "*";
     protected static string $whereText = "";
     protected static string $orderByText = "";
@@ -79,7 +82,7 @@ class Table {
 
             while ($item = $stmt->fetchObject()) {
                 $obj = new static;
-                $id;
+                $id = null;
                 foreach (get_object_vars($item) as $key => $column) {
                     $obj->$key = strval($column);
                     if (strpos($key, "_id")) $id = $key;
