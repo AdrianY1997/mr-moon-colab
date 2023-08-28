@@ -3,22 +3,20 @@
         <div class="container">
             @include('dashboard/static/menu'):
             <div class="content d-flex gap-3">
-                <div class="dash-gallery-item-container">
-                    <p></p>
-                    <img class="gali-img" src="{{ asset("img/gallery/home-event.jpg") }}" alt="">
-                    <img class="gali-img" src="{{ asset("img/gallery/home-drink.jpg") }}" alt="">
-                    <img class="gali-img" src="{{ asset("img/gallery/cafebar}.jpg") }}" alt="">
-                    <img class="gali-img" src="{{ asset("img/gallery/home-food.jpg") }}" alt="">
-                    <img class="gali-img" src="{{ asset("img/gallery/unnamed (1).png") }}" alt="">
-                    <img class="gali-img" src="{{ asset("img/gallery/granizado-de-cafe-2.jpg") }}" alt="">
-                    <img class="gali-img" src="{{ asset("img/gallery/unnamed (2).png") }}" alt="">
-                    <img class="gali-img" src="{{ asset("img/gallery/unnamed.png") }}" alt="">
-                    <img class="gali-img" src="{{ asset("img/gallery/unnamed (3).png") }}" alt="">
-                    <img class="gali-img" src="{{ asset("img/gallery/copteles.jpeg") }}" alt="">
-                    <img class="gali-img" src="{{ asset("img/gallery/cockteleles-modernos.jpg") }}" alt="">
-                    <img class="gali-img" src="{{ asset("img/gallery/50caf20e7f61dbe6fd88d1d18af34420.jpg") }}" alt="">
+                <div class="dash-gallery-item-container d-flex flex-wrap justify-content-between gap-3">
+                    @foreach($photos as $photo):
+                    <div data-bs-toggle="modal" type="button" data-bs-target="#dash-gallery-show-modal"><img class="gali-img" src="{{ asset($photo->gale_path) }}"></div>
+                    @endforeach
                 </div>
             </div>
         </div>
     </div>
 </div>
+<div class="modal fade" id="dash-gallery-show-modal" tabindex="-1" aria-labelledby="dash-gallery-show-label" aria-hidden="true">
+    <div class="modal-dialog p-4" style="max-width: 100%">
+        <div class="text-center position-relative">
+            <img src="" alt="">
+        </div>
+    </div>
+</div>
+<script src="{{ asset("js/dashboard/gallery/show.js") }}"></script>

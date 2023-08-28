@@ -51,7 +51,7 @@ class Model {
         $sentence = "UPDATE " . $this->model::$tableName . " SET " . implode(", ", $setText) . " WHERE " . substr($this->model::$tableName, 0, 4) . "_id = ?";
         try {
             $stmt = MySQL::connect()->prepare($sentence);
-            $stmt->execute([...$executeValues, $this->model->user_id]);
+            $stmt->execute([...$executeValues, $this->model->{substr($this->model::$tableName, 0, 4) . "_id"}]);
             return true;
         } catch (PDOException $e) {
             return false;
