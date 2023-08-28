@@ -61,9 +61,6 @@ async function viewReservation(e) {
     modalTime.innerHTML = time.split(":")[1] + textTime;
     modalDesc.innerHTML = data.rese_details === "" ? "Sin comentario" : data.rese_details
 
-    console.log(data.rese_status.toLowerCase() != "esperando confirmación")
-    console.log(data.rese_status.toLowerCase() != "esperando pago");
-
     if (data.rese_status.toLowerCase() == "esperando confirmación") { 
         confirmPayment.classList.remove("disabled")
         cancelPayment.classList.remove("disabled")

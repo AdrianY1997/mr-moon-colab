@@ -2,7 +2,7 @@ const payMethods = document.querySelectorAll("#payment-choises>p");
 const paySelected = document.querySelector("#pay-selected");
 const payImage = document.querySelector("#pay-img");
 const payLogo = document.querySelector("#pay-logo");
-const payForm = document.querySelector("#pay-form")
+const payForm = document.querySelector("#pay-form");
 const payInput = document.querySelector("#pay-input");
 const payInputText = document.querySelector("#pay-input-text");
 const paySub = document.querySelector("#pay-sub");
@@ -44,7 +44,7 @@ payMethods.forEach(method => {
         paySub.innerHTML = strt[m].subt
 
         payForm.reset();
-        payInputText.innerHTML = "Elejir archivo"
+        payInputText.innerHTML = "Elegir archivo"
         reseChoises.hide();
     })
 });
@@ -59,9 +59,10 @@ payInput.querySelector("input").addEventListener("change", (e) => {
 
 payForm.addEventListener("submit", async (e) => {
     e.preventDefault();
+    e.stopImmediatePropagation();
     e.stopPropagation();
 
-    const url = payForm.getAttribute("action")
+    const url = payForm.getAttribute("action");
     const input = payInput.querySelector("input");
 
     if (input.files.length == 0) {
@@ -90,7 +91,7 @@ payForm.addEventListener("submit", async (e) => {
     data.append("image", input.files[0])
     data.append("urid", document.querySelector("#pay-id-input").value)
     data.append("pay-selected", paySelected.innerHTML[0].toUpperCase() + paySelected.innerHTML.substring(1));
-    
+
     const response = await fetch(url, {
         method: "POST",
         body: data
@@ -99,5 +100,6 @@ payForm.addEventListener("submit", async (e) => {
     if (await checkFetchError(response)) {
         return;
     }
+
     location.reload();
 })

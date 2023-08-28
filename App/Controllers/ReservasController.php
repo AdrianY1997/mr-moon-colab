@@ -120,7 +120,7 @@ class ReservasController extends Controller {
             Response::status(500)->end("No ha sido posible guardar su factura, contacte con administración");
         }
 
-        $reservation = Reservation::where("rese_id", $data["urid"])->first();
+        $reservation = Reservation::where("rese_urid", $data["urid"])->first();
         $reservation->rese_status = Reservation::WAITING_FOR_CONFIRMATION;
         $reservation->rese_method = $data["pay-selected"];
         $reservation->rese_pay_img = $path;
@@ -130,7 +130,8 @@ class ReservasController extends Controller {
             Response::status(500)->end("Ha ocurrido un error en la operación, contacte con administración");
         }
 
-        Response::status(200)->end();
+        // var_dump($reservation);
+        // Response::status(200)->end($file);
     }
 
     public function getHours() {
