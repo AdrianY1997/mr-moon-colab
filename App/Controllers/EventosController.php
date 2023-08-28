@@ -56,7 +56,8 @@ class EventosController extends Controller {
             "even_name" => $data["even-edit-name"],
             "even_text" => $data["even-edit-text"],
             "even_fech" => $data["even-edit-fech"],
-            "even_path" => "img/eventos/" . $data["even-edit-path"]
+            "even_path" => "img/eventos/" . $data["even-edit-path"],
+            
         ];
     
         Event::where("even_id", $data["even-edit-id"])->update($even);
@@ -66,6 +67,7 @@ class EventosController extends Controller {
             ->success("Se ha actualizado el evento.")
             ->send();
     }
+    
     
     public function delete($id) {
         // Provider::where("prov_id", $id)->delete();

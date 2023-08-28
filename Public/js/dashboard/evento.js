@@ -35,7 +35,6 @@ const modals = {
     modalEdit.querySelector("#even-edit-name").value = data.even_name;
     modalEdit.querySelector("#even-edit-text").value = data.even_text;
     modalEdit.querySelector("#even-edit-fech").value = data.even_fech;
-    modalEdit.querySelector("#even-edit-path").value = data.even_path;
     modalEdit.querySelector("#even-edit-id").value = data.even_id;
   
     const editForm = modalEdit.querySelector("form");
@@ -98,7 +97,7 @@ document.addEventListener("DOMContentLoaded", function() {
     itemsContainers.forEach(ic => {
         const form = ic.querySelector("form");
         const imgContainer = ic.querySelector("img");
-        const imgField = ic.querySelector(".Events-img");
+        const imgField = ic.querySelector(".Event-img");
         const uploadImg = ic.querySelector(".upload-img");
         const saveImg = ic.querySelector(".save-img");
 
