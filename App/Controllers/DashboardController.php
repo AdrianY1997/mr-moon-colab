@@ -3,6 +3,7 @@
 namespace FoxyMVC\App\Controllers;
 
 use FoxyMVC\App\Models\Event;
+use FoxyMVC\App\Models\Galeria;
 use FoxyMVC\App\Models\Product;
 use FoxyMVC\App\Models\Provider;
 use FoxyMVC\App\Models\Reservation;
@@ -94,6 +95,7 @@ class DashboardController extends Controller {
     public function galeria() {
         return self::render("dashboard.galeria", [
             "active" => "galeria",
+            "photos" => Galeria::select("gale_id", "gale_path")->get(),
         ]);
     }
 
