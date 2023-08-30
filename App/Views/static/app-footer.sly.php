@@ -70,13 +70,13 @@
             <a href="#">
                 <p class="m-0">{{ $webdata->webd_city }}</p>
             </a>
-            <a href="#">
+            <a href="mailto:{{ $webdata->webd_email }}">
                 <p class="m-0">{{ $webdata->webd_email }}</p>
             </a>
-            <a href="#">
+            <a href="">
                 <p class="m-0">{{ $webdata->webd_address }}</p>
             </a>
-            <a href="#">
+            <a href="tel:{{ $webdata->webd_phone }}">
                 <p class="m-0">{{ $webdata->webd_phone }}</p>
             </a>
         </div>
