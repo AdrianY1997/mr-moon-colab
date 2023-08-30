@@ -39,7 +39,7 @@ class EventosController extends Controller {
         $even->even_name = $data["item-name"];
         $even->even_text = $data["item-text"];
         $even->even_fech = $data["item-fech"];
-        $even->even_path = $data["item-path"];
+        $even->even_path = "img/eventos/" . $data["item-path"];
     
         $evenId = Event::insert($even);
     
@@ -70,13 +70,13 @@ class EventosController extends Controller {
     
     
     public function delete($id) {
-        // Provider::where("prov_id", $id)->delete();
-        // ProductProvider::where("prov_id", $id)->delete();
+        Event::where("even_id", $id)->delete();
     
         return redirect()
             ->route("dash.even")
-            ->warning("Esta funcionalidad no se ha implementado aún.")
+            ->warning("Se Elimino el Evento.")
             ->send();
     }
+    
     
 }

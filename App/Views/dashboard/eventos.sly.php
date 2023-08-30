@@ -67,6 +67,7 @@
                             <div class="form-label-group mb-3">
                                 <label for="item-fech">Fecha</label>
                                 <input type="text" id="item-fech" name="item-fech">
+                                <p>Ejemplo "AAAA-MM-DD HH:MM:SS"</p>
                             </div>
                             <div class="form-label-group mb-3">
                                 <label for="item-path">Imagen</label>
