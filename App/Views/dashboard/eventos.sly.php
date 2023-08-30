@@ -57,7 +57,7 @@
                         <p class="ms-3 fs-5">Agregar evento</p>
                         <form action="{{ route("even.add") }}" method="post">
                             <div class="form-label-group mb-3">
-                                <label for="item-name">Nomnbre</label>
+                                <label for="item-name">Nombre</label>
                                 <input type="text" id="item-name" name="item-name" placeholder="">
                             </div>
                             <div class="form-label-group mb-3">
