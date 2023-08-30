@@ -55,7 +55,7 @@
                             <i class="fa-solid fa-caret-left"></i>
                         </span>
                         <p class="ms-3 fs-5">Agregar evento</p>
-                        <form action="{{ route("even.add") }}" method="post">
+                        <form action="{{ route("even.add") }}" method="post" class="event.add">
                             <div class="form-label-group mb-3">
                                 <label for="item-name">Nomnbre</label>
                                 <input type="text" id="item-name" name="item-name" placeholder="">
@@ -66,7 +66,7 @@
                             </div>
                             <div class="form-label-group mb-3">
                                 <label for="item-fech">Fecha</label>
-                                <input type="week" id="item-fech" name="item-fech">
+                                <input type="text" id="item-fech" name="item-fech">
                             </div>
                             <div class="form-label-group mb-3">
                                 <label for="item-path">Imagen</label>
