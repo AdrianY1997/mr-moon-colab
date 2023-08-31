@@ -51,7 +51,7 @@ Route::set("dashboard/eventos/delete-item/{id}", [EventosController::class, "del
 Route::set("dashboard/eventos", [DashboardController::class, "evento"])->name("dash.even");
 
 Route::set("dashboard/galerias/set/image/{id}", [DashboardController::class, "setGaleriaImg"])->name("dash.GaleriaSetImg");
-Route::set("dashboard/proveedor/new-item", [GaleriaController::class, "add"])->name("gal.add");
+Route::set("dashboard/galerias/new-item", [GaleriaController::class, "add"])->name("gal.add");
 Route::set("dashboard/galerias/delete-item/{id}", [GaleriaController::class, "delete"])->name("gal.delete");
 
 Route::set("dashboard/events/set/image/{id}", [DashboardController::class, "setEventosImg"])->name("dash.EventSetImg");
