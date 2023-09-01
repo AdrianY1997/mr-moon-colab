@@ -23,17 +23,17 @@ class GaleriaController extends Controller {
 
  
         $galery->gale_name = "Galeria";
-        $galery->gale_path = "Public/img/gallery/".$data["img"];
+        $galery->gale_path = "img/gallery/" . $data["img"];
 
         $galeryId = Galeria::insert($galery);
 
         redirect()
             ->route("dash.galery")
-            ->success("Se ha añadido una imaen nueva.")
+            ->success("Se ha añadido una imagen nueva.")
             ->send();
     }
     public function delete($id) {
-        // Galeria::where("gale_id", $id)->delete();
-        redirect()->route("dash.galery")->warning("Esta funcionalidad no se ha implementado aun.")->send();
+        Galeria::where("gale_id", $id)->delete();
+        redirect()->route("dash.galery")->warning("La imagen se a eliminado con Exito.")->send();
     }
 }
