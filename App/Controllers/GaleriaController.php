@@ -25,11 +25,20 @@ class GaleriaController extends Controller {
         $galery->gale_name = substr($_FILES["image"]["name"], 0, -strlen((pathinfo($_FILES["image"]["name"], FILEINFO_EXTENSION))));
         $galery->gale_path = $filePath;
 
- 
-        $galery->gale_name = "Galeria";
-        $galery->gale_path = "img/gallery/" . $data["img"];
+        if (!move_uploaded_file($_FILES["image"]["tmp_name"], "Public/$filePath")) {
+            redirect()
+                ->route("dash.galery")
+                ->error("No fue posible subir la imagen.")
+                ->send();
+        }
 
-        $galeryId = Galeria::insert($galery);
+        if (!Galeria::insert($galery)) {
+            unlink("Public/$filePath");
+            redirect()
+                ->route("dash.galery")
+                ->error("No fue posible subir la imagen.")
+                ->send();
+        }
 
         redirect()
             ->route("dash.galery")
@@ -40,5 +49,4 @@ class GaleriaController extends Controller {
         Galeria::where("gale_id", $id)->delete();
         redirect()->route("dash.galery")->warning("La imagen se a eliminado con Exito.")->send();
     }
-    // hola
 }
