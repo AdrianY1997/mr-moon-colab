@@ -18,12 +18,16 @@ class GaleriaController extends Controller {
     }
     public function add() {
         $data = Request::getData();
+        $dir = "img/gallery/";
+        $filePath = $dir . $_FILES["image"]["name"];
 
-        $galery = new Galeria();
+        $galery = new Galeria(); 
+        $galery->gale_name = substr($_FILES["image"]["name"], 0, -strlen((pathinfo($_FILES["image"]["name"], FILEINFO_EXTENSION))));
+        $galery->gale_path = $filePath;
 
  
         $galery->gale_name = "Galeria";
-        $galery->gale_path = "img/gallery/".$data["img"];
+        $galery->gale_path = "img/gallery/" . $data["img"];
 
         $galeryId = Galeria::insert($galery);
 
