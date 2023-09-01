@@ -18,18 +18,31 @@ class GaleriaController extends Controller {
     }
     public function add() {
         $data = Request::getData();
+        $dir = "img/gallery/";
+        $filePath = $dir . $_FILES["image"]["name"];
 
-        $galery = new Galeria();
+        $galery = new Galeria(); 
+        $galery->gale_name = substr($_FILES["image"]["name"], 0, -strlen((pathinfo($_FILES["image"]["name"], FILEINFO_EXTENSION))));
+        $galery->gale_path = $filePath;
 
- 
-        $galery->gale_name = "Galeria";
-        $galery->gale_path = "Public/img/gallery/".$data["img"];
+        if (!move_uploaded_file($_FILES["image"]["tmp_name"], "Public/$filePath")) {
+            redirect()
+                ->route("dash.galery")
+                ->error("No fue posible subir la imagen.")
+                ->send();
+        }
 
-        $galeryId = Galeria::insert($galery);
+        if (!Galeria::insert($galery)) {
+            unlink("Public/$filePath");
+            redirect()
+                ->route("dash.galery")
+                ->error("No fue posible subir la imagen.")
+                ->send();
+        }
 
         redirect()
             ->route("dash.galery")
-            ->success("Se ha añadido una imaen nueva.")
+            ->success("Se ha añadido una imagen nueva.")
             ->send();
     }
     public function delete($id) {
