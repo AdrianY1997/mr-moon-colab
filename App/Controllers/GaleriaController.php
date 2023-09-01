@@ -23,7 +23,7 @@ class GaleriaController extends Controller {
 
  
         $galery->gale_name = "Galeria";
-        $galery->gale_path = "img/gallery/" . $data["img"];
+        $galery->gale_path = "img/gallery/".$data["img"];
 
         $galeryId = Galeria::insert($galery);
 
