@@ -46,7 +46,7 @@ class GaleriaController extends Controller {
             ->send();
     }
     public function delete($id) {
-        // Galeria::where("gale_id", $id)->delete();
-        redirect()->route("dash.galery")->warning("Esta funcionalidad no se ha implementado aun.")->send();
+        Galeria::where("gale_id", $id)->delete();
+        redirect()->route("dash.galery")->warning("La imagen se a eliminado con Exito.")->send();
     }
 }
