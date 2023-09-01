@@ -16,7 +16,8 @@
                     <div data-bs-toggle="modal" type="button" data-bs-target="#dash-gallery-show-modal"><img class="gali-img" src="{{ asset($photo->gale_path) }}">
                         <a href="{{ route("gal.delete", ["id" => $photo->gale_id]) }}" class="delete-item btn p-0 px-2 text-danger">
                             <i class="fa-solid fa-trash"></i>
-                        </a></div>
+                        </a>
+                    </div>
                     @endforeach
                 </div>
                 <div id="modal-add" class="modal position-absolute p-3 bg-black bg-opacity-10" style="z-index: 1">
@@ -25,17 +26,23 @@
                             <i class="fa-solid fa-caret-left"></i>
                         </span>
                         <p class="ms-3 fs-5">Agregar Imagen</p>
-                        <form action="{{ route("gal.add") }}" method="post">
-                            <div class="dash-menu-item-container" data-img="gal">
-                                <div class="text-center d-flex gap-3 justify-content-center mt-3">
-                                    <input type="file" name="img" id="">
+                        <form action="{{ route("gal.add") }}" method="post" enctype="multipart/form-data">
+                                <div class="col">
+                                    <div class="col-12">
+                                        <div class="d-flex flex-column px-md-5 px-4 mb-4">
+                                            <div class="inputWithIcon form-group" style="cursor: pointer" id="pay-input">
+                                                <div>
+                                                    <input name="image" class="form-control" type="file">
+                                                </div>
+                                            </div>
+                                            <p class="mt-3">Agregue la nueva imagen de galeria</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 px-md-5 px-4 mt-3">
+                                        <button type="submit" class="btn btn-primary w-100">Confirmar</button>
+                                    </div>
                                 </div>
-                                <div class="text-center d-flex gap-3 justify-content-center mt-3">
-                                    <button class="btn btn-success upload-img">Subir</button>
-                                    <button class="btn btn-primary save-img" disabled>Guardar</button>
-                                </div>
-                            </div>
-                        </form>
+                            </form>
                     </div>
                 </div>
             </div>
