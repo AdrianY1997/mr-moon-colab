@@ -55,7 +55,7 @@
                             <i class="fa-solid fa-caret-left"></i>
                         </span>
                         <p class="ms-3 fs-5">Agregar evento</p>
-                        <form action="{{ route("even.add") }}" method="post" class="event.add">
+                        <form action="{{ route("even.add") }}" method="post" class="event.add" enctype="multipart/form-data">
                             <div class="form-label-group mb-3">
                                 <label for="item-name">Nombre</label>
                                 <input type="text" id="item-name" name="item-name" placeholder="">
@@ -71,7 +71,7 @@
                             </div>
                             <div class="form-label-group mb-3">
                                 <label for="item-path">Imagen</label>
-                                <input type="file" id="item-path" name="item-path">
+                                <input name="image" type="file" id="item-path" name="item-path">
                             </div>
                             <div class="d-flex justify-content-between">
                                 <button type="submit" class="btn btn-primary">Agregar</button>
