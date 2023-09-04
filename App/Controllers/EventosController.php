@@ -67,15 +67,18 @@ class EventosController extends Controller {
     
     public function edit($id) {
         $data = Request::getData();
+        $dir = "img/eventos/";
+        $filePath = $dir . $_FILES["image"]["name"];
+
     
         $even = [
             "even_name" => $data["even-edit-name"],
             "even_text" => $data["even-edit-text"],
             "even_fech" => $data["even-edit-fech"],
-            "even_path" => "img/eventos/" . $data["even-edit-path"],
+            "even_path" => $filePath
             
         ];
-    
+        
         Event::where("even_id", $data["even-edit-id"])->update($even);
     
         return redirect()

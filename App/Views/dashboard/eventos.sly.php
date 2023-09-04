@@ -85,7 +85,7 @@
                             <i class="fa-solid fa-caret-left"></i>
                         </span>
                         <p class="ms-3 fs-5">Editar Evento</p>
-                        <form action="{{ route("even.edit") }}" method="post">
+                        <form action="{{ route("even.edit") }}" method="post" enctype="multipart/form-data" >
                             <div class="form-label-group mb-3">
                                 <label for="even-edit-name">Nombre</label>
                                 <input type="text" id="even-edit-name" name="even-edit-name" placeholder="">
@@ -100,7 +100,7 @@
                             </div>
                             <div class="form-label-group mb-3">
                                 <label for="even-edit-path">imagen</label>
-                                <input type="file" id="even-edit-path" name="even-edit-path" placeholder="">
+                                <input  name="image" type="file" id="even-edit-path" name="even-edit-path" placeholder="">
                             </div>
                             <div class="d-flex justify-content-between">
                                 <button type="submit" class="btn btn-primary">Editar</button>
