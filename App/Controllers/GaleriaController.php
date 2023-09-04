@@ -28,7 +28,7 @@ class GaleriaController extends Controller {
         if (!move_uploaded_file($_FILES["image"]["tmp_name"], "Public/$filePath")) {
             redirect()
                 ->route("dash.galery")
-                ->error("No fue posible subir la imagen.")
+                ->error("Formato de imagen no valido.")
                 ->send();
         }
 
@@ -36,7 +36,7 @@ class GaleriaController extends Controller {
             unlink("Public/$filePath");
             redirect()
                 ->route("dash.galery")
-                ->error("No fue posible subir la imagen.")
+                ->error("Formato de imagen no valido.")
                 ->send();
         }
 

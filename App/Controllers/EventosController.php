@@ -33,31 +33,20 @@ class EventosController extends Controller {
     }
     public function add() {
         $data = Request::getData();
+        $dir = "img/eventos/";
+        $filePath = $dir . $_FILES["image"]["name"];
+
         $dir = "img/eventos";
         $filePath = $dir . $_FILES["image"]["name"];
 
         $even = new Event();
-    
+       
         $even->even_name = $data["item-name"];
         $even->even_text = $data["item-text"];
         $even->even_fech = $data["item-fech"];
-        $even->even_path = $filePath;
-
-        if (!move_uploaded_file($_FILES["image"]["tmp_name"], "Public/$filePath")) {
-            redirect()
-                ->route("dash.even")
-                ->error("No fue posible subir la imagen.")
-                ->send();
-        }
-
-        if (!Event::insert($even)) {
-            unlink("Public/$filePath");
-            redirect()
-                ->route("dash.even")
-                ->error("No fue posible subir la imagen.")
-                ->send();
-        }
+        $even->even_path = "img/eventos/" . $data["item-path"];
     
+        $evenId = Event::insert($even);
     
         return redirect()
             ->route("dash.even")
