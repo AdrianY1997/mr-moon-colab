@@ -71,6 +71,13 @@ class UserController extends Controller {
                 ->send();
         }
 
+        if ($user_id == 3 || $user_id == 2) {
+            redirect()
+                ->route("dash.users")
+                ->error("No se ha podido eliminar el usuario")
+                ->send();
+        }
+
         if (!User::where("user_id", $user_id)->delete()) {
             redirect()
                 ->route("dash.users")

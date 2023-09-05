@@ -54,19 +54,19 @@
                         <form action="{{ route("prov.add") }}" method="post">
                             <div class="form-label-group mb-3">
                                 <label for="item-nit">NIT</label>
-                                <input type="text" id="item-nit" name="item-nit" placeholder="">
+                                <input required type="text" id="item-nit" name="item-nit" placeholder="">
                             </div>
                             <div class="form-label-group mb-3">
                                 <label for="item-name">Nombre</label>
-                                <input type="text" id="item-name" name="item-name" placeholder="">
+                                <input required type="text" id="item-name" name="item-name" placeholder="">
                             </div>
                             <div class="form-label-group mb-3">
                                 <label for="item-email">Email</label>
-                                <input type="email" id="item-email" name="item-email">
+                                <input required type="email" id="item-email" name="item-email">
                             </div>
                             <div class="form-label-group mb-3">
                                 <label for="item-phone">Teléfono</label>
-                                <input type="text" id="item-phone" name="item-phone">
+                                <input required pattern="3[0-9]{2}[0-9]{7}" type="text" id="item-phone" name="item-phone">
                             </div>
                             <div class="d-flex justify-content-between">
                                 <button type="submit" class="btn btn-primary">Agregar</button>
@@ -83,19 +83,19 @@
                         <form action="{{ route("prov.edit") }}" method="post">
                             <div class="form-label-group mb-3">
                                 <label for="prov-edit-nit">NIT</label>
-                                <input type="text" id="prov-edit-nit" name="prov-edit-nit" placeholder="">
+                                <input required type="text" id="prov-edit-nit" name="prov-edit-nit" placeholder="">
                             </div>
                             <div class="form-label-group mb-3">
                                 <label for="prov-edit-name">Nombre</label>
-                                <input type="text" id="prov-edit-name" name="prov-edit-name" placeholder="">
+                                <input required type="text" id="prov-edit-name" name="prov-edit-name" placeholder="">
                             </div>
                             <div class="form-label-group mb-3">
                                 <label for="prov-edit-email">Email</label>
-                                <input type="email" id="prov-edit-email" name="prov-edit-email" placeholder="">
+                                <input required type="email" id="prov-edit-email" name="prov-edit-email" placeholder="">
                             </div>
                             <div class="form-label-group mb-3">
                                 <label for="prov-edit-phone">Teléfono</label>
-                                <input type="text" id="prov-edit-phone" name="prov-edit-phone" placeholder="">
+                                <input required type="text" id="prov-edit-phone" name="prov-edit-phone" pattern="3[0-9]{2}[0-9]{7}" placeholder="">
                             </div>
                             <div class="d-flex justify-content-between">
                                 <button type="submit" class="btn btn-primary">Editar</button>

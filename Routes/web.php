@@ -30,4 +30,3 @@ Route::set("profile/edit", [ProfileController::class, "edit"])->name("profile.ed
 Route::set("eventos", [EventosController::class, "index"])->name("event");
 Route::set("evento/{id}", [EventosController::class, "get"])->name("event.get");
 Route::set("evento/delete/{id}", [EventosController::class, "delete"])->name("event.delete");
-Route::set("evento/edit/{id}", [EventosController::class, "edit"])->name("event.edit");

@@ -99,6 +99,8 @@ class DashboardController extends Controller {
         ]);
     }
 
+
+
     public function updateWebInfo() {
         $data = Request::getData();
 
@@ -236,55 +238,6 @@ class DashboardController extends Controller {
     }
 
 
-    public function setEventosImg($id) {
-        if (!isset($_FILES["Event-img"])) {
-            redirect()->route("dash.Event")->error("No se ha seleccionado una imagen")->send();
-        }
-    
-        $events = [
-            "1" => "eventos-Bartender invitado",
-            "2" => "eventos-Noche de Karaoke",
-            "3" => "eventos-Festividades",
-            "4" => "eventos-Trivia",
-        ];
-    
-        $targetDir = "Public/img/eventos/";
-        $imageFileType = strtolower(pathinfo($_FILES["Event-img"]["name"], PATHINFO_EXTENSION));
-        $targetFile = $targetDir . $events[$id] . "." . $imageFileType;
-    
-        if (getimagesize($_FILES["Event-img"]["tmp_name"]) === false) {
-            redirect()
-                ->route("dash.Events")
-                ->error("Se ha seleccionado una imagen inválida")
-                ->send();
-        }
-    
-        if ($_FILES["Event-img"]["size"] > 500000) {
-            redirect()
-                ->route("dash.Events")
-                ->error("El tamaño de la imagen debe ser menor a 500 KB")
-                ->send();
-        }
-    
-        if ($imageFileType != "jpg" && $imageFileType != "png") {
-            redirect()
-                ->route("dash.Events")
-                ->error("Solo se aceptan imágenes de tipo JPG y PNG")
-                ->send();
-        }
-    
-        if (!move_uploaded_file($_FILES["Event-img"]["tmp_name"], $targetFile)) {
-            redirect()
-                ->route("dash.Events")
-                ->error("No se ha podido subir la imagen")
-                ->send();
-        }
-    
-        redirect()
-            ->route("dash.Events")
-            ->success("Se ha guardado la imagen con éxito")
-            ->send();
-    }
     
 
     // public function setEventosImg($id) {

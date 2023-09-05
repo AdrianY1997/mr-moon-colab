@@ -3,7 +3,7 @@
         'name' => 'hfdevs/mr-moon',
         'pretty_version' => '2.0.x-dev',
         'version' => '2.0.9999999.9999999-dev',
-        'reference' => 'a175161c4544469caf2c7bac78b86362da3e8253',
+        'reference' => '8472e216db2a49598f49671844bdfffa2f24f1f1',
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -22,7 +22,7 @@
         'hfdevs/mr-moon' => array(
             'pretty_version' => '2.0.x-dev',
             'version' => '2.0.9999999.9999999-dev',
-            'reference' => 'a175161c4544469caf2c7bac78b86362da3e8253',
+            'reference' => '8472e216db2a49598f49671844bdfffa2f24f1f1',
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
