@@ -58,20 +58,19 @@
                         <form action="{{ route("even.add") }}" method="post" class="event.add" enctype="multipart/form-data">
                             <div class="form-label-group mb-3">
                                 <label for="item-name">Nombre</label>
-                                <input type="text" id="item-name" name="item-name" placeholder="">
+                                <input required type="text" id="item-name" name="item-name" placeholder="">
                             </div>
                             <div class="form-label-group mb-3">
                                 <label for="item-text">Descripcion</label>
-                                <input type="text" id="item-text" name="item-text" placeholder="">
+                                <input required type="text" id="item-text" name="item-text" placeholder="">
                             </div>
                             <div class="form-label-group mb-3">
                                 <label for="item-fech">Fecha</label>
-                                <input type="text" id="item-fech" name="item-fech">
-                                <p>Ejemplo "AAAA-MM-DD HH:MM:SS"</p>
+                                <input type="text" id="item-fech" name="item-fech"  pattern="\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}" title="Formato válido: AAAA-MM-DD HH:MM:SS" required>
                             </div>
                             <div class="form-label-group mb-3">
                                 <label for="item-path">Imagen</label>
-                                <input type="file" id="item-path" name="item-path">
+                                <input required type="file" id="item-path" name="item-path">
                             </div>
                             <div class="d-flex justify-content-between">
                                 <button type="submit" class="btn btn-primary">Agregar</button>
@@ -88,19 +87,19 @@
                         <form action="{{ route("even.edit") }}" method="post">
                             <div class="form-label-group mb-3">
                                 <label for="even-edit-name">Nombre</label>
-                                <input type="text" id="even-edit-name" name="even-edit-name" placeholder="">
+                                <input required type="text" id="even-edit-name" name="even-edit-name" placeholder="">
                             </div>
                             <div class="form-label-group mb-3">
                                 <label for="even-edit-text">Descripcion</label>
-                                <input type="text" id="even-edit-text" name="even-edit-text" placeholder="">
+                                <input required type="text" id="even-edit-text" name="even-edit-text" placeholder="">
                             </div>
                             <div class="form-label-group mb-3">
                                 <label for="even-edit-fech">Fecha</label>
-                                <input type="text" id="even-edit-fech" name="even-edit-fech" placeholder="">
+                                <input required type="text" id="even-edit-fech" name="even-edit-fech"  pattern="\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}" title="Formato válido: AAAA-MM-DD HH:MM:SS" placeholder="">
                             </div>
                             <div class="form-label-group mb-3">
                                 <label for="even-edit-path">imagen</label>
-                                <input type="file" id="even-edit-path" name="even-edit-path" placeholder="">
+                                <input required type="file" id="even-edit-path" name="even-edit-path" placeholder="">
                             </div>
                             <div class="d-flex justify-content-between">
                                 <button type="submit" class="btn btn-primary">Editar</button>
