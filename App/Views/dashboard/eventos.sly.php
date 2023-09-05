@@ -70,7 +70,7 @@
                             </div>
                             <div class="form-label-group mb-3">
                                 <label for="item-path">Imagen</label>
-                                <input required type="file" id="item-path" name="item-path">
+                                <input name="image" required type="file" id="item-path" name="item-path">
                             </div>
                             <div class="d-flex justify-content-between">
                                 <button type="submit" class="btn btn-primary">Agregar</button>
