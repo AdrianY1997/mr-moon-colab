@@ -36,18 +36,29 @@ class EventosController extends Controller {
         $dir = "img/eventos/";
         $filePath = $dir . $_FILES["image"]["name"];
 
-        $dir = "img/eventos";
-        $filePath = $dir . $_FILES["image"]["name"];
-
         $even = new Event();
        
         $even->even_name = $data["item-name"];
         $even->even_text = $data["item-text"];
         $even->even_fech = $data["item-fech"];
-        $even->even_path = "img/eventos/" . $data["item-path"];
+        $even->even_path = $filePath;
+
+        if (!move_uploaded_file($_FILES["image"]["tmp_name"], "Public/$filePath")) {
+            redirect()
+                ->route("dash.even")
+                ->error("Formato de imagen no valido.")
+                ->send();
+        }
+
+        if (!Event::insert($even)) {
+            unlink("Public/$filePath");
+            redirect()
+                ->route("dash.even")
+                ->error("Formato de imagen no valido.")
+                ->send();
+        }
     
-        $evenId = Event::insert($even);
-    
+            
         return redirect()
             ->route("dash.even")
             ->success("Se ha añadido un evento nuevo.")
@@ -74,7 +85,7 @@ class EventosController extends Controller {
                 ->error("Formato de imagen no valido.")
                 ->send();
         }
-
+        
         
         Event::where("even_id", $data["even-edit-id"])->update($even);
     
