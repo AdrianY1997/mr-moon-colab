@@ -14,5 +14,7 @@
             "email": "yasnoadriandatos@gmaill.com"
         }
     ],
-    "require": {}
+    "require": {
+        "dompdf/dompdf": "^2.0"
+    }
 }

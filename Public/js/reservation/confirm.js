@@ -7,6 +7,8 @@ const payInput = document.querySelector("#pay-input");
 const payInputText = document.querySelector("#pay-input-text");
 const paySub = document.querySelector("#pay-sub");
 
+const downloadPDF = document.querySelector("#download-pdf");
+
 const strt = {
     "NEQU": {
         "subt": "Escanee este codigo QR<br>con su aplicación Nequi"

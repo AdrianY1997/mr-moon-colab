@@ -16,6 +16,7 @@ Route::set("galeria", [GaleriaController::class, "index"])->name("galery");
 
 Route::set("reservas", [ReservasController::class, "index"])->name("reserve");
 Route::set("reserve/new", [ReservasController::class, "new"])->name("reserve.new");
+Route::set("reserve/download", [ReservasController::class, "download"])->name("reserve.download");
 
 Route::set("reservas/buscar", [ReservasController::class, "search"])->name("reserve.search");
 Route::set("reserva/{urid}", [ReservasController::class, "show"])->name("reserve.show");

@@ -1,7 +1,3 @@
-/vendor/*
-!/vendor/composer/
-!/vendor/autoload.php
-
 ##### Windows
 # Windows thumbnail cache files
 Thumbs.db

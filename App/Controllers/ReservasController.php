@@ -4,6 +4,7 @@ namespace FoxyMVC\App\Controllers;
 
 use DateTime;
 use DateTimeZone;
+use Dompdf\Dompdf;
 use FoxyMVC\App\Models\Reservation;
 use FoxyMVC\Lib\Cli\Command\Migration\Reset;
 use FoxyMVC\Lib\Foxy\Core\Controller;
@@ -57,6 +58,28 @@ class ReservasController extends Controller {
         return self::render("web.reserve.confirm", [
             "reservation" => $rese
         ]);
+    }
+
+    public function download() {
+        $data = Request::getData();
+
+        if (!$data || count($data) == 0) {
+            return self::render("web.reserve.download");
+        }
+
+        $rese = Reservation::where("rese_urid", $data["urid"])->first();
+        if (!$rese) {
+            return self::render("web.reserve.download");
+        }
+
+        $pdf = new Dompdf();
+        $pdf->setPaper("B6");
+        ob_start();
+        include "Lib/Util/Templates/reservation-pdf.template.php";
+        $html_pdf = ob_get_clean();
+        $pdf->loadHtml($html_pdf);
+        $pdf->render();
+        $pdf->stream();
     }
 
     public function new() {
@@ -153,22 +176,22 @@ class ReservasController extends Controller {
 
         $selectText = isset($data->all) ? ["*"] : ["rese_urid", "rese_status"];
 
-        
+
         $status = isset($data->status) ? ["rese_status", explode("-", $data->status)[0]] : ["rese_status", "!=", "null"];
         $urid = isset($data->urid) ? ["rese_urid", $data->urid] : ["rese_urid", "!=", "null"];
-        
+
         $rese = Reservation::select(...$selectText)->where(...$urid)->where(...$status)->get();
 
         if ($rese === false) {
             Response::status(500)->end("Ha ocurrido un error al obtener los datos");
         }
-        
+
         $newRese = array_map(function ($r) {
             unset($r->model, $r->fillable);
             $r->rese_status = Reservation::getText($r->rese_status);
             return $r;
         }, $rese);
-        
+
         Response::json($newRese);
     }
 

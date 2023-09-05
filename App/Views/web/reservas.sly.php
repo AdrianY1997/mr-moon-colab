@@ -5,6 +5,14 @@
 
     <div class="form container">
         <div>
+            <h4>Importante!</h4>
+            <p class="m-0">
+                Tenga en cuenta que para realizar una reservación es necesario un deposito de $20.000 pesos<br>
+                El dinero en deposito se tendra en cuenta en la factura final
+            </p>
+        </div>
+        <hr>
+        <div>
             <p>Si ya tienes tu reservación puedes introducirla aqui</p>
             <div class="form-floating">
                 <input type="text" id="urid" name="urid" class="form-control" placeholder="12345">

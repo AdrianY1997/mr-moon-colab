@@ -64,22 +64,22 @@
     <div class="card box1 shadow-sm p-4 rounded-start-3">
         <p class="fs-5 fw-bold">Detalles</p>
         <div class="align-items-center pb-2">
-            <p class="m-0">A nombre de:</p>
-            <p class="m-0 fw-bold bg-black bg-opacity-10 px-2 py-1"><span>{{$reservation->rese_name}} {{$reservation->rese_lastname}}</span></p>
+            <p class="m-0">Cliente:</p>
+            <p class="m-0 fw-bold bg-black bg-opacity-10 px-2 py-1"><span id="cCustomer">{{$reservation->rese_name}} {{$reservation->rese_lastname}}</span></p>
         </div>
         <div class="row row-cols-2">
             <div class="align-items-center pb-2 col">
                 <p class="m-0">Mesa:</p>
-                <p class="m-0 fw-bold bg-black bg-opacity-10 px-2 py-1"><span>{{$reservation->rese_table}}</span></p>
+                <p class="m-0 fw-bold bg-black bg-opacity-10 px-2 py-1"><span id="cTable">{{$reservation->rese_table}}</span></p>
             </div>
             <div class="align-items-center pb-2">
                 <p class="m-0">Personas:</p>
-                <p class="m-0 fw-bold bg-black bg-opacity-10 px-2 py-1"><span>{{$reservation->rese_quantity}}</span></p>
+                <p class="m-0 fw-bold bg-black bg-opacity-10 px-2 py-1"><span id="cPeople">{{$reservation->rese_quantity}}</span></p>
             </div>
         </div>
         <div class="align-items-center pb-2 col">
             <p class="m-0">Dia:</p>
-            <p class="m-0 fw-bold bg-black bg-opacity-10 px-2 py-1"><span data-date></span></p>
+            <p class="m-0 fw-bold bg-black bg-opacity-10 px-2 py-1"><span id="cDate" data-date></span></p>
             <script>
                 document.querySelector("[data-date]").innerHTML = new Date('{{$reservation->rese_day}}').toLocaleString('default', {
                     dateStyle: 'long'
@@ -89,7 +89,7 @@
         </div>
         <div class="align-items-center pb-2">
             <p class="m-0">Hora:</p>
-            <p class="m-0 fw-bold bg-black bg-opacity-10 px-2 py-1"><span data-time></span></p>
+            <p class="m-0 fw-bold bg-black bg-opacity-10 px-2 py-1"><span id="cTime" data-time></span></p>
             <script>
                 const section = {
                     "morning": {
@@ -111,11 +111,20 @@
             </script>
         </div>
         <div class="d-flex flex-column">
-            <div class="d-flex align-items-center justify-content-between text mb-4"> <span>Total</span> <span class="fas fa-dollar-sign"><span class="ps-1">600.99</span></span> </div>
+            <div class="row row-cols-2">
+                <div class="align-items-center pb-2 col">
+                    <p class="m-0">Metodo de pago:</p>
+                    <p class="m-0 fw-bold bg-black bg-opacity-10 px-2 py-1"><span id="cMethod"><?= $reservation->rese_method?></span></p>
+                </div>
+                <div class="align-items-center pb-2">
+                    <p class="m-0">Total:</p>
+                    <p class="m-0 fw-bold bg-black bg-opacity-10 px-2 py-1"><span><i class="fa-solid fa-dollar-sign"></i> 20.000</span></p>
+                </div>
+            </div>
             <div class="border-bottom mb-4"></div>
             <div class="align-items-center" style="font-size: 10pt">
                 <p class="m-0">ID de reservación:</p>
-                <p class="m-0 fw-bold bg-black bg-opacity-10 px-2 py-1"><span>{{$reservation->rese_urid}}</span></p>
+                <p class="m-0 fw-bold bg-black bg-opacity-10 px-2 py-1"><span id="cUrid">{{$reservation->rese_urid}}</span></p>
             </div>
         </div>
     </div>
@@ -131,7 +140,7 @@
             <span class="h5 fw-bold m-0">Esperando confirmación</span>
             @endif
             @if($reservation->rese_status == Reservation::RESERVED):
-            <span class="h5 fw-bold m-0">Reservado</span>
+            <span class="h5 fw-bold m-0">Confirmado</span>
             @endif
         </div>
         <ul class="nav nav-tabs mb-3 px-md-4 px-2">
@@ -181,9 +190,47 @@
             @endif
             @if($reservation->rese_status == Reservation::RESERVED):
             <div class="text-center">
-                <p id="pay-sub" class="text-center">Su reservación ha sido confirmada<br></p>
-                <button class="btn btn-success">Descargar factura</button>
+                <p id="pay-sub" class="text-center">
+                    Su pago se ha confirmado correctamente<br>
+                    y se realizo la reserva<br><br>
+                    ¿Desea descargar su comprobante de pago?
+                </p>
+                <form id="download-pdf-form" action="{{ route("reserve.download") }}" target="_blank" method="post">
+                    <input type="hidden" name="urid" value="<?= $reservation->rese_urid ?>">
+                    <input type="hidden" name="name" value="<?= $reservation->rese_name ?>">
+                    <input type="hidden" name="last" value="<?= $reservation->rese_lastname ?>">
+                    <input type="hidden" name="mail" value="<?= $reservation->rese_email ?>">
+                    <input type="hidden" name="quan" value="<?= $reservation->rese_quantity ?>">
+                    <input type="hidden" name="tabl" value="<?= $reservation->rese_table ?>">
+                    <input type="hidden" name="date" value="">
+                    <input type="hidden" name="time" value="">
+                    <input type="hidden" name="meth" value="<?= $reservation->rese_method ?>">
+                    <button id="download-pdf" class="btn btn-success">Descargar</button>
+                </form>
             </div>
+            <script>
+                const dSection = {
+                    "morning": {
+                        "text": "Mañana"
+                        , "sect": "am"
+                    }
+                    , "afternoon": {
+                        "text": "Tarde"
+                        , "sect": "pm"
+                    }
+                    , "night": {
+                        "text": "Noche"
+                        , "sect": "pm"
+                    }
+                , }
+
+                document.querySelector("[name='date']").value = new Date('{{$reservation->rese_day}}').toLocaleString('default', {
+                    dateStyle: 'long'
+                })
+                
+                const dTime = "{{$reservation->rese_time}}".split(":")
+                document.querySelector("[name='time']").value = `${dSection[dTime[0].trim()].text}: ${dTime[1].trim()} ${dSection[time[0]].sect}`;
+            </script>
             @endif
         </div>
         @if($reservation->rese_status == Reservation::WAITING_FOR_PAYMENT):
