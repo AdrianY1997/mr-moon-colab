@@ -78,6 +78,14 @@ class EventosController extends Controller {
             "even_path" => $filePath
             
         ];
+
+        if (!move_uploaded_file($_FILES["image"]["tmp_name"], "Public/$filePath")) {
+            redirect()
+                ->route("dash.even")
+                ->error("Formato de imagen no valido.")
+                ->send();
+        }
+
         
         Event::where("even_id", $data["even-edit-id"])->update($even);
     
