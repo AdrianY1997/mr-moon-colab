@@ -75,7 +75,7 @@ class ReservasController extends Controller {
         $pdf = new Dompdf();
         $pdf->setPaper("B6");
         ob_start();
-        include "Lib/Util/Templates/reservation-pdf.template.php";
+        include "App/Packages/reservation-pdf.template.php";
         $html_pdf = ob_get_clean();
         $pdf->loadHtml($html_pdf);
         $pdf->render();
