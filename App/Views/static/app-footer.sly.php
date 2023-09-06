@@ -29,11 +29,8 @@
         <hr>
         <div>
             <h1>{{ $webdata->webd_name }} {{ $webdata->webd_subt }}</h1>
-            <p class="m-0">Mision: En nuestra empresa aspira ser un negocio que sastistace las necesidades de
-                nuestros clientes</p>
-            <p class="m-0">Vision: En el año 2035 ser uno de los mas negocios mas populares y tener diferentes
-                surcusales en el pais
-            </p>
+            <p class="m-0">Mision: {{$webdata->webd_m}}</p>
+            <p class="m-0">Vision:  {{$webdata->webd_v}}</p>
         </div>
         <hr>
         <div>

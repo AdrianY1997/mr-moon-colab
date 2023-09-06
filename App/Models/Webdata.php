@@ -32,6 +32,8 @@ class Webdata extends Table {
     public string $webd_twlink;
     public string $webd_iglink;
     public string $webd_ytlink;
+    public string $webd_m;
+    public string $webd_v;
 
     public array $fillable = [
         "webd_name",

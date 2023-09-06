@@ -35,6 +35,16 @@
                                     {{ explode('/', $webdata->webd_logo)[2] }}
                                 </p>
                             </div>
+                            <div class="info-control mb-3">
+                                <p class="m-0"><span><i class="fa-solid fa-bullseye"></i></span>
+                                    {{$webdata->webd_m}}
+                                </p>
+                            </div>
+                            <div class="info-control mb-3">
+                                <p class="m-0"><span><i class="fa-solid fa-eye"></i></span>
+                                    {{ $webdata->webd_v }}
+                                </p>
+                            </div>
                         </div>
                     </div>
                     <hr>
@@ -101,6 +111,14 @@
                             <div class="position-relative d-flex mb-2">
                                 <label class="form-label bg-body-secondary rounded-start-2 p-2 m-0"><i class="fa-solid fa-closed-captioning"></i></label>
                                 <input class="ps-2 form-control border-start-0 rounded-0 rounded-end-2" name="subt" type="text" value="{{ $webdata->webd_subt }}">
+                            </div>
+                            <div class="position-relative d-flex mb-2">
+                                <label class="form-label bg-body-secondary rounded-start-2 p-2 m-0"><i class="fa-solid fa-bullseye"></i></label>
+                                <input class="ps-2 form-control border-start-0 rounded-0 rounded-end-2" name="mision" type="text" value="{{ $webdata->webd_m }}">
+                            </div>
+                            <div class="position-relative d-flex mb-2">
+                                <label class="form-label bg-body-secondary rounded-start-2 p-2 m-0"><i class="fa-solid fa-eye"></i></label>
+                                <input class="ps-2 form-control border-start-0 rounded-0 rounded-end-2" name="vision" type="text" value="{{ $webdata->webd_v }}">
                             </div>
                             <div class="position-relative d-flex mb-2">
                                 <label class="form-label bg-body-secondary rounded-start-2 p-2 m-0"><i class="fa-regular fa-star"></i></label>

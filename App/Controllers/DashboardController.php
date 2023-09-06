@@ -123,6 +123,8 @@ class DashboardController extends Controller {
         $webdata->webd_twlink = $data["twlink"];
         $webdata->webd_iglink = $data["iglink"];
         $webdata->webd_ytlink = $data["ytlink"];
+        $webdata->webd_m = $data["mision"];
+        $webdata->webd_v = $data["vision"];
 
         if (!$webdata->model->update()) {
             redirect()

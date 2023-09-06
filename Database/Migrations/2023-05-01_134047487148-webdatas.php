@@ -20,6 +20,8 @@ return new class {
             $table->string("twlink");
             $table->string("iglink");
             $table->string("ytlink");
+            $table->string("mision");
+            $table->string("vision");
         });
 
         Schema::insert($this->tableName, [
@@ -33,7 +35,9 @@ return new class {
             "fblink" => "https://facebook.com/",
             "twlink" => "https://twitter.com/",
             "iglink" => "https://instagram.com/",
-            "ytlink" => "https://www.youtube.com/"
+            "ytlink" => "https://www.youtube.com/",
+            "mision"=>"En nuestra empresa aspira ser un negocio que sastistace las necesidades de nuestros clientes",
+            "vision"=>"En el año 2035 ser uno de los mas negocios mas populares y tener diferentes surcusales en el pais"
         ]);
     }
 

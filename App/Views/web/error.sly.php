@@ -10,10 +10,10 @@
             <h2>Error {{ $num }} : {{ $cod }}</h2>
             <a href="{{ route(constant("HOME")) }}">go home</a>
             <div class="notfound-social pb-3">
-                <a href="#"><i class="fa fa-facebook"></i></a>
-                <a href="#"><i class="fa fa-twitter"></i></a>
-                <a href="#"><i class="fa fa-pinterest"></i></a>
-                <a href="#"><i class="fa fa-google-plus"></i></a>
+                <a href="#"><i class="fa-brands fa-facebook"></i></a>
+                <a href="#"><i class="fa-brands fa-x-twitter"></i></a>
+                <a href="#"><i class="fa-brands fa-pinterest"></i></a>
+                <a href="#"><i class="fa-brands fa-google-plus"></i></a>
             </div>
         </div>
     </div>
