@@ -16,9 +16,15 @@
 
     <script src="{{ asset('js/fontawesome.min.js') }}"></script>
     <script src="{{ asset('js/boostrap.bundle.min.js') }}"></script>
+    <script src="{{ asset('js/helper.js') }}"></script>
 </head>
 
 <body>
+
+    <div id="notifications" class="container">
+        @include('static.app-messages'):
+    </div>
+
     <header>
         @include('static.app-header'):
     </header>
@@ -29,23 +35,18 @@
 
     <footer class="footer shadow">
         @include('static.app-footer'):
+
+        <script src="{{ asset('js/foxy.js') }}"></script>
+        <script src="{{ asset('js/jquery.min.js') }}"></script>
+        <script src="{{ asset('js/main.js') }}"></script>
+        <script>
+            var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+            var tooltipList = tooltipTriggerList.map(function(tooltipTriggerEl) {
+                return new bootstrap.Tooltip(tooltipTriggerEl)
+            })
+
+        </script>
     </footer>
-
-    <div id="notifications" class="container">
-        @include('static.app-messages'):
-    </div>
-
-    <script src="{{ asset('js/foxy.js') }}"></script>
-    <script src="{{ asset('js/helper.js') }}"></script>
-    <script src="{{ asset('js/jquery.min.js') }}"></script>
-    <script src="{{ asset('js/main.js') }}"></script>
-    <script>
-        var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
-        var tooltipList = tooltipTriggerList.map(function(tooltipTriggerEl) {
-            return new bootstrap.Tooltip(tooltipTriggerEl)
-        })
-
-    </script>
 </body>
 
 </html>
