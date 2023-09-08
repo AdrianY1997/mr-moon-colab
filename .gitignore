@@ -472,6 +472,6 @@ composer.lock
 *.sass.map
 *.scss.map
 
-!vendor\dompdf\dompdf\src\Css\*
+!/vendor/dompdf/dompdf/src/Css/
 
 .env
