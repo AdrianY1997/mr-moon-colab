@@ -14,6 +14,7 @@ use FoxyMVC\Lib\Foxy\Core\Request;
 use FoxyMVC\Lib\Foxy\Core\Session;
 use FoxyMVC\Lib\Foxy\Core\Controller;
 use FoxyMVC\Lib\Foxy\Core\Response;
+use FoxyMVC\Lib\Foxy\Database\Model;
 
 class DashboardController extends Controller {
     public function __construct() {
@@ -106,7 +107,7 @@ class DashboardController extends Controller {
 
         $webdata = new Webdata();
 
-        if (!password_verify($data["password"], Session::data("password"))) {
+        if (!password_verify($data["password"], Session::data("user_pass"))) {
             redirect()
                 ->route("dash.info")
                 ->error("No se pudo actualizar, por que la contraseña no coincide con tu usuario")
