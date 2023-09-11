@@ -104,6 +104,9 @@ class DashboardController extends Controller {
 
     public function updateWebInfo() {
         $data = Request::getData();
+        $dir = "img/static/";
+        $filePath = $dir . $_FILES["image"]["name"];
+        $data = Request::getData();
 
         $webdata = new Webdata();
 
@@ -113,30 +116,41 @@ class DashboardController extends Controller {
                 ->error("No se pudo actualizar, por que la contraseña no coincide con tu usuario")
                 ->send();
         }
+        if (!move_uploaded_file($_FILES["image"]["tmp_name"], "Public/$filePath")) {
+            redirect()
+                ->route("dash.even")
+                ->error("Formato de imagen no valido.")
+                ->send();
+        }
+        $webdata=[
+        "webd_name" => $data["name"],
+        "webd_subt" => $data["subt"],
+        "webd_logo"=>$filePath,
+        "webd_email" => $data["email"],
+        "webd_phone" => $data["phone"],
+        "webd_address" => $data["address"],
+        "webd_city" => $data["city"],
+        "webd_fblink" => $data["fblink"],
+        "webd_twlink" => $data["twlink"],
+        "webd_iglink" => $data["iglink"],
+        "webd_ytlink" => $data["ytlink"],
+        "webd_m" => $data["mision"],
+        "webd_v" => $data["vision"],
+        ];
+       
+        Webdata::update($webdata);
 
-        $webdata->webd_name = $data["name"];
-        $webdata->webd_subt = $data["subt"];
-        $webdata->webd_email = $data["email"];
-        $webdata->webd_phone = $data["phone"];
-        $webdata->webd_address = $data["address"];
-        $webdata->webd_city = $data["city"];
-        $webdata->webd_fblink = $data["fblink"];
-        $webdata->webd_twlink = $data["twlink"];
-        $webdata->webd_iglink = $data["iglink"];
-        $webdata->webd_ytlink = $data["ytlink"];
-        $webdata->webd_m = $data["mision"];
-        $webdata->webd_v = $data["vision"];
 
-        if (!$webdata->model->update()) {
+        if (!$webdata) {
             redirect()
                 ->route("dash.info")
-                ->error("Ubo un error al actualizar la información de la pagina.")
+                ->error("Hubo un error al actualizar la información de la pagina.")
                 ->send();
         }
 
         redirect()
             ->route("dash.info")
-            ->route("Se ha actualizado la información de la pagina correctamente.")
+            ->success("Se ha actualizado la información de la pagina correctamente.")
             ->send();
     }
 

@@ -3,7 +3,7 @@
         <div class="container">
             <div>
                 <h1>¡Bienvenidos!</h1>
-                <p class="m-0">Somos <strong>Mr. Moon Coffee & Bar</strong></p>
+                <p class="m-0">Somos <strong>{{ $webdata->webd_name }} {{ $webdata->webd_subt }}</strong></p>
                 <p class="m-0">Estamos en Calle 4 Sur # 5- 456</p>
                 <p class="m-0">La Plata, Huila - Colombia</p>
                 @if(!$session):
