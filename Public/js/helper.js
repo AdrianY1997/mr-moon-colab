@@ -1,4 +1,4 @@
-const TIME = 10000;
+const TIME = 100000;
 
 const notify = (data) => {
     const id = (new Date()).getMilliseconds();

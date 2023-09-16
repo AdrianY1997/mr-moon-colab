@@ -14,3 +14,4 @@ Route::set("auth/close", [AuthController::class, "close_session"])->name("auth.c
 Route::set("recuperacion", [RecoveryController::class, "recovery"])->name("auth.recovery");
 Route::set("recovery/code/request", [RecoveryController::class, "request_recovery_code"])->name("auth.recovery.request.code");
 Route::set("recovery/code/verify", [RecoveryController::class, "verify_recovery_code"])->name("auth.recovery.verify.code");
+Route::set("recovery/code/new_pass", [RecoveryController::class, "new_pass"])->name("auth.recovery.new_pass");

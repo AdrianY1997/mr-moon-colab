@@ -93,7 +93,7 @@ class RecoveryController extends Controller {
             Response::status(500)->end("El código expiró, pero no puede ser actualizado. Contacte con el administrador.");
         }
     }
-    public function verify_new_pass() {
+    public function new_pass() {
         Response::checkMethod("POST");
 
         $data = Request::getFormData();
