@@ -25,11 +25,11 @@ const notify = (data) => {
     }, TIME + 1000);
 }
 
-const checkFetchError = async (response) => {
+const checkFetchError = async (response, message) => {
     if (response.status != 200) {
         notify({
             text: await response.text(),
-            status: "Acceso denegado",
+            status: message || "Acceso denegado",
             bg: "bg-danger"
         });
         return true;

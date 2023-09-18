@@ -62,7 +62,7 @@
 <div class="modal fade" id="add-user-modal" tabindex="-1" aria-labelledby="add-profile-label" aria-hidden="true">
     <div class="modal-dialog container">
         <div class="modal-content">
-            <form id="add-profile-form" action="{{ route("profile.add") }}" method="post">
+            <form id="add-profile-form" action="{{ route("profile.add") }}" data-url="{{ route("profile.get") }}" method="post">
                 <div class="modal-header">
                     <h5 class="modal-title" id="add-profile-label">Añadir Perfil</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -110,7 +110,7 @@
                     <div class="input-group mb-3">
                         <span class="input-group-text"><i class="fa-solid fa-lock"></i></span>
                         <div class="form-floating">
-                            <input type="text" class="form-control" name="pass" id="pass" placeholder="*********">
+                            <input type="password" class="form-control" name="pass" id="pass" placeholder="*********">
                             <label for="pass">Contraseña</label>
                         </div>
                     </div>

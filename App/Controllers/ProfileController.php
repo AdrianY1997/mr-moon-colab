@@ -6,6 +6,7 @@ use FoxyMVC\App\Models\User;
 use FoxyMVC\App\Packages\Privileges;
 use FoxyMVC\Lib\Foxy\Core\Controller;
 use FoxyMVC\Lib\Foxy\Core\Request;
+use FoxyMVC\Lib\Foxy\Core\Response;
 use FoxyMVC\Lib\Foxy\Core\Session;
 
 class ProfileController extends Controller {
@@ -25,10 +26,34 @@ class ProfileController extends Controller {
         }
 
         $data = Request::getData();
-
         $data["priv-generated"] = $data["priv-user"] ?? 0 + $data["priv-admin"] ?? 0 + $data["priv-master"] ?? 0;
 
-        var_dump($data);
+        $user = new User();
+        $user->user_address = $data["address"];
+        $user->user_email = $data["email"];
+        $user->user_lastname = $data["last"];
+        $user->user_name = $data["name"];
+        $user->user_nick = $data["nick"];
+        $user->user_pass = password_hash($data["pass"], PASSWORD_DEFAULT);
+        $user->user_phone = $data["phone"];
+        $user->user_img_path = "img";
+        $user->user_privileges = $data["priv-generated"];
+
+        if (!User::insert($user)) {
+            redirect()
+                ->route("dash.users")
+                ->error("No se pudo guardar el usuario en la base de datos")->send();
+        }
+
+        redirect()
+            ->route("dash.users")
+            ->success("Se ha guardado el usuario correctamente")->send();
+    }
+
+    public function getProfileInfo() {
+        $data = Request::getFormData();
+        $userList = User::where("user_nick", $data->user)->orWhere("user_email", $data->email)->get();
+        return Response::json(["isStored" => count($userList) == 0 ? false : true]);
     }
 
     public function show() {

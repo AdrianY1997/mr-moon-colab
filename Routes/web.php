@@ -26,6 +26,7 @@ Route::set("reserve/hours", [ReservasController::class, "getHours"])->name("rese
 Route::set("profile", [ProfileController::class, "show"])->name("profile.show");
 Route::set("profile/add", [ProfileController::class, "add"])->name("profile.add");
 Route::set("profile/edit", [ProfileController::class, "edit"])->name("profile.edit");
+Route::set("profile/get", [ProfileController::class, "getProfileInfo"])->name("profile.get");
 
 Route::set("eventos", [EventosController::class, "index"])->name("event");
 Route::set("evento/{id}", [EventosController::class, "get"])->name("event.get");
