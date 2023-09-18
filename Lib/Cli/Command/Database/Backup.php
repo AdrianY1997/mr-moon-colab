@@ -27,7 +27,7 @@ class Backup extends Connection {
      */
     public function init() {
         // Crear la carpeta para almacenar las copias de seguridad
-        $backupsFolder = constant("DIR") . "/Database/Backup";
+        $backupsFolder = "Database/Backup";
         mkdir($backupsFolder);
 
         // Generar el nombre del archivo de salida con la fecha y hora actual
@@ -42,8 +42,11 @@ class Backup extends Connection {
             // Si existe la base de datos, realizar la copia de seguridad
             $this->printer->display("succ", "La base de datos existe.");
             $this->printer->display("info", "Iniciando Copia de seguridad");
-            exec($this->dpfl . " --opt -h " . $this->host . " -u " . $this->user . " -p" . $this->pass . " -P" . $this->port . " " . $this->name . " > $output");
-            $this->printer->display("info", "Copia de seguridad completa");
+            $exec = "\"" . $this->dpfl . "\" --opt --host=" . $this->host . " --user=" . $this->user . " --password=" . $this->pass . " --port=" . $this->port . " " . $this->name . " > \"$output\"";
+            // var_dump($exec);
+            !exec($exec);
+            $this->printer->display("succ", "Copia de seguridad completa");
+            $this->printer->display("succ", "Saliendo...\n");
         } else {
             // Si no existe la base de datos, mostrar un mensaje y salir
             $this->printer->display("warn", "No existe la base de datos");

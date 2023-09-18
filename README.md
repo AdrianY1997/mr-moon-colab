@@ -16,4 +16,4 @@ Este documento aun se encuentra en construcción
 
 ## License
 
-This project is licensed under the terms of the [MIT](http://opensource.org/licenses/mit-license.php) license.
+Este proyecto está bajo los términos de la licencia [MIT](http://opensource.org/licenses/mit-license.php).

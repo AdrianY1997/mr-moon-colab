@@ -39,8 +39,11 @@ class Restore extends Connection {
             // Si existe la base de datos, realizar la restauración
             $this->printer->display("succ", "La base de datos existe.");
             $this->printer->display("info", "Iniciando Restauración.");
-            exec($this->dbfl . " -h " . $this->host . " -u " . $this->user . " -p " . $this->pass . " -P " . $this->port . " " . $this->name . " < $backupLast");
-            $this->printer->display("info", "Copia de seguridad restaurada");
+            $exec = "\"" . $this->dpfl . "\" --opt --host=" . $this->host . " --user=" . $this->user . " --password=" . $this->pass . " --port=" . $this->port . " " . $this->name . " > \"$backupLast\"";
+            // var_dump($exec);
+            exec($exec);
+            $this->printer->display("succ", "Copia de seguridad restaurada");
+            $this->printer->display("succ", "Saliendo...\n");
         } else {
             // Si no existe la base de datos, mostrar un mensaje y salir
             $this->printer->display("warn", "No existe la base de datos");

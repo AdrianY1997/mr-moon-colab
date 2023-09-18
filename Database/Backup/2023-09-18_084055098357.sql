@@ -1,8 +1,8 @@
--- MariaDB dump 10.19  Distrib 10.4.27-MariaDB, for Win64 (AMD64)
+-- MariaDB dump 10.19  Distrib 10.4.28-MariaDB, for Win64 (AMD64)
 --
--- Host: localhost    Database: mr_moon_db
+-- Host: localhost    Database: mr_moon
 -- ------------------------------------------------------
--- Server version	10.4.27-MariaDB
+-- Server version	10.4.28-MariaDB
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -16,37 +16,6 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `bills`
---
-
-DROP TABLE IF EXISTS `bills`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `bills` (
-  `bill_id` int(11) NOT NULL AUTO_INCREMENT,
-  `bill_serial` varchar(255) DEFAULT NULL,
-  `bill_date` varchar(255) DEFAULT NULL,
-  `bill_total` varchar(255) DEFAULT NULL,
-  `user_id` int(11) DEFAULT NULL,
-  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
-  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
-  PRIMARY KEY (`bill_id`),
-  UNIQUE KEY `bill_serial` (`bill_serial`),
-  KEY `user_id` (`user_id`),
-  CONSTRAINT `bills_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `bills`
---
-
-LOCK TABLES `bills` WRITE;
-/*!40000 ALTER TABLE `bills` DISABLE KEYS */;
-/*!40000 ALTER TABLE `bills` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Table structure for table `codes`
 --
 
@@ -57,7 +26,7 @@ CREATE TABLE `codes` (
   `code_id` int(11) NOT NULL AUTO_INCREMENT,
   `code_email` varchar(255) DEFAULT NULL,
   `code_code` varchar(255) DEFAULT NULL,
-  `code_status` varchar(255) DEFAULT NULL,
+  `code_status` int(11) DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   PRIMARY KEY (`code_id`)
@@ -74,34 +43,6 @@ LOCK TABLES `codes` WRITE;
 UNLOCK TABLES;
 
 --
--- Table structure for table `employers`
---
-
-DROP TABLE IF EXISTS `employers`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `employers` (
-  `empl_id` int(11) NOT NULL AUTO_INCREMENT,
-  `empl_position` varchar(255) DEFAULT NULL,
-  `user_id` int(11) DEFAULT NULL,
-  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
-  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
-  PRIMARY KEY (`empl_id`),
-  KEY `user_id` (`user_id`),
-  CONSTRAINT `employers_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `employers`
---
-
-LOCK TABLES `employers` WRITE;
-/*!40000 ALTER TABLE `employers` DISABLE KEYS */;
-/*!40000 ALTER TABLE `employers` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Table structure for table `events`
 --
 
@@ -110,13 +51,14 @@ DROP TABLE IF EXISTS `events`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `events` (
   `even_id` int(11) NOT NULL AUTO_INCREMENT,
-  `even_title` varchar(255) DEFAULT NULL,
-  `even_date` varchar(255) DEFAULT NULL,
+  `even_name` varchar(255) DEFAULT NULL,
+  `even_path` varchar(255) DEFAULT NULL,
   `even_text` varchar(255) DEFAULT NULL,
+  `even_fech` varchar(255) DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   PRIMARY KEY (`even_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -125,34 +67,35 @@ CREATE TABLE `events` (
 
 LOCK TABLES `events` WRITE;
 /*!40000 ALTER TABLE `events` DISABLE KEYS */;
+INSERT INTO `events` VALUES (1,'Bartender Invitado','img/eventos/bartender.jpg','En esta exclusiva velada, nuestro talentoso mixólogo compartirá sus conocimientos y técnicas innovadoras mientras prepara bebidas de autor impresionantes. Desde clásicos reinventados hasta creaciones vanguardistas, cada sorbo será una explosión de sabores','2023-07-18 11:03:26','2023-09-18 13:05:31','2023-09-18 13:05:31'),(2,'Noche de Karaoke','img/eventos/Karaoke.jpg','Ven y únete a la diversión mientras llenamos el escenario con cantantes de todas las edades y talentos. Desde baladas clásicas hasta éxitos actuales, hay algo para cada amante de la música.','2023-09-15 05:44:25','2023-09-18 13:05:31','2023-09-18 13:05:31'),(3,'Festividades','img/eventos/festividades.jpg','¡Celebremos juntos la magia de la temporada en nuestro espectacular evento de festividades Luces Brillantes y Alegría Festiva!','2023-12-24 12:00:00','2023-09-18 13:05:31','2023-09-18 13:05:31'),(4,'Noches de Trivia','img/eventos/20190820.png','¡Bienvenidos a nuestra emocionante Noche de Trivia: Desafía tu Conocimiento! Prepárate para poner a prueba tu mente y divertirte con amigos en una noche llena de preguntas intrigantes y respuestas sorprendentes.','2023-10-15 03:00:00','2023-09-18 13:05:31','2023-09-18 13:05:31');
 /*!40000 ALTER TABLE `events` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Table structure for table `logs`
+-- Table structure for table `galerias`
 --
 
-DROP TABLE IF EXISTS `logs`;
+DROP TABLE IF EXISTS `galerias`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `logs` (
-  `logs_id` int(11) NOT NULL AUTO_INCREMENT,
-  `logs_table_name` varchar(255) DEFAULT NULL,
-  `logs_params` varchar(255) DEFAULT NULL,
-  `logs_action` varchar(255) DEFAULT NULL,
+CREATE TABLE `galerias` (
+  `gale_id` int(11) NOT NULL AUTO_INCREMENT,
+  `gale_name` varchar(255) DEFAULT NULL,
+  `gale_path` varchar(255) DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
-  PRIMARY KEY (`logs_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  PRIMARY KEY (`gale_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `logs`
+-- Dumping data for table `galerias`
 --
 
-LOCK TABLES `logs` WRITE;
-/*!40000 ALTER TABLE `logs` DISABLE KEYS */;
-/*!40000 ALTER TABLE `logs` ENABLE KEYS */;
+LOCK TABLES `galerias` WRITE;
+/*!40000 ALTER TABLE `galerias` DISABLE KEYS */;
+INSERT INTO `galerias` VALUES (1,'Galeria','img/gallery/home-event.jpg','2023-09-18 13:05:31','2023-09-18 13:05:31'),(2,'Galeria','img/gallery/home-drink.jpg','2023-09-18 13:05:31','2023-09-18 13:05:31'),(3,'Galeria','img/gallery/cafebar}.jpg','2023-09-18 13:05:31','2023-09-18 13:05:31'),(4,'Galeria','img/gallery/home-food.jpg','2023-09-18 13:05:31','2023-09-18 13:05:31'),(5,'Galeria','img/gallery/unnamed (1).png','2023-09-18 13:05:31','2023-09-18 13:05:31'),(6,'Galeria','img/gallery/granizado-de-cafe-2.jpg','2023-09-18 13:05:31','2023-09-18 13:05:31'),(7,'Galeria','img/gallery/unnamed (2).png','2023-09-18 13:05:31','2023-09-18 13:05:31'),(8,'Galeria','img/gallery/unnamed.png','2023-09-18 13:05:31','2023-09-18 13:05:31'),(9,'Galeria','img/gallery/unnamed (3).png','2023-09-18 13:05:31','2023-09-18 13:05:31'),(10,'Galeria','img/gallery/copteles.jpeg','2023-09-18 13:05:31','2023-09-18 13:05:31'),(11,'Galeria','img/gallery/cockteleles-modernos.jpg','2023-09-18 13:05:31','2023-09-18 13:05:31'),(12,'Galeria','img/gallery/50caf20e7f61dbe6fd88d1d18af34420.jpg','2023-09-18 13:05:31','2023-09-18 13:05:31');
+/*!40000 ALTER TABLE `galerias` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -178,67 +121,8 @@ CREATE TABLE `menus` (
 
 LOCK TABLES `menus` WRITE;
 /*!40000 ALTER TABLE `menus` DISABLE KEYS */;
-INSERT INTO `menus` VALUES (1,'Bebidas','img/menu/menu-bebidas.jpg','2023-05-31 16:18:07','2023-05-31 16:18:07'),(2,'Principal','img/menu/menu-principal.jpg','2023-05-31 16:18:07','2023-05-31 16:18:07'),(3,'Comidas','img/menu/menu-comidas.jpg','2023-05-31 16:18:07','2023-05-31 16:18:07');
+INSERT INTO `menus` VALUES (1,'Bebidas','img/menu/menu-bebidas.jpg','2023-09-18 13:05:31','2023-09-18 13:05:31'),(2,'Principal','img/menu/menu-principal.jpg','2023-09-18 13:05:31','2023-09-18 13:05:31'),(3,'Comidas','img/menu/menu-comidas.jpg','2023-09-18 13:05:31','2023-09-18 13:05:31');
 /*!40000 ALTER TABLE `menus` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `orders`
---
-
-DROP TABLE IF EXISTS `orders`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `orders` (
-  `orde_id` int(11) NOT NULL AUTO_INCREMENT,
-  `orde_quantity` varchar(255) DEFAULT NULL,
-  `bill_id` int(11) DEFAULT NULL,
-  `prod_id` int(11) DEFAULT NULL,
-  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
-  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
-  PRIMARY KEY (`orde_id`),
-  KEY `bill_id` (`bill_id`),
-  KEY `prod_id` (`prod_id`),
-  CONSTRAINT `orders_ibfk_1` FOREIGN KEY (`bill_id`) REFERENCES `bills` (`bill_id`),
-  CONSTRAINT `orders_ibfk_2` FOREIGN KEY (`prod_id`) REFERENCES `products` (`prod_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `orders`
---
-
-LOCK TABLES `orders` WRITE;
-/*!40000 ALTER TABLE `orders` DISABLE KEYS */;
-/*!40000 ALTER TABLE `orders` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `product_menu`
---
-
-DROP TABLE IF EXISTS `product_menu`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `product_menu` (
-  `prod_id` int(11) DEFAULT NULL,
-  `menu_id` int(11) DEFAULT NULL,
-  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
-  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
-  KEY `prod_id` (`prod_id`),
-  KEY `menu_id` (`menu_id`),
-  CONSTRAINT `product_menu_ibfk_1` FOREIGN KEY (`prod_id`) REFERENCES `products` (`prod_id`),
-  CONSTRAINT `product_menu_ibfk_2` FOREIGN KEY (`menu_id`) REFERENCES `menus` (`menu_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `product_menu`
---
-
-LOCK TABLES `product_menu` WRITE;
-/*!40000 ALTER TABLE `product_menu` DISABLE KEYS */;
-/*!40000 ALTER TABLE `product_menu` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -280,6 +164,7 @@ CREATE TABLE `products` (
   `prod_id` int(11) NOT NULL AUTO_INCREMENT,
   `prod_ref` varchar(255) DEFAULT NULL,
   `prod_name` varchar(255) DEFAULT NULL,
+  `prod_desc` text DEFAULT NULL,
   `prod_stock` varchar(255) DEFAULT NULL,
   `prod_value` varchar(255) DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
@@ -336,18 +221,23 @@ DROP TABLE IF EXISTS `reservations`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `reservations` (
   `rese_id` int(11) NOT NULL AUTO_INCREMENT,
+  `rese_urid` varchar(255) DEFAULT NULL,
   `rese_name` varchar(255) DEFAULT NULL,
   `rese_lastname` varchar(255) DEFAULT NULL,
   `rese_email` varchar(255) DEFAULT NULL,
   `rese_quantity` varchar(255) DEFAULT NULL,
   `rese_table` varchar(255) DEFAULT NULL,
-  `rese_date` varchar(255) DEFAULT NULL,
+  `rese_day` varchar(255) DEFAULT NULL,
   `rese_time` varchar(255) DEFAULT NULL,
-  `rese_status` varchar(255) DEFAULT 'pending',
+  `rese_details` text DEFAULT NULL,
+  `rese_method` varchar(255) DEFAULT NULL,
+  `rese_pay_img` text DEFAULT NULL,
+  `rese_status` varchar(255) DEFAULT 'PENDING',
   `user_id` int(11) DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   PRIMARY KEY (`rese_id`),
+  UNIQUE KEY `rese_urid` (`rese_urid`),
   KEY `user_id` (`user_id`),
   CONSTRAINT `reservations_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -363,58 +253,30 @@ LOCK TABLES `reservations` WRITE;
 UNLOCK TABLES;
 
 --
--- Table structure for table `roles`
+-- Table structure for table `subscribers`
 --
 
-DROP TABLE IF EXISTS `roles`;
+DROP TABLE IF EXISTS `subscribers`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `roles` (
-  `role_id` int(11) NOT NULL AUTO_INCREMENT,
-  `role_name` varchar(255) DEFAULT 'USER',
+CREATE TABLE `subscribers` (
+  `subs_id` int(11) NOT NULL AUTO_INCREMENT,
+  `subs_name` varchar(255) DEFAULT NULL,
+  `subs_lastname` varchar(255) DEFAULT NULL,
+  `subs_email` varchar(255) DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
-  PRIMARY KEY (`role_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `roles`
---
-
-LOCK TABLES `roles` WRITE;
-/*!40000 ALTER TABLE `roles` DISABLE KEYS */;
-INSERT INTO `roles` VALUES (1,'ADMIN','2023-05-31 16:18:07','2023-05-31 16:18:07');
-/*!40000 ALTER TABLE `roles` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `user_role`
---
-
-DROP TABLE IF EXISTS `user_role`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `user_role` (
-  `user_id` int(11) DEFAULT NULL,
-  `role_id` int(11) DEFAULT NULL,
-  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
-  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
-  KEY `user_id` (`user_id`),
-  KEY `role_id` (`role_id`),
-  CONSTRAINT `user_role_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`),
-  CONSTRAINT `user_role_ibfk_2` FOREIGN KEY (`role_id`) REFERENCES `roles` (`role_id`)
+  PRIMARY KEY (`subs_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `user_role`
+-- Dumping data for table `subscribers`
 --
 
-LOCK TABLES `user_role` WRITE;
-/*!40000 ALTER TABLE `user_role` DISABLE KEYS */;
-INSERT INTO `user_role` VALUES (1,1,'2023-05-31 16:18:07','2023-05-31 16:18:07');
-/*!40000 ALTER TABLE `user_role` ENABLE KEYS */;
+LOCK TABLES `subscribers` WRITE;
+/*!40000 ALTER TABLE `subscribers` DISABLE KEYS */;
+/*!40000 ALTER TABLE `subscribers` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -431,12 +293,15 @@ CREATE TABLE `users` (
   `user_pass` varchar(255) DEFAULT NULL,
   `user_name` varchar(255) DEFAULT NULL,
   `user_lastname` varchar(255) DEFAULT NULL,
+  `user_address` varchar(255) DEFAULT NULL,
   `user_phone` varchar(255) DEFAULT NULL,
+  `user_img_path` varchar(255) DEFAULT 'img/static/profiles/avatar1.png',
+  `user_privileges` int(11) DEFAULT 1,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   PRIMARY KEY (`user_id`),
   UNIQUE KEY `user_nick` (`user_nick`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -445,7 +310,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,'admin','admin@mail.com','$2y$10$oudZWAc8cW0LSotsO8pwhO03qIq4oR.bGyeW7b04sVqhN7s8BHDXm','Administrador','01',NULL,'2023-05-31 16:18:07','2023-05-31 16:18:07');
+INSERT INTO `users` VALUES (1,'Guest','guest@mail.com','$2y$10$oVY0ngkO7lJ.nreAcPydZ.AwTFP.sS82ktO92GM0s1As0AB4UoWBK',NULL,NULL,NULL,NULL,'img/static/profiles/avatar1.png',1,'2023-09-18 13:05:30','2023-09-18 13:05:30'),(2,'Administrator','admin@mail.com','$2y$10$HArumTXhX.xNnUmXJ1jT7ONqVWj/Zz1WVkF0tCi7ybJuV7sZgozWW',NULL,NULL,NULL,NULL,'img/static/profiles/avatar1.png',3,'2023-09-18 13:05:31','2023-09-18 13:05:31'),(3,'Master','master@mail.com','$2y$10$uCuK4W5tDG5hdkAy.lIrBumrc.qNxOB8z81RpVelYdMEw6IjSpavm',NULL,NULL,NULL,NULL,'img/static/profiles/avatar1.png',7,'2023-09-18 13:05:31','2023-09-18 13:05:31');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -469,6 +334,8 @@ CREATE TABLE `webdatas` (
   `webd_twlink` varchar(255) DEFAULT NULL,
   `webd_iglink` varchar(255) DEFAULT NULL,
   `webd_ytlink` varchar(255) DEFAULT NULL,
+  `webd_m` varchar(255) DEFAULT NULL,
+  `webd_v` varchar(255) DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   PRIMARY KEY (`webd_id`)
@@ -481,7 +348,7 @@ CREATE TABLE `webdatas` (
 
 LOCK TABLES `webdatas` WRITE;
 /*!40000 ALTER TABLE `webdatas` DISABLE KEYS */;
-INSERT INTO `webdatas` VALUES (1,'Mr. Moon','Coffee & Bar','img/static/mr_moon_logo.png','email@email.com','+57 312 334 5555','Cra 4 No. 4 - 58','La Plata, Huila','https://facebook.com/','https://twitter.com/','https://instagram.com/','https://www.youtube.com/','2023-05-31 16:18:07','2023-05-31 16:18:07');
+INSERT INTO `webdatas` VALUES (1,'Mr. Moon','Coffee & Bar','img/static/mr_moon_logo.png','email@email.com','+57 312 334 5555','Cra 4 No. 4 - 58','La Plata, Huila','https://facebook.com/','https://twitter.com/','https://instagram.com/','https://www.youtube.com/','En nuestra empresa aspira ser un negocio que sastistace las necesidades de nuestros clientes','En el año 2035 ser uno de los mas negocios mas populares y tener diferentes surcusales en el pais','2023-09-18 13:05:31','2023-09-18 13:05:31');
 /*!40000 ALTER TABLE `webdatas` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -494,4 +361,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-05-31 11:28:02
+-- Dump completed on 2023-09-18  8:41:24

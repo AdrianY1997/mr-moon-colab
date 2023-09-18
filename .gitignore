@@ -14,8 +14,6 @@ ehthumbs_vista.db
 # Recycle Bin used on file shares
 $RECYCLE.BIN/
 
-css
-
 # Windows Installer files
 *.cab
 *.msi
@@ -465,12 +463,17 @@ composer.lock
 
 /wpcs/*
 
+##### VSC
+.vscode
+
 ##### SASS
 
+scss
 .sass-cache/
 *.css.map
 *.sass.map
 *.scss.map
+*.scss
 
 !/vendor/dompdf/dompdf/src/Css/
 
