@@ -150,6 +150,7 @@ CREATE TABLE `product_provider` (
 
 LOCK TABLES `product_provider` WRITE;
 /*!40000 ALTER TABLE `product_provider` DISABLE KEYS */;
+INSERT INTO `product_provider` VALUES (1,1,'2023-09-18 13:54:03','2023-09-18 13:54:03');
 /*!40000 ALTER TABLE `product_provider` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -171,7 +172,7 @@ CREATE TABLE `products` (
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   PRIMARY KEY (`prod_id`),
   UNIQUE KEY `prod_ref` (`prod_ref`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -180,6 +181,7 @@ CREATE TABLE `products` (
 
 LOCK TABLES `products` WRITE;
 /*!40000 ALTER TABLE `products` DISABLE KEYS */;
+INSERT INTO `products` VALUES (1,'10023','Wiski','asdasd','2','5000','2023-09-18 13:54:03','2023-09-18 13:54:10');
 /*!40000 ALTER TABLE `products` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -200,7 +202,7 @@ CREATE TABLE `providers` (
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   PRIMARY KEY (`prov_id`),
   UNIQUE KEY `prov_nit` (`prov_nit`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -209,6 +211,7 @@ CREATE TABLE `providers` (
 
 LOCK TABLES `providers` WRITE;
 /*!40000 ALTER TABLE `providers` DISABLE KEYS */;
+INSERT INTO `providers` VALUES (1,'21121-56','Wiski2','yasnoadriandatos@gmail.com','3157832393','2023-09-18 13:53:19','2023-09-18 13:53:28'),(2,'10221-5','Sanchez','jhonsju@hotmail.com','3157832393','2023-09-18 13:53:44','2023-09-18 13:53:44');
 /*!40000 ALTER TABLE `providers` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -240,7 +243,7 @@ CREATE TABLE `reservations` (
   UNIQUE KEY `rese_urid` (`rese_urid`),
   KEY `user_id` (`user_id`),
   CONSTRAINT `reservations_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -249,6 +252,7 @@ CREATE TABLE `reservations` (
 
 LOCK TABLES `reservations` WRITE;
 /*!40000 ALTER TABLE `reservations` DISABLE KEYS */;
+INSERT INTO `reservations` VALUES (1,'1-1695045142-1650856165c76b','Adrian','Urrea','yasnoadriandatos@gmail.com','2','2','2023-09-19','morning: 10','','Nequi','Public/img/facturas/16950453201-1695045142-1650856165c76b.jpg','3',1,'2023-09-18 13:52:22','2023-09-18 13:55:39');
 /*!40000 ALTER TABLE `reservations` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -361,4 +365,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-09-18  8:41:24
+-- Dump completed on 2023-09-18  8:56:07
