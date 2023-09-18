@@ -118,7 +118,7 @@ class DashboardController extends Controller {
         }
         if (!move_uploaded_file($_FILES["image"]["tmp_name"], "Public/$filePath")) {
             redirect()
-                ->route("dash.even")
+                ->route("dash.info")
                 ->error("Formato de imagen no valido.")
                 ->send();
         }

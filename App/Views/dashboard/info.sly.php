@@ -122,7 +122,7 @@
                             </div>
                             <div class="position-relative d-flex mb-2">
                                 <label class="form-label bg-body-secondary rounded-start-2 p-2 m-0"><i class="fa-regular fa-star"></i></label>
-                                <input class="ps-2 form-control border-start-0 rounded-0 rounded-end-2 py-2" name="image" type="file">
+                                <input required class="ps-2 form-control border-start-0 rounded-0 rounded-end-2 py-2" name="image" type="file">
                             </div>
                         </div>
                     </div>
