@@ -30,7 +30,7 @@ Route::set("dashboard/inventario/new-item", [InventoryController::class, "add"])
 Route::set("dashboard/inventario/edit-item/{id}", [InventoryController::class, "edit"])->name("inv.edit");
 Route::set("dashboard/inventario/delete-item/{id}", [InventoryController::class, "delete"])->name("inv.delete");
 
-Route::set("dashboard/facturas", [DashboardController::class, "facturas"])->name("dash.bill");
+
 Route::set("dashboard/menu", [DashboardController::class, "menu"])->name("dash.menu");
 Route::set("dashboard/galeria", [DashboardController::class, "galeria"])->name("dash.galery");
 

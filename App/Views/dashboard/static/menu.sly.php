@@ -29,11 +29,6 @@
                 <p class="m-0">Inventario</p>
             </a>
         </div>
-        <div class="{{ $active == 'facturas' ? 'active' : '' }}">
-            <a href="{{ route('dash.bill') }}">
-                <p class="m-0">Facturas</p>
-            </a>
-        </div>
         <div class="{{ $active == 'menu' ? 'active' : '' }}">
             <a href="{{ route('dash.menu') }}">
                 <p class="m-0">Menu</p>
