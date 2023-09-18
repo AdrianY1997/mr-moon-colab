@@ -65,11 +65,6 @@ class DashboardController extends Controller {
         ]);
     }
 
-    public function facturas() {
-        return self::render("dashboard.fact", [
-            "active" => "facturas"
-        ]);
-    }
 
     public function menu() {
         return self::render("dashboard.menu", [
