@@ -43,7 +43,7 @@
                     <input class="form-control" type="date" min="<?= $now ?>" name="day" id="day" placeholder="day" data-href="{{ route("reserve.hours") }}">
                     <label for="day">Dia<span class="text-danger">*</span></label>
                 </div>
-                <div class="form-floating position-relative">
+                <div class="horas form-floating position-relative">
                     <button id="reserve-time-btn" class="btn border h-100 w-100 text-start" type="button" data-bs-target="#reserve-time-container" aria-expanded="false" aria-controls="reserve-time-container"></button>
                     <label id="time-label" for="time">Hora<span class="text-danger">*</span></label>
                     <div class="collapse position-absolute w-100" style="z-index: 1" id="reserve-time-container">

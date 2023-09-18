@@ -47,6 +47,8 @@ class Webdata extends Table {
         "webd_twlink",
         "webd_iglink",
         "webd_ytlink",
+        "webd_m",
+        "webd_v",
     ];
 
     // ----

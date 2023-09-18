@@ -14,6 +14,7 @@ use FoxyMVC\Lib\Foxy\Core\Request;
 use FoxyMVC\Lib\Foxy\Core\Session;
 use FoxyMVC\Lib\Foxy\Core\Controller;
 use FoxyMVC\Lib\Foxy\Core\Response;
+use FoxyMVC\Lib\Foxy\Database\Model;
 
 class DashboardController extends Controller {
     public function __construct() {
@@ -103,39 +104,53 @@ class DashboardController extends Controller {
 
     public function updateWebInfo() {
         $data = Request::getData();
+        $dir = "img/static/";
+        $filePath = $dir . $_FILES["image"]["name"];
+        $data = Request::getData();
 
         $webdata = new Webdata();
 
-        if (!password_verify($data["password"], Session::data("password"))) {
+        if (!password_verify($data["password"], Session::data("user_pass"))) {
             redirect()
                 ->route("dash.info")
                 ->error("No se pudo actualizar, por que la contraseña no coincide con tu usuario")
                 ->send();
         }
+        if (!move_uploaded_file($_FILES["image"]["tmp_name"], "Public/$filePath")) {
+            redirect()
+                ->route("dash.even")
+                ->error("Formato de imagen no valido.")
+                ->send();
+        }
+        $webdata=[
+        "webd_name" => $data["name"],
+        "webd_subt" => $data["subt"],
+        "webd_logo"=>$filePath,
+        "webd_email" => $data["email"],
+        "webd_phone" => $data["phone"],
+        "webd_address" => $data["address"],
+        "webd_city" => $data["city"],
+        "webd_fblink" => $data["fblink"],
+        "webd_twlink" => $data["twlink"],
+        "webd_iglink" => $data["iglink"],
+        "webd_ytlink" => $data["ytlink"],
+        "webd_m" => $data["mision"],
+        "webd_v" => $data["vision"],
+        ];
+       
+        Webdata::update($webdata);
 
-        $webdata->webd_name = $data["name"];
-        $webdata->webd_subt = $data["subt"];
-        $webdata->webd_email = $data["email"];
-        $webdata->webd_phone = $data["phone"];
-        $webdata->webd_address = $data["address"];
-        $webdata->webd_city = $data["city"];
-        $webdata->webd_fblink = $data["fblink"];
-        $webdata->webd_twlink = $data["twlink"];
-        $webdata->webd_iglink = $data["iglink"];
-        $webdata->webd_ytlink = $data["ytlink"];
-        $webdata->webd_m = $data["mision"];
-        $webdata->webd_v = $data["vision"];
 
-        if (!$webdata->model->update()) {
+        if (!$webdata) {
             redirect()
                 ->route("dash.info")
-                ->error("Ubo un error al actualizar la información de la pagina.")
+                ->error("Hubo un error al actualizar la información de la pagina.")
                 ->send();
         }
 
         redirect()
             ->route("dash.info")
-            ->route("Se ha actualizado la información de la pagina correctamente.")
+            ->success("Se ha actualizado la información de la pagina correctamente.")
             ->send();
     }
 
@@ -238,65 +253,4 @@ class DashboardController extends Controller {
             ->success("Se ha guardado la imagen con éxito")
             ->send();
     }
-
-
-    
-
-    // public function setEventosImg($id) {
-    //     if (!isset($_FILES["Event-img"])) {
-    //         redirect()->route("dash.Event")->error("No se ha seleccionado una imagen")->send();
-    //     }
-    
-    //     $events = [
-    //         "1" => "eventos-Bartender invitado",
-    //         "2" => "eventos-Noche de Karaoke",
-    //         "3" => "eventos-Festividades",
-    //         "4" => "eventos-Trivia",
-    //     ];
-    
-    //     $targetDir = "Public/img/eventos/";
-    //     $imageFileType = strtolower(pathinfo(basename($_FILES["Events-img"]["name"]), PATHINFO_EXTENSION));
-    //     $targetFile = $targetDir . $events[$id] . "." . $imageFileType;
-    
-    //     if (getimagesize($_FILES["Events-img"]["tmp_name"]) === false) {
-    //         redirect()
-    //             ->route("dash.Events")
-    //             ->error("Se ha seleccionado una imagen invalida")
-    //             ->send();
-    //     }
-
-    //     if ($_FILES["Events-img"]["size"] > 500000) {
-    //         redirect()
-    //             ->route("dash.Events")
-    //             ->error("El tamaño de la imagen debe ser menor a 500kb")
-    //             ->send();
-    //     }
-
-    //     if ($imageFileType != "jpg" && $imageFileType != "png") {
-    //         redirect()
-    //             ->route("dash.Events")
-    //             ->error("Solo se aceptan imágenes de tipo jpg y png")
-    //             ->send();
-    //     }
-
-    //     if (!move_uploaded_file($_FILES["Events-img"]["tmp_name"], $targetFile)) {
-    //         redirect()
-    //             ->route("dash.Events")
-    //             ->error("No se ha podido subir la imagen")
-    //             ->send();
-    //     }
-
-    //     redirect()
-    //         ->route("dash.Events")
-    //         ->success("Se ha guardado la imagen con éxito")
-    //         ->send();
-    // }
-
 }
-
-
-
-
-    
-    
-   

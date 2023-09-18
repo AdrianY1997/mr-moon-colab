@@ -54,14 +54,32 @@ class ProfileController extends Controller {
             redirect()->route("profile.show")->error("Solo se aceptan numeros")->send();
         }
 
-        $isUpdated = User::where("user_email", $data["email"])->update([
-            "user_nick" => $data["nick"],
-            "user_pass" => $data["new-pass"] != "" ? password_hash($data["new-pass"], PASSWORD_DEFAULT) : $user->user_pass,
-            "user_name" => $data["name"],
-            "user_lastname" => $data["lastname"],
-            "user_address" => $data["address"],
-            "user_phone" => $data["phone"],
-        ]);
+        if ($data["new-pass"] == "") {
+            $isUpdated = User::where("user_email", $data["email"])->update([
+                "user_nick" => $data["nick"],
+                "user_pass" => $user->user_pass,
+                "user_name" => $data["name"],
+                "user_lastname" => $data["lastname"],
+                "user_address" => $data["address"],
+                "user_phone" => $data["phone"],
+            ]);
+        } else {
+            if (preg_match('/^(?=.*[A-Z])(?=.{8,16})(?=.*[!@#$%^&*.()_+-]).*$/', $data["new-pass"])) {
+                $isUpdated = User::where("user_email", $data["email"])->update([
+                    "user_nick" => $data["nick"],
+                    "user_pass" => password_hash($data["new-pass"], PASSWORD_DEFAULT),
+                    "user_name" => $data["name"],
+                    "user_lastname" => $data["lastname"],
+                    "user_address" => $data["address"],
+                    "user_phone" => $data["phone"],
+                ]);
+            } else {
+                redirect()
+                    ->route("profile.show")
+                    ->error("La contraseña debe contener entre 8 y 16 caracteres, 1 letra mayúscula y un carácter especial")
+                    ->send();
+            }
+        }
 
         if (!$isUpdated)
             redirect()

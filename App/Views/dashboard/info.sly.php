@@ -93,7 +93,7 @@
                     </div>
                 </div>
                 @if(Privileges::check(Privileges::Master->get())):
-                <form class="set-info hide" data-section="1" method="post" action="{{ route("dash.info.update") }}">
+                <form class="set-info hide" data-section="1" method="post" action="{{ route("dash.info.update") }}" enctype="multipart/form-data">
                     <p class="m-0">Datos del sitio web</p>
                     <div class="web-data">
                         <div class="logo">
@@ -122,7 +122,7 @@
                             </div>
                             <div class="position-relative d-flex mb-2">
                                 <label class="form-label bg-body-secondary rounded-start-2 p-2 m-0"><i class="fa-regular fa-star"></i></label>
-                                <input class="ps-2 form-control border-start-0 rounded-0 rounded-end-2 py-2" name="photo" type="file">
+                                <input class="ps-2 form-control border-start-0 rounded-0 rounded-end-2 py-2" name="image" type="file">
                             </div>
                         </div>
                     </div>

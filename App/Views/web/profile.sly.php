@@ -112,7 +112,7 @@
                                         </div>
                                         <div>
                                             <div class="form-floating">
-                                                <input name="new-pass" id="new-pass" type="password" class="form-control" placeholder="Contraseña">
+                                                <input class="form-control border shadow fs-6" data-bs-toggle="tooltip" data-bs-placement="left" data-bs-custom-class="custom-tooltip" data-bs-title="La nueva contraseña debe contener entre 8 y 16 caracteres, 1 letra mayúscula y un carácter especial" required style="margin-bottom: 1px" type="password" name="new-pass" id="new-pass" placeholder="password">
                                                 <label for="new-pass">Nueva Contraseña</label>
                                             </div>
                                         </div>
