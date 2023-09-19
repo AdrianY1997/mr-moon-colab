@@ -95,11 +95,51 @@ class RecoveryController extends Controller {
     }
     public function new_pass() {
         Response::checkMethod("POST");
-
+    
         $data = Request::getFormData();
-
+    
         $code = Code::where("code_code", $data->code)->where("code_email", $data->email)->first();
-
-        if (!$code) {}
+    
+        if (!$code) {
+            Response::status(401)->end("El código ingresado no coincide.");
+        }
+    
+        $date1 = new DateTime($code->created_at, new DateTimeZone('America/Bogota'));
+        $date2 = new DateTime('now', new DateTimeZone('America/Bogota'));
+        $interval = $date2->getTimestamp() - $date1->getTimestamp();
+    
+        if ($interval > 7200) {
+            $code->code_status = Code::CANCELLED;
+    
+            if ($code->model->update()){
+                Response::status(401)->end("El código de recuperación expiró, vuelve a generarlo nuevamente.");
+            }
+    
+            Response::status(500)->end("El código expiró, pero no puede ser actualizado. Contacta con el administrador.");
+        }
+    
+        if ($data->password !== $data->password_confirmation) {
+            Response::status(401)->end("Las contraseñas no coinciden.");
+        }
+    
+        $user = User::where("user_email", $data->email)->first();
+        
+        if (!$user) {
+            Response::status(500)->end("El usuario no se encuentra registrado. Contacta con el administrador.");
+        }
+    
+        $user->user_password = password_hash($data->password, PASSWORD_DEFAULT);
+    
+        if (!$user->update()) {
+            Response::status(500)->end("No se pudo actualizar la contraseña. Contacta con el administrador.");
+        }
+    
+        $code->code_status = Code::CONFIRMED;
+    
+        if (!$code->update()) {
+            Response::status(500)->end("No se pudo marcar el código de recuperación como utilizado. Contacta con el administrador.");
+        }
+    
+        redirect()->route("dash.login")->success("mensaje")->send();
     }
 }

@@ -43,6 +43,11 @@ sendCodeBtn.addEventListener("click", async (e) => {
     })
 })
 
+function ValCorreo(mail) {
+    const regex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+    return regex.test(mail);
+}
+
 sendCodeConfirm.addEventListener("click", async (e) => {
     e.preventDefault();
     e.stopPropagation();
@@ -54,11 +59,11 @@ sendCodeConfirm.addEventListener("click", async (e) => {
         body: JSON.stringify({ email: email, code: code.value }),
     });
 
-    if (await checkFetchError(response)) return;
+    if (await checkFetchError(response)) return; 
 
-    if(email.value == "" || code.value == ""){
+    if(email != email || code != code){
         return notify({
-            text: "Diligencia todos los campos",
+            text: "Diligencia correctamente tu usuario y el código",
             status: "Acceso denegado",
             bg: "bg-danger"
         })
@@ -90,7 +95,7 @@ sendNewPass.addEventListener("click", async (e) => {
             bg: "bg-danger"
         })
     }else if(newPass.value == confirmPass.value){
-        location.href = form.getAttribute('data-route');
+        location.href = form.getAttribute('auth.login');
         return notify({
         text: "Las contraseñas son las mismas",
         status: "success",
