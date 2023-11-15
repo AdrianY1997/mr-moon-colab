@@ -58,7 +58,7 @@ class ProfileController extends Controller {
 
     public function show() {
         $user = Session::data();
-        return self::render("web.profile", [
+        return self::render("web/profile", [
             "user" => $user
         ]);
     }

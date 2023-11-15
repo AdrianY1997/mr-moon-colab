@@ -223,7 +223,7 @@ class Entities
         'bsemi' => '⁏',
         'bsim' => '∽',
         'bsime' => '⋍',
-        'bsol' => '\\',
+        'bsol' => '/',
         'bsolb' => '⧅',
         'bsolhsub' => '⟈',
         'bull' => '•',

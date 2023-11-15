@@ -46,7 +46,7 @@ class HTML5Entities
         '?' => '&quest;',
         '@' => '&commat;',
         '[' => '&lbrack;',
-        '\\' => '&bsol;',
+        '/' => '&bsol;',
         ']' => '&rsqb;',
         '^' => '&Hat;',
         '_' => '&lowbar;',

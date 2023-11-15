@@ -112,7 +112,7 @@ class Migration extends Command {
         }
 
         // Genera la ruta de la migración
-        $migrationPath = $migrationsFolder . "\\" . $date->format("Y-m-d_Hisu") . "-" . $tableName . ".php";
+        $migrationPath = $migrationsFolder . "/" . $date->format("Y-m-d_Hisu") . "-" . $tableName . ".php";
         $this->printer->display("info", "Creando e la migración en \"$migrationsFolder\"");
         $migrationFile = fopen($migrationPath, "w");
         if (!$migrationFile) {

@@ -15,12 +15,12 @@ class AuthController extends Controller {
 
     public function log_in() {
         $this->checkRole();
-        return self::render("auth.login");
+        return self::render("auth/login");
     }
 
     public function sign_up() {
         $this->checkRole();
-        return self::render("auth.signup");
+        return self::render("auth/signup");
     }
 
     public function checkRole() {

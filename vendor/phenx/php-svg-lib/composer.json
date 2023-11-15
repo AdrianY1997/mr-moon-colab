@@ -12,12 +12,12 @@
   ],
   "autoload": {
     "psr-4": {
-      "Svg\\": "src/Svg"
+      "Svg/": "src/Svg"
     }
   },
   "autoload-dev": {
     "psr-4": {
-      "Svg\\Tests\\": "tests/Svg"
+      "Svg/Tests/": "tests/Svg"
     }
   },
   "require": {

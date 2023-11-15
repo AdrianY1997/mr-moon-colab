@@ -4,8 +4,8 @@
 define("DIR", __DIR__);
 define("VER", "Alpha-v0.1");
 
-require_once "vendor\\autoload.php";
+require_once "vendor/autoload.php";
 
-$cli = include_once __DIR__ . "\\Lib\\Cli\\app.php";
+$cli = include_once __DIR__ . "/Lib/Cli/app.php";
 
 $cli->run($argv);

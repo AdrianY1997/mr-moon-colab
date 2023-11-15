@@ -1,5 +1,9 @@
+<?php
+use FoxyMVC\Lib\Foxy\Core\Session;
+?>
+
 <div class="reservas">
-    <div class="title" style="background-image: url({{ asset('img/reservas/reservas-title-img.png') }});">
+    <div class="title" style="background-image: url(<?= asset('img/reservas/reservas-title-img.png') ?>);">
         <h1>Reservas</h1>
     </div>
 
@@ -18,16 +22,18 @@
                 <input type="text" id="urid" name="urid" class="form-control" placeholder="12345">
                 <label for="urid">Identificación de reserva</label>
             </div>
-            <button data-href="{{ route("reserve.show", ["urid" => ":urid"]) }}" class="btn btn-primary" id="search-reservation">Buscar</button>
+            <button data-href="<?= route('reserve.show', ['urid' => ':urid']) ?>" class="btn btn-primary"
+                id="search-reservation">Buscar</button>
         </div>
         <hr class="border-3 border-success-subtle" />
-        <form action="{{ route("reserve.new") }}" method="post">
+        <form action="<?= route('reserve.new') ?>" method="post">
             <div>
                 <p>Llena el siguiente formulario para realizar una reserva</p>
             </div>
             <div class="info-mesa">
                 <div class="form-floating">
-                    <input class="form-control" type="number" name="people" id="people" placeholder="people" min="1" max="4">
+                    <input class="form-control" type="number" name="people" id="people" placeholder="people"
+                        min="1" max="4">
                     <label for="people">Personas<span class="text-danger">*</span></label>
                 </div>
                 <div class="form-floating">
@@ -40,16 +46,22 @@
                     <label for="table">Mesa<span class="text-danger">*</span></label>
                 </div>
                 <div class="form-floating">
-                    <input class="form-control" type="date" min="<?= $now ?>" name="day" id="day" placeholder="day" data-href="{{ route("reserve.hours") }}">
+                    <input class="form-control" type="date" min="<?= $now ?>" name="day" id="day"
+                        placeholder="day" data-href="<?= route('reserve.hours') ?>">
                     <label for="day">Dia<span class="text-danger">*</span></label>
                 </div>
                 <div class="horas form-floating position-relative">
-                    <button id="reserve-time-btn" class="btn border h-100 w-100 text-start" type="button" data-bs-target="#reserve-time-container" aria-expanded="false" aria-controls="reserve-time-container"></button>
+                    <button id="reserve-time-btn" class="btn border h-100 w-100 text-start" type="button"
+                        data-bs-target="#reserve-time-container" aria-expanded="false"
+                        aria-controls="reserve-time-container"></button>
                     <label id="time-label" for="time">Hora<span class="text-danger">*</span></label>
                     <div class="collapse position-absolute w-100" style="z-index: 1" id="reserve-time-container">
                         <div class="card card-body mt-2 d-flex flex-column gap-2">
                             <div class="position-absolute end-0 top-0 m-2 my-1">
-                                <div class="text-secondary" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="custom-tooltip" data-bs-title="Cuando Selecciones una hora, se deshabilitaran el resto a excepción la casillas siguiente."><i class="fa-solid fa-info-circle"></i></div>
+                                <div class="text-secondary" data-bs-toggle="tooltip" data-bs-placement="top"
+                                    data-bs-custom-class="custom-tooltip"
+                                    data-bs-title="Cuando Selecciones una hora, se deshabilitaran el resto a excepción la casillas siguiente.">
+                                    <i class="fa-solid fa-info-circle"></i></div>
                             </div>
                             <div>
                                 <p class="mb-0">Mañana</p>
@@ -79,7 +91,8 @@
                                 </div>
                             </div>
                             <div class="d-flex justify-content-between">
-                                <span id="time-clean" class="btn btn-outline-warning">Limpiar</span><span id="time-confirm" class="btn btn-outline-primary">Confirmar</span>
+                                <span id="time-clean" class="btn btn-outline-warning">Limpiar</span><span
+                                    id="time-confirm" class="btn btn-outline-primary">Confirmar</span>
                             </div>
                         </div>
                     </div>
@@ -87,19 +100,23 @@
             </div>
             <div class="info-persona mt-3">
                 <div class="form-floating">
-                    <input class="form-control" type="text" name="name" id="name" placeholder="name" value="{{ Session::data("user_name") ?: "" }}">
+                    <input class="form-control" type="text" name="name" id="name" placeholder="name"
+                        value="<?= Session::data('user_name') ?: '' ?>">
                     <label for="">Nombre<span class="text-danger">*</span></label>
                 </div>
                 <div class="form-floating">
-                    <input class="form-control" type="text" name="lastname" id="lastname" placeholder="lastname" value="{{ Session::data("user_lastname") ?: "" }}">
+                    <input class="form-control" type="text" name="lastname" id="lastname"
+                        placeholder="lastname" value="<?= Session::data('user_lastname') ?: '' ?>">
                     <label for="">Apellido<span class="text-danger">*</span></label>
                 </div>
                 <div class="form-floating">
-                    <input class="form-control" type="text" name="email" id="email" placeholder="email" value="{{ Session::data("user_email") ?: "" }}">
+                    <input class="form-control" type="text" name="email" id="email" placeholder="email"
+                        value="<?= Session::data('user_email') ?: '' ?>">
                     <label for="">Correo<span class="text-danger">*</span></label>
                 </div>
                 <div class="form-floating">
-                    <input class="form-control" type="text" name="phone" id="phone" placeholder="phone" pattern="3[0-9]{2}[0-9]{7}" value="{{ Session::data("user_phone") ?: "" }}">
+                    <input class="form-control" type="text" name="phone" id="phone" placeholder="phone"
+                        pattern="3[0-9]{2}[0-9]{7}" value="<?= Session::data('user_phone') ?: '' ?>">
                     <label for="">Teléfono<span class="text-danger">*</span></label>
                 </div>
             </div>
@@ -117,7 +134,7 @@
         </form>
     </div>
 </div>
-<script src="{{ asset("js/reserve.js") }}"></script>
+<script src="<?= asset('js/reserve.js') ?>"></script>
 
 
 <!-- hola -->

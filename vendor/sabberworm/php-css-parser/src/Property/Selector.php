@@ -54,8 +54,8 @@ class Selector
         ^(
             (?:
                 [a-zA-Z0-9\x{00A0}-\x{FFFF}_^$|*="\'~\[\]()\-\s\.:#+>]* # any sequence of valid unescaped characters
-                (?:\\\\.)?                                              # a single escaped character
-                (?:([\'"]).*?(?<!\\\\)\2)?                              # a quoted text like [id="example"]
+                (?://.)?                                              # a single escaped character
+                (?:([\'"]).*?(?<!//)\2)?                              # a quoted text like [id="example"]
             )*
         )$
         /ux';

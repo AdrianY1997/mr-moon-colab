@@ -13,7 +13,7 @@ class Redirector {
     /**
      * Patrón para buscar marcadores de posición en la URL de una ruta
      */
-    public const PLACEHOLDER_PATTERN = '/\\{([a-zA-Z0-9_]{1,})\\}/';
+    public const PLACEHOLDER_PATTERN = '~/{([a-zA-Z0-9_]{1,})}/~';
 
     /**
      * Nombre de la ruta a la que se redirigirá

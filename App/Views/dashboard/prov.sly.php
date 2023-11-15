@@ -1,7 +1,7 @@
 <div class="dash dash-proveedores">
     <div>
         <div class="container">
-            @include('dashboard/static/menu'):
+            <?php include_once 'App/Views/dashboard/static/menu.sly.php'; ?>
             <div class="content position-relative">
                 <p>Proveedores</p>
                 <div class="mb-3">
@@ -20,38 +20,39 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @if(!$providers):
+                        <?php if(!$providers) { ?>
                         <tr>
                             <td>No hay datos.</td>
                         </tr>
-                        @else
-                            @foreach($providers as $key => $provider):
-                            <tr class="item" data-href="{{ route("prov.getInfo", ["id" => $provider->prov_id]) }}">
-                                <td>{{ $provider->prov_nit }}</td>
-                                <td>{{ $provider->prov_name }}</td>
-                                <td class="d-flex gap-2">
-                                    <span class="view-item btn p-0 px-2">
-                                        <i class="fa-solid fa-eye"></i>
-                                    </span>
-                                    <span class="edit-item  btn p-0 px-2">
-                                        <i class="fa-solid fa-edit"></i>
-                                    </span>
-                                    <a href="{{ route("prov.delete", ["id" => $provider->prov_id]) }}" class="delete-item btn p-0 px-2 text-danger">
-                                        <i class="fa-solid fa-trash"></i>
-                                    </a>
-                                </td>
-                            </tr>
-                            @endforeach
-                        @endif
+                        <?php } else { ?>
+                        <?php foreach($providers as $key => $provider) { ?>
+                        <tr class="item" data-href="<?= route('prov.getInfo', ['id' => $provider->prov_id]) ?>">
+                            <td><?= $provider->prov_nit ?></td>
+                            <td><?= $provider->prov_name ?></td>
+                            <td class="d-flex gap-2">
+                                <span class="view-item btn p-0 px-2">
+                                    <i class="fa-solid fa-eye"></i>
+                                </span>
+                                <span class="edit-item  btn p-0 px-2">
+                                    <i class="fa-solid fa-edit"></i>
+                                </span>
+                                <a href="<?= route('prov.delete', ['id' => $provider->prov_id]) ?>"
+                                    class="delete-item btn p-0 px-2 text-danger">
+                                    <i class="fa-solid fa-trash"></i>
+                                </a>
+                            </td>
+                        </tr>
+                        <?php }} ?>
                     </tbody>
                 </table>
                 <div id="modal-add" class="modal position-absolute p-3 bg-black bg-opacity-10" style="z-index: 1">
-                    <div class="position-absolute top-50 start-50 translate-middle bg-white rounded-2 p-3 w-100 h-100 p-3">
+                    <div
+                        class="position-absolute top-50 start-50 translate-middle bg-white rounded-2 p-3 w-100 h-100 p-3">
                         <span class="close-modal position-absolute top-0 start-0 btn p-3">
                             <i class="fa-solid fa-caret-left"></i>
                         </span>
                         <p class="ms-3 fs-5">Agregar Proveedor</p>
-                        <form action="{{ route("prov.add") }}" method="post">
+                        <form action="<?= route('prov.add') ?>" method="post">
                             <div class="form-label-group mb-3">
                                 <label for="item-nit">NIT</label>
                                 <input required type="text" id="item-nit" name="item-nit" placeholder="">
@@ -66,7 +67,8 @@
                             </div>
                             <div class="form-label-group mb-3">
                                 <label for="item-phone">Teléfono</label>
-                                <input required pattern="3[0-9]{2}[0-9]{7}" type="text" id="item-phone" name="item-phone">
+                                <input required pattern="3[0-9]{2}[0-9]{7}" type="text" id="item-phone"
+                                    name="item-phone">
                             </div>
                             <div class="d-flex justify-content-between">
                                 <button type="submit" class="btn btn-primary">Agregar</button>
@@ -75,12 +77,13 @@
                     </div>
                 </div>
                 <div id="modal-edit" class="modal position-absolute p-3 bg-black bg-opacity-10" style="z-index: 1">
-                    <div class="position-absolute top-50 start-50 translate-middle bg-white rounded-2 p-3 w-100 h-100 p-3">
+                    <div
+                        class="position-absolute top-50 start-50 translate-middle bg-white rounded-2 p-3 w-100 h-100 p-3">
                         <span class="close-modal position-absolute top-0 start-0 btn p-3">
                             <i class="fa-solid fa-caret-left"></i>
                         </span>
                         <p class="ms-3 fs-5">Editar Producto</p>
-                        <form action="{{ route("prov.edit") }}" method="post">
+                        <form action="<?= route('prov.edit') ?>" method="post">
                             <div class="form-label-group mb-3">
                                 <label for="prov-edit-nit">NIT</label>
                                 <input required type="text" id="prov-edit-nit" name="prov-edit-nit" placeholder="">
@@ -91,11 +94,13 @@
                             </div>
                             <div class="form-label-group mb-3">
                                 <label for="prov-edit-email">Email</label>
-                                <input required type="email" id="prov-edit-email" name="prov-edit-email" placeholder="">
+                                <input required type="email" id="prov-edit-email" name="prov-edit-email"
+                                    placeholder="">
                             </div>
                             <div class="form-label-group mb-3">
                                 <label for="prov-edit-phone">Teléfono</label>
-                                <input required type="text" id="prov-edit-phone" name="prov-edit-phone" pattern="3[0-9]{2}[0-9]{7}" placeholder="">
+                                <input required type="text" id="prov-edit-phone" name="prov-edit-phone"
+                                    pattern="3[0-9]{2}[0-9]{7}" placeholder="">
                             </div>
                             <div class="d-flex justify-content-between">
                                 <button type="submit" class="btn btn-primary">Editar</button>
@@ -104,8 +109,10 @@
                         </form>
                     </div>
                 </div>
-                <div id="modal-view" class="modal position-absolute p-3 bg-black bg-opacity-10 overflow-hidden" style="z-index: 1">
-                    <div class="position-absolute top-50 start-50 translate-middle bg-white rounded-2 p-3 w-100 h-100 p-3 overflow-auto">
+                <div id="modal-view" class="modal position-absolute p-3 bg-black bg-opacity-10 overflow-hidden"
+                    style="z-index: 1">
+                    <div
+                        class="position-absolute top-50 start-50 translate-middle bg-white rounded-2 p-3 w-100 h-100 p-3 overflow-auto">
                         <span class="close-modal position-absolute top-0 start-0 btn p-3">
                             <i class="fa-solid fa-caret-left"></i>
                         </span>
@@ -136,4 +143,4 @@
         </div>
     </div>
 </div>
-<script src="{{ asset("js/dashboard/proveedor.js") }}"></script>
+<script src="<?= asset('js/dashboard/proveedor.js') ?>"></script>

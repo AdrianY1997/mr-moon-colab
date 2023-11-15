@@ -1,18 +1,18 @@
 <div class="home">
-    <div class="hero" style="background-image: url({{ asset('img/static/home-bg.jpg') }})">
+    <div class="hero" style="background-image: url(<?= asset('img/static/home-bg.jpg') ?>)">
         <div class="container">
             <div>
                 <h1>¡Bienvenidos!</h1>
-                <p class="m-0">Somos <strong>{{ $webdata->webd_name }} {{ $webdata->webd_subt }}</strong></p>
+                <p class="m-0">Somos <strong><?= $webdata->webd_name ?> <?= $webdata->webd_subt ?></strong></p>
                 <p class="m-0">Estamos en Calle 4 Sur # 5- 456</p>
                 <p class="m-0">La Plata, Huila - Colombia</p>
-                @if(!$session):
+                <?php if(!$session) { ?>
                 <p class="m-0">
-                    <a href="{{ route('auth.login') }}">Iniciar Sesión</a>
+                    <a href="<?= route('auth.login') ?>">Iniciar Sesión</a>
                     <span>|</span>
-                    <a href="{{ route('auth.signup') }}">Regístrate</a>
+                    <a href="<?= route('auth.signup') ?>">Regístrate</a>
                 </p>
-                @endif
+                <?php } ?>
             </div>
         </div>
     </div>
@@ -20,7 +20,7 @@
         <div class="container">
             <p class="">Suscríbete a nuestro boletín</p>
             <p>Regístrate con tu dirección de correo electrónico para recibir noticias y actualizaciones</p>
-            <form action="{{ route('home.star') }}" method="POST">
+            <form action="<?= route('home.star') ?>" method="POST">
                 <div class="form-floating mb-2">
                     <input class="form-control" type="text" required placeholder="Nombre" name="name" id="name">
                     <label for="name">Nombre</label>

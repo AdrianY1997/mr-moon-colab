@@ -16,8 +16,10 @@ use FoxyMVC\Lib\Foxy\Core\Controller;
 use FoxyMVC\Lib\Foxy\Core\Response;
 use FoxyMVC\Lib\Foxy\Database\Model;
 
-class DashboardController extends Controller {
-    public function __construct() {
+class DashboardController extends Controller
+{
+    public function __construct()
+    {
         parent::__construct();
         if (!Session::checkSession() || (Privileges::Admin->get() & Session::data("user_privileges") != Privileges::Admin->get())) {
             redirect()
@@ -26,70 +28,80 @@ class DashboardController extends Controller {
         }
     }
 
-    public function index() {
+    public function index()
+    {
         redirect()
             ->route("dash.home")
             ->send();
     }
 
-    public function inicio() {
-        return self::render("dashboard.home", [
+    public function inicio()
+    {
+        return self::render("dashboard/home", [
             "active" => "home"
         ]);
     }
 
-    public function info() {
-        return self::render("dashboard.info", [
+    public function info()
+    {
+        return self::render("dashboard/info", [
             "active" => "info",
         ]);
     }
 
-    public function usuarios() {
-        return self::render("dashboard.users", [
+    public function usuarios()
+    {
+        return self::render("dashboard/users", [
             "active" => "usuarios",
             "usuarios" => User::get(),
         ]);
     }
 
-    public function proveedores() {
-        return self::render("dashboard.prov", [
+    public function proveedores()
+    {
+        return self::render("dashboard/prov", [
             "active" => "proveedores",
             "providers" => Provider::get()
         ]);
     }
 
-    public function inventario() {
-        return self::render("dashboard.inv", [
+    public function inventario()
+    {
+        return self::render("dashboard/inv", [
             "active" => "inventario",
             "products" => Product::getAllData(),
         ]);
     }
 
 
-    public function menu() {
-        return self::render("dashboard.menu", [
+    public function menu()
+    {
+        return self::render("dashboard/menu", [
             "active" => "menu"
         ]);
     }
 
-    public function reservas() {
-        return self::render("dashboard.reservas", [
+    public function reservas()
+    {
+        return self::render("dashboard/reservas", [
             "active" => "reservas",
         ]);
     }
 
-    public function eventos() {
-        return self::render("dashboard.eventos", [
+    public function eventos()
+    {
+        return self::render("dashboard/eventos", [
             "active" => "eventos",
             "evento" => Event::get()
 
 
-            
+
         ]);
     }
 
-    public function galeria() {
-        return self::render("dashboard.galeria", [
+    public function galeria()
+    {
+        return self::render("dashboard/galeria", [
             "active" => "galeria",
             "photos" => Galeria::select("gale_id", "gale_path")->get(),
         ]);
@@ -97,7 +109,8 @@ class DashboardController extends Controller {
 
 
 
-    public function updateWebInfo() {
+    public function updateWebInfo()
+    {
         $data = Request::getData();
         $dir = "img/static/";
         $filePath = $dir . $_FILES["image"]["name"];
@@ -111,28 +124,31 @@ class DashboardController extends Controller {
                 ->error("No se pudo actualizar, por que la contraseña no coincide con tu usuario")
                 ->send();
         }
-        if (!move_uploaded_file($_FILES["image"]["tmp_name"], "Public/$filePath")) {
+        if (!empty($_FILES["image"]["name"]) && !move_uploaded_file($_FILES["image"]["tmp_name"], "Public/$filePath")) {
             redirect()
-                ->route("dash.even")
+                ->route("dash.info")
                 ->error("Formato de imagen no valido.")
                 ->send();
         }
-        $webdata=[
-        "webd_name" => $data["name"],
-        "webd_subt" => $data["subt"],
-        "webd_logo"=>$filePath,
-        "webd_email" => $data["email"],
-        "webd_phone" => $data["phone"],
-        "webd_address" => $data["address"],
-        "webd_city" => $data["city"],
-        "webd_fblink" => $data["fblink"],
-        "webd_twlink" => $data["twlink"],
-        "webd_iglink" => $data["iglink"],
-        "webd_ytlink" => $data["ytlink"],
-        "webd_m" => $data["mision"],
-        "webd_v" => $data["vision"],
+        $webdata = [
+            "webd_name" => $data["name"],
+            "webd_subt" => $data["subt"],
+            "webd_email" => $data["email"],
+            "webd_phone" => $data["phone"],
+            "webd_address" => $data["address"],
+            "webd_city" => $data["city"],
+            "webd_fblink" => $data["fblink"],
+            "webd_twlink" => $data["twlink"],
+            "webd_iglink" => $data["iglink"],
+            "webd_ytlink" => $data["ytlink"],
+            "webd_m" => $data["mision"],
+            "webd_v" => $data["vision"],
         ];
-       
+
+        if (!empty($_FILES["image"]["name"])) {
+            array_push($webdata, ["webd_logo" => $filePath]);
+        }
+
         Webdata::update($webdata);
 
 
@@ -149,7 +165,8 @@ class DashboardController extends Controller {
             ->send();
     }
 
-    public function getUserInfo($id) {
+    public function getUserInfo($id)
+    {
         $user = User::where("user_id", $id)->first();
         if (!$user) {
             Response::status(401)->end("Ha ocurrido un error al obtener la información del perfil.");
@@ -160,7 +177,8 @@ class DashboardController extends Controller {
         ]);
     }
 
-    public function setUserInfo() {
+    public function setUserInfo()
+    {
         $data = Request::getFormData();
         $isUpdated = User::where("user_id", $data->id)->update([
             "user_nick" => $data->nick,
@@ -177,7 +195,8 @@ class DashboardController extends Controller {
         Response::end("Se ha actualizado la información ");
     }
 
-    public function getItem($id) {
+    public function getItem($id)
+    {
         $products = Product::getAllData($id);
 
         if ($products === false) {
@@ -187,7 +206,8 @@ class DashboardController extends Controller {
         Response::json(["product" => $products[0]]);
     }
 
-    public function getProv() {
+    public function getProv()
+    {
         Response::checkMethod("GET");
 
         $providers = Provider::get();
@@ -200,7 +220,8 @@ class DashboardController extends Controller {
 
 
 
-    public function setMenuImg($id) {
+    public function setMenuImg($id)
+    {
         if (!isset($_FILES["menu-img"])) {
             redirect()->route("dash.menu")->error("No se ha seleccionado una image")->send();
         }

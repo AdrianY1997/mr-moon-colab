@@ -6,7 +6,6 @@ use FoxyMVC\App\Models\User;
 
 class Session {
     static private object|bool $data = false;
-    static private array $messages = [];
     static private array $notifications = [];
 
     static function start() {

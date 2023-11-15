@@ -5,7 +5,7 @@ ini_set('display_errors', '1');
 
 include_once "Lib/Util/DotEnv.php";
 include_once "vendor/autoload.php";
-include_once "Lib/Util/helper.php";
+include_once "Lib/Util/Helper.php";
 
 define("DIR", __DIR__);
 

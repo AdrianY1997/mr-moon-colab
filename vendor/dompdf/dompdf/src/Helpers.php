@@ -104,8 +104,8 @@ class Helpers
             //On Windows local file, an abs path can begin also with a '\' or a drive letter and colon
             //drive: followed by a relative path would be a drive specific default folder.
             //not known in php app code, treat as abs path
-            //($url[1] !== ':' || ($url[2]!=='\\' && $url[2]!=='/'))
-            if ($url[0] !== '/' && (strtoupper(substr(PHP_OS, 0, 3)) !== 'WIN' || (mb_strlen($url) > 1 && $url[0] !== '\\' && $url[1] !== ':'))) {
+            //($url[1] !== ':' || ($url[2]!=='/' && $url[2]!=='/'))
+            if ($url[0] !== '/' && (strtoupper(substr(PHP_OS, 0, 3)) !== 'WIN' || (mb_strlen($url) > 1 && $url[0] !== '/' && $url[1] !== ':'))) {
                 // For rel path and local access we ignore the host, and run the path through realpath()
                 $ret .= realpath($base_path) . '/';
             }
@@ -127,12 +127,12 @@ class Helpers
         if (strpos($url, '//') === 0) {
             $ret .= substr($url, 2);
             //remote urls with backslash in html/css are not really correct, but lets be genereous
-        } elseif ($url[0] === '/' || $url[0] === '\\') {
+        } elseif ($url[0] === '/' || $url[0] === '/') {
             // Absolute path
             $ret .= $host . $url;
         } else {
             // Relative path
-            //$base_path = $base_path !== "" ? rtrim($base_path, "/\\") . "/" : "";
+            //$base_path = $base_path !== "" ? rtrim($base_path, "//") . "/" : "";
             $ret .= $host . $base_path . $url;
         }
 
@@ -496,7 +496,7 @@ class Helpers
                     $path = $arr["path"];
                     $file = "";
                 } else {
-                    $path = rtrim(dirname($arr["path"]), '/\\') . "/";
+                    $path = rtrim(dirname($arr["path"]), '//') . "/";
                     $file = basename($arr["path"]);
                 }
             }

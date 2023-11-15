@@ -14,7 +14,7 @@ class ClassPatterns implements TemplatePatterns {
                 if (count($file) == 0) {
                     $file = search_file(constant("DIR") . "/Lib/Foxy", $matches[1] . ".php");
                 }
-                $class = "FoxyMVC" . explode(".php", str_replace("/", '\\', explode(constant("DIR"), $file[0])[1]))[0];
+                $class = "FoxyMVC" . explode(".php", str_replace("/", '/', explode(constant("DIR"), $file[0])[1]))[0];
                 return $class . "::";
             }
         ];

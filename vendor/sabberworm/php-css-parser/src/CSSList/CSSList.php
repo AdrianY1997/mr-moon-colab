@@ -248,7 +248,7 @@ abstract class CSSList implements Renderable, Commentable
     private static function identifierIs($sIdentifier, $sMatch)
     {
         return (strcasecmp($sIdentifier, $sMatch) === 0)
-            ?: preg_match("/^(-\\w+-)?$sMatch$/i", $sIdentifier) === 1;
+            ?: preg_match("/^(-/w+-)?$sMatch$/i", $sIdentifier) === 1;
     }
 
     /**

@@ -107,7 +107,7 @@ class Route {
      * @return void
      */
     static public function loadRoutes(): void {
-        $routes = glob("Routes\\*.php");
+        $routes = glob("Routes/*.php");
         foreach ($routes as $value) {
             require_once $value;
         }

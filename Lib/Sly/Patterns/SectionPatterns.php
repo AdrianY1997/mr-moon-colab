@@ -18,7 +18,7 @@ class SectionPatterns {
                 }
 
                 // Generate the view path
-                $viewPath = 'App\Views\\' . str_replace('.', '\\', $viewName) . '.sly.php';
+                $viewPath = 'App\Views/' . str_replace('.', '/', $viewName) . '.sly.php';
 
                 // Include the view and capture its contents
                 ob_start();

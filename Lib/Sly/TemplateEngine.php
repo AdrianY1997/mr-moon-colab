@@ -16,7 +16,7 @@ class TemplateEngine {
         foreach ($patterns as $file) {
             require $file;
             $className = basename($file, '.php');
-            $class = "FoxyMVC\\" . $path . "\\" . $className;
+            $class = "FoxyMVC/" . $path . "/" . $className;
             $instance = new $class();
             $this->patterns = array_merge($this->patterns, $instance->getPatterns());
         }
@@ -28,23 +28,19 @@ class TemplateEngine {
         extract($data);
 
         // Capturar el contenido de la vista en un buffer
-        ob_start();
+        // ob_start();
         include_once 'App/Views/app.sly.php';
-        $content = ob_get_clean();
 
-        // Procesar patrones
-        foreach ($this->patterns as $pattern => $callback) {
-            $content = preg_replace_callback($pattern, function ($matches) use ($callback, $view, $data) {
-                return call_user_func($callback, $matches, $this->patterns, $view, $data);
-            }, $content);
-        }
+        // // Procesar patrones
+        // foreach ($this->patterns as $pattern => $callback) {
+        //     $content = preg_replace_callback($pattern, function ($matches) use ($callback, $view, $data) {
+        //         return call_user_func($callback, $matches, $this->patterns, $view, $data);
+        //     }, $content);
+        // }
 
-        // Evaluar el contenido procesado
-        ob_start();
-        eval('?>' . $content);
-        $content = ob_get_clean();
+        // $processedContent = ob_get_clean();
 
-        // Mostrar el contenido procesado
-        echo $content;
+        // // Mostrar el contenido procesado
+        // echo $processedContent;
     }
 }

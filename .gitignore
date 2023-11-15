@@ -478,3 +478,4 @@ scss
 !/vendor/dompdf/dompdf/src/Css/
 
 .env
+Database/**/*.*

@@ -41,14 +41,14 @@ class CanvasFactory
             if (($backend === "auto" || $backend === "pdflib") &&
                 class_exists("PDFLib", false)
             ) {
-                $class = "Dompdf\\Adapter\\PDFLib";
+                $class = "Dompdf/Adapter/PDFLib";
             }
 
             else {
                 if ($backend === "gd" && extension_loaded('gd')) {
-                    $class = "Dompdf\\Adapter\\GD";
+                    $class = "Dompdf/Adapter/GD";
                 } else {
-                    $class = "Dompdf\\Adapter\\CPDF";
+                    $class = "Dompdf/Adapter/CPDF";
                 }
             }
         }

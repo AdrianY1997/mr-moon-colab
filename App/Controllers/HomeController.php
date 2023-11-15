@@ -25,7 +25,7 @@ class HomeController extends Controller {
      * Muestra la página de inicio.
      */
     public function home() {
-        return self::render("web.home", [
+        return self::render("web/home", [
             "session" => Session::checkSession(),
 
         ]);

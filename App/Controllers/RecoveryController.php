@@ -28,7 +28,7 @@ class RecoveryController extends Controller {
             redirect()->route("profile.show")->send();
         }
 
-        return self::render("auth.recovery");
+        return self::render("auth/recovery");
     }
 
     public function request_recovery_code() {

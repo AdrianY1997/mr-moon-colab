@@ -89,8 +89,8 @@ class Rule implements Renderable, Commentable
         $oValue = Value::parseValue($oParserState, self::listDelimiterForRule($oRule->getRule()));
         $oRule->setValue($oValue);
         if ($oParserState->getSettings()->bLenientParsing) {
-            while ($oParserState->comes('\\')) {
-                $oParserState->consume('\\');
+            while ($oParserState->comes('/')) {
+                $oParserState->consume('/');
                 $oRule->addIeHack($oParserState->consume());
                 $oParserState->consumeWhiteSpace();
             }
@@ -353,7 +353,7 @@ class Rule implements Renderable, Commentable
             $sResult .= $this->mValue;
         }
         if (!empty($this->aIeHack)) {
-            $sResult .= ' \\' . implode('\\', $this->aIeHack);
+            $sResult .= ' /' . implode('/', $this->aIeHack);
         }
         if ($this->bIsImportant) {
             $sResult .= ' !important';

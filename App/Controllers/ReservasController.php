@@ -6,7 +6,6 @@ use DateTime;
 use DateTimeZone;
 use Dompdf\Dompdf;
 use FoxyMVC\App\Models\Reservation;
-use FoxyMVC\Lib\Cli\Command\Migration\Reset;
 use FoxyMVC\Lib\Foxy\Core\Controller;
 use FoxyMVC\Lib\Foxy\Core\Request;
 use FoxyMVC\Lib\Foxy\Core\Response;
@@ -18,7 +17,7 @@ class ReservasController extends Controller {
     }
 
     public function index() {
-        return self::render("web.reservas", [
+        return self::render("web/reservas", [
             "now" => date("Y-m-d")
         ]);
     }
@@ -37,7 +36,7 @@ class ReservasController extends Controller {
             redirect()->route("reserve.show", ["urid" => $rese->rese_urid])->send();
         }
 
-        return self::render("web.reserve.search");
+        return self::render("web/reserve/search");
     }
 
     public function show($urid) {
@@ -55,7 +54,7 @@ class ReservasController extends Controller {
             $rese->model->update();
         }
 
-        return self::render("web.reserve.confirm", [
+        return self::render("web/reserve/confirm", [
             "reservation" => $rese
         ]);
     }
@@ -64,12 +63,12 @@ class ReservasController extends Controller {
         $data = Request::getData();
 
         if (!$data || count($data) == 0) {
-            return self::render("web.reserve.download");
+            return self::render("web/reserve/download");
         }
 
         $rese = Reservation::where("rese_urid", $data["urid"])->first();
         if (!$rese) {
-            return self::render("web.reserve.download");
+            return self::render("web/reserve/download");
         }
 
         $pdf = new Dompdf();

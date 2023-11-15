@@ -99,7 +99,7 @@ class Model extends Command {
         $modelContent = str_replace(["__model", "__tableName"], [$modelName, $tableName], $templateContent);
 
         // Genera la ruta del modelo
-        $modelPath = $modelsFolder . "\\" . $modelName . ".php";
+        $modelPath = $modelsFolder . "/" . $modelName . ".php";
         $this->printer->display("info", "Creando modelo en \"$modelsFolder\"");
         $modelFile = fopen($modelPath, "w");
         if (!$modelFile) {

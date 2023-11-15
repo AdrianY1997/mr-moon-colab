@@ -6,6 +6,6 @@ use FoxyMVC\Lib\Util\DotEnv;
 $dotenv = new DotEnv(constant("DIR") . '/.env');
 $dotenv->load();
 
-require_once constant("DIR") . "\\Config\\Database.php";
+require_once constant("DIR") . "/Config/Database.php";
 
 return new Application();

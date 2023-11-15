@@ -265,7 +265,7 @@ class File extends BinaryStream {
   }
 
   function getFontType(){
-    $class_parts = explode("\\", get_class($this));
+    $class_parts = explode("/", get_class($this));
     return $class_parts[1];
   }
 
@@ -282,7 +282,7 @@ class File extends BinaryStream {
 
 
     $type = $this->getFontType();
-    $class = "FontLib\\$type\\TableDirectoryEntry";
+    $class = "FontLib/$type/TableDirectoryEntry";
 
     for ($i = 0; $i < $this->header->data["numTables"]; $i++) {
       /** @var TableDirectoryEntry $entry */
@@ -303,14 +303,14 @@ class File extends BinaryStream {
     if (!self::$raw) {
       $name_canon = preg_replace("/[^a-z0-9]/", "", strtolower($tag));
 
-      $class = "FontLib\\Table\\Type\\$name_canon";
+      $class = "FontLib/Table/Type/$name_canon";
 
       if (!isset($this->directory[$tag]) || !@class_exists($class)) {
         return;
       }
     }
     else {
-      $class = "FontLib\\Table\\Table";
+      $class = "FontLib/Table/Table";
     }
 
     /** @var Table $table */

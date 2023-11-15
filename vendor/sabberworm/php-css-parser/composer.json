@@ -27,12 +27,12 @@
     },
     "autoload": {
         "psr-4": {
-            "Sabberworm\\CSS\\": "src/"
+            "Sabberworm/CSS/": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Sabberworm\\CSS\\Tests\\": "tests/"
+            "Sabberworm/CSS/Tests/": "tests/"
         }
     },
     "scripts": {

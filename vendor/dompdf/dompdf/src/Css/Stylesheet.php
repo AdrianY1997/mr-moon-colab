@@ -429,8 +429,8 @@ class Stylesheet
     protected function selectorToXpath(string $selector, bool $firstPass = false): ?array
     {
         // Collapse white space and strip whitespace around delimiters
-        //$search = array("/\\s+/", "/\\s+([.>#+:])\\s+/");
-        //$replace = array(" ", "\\1");
+        //$search = array("//s+/", "//s+([.>#+:])/s+/");
+        //$replace = array(" ", "/1");
         //$selector = preg_replace($search, $replace, trim($selector));
 
         // Initial query, always expanded to // below (non-absolute)
@@ -1363,7 +1363,7 @@ class Stylesheet
         } elseif (mb_strpos($val, "url") === false) {
             $path = "none"; //Don't resolve no image -> otherwise would prefix path and no longer recognize as none
         } else {
-            $val = preg_replace("/url\(\s*['\"]?([^'\")]+)['\"]?\s*\)/", "\\1", trim($val));
+            $val = preg_replace("/url\(\s*['\"]?([^'\")]+)['\"]?\s*\)/", "/1", trim($val));
 
             // Resolve the url now in the context of the current stylesheet
             $path = Helpers::build_url($this->_protocol,
@@ -1562,7 +1562,7 @@ class Stylesheet
         // Pre-process selectors: collapse all whitespace and strip whitespace
         // around '>', '.', ':', '+', '~', '#'
         $patterns = ["/\s+/", "/\s+([>.:+~#])\s+/"];
-        $replacements = [" ", "\\1"];
+        $replacements = [" ", "/1"];
         $DEBUGCSS = $this->_dompdf->getOptions()->getDebugCss();
 
         $sections = explode("}", $str);

@@ -12,7 +12,7 @@ class GaleriaController extends Controller {
     }
 
     public function index() {
-        return self::render("web.galeria",  [
+        return self::render("web/galeria",  [
             "galerias" => Galeria::get(),
         ]);
     }

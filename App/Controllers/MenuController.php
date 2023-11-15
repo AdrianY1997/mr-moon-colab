@@ -11,7 +11,7 @@ class MenuController extends Controller {
     }
 
     public function index() {
-        return self::render("web.menu", [
+        return self::render("web/menu", [
             "menus" => Menu::select("menu_path")->get()
         ]);
     }

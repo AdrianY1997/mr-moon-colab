@@ -35,19 +35,19 @@ class Font {
       case "\x00\x01\x00\x00":
       case "true":
       case "typ1":
-        $class = "TrueType\\File";
+        $class = "TrueType/File";
         break;
 
       case "OTTO":
-        $class = "OpenType\\File";
+        $class = "OpenType/File";
         break;
 
       case "wOFF":
-        $class = "WOFF\\File";
+        $class = "WOFF/File";
         break;
 
       case "ttcf":
-        $class = "TrueType\\Collection";
+        $class = "TrueType/Collection";
         break;
 
       // Unknown type or EOT
@@ -55,12 +55,12 @@ class Font {
         $magicNumber = file_get_contents($file, false, null, 34, 2);
 
         if ($magicNumber === "LP") {
-          $class = "EOT\\File";
+          $class = "EOT/File";
         }
     }
 
     if ($class) {
-      $class = "FontLib\\$class";
+      $class = "FontLib/$class";
 
       /** @var TrueType\File $obj */
       $obj = new $class;

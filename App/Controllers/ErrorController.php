@@ -32,7 +32,7 @@ class ErrorController extends Controller {
         ];
 
         // Mostrar la página de error
-        return self::render("web.error", [
+        return self::render("web/error", [
             "num" => $codes[$msg][0],
             "cod" => ucwords(str_replace('-', ' ', $msg))
         ]);

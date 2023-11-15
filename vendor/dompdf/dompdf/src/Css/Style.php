@@ -2152,9 +2152,9 @@ class Style
         $number = self::CSS_NUMBER;
 
         $pattern = "/\n" .
-            "\s* \" ( (?:[^\"]|\\\\[\"])* ) (?<!\\\\)\" |\n" . // String ""
-            "\s* '  ( (?:[^']|\\\\['])* )   (?<!\\\\)'  |\n" . // String ''
-            "\s* ($ident \\([^)]*\\) )                  |\n" . // Functional
+            "\s* \" ( (?:[^\"]|//[\"])* ) (?<!//)\" |\n" . // String ""
+            "\s* '  ( (?:[^']|//['])* )   (?<!//)'  |\n" . // String ''
+            "\s* ($ident /([^)]*/) )                  |\n" . // Functional
             "\s* ($ident)                               |\n" . // Keyword
             "\s* (\#[0-9a-fA-F]*)                       |\n" . // Hex value
             "\s* ($number [a-zA-Z%]*)                   |\n" . // Number (+ unit/percentage)

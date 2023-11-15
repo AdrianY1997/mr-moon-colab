@@ -56,7 +56,7 @@ class Controller extends Command {
         $controllerContent = str_replace("__controller", ucfirst($controllerName), $templateContent);
 
         // Crea el archivo en la ruta de controladores
-        $controllerPath = $controllersFolder . "\\" . ucfirst($controllerName) . "Controller.php";
+        $controllerPath = $controllersFolder . "/" . ucfirst($controllerName) . "Controller.php";
         $this->printer->display("info", "Creando el controlador en \"$controllersFolder\"");
         $controllerFile = fopen($controllerPath, "w");
         if (!$controllerFile) {

@@ -57,7 +57,7 @@ class DeclarationBlock extends RuleSet
             do {
                 $aSelectorParts[] = $oParserState->consume(1)
                     . $oParserState->consumeUntil(['{', '}', '\'', '"'], false, false, $aComments);
-                if (in_array($oParserState->peek(), ['\'', '"']) && substr(end($aSelectorParts), -1) != "\\") {
+                if (in_array($oParserState->peek(), ['\'', '"']) && substr(end($aSelectorParts), -1) != "/") {
                     if ($sStringWrapperChar === false) {
                         $sStringWrapperChar = $oParserState->peek();
                     } elseif ($sStringWrapperChar == $oParserState->peek()) {

@@ -40,7 +40,7 @@ abstract class Value implements Renderable
         while (
             !($oParserState->comes('}') || $oParserState->comes(';') || $oParserState->comes('!')
             || $oParserState->comes(')')
-            || $oParserState->comes('\\'))
+            || $oParserState->comes('/'))
         ) {
             if (count($aStack) > 0) {
                 $bFoundDelimiter = false;

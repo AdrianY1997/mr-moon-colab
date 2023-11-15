@@ -309,7 +309,7 @@ class Style
             return null;
         }
 
-        $quad = preg_split("/\\s*[,\\/]\\s*/", trim(substr($color, $i + 1, $j - $i - 1)));
+        $quad = preg_split("//s*[,//]/s*/", trim(substr($color, $i + 1, $j - $i - 1)));
         if (!isset($quad[3])) {
             $quad[3] = 1;
         }
@@ -378,7 +378,7 @@ class Style
     static function parseCssStyle($style)
     {
         $matches = array();
-        preg_match_all("/([a-z-]+)\\s*:\\s*([^;$]+)/si", $style, $matches, PREG_SET_ORDER);
+        preg_match_all("/([a-z-]+)/s*:/s*([^;$]+)/si", $style, $matches, PREG_SET_ORDER);
 
         $styles = array();
         foreach ($matches as $match) {

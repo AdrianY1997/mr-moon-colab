@@ -13,7 +13,7 @@ class EventosController extends Controller {
     }
 
     function index() {
-        return self::render("web.eventos", [
+        return self::render("web/eventos", [
             "events" => Event::get()
         ]);
     }

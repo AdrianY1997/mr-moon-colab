@@ -52,7 +52,7 @@ class Application {
             $sub = ucfirst($sub);
 
             // Definir la ruta del archivo del comando
-            $commandFile = "FoxyMVC\\Lib\\Cli\\Command\\$cmd\\$sub";
+            $commandFile = "FoxyMVC/Lib/Cli/Command/$cmd/$sub";
 
             // Si no existe la clase del comando, mostrar un mensaje de error y salir
             if (!class_exists($commandFile))

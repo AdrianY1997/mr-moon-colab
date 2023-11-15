@@ -191,8 +191,8 @@ class Factory
             $reflower = "Image";
         }
 
-        $decorator  = "Dompdf\\FrameDecorator\\$decorator";
-        $reflower   = "Dompdf\\FrameReflower\\$reflower";
+        $decorator  = "Dompdf/FrameDecorator/$decorator";
+        $reflower   = "Dompdf/FrameReflower/$reflower";
 
         /** @var AbstractFrameDecorator $deco */
         $deco = new $decorator($frame, $dompdf);
@@ -254,7 +254,7 @@ class Factory
     protected static function getPositionerInstance(string $type): AbstractPositioner
     {
         if (!isset(self::$_positioners[$type])) {
-            $class = '\\Dompdf\\Positioner\\'.$type;
+            $class = '/Dompdf/Positioner/'.$type;
             self::$_positioners[$type] = new $class();
         }
         return self::$_positioners[$type];
